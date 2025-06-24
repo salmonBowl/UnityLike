@@ -6,6 +6,6 @@ public enum CodeEditorBlock
     VoidUpdate,
 }
 
-public class CodeEditor : MonoBehaviour
+public class CodeEditor
 {
 }
