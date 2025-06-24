@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum CodeEditorBlock
@@ -22,5 +23,13 @@ public class CodeEditor
     {
         lineCountManager = new();
         textAreaSize = new(lineCountManager, settings, areaVoidstart, areaVoidupdate);
+    }
+
+    public void Update()
+    {
+        // lineCount‚ÍUI‚©‚ç‚ÌƒCƒxƒ“ƒg‹ì“®‚È‚Ì‚ÅUpdate‚ª‚¢‚ç‚È‚¢
+        //lineCountManager.Update();
+
+        textAreaSize.Update();
     }
 }
