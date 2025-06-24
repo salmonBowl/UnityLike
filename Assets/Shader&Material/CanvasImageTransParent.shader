@@ -19,14 +19,14 @@ Shader "Custom/CanvasImageTransParent"
         Stencil
         {
             Ref 1
-            Comp Greater
+            Comp NotEqual
             Pass Replace
         }
 
         Cull Off
         Lighting Off
         ZWrite Off
-        ZTest [unity_GUIZTestMode]
+        ZTest Always
         Blend SrcAlpha OneMinusSrcAlpha
         ColorMask RGBA
 
@@ -35,7 +35,7 @@ Shader "Custom/CanvasImageTransParent"
         CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma shader_future DONT_DRAW
+            //#pragma shader_future DONT_DRAW
             #include "UnityCG.cginc"
 
             struct appdata_t
