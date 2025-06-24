@@ -5,29 +5,28 @@ public class CodeEditorTextAreaSize
     private readonly CodeEditorLineCountManager lineCountManager;
     private readonly CodeEditorSettings settings;
 
-    private readonly RectTransform areaVoidStart;
-    private readonly RectTransform areaVoidUpdate;
+    private readonly RectTransform areaVoidstart;
+    private readonly RectTransform areaVoidupdate;
 
     public CodeEditorTextAreaSize(
         CodeEditorLineCountManager lineCountManager,
         CodeEditorSettings settings,
-        RectTransform areaVoidStart,
-        RectTransform areaVoidUpdate
+        RectTransform areaVoidstart,
+        RectTransform areaVoidupdate
         )
     {
         this.lineCountManager = lineCountManager;
         this.settings = settings;
 
-        this.areaVoidStart = areaVoidStart;
-        this.areaVoidUpdate = areaVoidUpdate;
+        this.areaVoidstart = areaVoidstart;
+        this.areaVoidupdate = areaVoidupdate;
     }
 
-    public void Execute()
+    public void Update()
     {
-
-    }
-    public void Render()
-    {
-
+        float heightVoidstart = Mathf.Max(settings.lowerHeightInputField, lineCountManager.LineCountVoidstart);
+        //float heightVoidupdate = Mathf.Max(settings.lowerHeightInputField, lineCountManager.LineCountVoidupdate);
+        areaVoidstart.anchoredPosition = new Vector2(0, 1f);
+        areaVoidupdate.anchoredPosition = new Vector2(0, heightVoidstart - 0.2f);
     }
 }
