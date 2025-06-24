@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+using UnityEngine.EventSystems;
 
 public class InputFieldMouseScrollToScrollViewDo : MonoBehaviour
 {
@@ -15,6 +14,6 @@ public class InputFieldMouseScrollToScrollViewDo : MonoBehaviour
 
     public void OnScroll(PointerEventData e)
     {
-        ExecuteEvents.Execute(parentScrollView.gameObject, e, EventHandler );
+        ExecuteEvents.Execute(parentScrollView.gameObject, e, ExecuteEvents.scrollHandler);
     }
 }
