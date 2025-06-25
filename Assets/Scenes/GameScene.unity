@@ -506,7 +506,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 0.11
+  m_ScrollSensitivity: 0.15
   m_Viewport: {fileID: 818905159}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -3365,9 +3365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2933c1bda34434b4580090594ff09a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  codeEditorSettings: {fileID: 0}
-  areaVoidstart: {fileID: 0}
-  areaVoidupdate: {fileID: 0}
+  codeEditorSettings: {fileID: 11400000, guid: edfea24ced3ee0c4bac1514a2d51484a, type: 2}
+  areaVoidstart: {fileID: 1705077550}
+  areaVoidupdate: {fileID: 1436336179}
 --- !u!1 &1856146404
 GameObject:
   m_ObjectHideFlags: 0
