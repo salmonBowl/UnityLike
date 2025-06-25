@@ -1,30 +1,23 @@
-
-using UnityEngine;
+using Zenject;
 
 public class GameRootGameScene
 {
     // CodeEditor
     private readonly CodeEditor codeEditor;
-    
 
-    
+
+
     //private readonly RectTransform    ;
 
-    public GameRootGameScene(
-        CodeEditorSettings codeEditorSettings,
-        RectTransform content,
-        RectTransform areaVoidstart,
-        RectTransform blockVoidupdate,
-        RectTransform areaVoidupdate
-        )
+    [Inject]
+    public GameRootGameScene(CodeEditor codeEditor)
     {
-        codeEditor = new(
-            codeEditorSettings,
-            content,
-            areaVoidstart,
-            blockVoidupdate,
-            areaVoidupdate
-            );
+        this.codeEditor = codeEditor;
+    }
+
+    public void Start()
+    {
+
     }
 
     public void Update()

@@ -22,10 +22,10 @@ public class GameSceneInstaller : MonoInstaller
     {
         // SerializeFieldで取得したコンポーネントを登録します
         Container.Bind<CodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
-        Container.Bind<RectTransform>().WithId("content").FromInstance(content).AsSingle();
-        Container.Bind<RectTransform>().WithId("blockVoidupdate").FromInstance(blockVoidupdate).AsSingle();
-        Container.Bind<RectTransform>().WithId("areaVoidstart").FromInstance(areaVoidstart).AsSingle();
-        Container.Bind<RectTransform>().WithId("areaVoidupdate").FromInstance(areaVoidupdate).AsSingle();
+        Container.Bind<RectTransform>().WithId("content").FromInstance(content).AsCached();
+        Container.Bind<RectTransform>().WithId("blockVoidupdate").FromInstance(blockVoidupdate).AsCached();
+        Container.Bind<RectTransform>().WithId("areaVoidstart").FromInstance(areaVoidstart).AsCached();
+        Container.Bind<RectTransform>().WithId("areaVoidupdate").FromInstance(areaVoidupdate).AsCached();
 
         // 依存関係をバインドします
         Container.BindInterfacesAndSelfTo<GameRootGameScene>().AsSingle();

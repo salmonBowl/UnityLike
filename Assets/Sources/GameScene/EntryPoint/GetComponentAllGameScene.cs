@@ -1,37 +1,14 @@
 using UnityEngine;
+using Zenject;
 
 public class GetComponentAllGameScene : MonoBehaviour
 {
-    private GameRootGameScene game;
+    private readonly GameRootGameScene game;
 
-    [Header("ScriptableObjectファイルをアタッチします")]
-    [SerializeField]
-    private CodeEditorSettings codeEditorSettings;
+    [Inject]
+    public GetComponentAllGameScene(GameRootGameScene game) => this.game = game;
 
-    [Header("開発に使う全てのゲームオブジェクトやコンポーネントを取得します")]
-
-    [SerializeField]
-    private RectTransform content;
-    [SerializeField]
-    private RectTransform areaVoidstart;
-    [SerializeField]
-    private RectTransform blockVoidupdate;
-    [SerializeField]
-    private RectTransform areaVoidupdate;
-
-
-
-    void Start()
-    {
-        game = new(
-            codeEditorSettings,
-            content,
-            areaVoidstart,
-            blockVoidupdate,
-            areaVoidupdate
-            );
-    }
-
+    void Start() => game.Start();
     void Update() => game.Update();
 
     // 抽象世界への突入! ってかんじでかっこよくないですか
