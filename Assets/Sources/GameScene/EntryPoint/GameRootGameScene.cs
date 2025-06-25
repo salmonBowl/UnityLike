@@ -26,5 +26,7 @@ public class GameRootGameScene
     public void Update()
     {
         codeEditor.Update();
+
+
     }
 }

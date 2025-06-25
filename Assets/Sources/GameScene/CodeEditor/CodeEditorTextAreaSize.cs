@@ -24,16 +24,21 @@ public class CodeEditorTextAreaSize
 
     public void Update()
     {
+        Debug.Log("textAreaSize.Update()");
 
         //areaVoidstart.anchoredPosition = new Vector2(0, 1f);
         //areaVoidupdate.anchoredPosition = new Vector2(0, heightVoidstart - 0.2f);
 
         // InputFieldのサイズを調整
+        // サイズを計算して
         float heightVoidstart = Mathf.Max(
             settings.lowerHeightInputField,
             settings.lineHeight * lineCountManager.LineCountVoidstart
             );
+        // 反映
         areaVoidstart.sizeDelta = new Vector2(11f, heightVoidstart);
         areaVoidstart.anchoredPosition = new Vector2(0, heightVoidstart * -0.5f + 0.5f);
+
+        //
     }
 }

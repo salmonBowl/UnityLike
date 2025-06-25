@@ -5,11 +5,11 @@ public enum CodeEditorBlock
 {
     VoidStart,
     VoidUpdate,
+    MaxNum
 }
 
 public class CodeEditor
 {
-    private readonly CodeEditorSettings settings;
 
 
     readonly CodeEditorLineCountManager lineCountManager;

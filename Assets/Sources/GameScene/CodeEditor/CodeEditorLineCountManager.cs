@@ -5,7 +5,7 @@ public class CodeEditorLineCountManager
     public int LineCountVoidstart => lineCountVoidstart;
     public int LineCountVoidupdate => lineCountVoidupdate;
 
-    private int lineCountVoidstart;
+    private int lineCountVoidstart = 5;
     private int lineCountVoidupdate;
 
     public void SetLineCount(CodeEditorBlock block, int value)
