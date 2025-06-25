@@ -13,12 +13,14 @@ public class GameRootGameScene
     public GameRootGameScene(
         CodeEditorSettings codeEditorSettings,
         RectTransform areaVoidstart,
+        RectTransform blockVoidupdate,
         RectTransform areaVoidupdate
         )
     {
         codeEditor = new(
             codeEditorSettings,
             areaVoidstart,
+            blockVoidupdate,
             areaVoidupdate
             );
     }

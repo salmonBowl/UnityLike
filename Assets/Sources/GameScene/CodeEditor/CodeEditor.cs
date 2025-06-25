@@ -18,11 +18,12 @@ public class CodeEditor
     public CodeEditor(
         CodeEditorSettings settings,
         RectTransform areaVoidstart,
+        RectTransform blockVoidupdate,
         RectTransform areaVoidupdate
     )
     {
         lineCountManager = new();
-        textAreaSize = new(lineCountManager, settings, areaVoidstart, areaVoidupdate);
+        textAreaSize = new(lineCountManager, settings, areaVoidstart, blockVoidupdate, areaVoidupdate);
     }
 
     public void Update()

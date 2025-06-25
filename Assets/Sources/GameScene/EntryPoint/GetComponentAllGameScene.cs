@@ -13,6 +13,8 @@ public class GetComponentAllGameScene : MonoBehaviour
     [SerializeField]
     private RectTransform areaVoidstart;
     [SerializeField]
+    private RectTransform blockVoidupdate;
+    [SerializeField]
     private RectTransform areaVoidupdate;
 
 
@@ -22,6 +24,7 @@ public class GetComponentAllGameScene : MonoBehaviour
         game = new(
             codeEditorSettings,
             areaVoidstart,
+            blockVoidupdate,
             areaVoidupdate
             );
     }
