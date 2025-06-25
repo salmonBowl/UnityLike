@@ -24,9 +24,16 @@ public class CodeEditorTextAreaSize
 
     public void Update()
     {
-        float heightVoidstart = Mathf.Max(settings.lowerHeightInputField, lineCountManager.LineCountVoidstart);
-        //float heightVoidupdate = Mathf.Max(settings.lowerHeightInputField, lineCountManager.LineCountVoidupdate);
-        areaVoidstart.anchoredPosition = new Vector2(0, 1f);
-        areaVoidupdate.anchoredPosition = new Vector2(0, heightVoidstart - 0.2f);
+
+        //areaVoidstart.anchoredPosition = new Vector2(0, 1f);
+        //areaVoidupdate.anchoredPosition = new Vector2(0, heightVoidstart - 0.2f);
+
+        // InputFieldÇÃÉTÉCÉYÇí≤êÆ
+        float heightVoidstart = Mathf.Max(
+            settings.lowerHeightInputField,
+            settings.lineHeight * lineCountManager.LineCountVoidstart
+            );
+        areaVoidstart.sizeDelta = new Vector2(11f, heightVoidstart);
+        areaVoidstart.anchoredPosition = new Vector2(0, heightVoidstart * -0.5f + 0.5f);
     }
 }
