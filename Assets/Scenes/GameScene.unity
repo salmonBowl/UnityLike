@@ -1679,7 +1679,13 @@ MonoBehaviour:
   m_CaretColor: {r: 0, g: 1, b: 0, a: 1}
   m_CustomCaretColor: 1
   m_SelectionColor: {r: 0.40634382, g: 0.58652663, b: 0.81886786, a: 0.7882353}
-  m_Text: Player.transform.position = new Vector2(0, 0, 0);
+  m_Text: 'Player.transform.position = new Vector2(0, 0, 0);
+
+
+
+
+
+    aaaera'
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -2420,9 +2426,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1679052516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 5.22}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -0.9}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1462083831
@@ -3082,10 +3088,10 @@ RectTransform:
   - {fileID: 1082495301}
   m_Father: {fileID: 1679052516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1.1999998}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -7}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1679052515
 GameObject:
@@ -3123,7 +3129,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 12}
+  m_SizeDelta: {x: 0, y: 10.5}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1705077549
 GameObject:
@@ -3366,7 +3372,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   codeEditorSettings: {fileID: 11400000, guid: edfea24ced3ee0c4bac1514a2d51484a, type: 2}
+  content: {fileID: 1679052516}
   areaVoidstart: {fileID: 1705077550}
+  blockVoidupdate: {fileID: 1602699583}
   areaVoidupdate: {fileID: 1436336179}
 --- !u!1 &1856146404
 GameObject:
@@ -3556,10 +3564,10 @@ RectTransform:
   - {fileID: 1542608458}
   m_Father: {fileID: 1679052516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 3}
-  m_SizeDelta: {x: 1, y: 100}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -2.9}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2081095976
 GameObject:
@@ -3618,7 +3626,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Player.transform.position = new Vector2(0, 0, 0);\u200B"
+  m_text: "Player.transform.position = new Vector2(0, 0, 0);\n\n\n\n\naaaera\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
   m_sharedMaterial: {fileID: 7155552369867759418, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
