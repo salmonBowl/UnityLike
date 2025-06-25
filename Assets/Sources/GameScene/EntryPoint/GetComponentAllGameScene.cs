@@ -11,6 +11,8 @@ public class GetComponentAllGameScene : MonoBehaviour
     [Header("開発に使う全てのゲームオブジェクトやコンポーネントを取得します")]
 
     [SerializeField]
+    private RectTransform content;
+    [SerializeField]
     private RectTransform areaVoidstart;
     [SerializeField]
     private RectTransform blockVoidupdate;
@@ -23,6 +25,7 @@ public class GetComponentAllGameScene : MonoBehaviour
     {
         game = new(
             codeEditorSettings,
+            content,
             areaVoidstart,
             blockVoidupdate,
             areaVoidupdate

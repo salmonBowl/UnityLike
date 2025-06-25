@@ -12,6 +12,7 @@ public class GameRootGameScene
 
     public GameRootGameScene(
         CodeEditorSettings codeEditorSettings,
+        RectTransform content,
         RectTransform areaVoidstart,
         RectTransform blockVoidupdate,
         RectTransform areaVoidupdate
@@ -19,6 +20,7 @@ public class GameRootGameScene
     {
         codeEditor = new(
             codeEditorSettings,
+            content,
             areaVoidstart,
             blockVoidupdate,
             areaVoidupdate

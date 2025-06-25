@@ -17,13 +17,14 @@ public class CodeEditor
 
     public CodeEditor(
         CodeEditorSettings settings,
+        RectTransform content,
         RectTransform areaVoidstart,
         RectTransform blockVoidupdate,
         RectTransform areaVoidupdate
     )
     {
         lineCountManager = new();
-        textAreaSize = new(lineCountManager, settings, areaVoidstart, blockVoidupdate, areaVoidupdate);
+        textAreaSize = new(lineCountManager, settings, content, areaVoidstart, blockVoidupdate, areaVoidupdate);
     }
 
     public void Update()
