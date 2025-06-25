@@ -16,12 +16,12 @@ Shader "Custom/CanvasImageTransParent"
             "CanUseSpriteAtlas"="True"
         }
 
-        // Stencil
-        // {
-        //     Ref 2
-        //     Comp NotEqual
-        //     Pass Replace
-        // }
+        Stencil
+        {
+            Ref 2
+            Comp NotEqual
+            Pass Replace
+        }
 
         Cull Off
         Lighting Off
