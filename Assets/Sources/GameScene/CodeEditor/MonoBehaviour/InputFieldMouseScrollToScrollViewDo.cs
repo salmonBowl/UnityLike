@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// ScrollViewの子になっているInputFieldにアタッチします
 /// </summary>
-public class InputFieldMouseScrollToScrollViewDo : MonoBehaviour
+public class InputFieldMouseScrollToScrollViewDo : MonoBehaviour, IScrollHandler
 {
     [SerializeField] ScrollRect parentScrollView;
 
@@ -21,6 +21,8 @@ public class InputFieldMouseScrollToScrollViewDo : MonoBehaviour
     /// <param name="e">InputFieldのイベントデータ</param>
     public void OnScroll(PointerEventData e)
     {
+        //Debug.Log("InputField Scrolled");
+
         // 親のScrollViewにイベントを渡します
         ExecuteEvents.Execute(parentScrollView.gameObject, e, ExecuteEvents.scrollHandler);
 

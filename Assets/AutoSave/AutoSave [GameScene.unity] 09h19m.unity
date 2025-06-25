@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 61857287}
   - component: {fileID: 61857286}
   - component: {fileID: 61857285}
+  - component: {fileID: 61857288}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -298,6 +299,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61857283}
   m_CullTransparentMesh: 1
+--- !u!114 &61857288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61857283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19bc92da39c2ae042b211925bc5c98b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentScrollView: {fileID: 153979051}
 --- !u!1 &77103640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 419510437}
   - component: {fileID: 419510438}
+  - component: {fileID: 419510439}
   m_Layer: 5
   m_Name: Text Area
   m_TagString: Untagged
@@ -1107,6 +1122,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
+--- !u!114 &419510439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419510436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19bc92da39c2ae042b211925bc5c98b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentScrollView: {fileID: 153979051}
 --- !u!1 &426847780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,6 +1579,7 @@ GameObject:
   - component: {fileID: 868099851}
   - component: {fileID: 868099850}
   - component: {fileID: 868099849}
+  - component: {fileID: 868099852}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -1717,6 +1746,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868099847}
   m_CullTransparentMesh: 1
+--- !u!114 &868099852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868099847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19bc92da39c2ae042b211925bc5c98b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentScrollView: {fileID: 153979051}
 --- !u!1 &916237802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,7 +2890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8627451}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
