@@ -41,7 +41,7 @@ public class CodeEditorTextAreaSize
         }
         if (content == null)
         {
-            Debug.Log("contentが指定されていません");
+            Debug.LogError("contentが指定されていません");
             return;
         }
         if (areaVoidstart == null)
@@ -80,10 +80,10 @@ public class CodeEditorTextAreaSize
         areaVoidupdate.anchoredPosition = new Vector2(0, heightVoidupdate * -0.5f + 0.5f);
 
         // voidupdateの位置補正
-        blockVoidupdate.anchoredPosition = new Vector2(0, 1.8f - heightVoidstart);
+        blockVoidupdate.anchoredPosition = new Vector2(0, -heightVoidstart - 4.0f);
 
         // contentサイズ(スクロール範囲)の補正
-        float contentHeight = heightVoidstart + heightVoidupdate + 3.3f;
+        float contentHeight = heightVoidstart + heightVoidupdate + 4.3f;
         content.sizeDelta = new Vector2(content.sizeDelta.x, contentHeight);
     }
 }
