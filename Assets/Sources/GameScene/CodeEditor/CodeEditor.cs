@@ -10,7 +10,7 @@ public enum CodeEditorBlock
 public class CodeEditor
 {
     private readonly CodeEditorLineCountManager lineCountManager;
-    private readonly CodeEditorTextAreaView textAreaSize;
+    private readonly UpdateTextAreaUseCase updateTextAreaUseCase;
 
     private readonly CodeEditorSettings settings;
 
@@ -18,12 +18,12 @@ public class CodeEditor
     [Inject]
     public CodeEditor(
         CodeEditorLineCountManager lineCountManager,
-        CodeEditorTextAreaView textAreaSize,
+        UpdateTextAreaUseCase updateTextAreaUseCase,
         CodeEditorSettings settings
     )
     {
         this.lineCountManager = lineCountManager;
-        this.textAreaSize = textAreaSize;
+        this.updateTextAreaUseCase = updateTextAreaUseCase;
         this.settings = settings;
     }
 
@@ -32,6 +32,6 @@ public class CodeEditor
         // lineCount‚ÍUI‚©‚ç‚ÌƒCƒxƒ“ƒg‹ì“®‚È‚Ì‚ÅUpdate‚ª‚¢‚ç‚È‚¢
         //lineCountManager.Update();
 
-        textAreaSize.Update();
+        updateTextAreaUseCase.Execute();
     }
 }
