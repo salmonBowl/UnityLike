@@ -1,7 +1,7 @@
 using System;
 using Zenject;
 
-public interface ICodeEditorTextAreaInput
+public interface ITextAreaInput
 {
     public event Action<CodeEditorBlock, string> OnTextAreaInputChanged;
 }
@@ -11,7 +11,7 @@ public class CodeEditorInputController : IInitializable, IDisposable
 {
     private readonly CodeEditorLineCountManager lineCountManager;
     private readonly UpdateTextAreaUseCase updateTextAreaUseCase;
-    private readonly ICodeEditorTextAreaInput textAreaInput;
+    private readonly ITextAreaInput textAreaInput;
 
     [Inject]
     public CodeEditorInputController(
@@ -44,7 +44,7 @@ public class CodeEditorInputController : IInitializable, IDisposable
     {
         updateTextAreaUseCase.Execute();
     }
-    public void OnTextInputChanged(CodeEditorBlock block, string newText)
+    private void OnTextInputChanged(CodeEditorBlock block, string newText)
     {
         int newLineCount = CalculateLineCount(newText);
         lineCountManager.SetLineCount(block, newLineCount);

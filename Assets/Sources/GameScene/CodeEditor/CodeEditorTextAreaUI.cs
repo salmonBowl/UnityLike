@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView, ICodeEditorTextAreaInput
+public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
 {
     [SerializeField]
     private RectTransform content;
@@ -13,6 +14,8 @@ public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView, ICodeEditorT
     [SerializeField]
     private RectTransform blockVoidupdate;
 
+    public event Action<CodeEditorBlock, string> OnTextAreaInputChanged;
+
     public float GetContentWidth()
     {
         if (content == null)
@@ -23,6 +26,10 @@ public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView, ICodeEditorT
 
         return content.rect.width;
     }
+
+    /*
+        View
+     */
 
     public void SetContentSize(Vector2 anchoredSize)
     {
@@ -67,5 +74,17 @@ public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView, ICodeEditorT
         }
 
         blockVoidupdate.anchoredPosition = anchoredPosition;
+    }
+
+    /*
+        Input
+     */
+    public void OnAreaVoidstartTextChanged(string newText)
+    {
+        OnTextAreaInputChanged?.Invoke(CodeEditorBlock.VoidStart, newText);
+    }
+    public void OnAreaVoidupdateTextChanged(string newText)
+    {
+        OnTextAreaInputChanged?.Invoke(CodeEditorBlock.VoidUpdate, newText);
     }
 }

@@ -13,7 +13,7 @@ public class GameSceneInstaller : MonoInstaller
 
     [Header("CodeEditorŠÖŒW")]
     [SerializeField]
-    private CodeEditorTextAreaView codeEditorTextAreaView;
+    private CodeEditorTextAreaUI codeEditorTextAreaView;
 
     public override void Start()
     {
