@@ -1,5 +1,3 @@
-using static UnityEngine.Vector2;
-using static UnityEngine.Mathf;
 using Zenject;
 
 public interface ITextAreaLayoutPresenter
@@ -36,11 +34,11 @@ public class UpdateTextAreaUseCase
 
         // InputFieldのサイズを計算
 
-        float heightVoidstart = Mathf.Max(
+        float heightVoidstart = UnityEngine.Mathf.Max(
             settings.lowerHeightInputField,
             settings.lineHeight * lineCountManager.LineCountVoidstart
             );
-        float heightVoidupdate = Mathf.Max(
+        float heightVoidupdate = UnityEngine.Mathf.Max(
             settings.lowerHeightInputField,
             settings.lineHeight * lineCountManager.LineCountVoidupdate
             );
