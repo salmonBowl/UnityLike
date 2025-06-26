@@ -5,7 +5,7 @@ public class CodeEditorLineCountManager
     public int LineCountVoidstart { get; private set; }
     public int LineCountVoidupdate { get; private set; }
 
-    public event Action<CodeEditorBlock> OnLineCountChanged;
+    public event Action OnLineCountChanged;
 
     public CodeEditorLineCountManager()
     {
@@ -28,6 +28,6 @@ public class CodeEditorLineCountManager
                 break;
         }
 
-        OnLineCountChanged?.Invoke(block);
+        OnLineCountChanged?.Invoke();
     }
 }

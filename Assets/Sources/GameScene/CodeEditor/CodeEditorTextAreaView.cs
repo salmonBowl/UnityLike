@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView
+public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView, ICodeEditorTextAreaInput
 {
     [SerializeField]
     private RectTransform content;
