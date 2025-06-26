@@ -39,6 +39,8 @@ public class GameSceneInstaller : MonoInstaller
         // Interface Adapters層
         Container.Bind<ITextAreaLayoutPresenter>().To<TextAreaLayoutPresenter>().AsSingle();
         Container.Bind<ITextAreaView>().FromInstance(codeEditorTextAreaView).AsSingle(); // MonoBehaviourをインターフェースとしてバインド
+        Container.Bind<ITextAreaInput>().FromInstance(codeEditorTextAreaView).AsSingle();
+        Container.Bind<CodeEditorInputController>().AsSingle();
 
         // 全体のシステム
         Container.Bind<CodeEditor>().AsSingle();

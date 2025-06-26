@@ -47,6 +47,9 @@ public class CodeEditorInputController : IInitializable, IDisposable
     private void OnTextInputChanged(CodeEditorBlock block, string newText)
     {
         int newLineCount = CalculateLineCount(newText);
+
+        UnityEngine.Debug.Log($"CodeEditorInputController | block : {block}, LineCount : {newLineCount}");
+
         lineCountManager.SetLineCount(block, newLineCount);
     }
 
