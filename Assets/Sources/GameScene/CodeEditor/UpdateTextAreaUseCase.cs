@@ -44,6 +44,27 @@ public class UpdateTextAreaUseCase
             settings.lowerHeightInputField,
             settings.lineHeight * lineCountManager.LineCountVoidupdate
             );
+
+        // レイアウトデータを生成
         float contentHeight = heightVoidstart + heightVoidupdate + 4.3f;
+        UnityEngine.Vector2 areaVoidstartSize = new(11f, heightVoidstart);
+        UnityEngine.Vector2 areaVoidupdateSize = new(11f, heightVoidupdate);
+        UnityEngine.Vector2 areaVoidstartPosition = new(0, heightVoidstart * -0.5f + 0.5f);
+        UnityEngine.Vector2 areaVoidupdatePosition = new(0, heightVoidupdate * -0.5f + 0.5f);
+        UnityEngine.Vector2 blockVoidupdatePosition = new(0, -heightVoidstart - 4.0f);
+
+        TextAreaLayoutData layoutData = new(
+            contentHeight,
+            heightVoidstart,
+            heightVoidupdate,
+            areaVoidstartSize,
+            areaVoidupdateSize,
+            areaVoidstartPosition,
+            areaVoidupdatePosition,
+            blockVoidupdatePosition
+        );
+
+        // レイアウトデータの出力
+        layoutPresenter.PresenterLayout(layoutData);
     }
 }
