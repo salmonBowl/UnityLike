@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class CodeEditorTextAreaSize
 {
@@ -6,34 +7,28 @@ public class CodeEditorTextAreaSize
     private readonly CodeEditorSettings settings;
 
 
+    [Inject(Id = "content")]
     private readonly RectTransform content;
 
+    [Inject(Id = "areaVoidstart")]
     private readonly RectTransform areaVoidstart;
 
+    [Inject(Id = "blockVoidupdate")]
     private readonly RectTransform blockVoidupdate;
+    [Inject(Id = "areaVoidupdate")]
     private readonly RectTransform areaVoidupdate;
 
-    public CodeEditorTextAreaSize(
-        CodeEditorLineCountManager lineCountManager,
-        CodeEditorSettings settings,
-        RectTransform content,
-        RectTransform areaVoidstart,
-        RectTransform blockVoidupdate,
-        RectTransform areaVoidupdate
-        )
+    [Inject]
+    public CodeEditorTextAreaSize(CodeEditorLineCountManager lineCountManager, CodeEditorSettings settings)
     {
         this.lineCountManager = lineCountManager;
         this.settings = settings;
-
-        this.content = content;
-        this.areaVoidstart = areaVoidstart;
-        this.blockVoidupdate = blockVoidupdate;
-        this.areaVoidupdate = areaVoidupdate;
     }
 
     public void Update()
     {
         //Debug.Log("textAreaSize.Update()");
+
         if (settings == null)
         {
             Debug.LogError("codeEditorSetting‚ªŽw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");

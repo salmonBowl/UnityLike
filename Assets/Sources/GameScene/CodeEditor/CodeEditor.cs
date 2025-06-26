@@ -1,5 +1,4 @@
-using Unity.VisualScripting;
-using UnityEngine;
+using Zenject;
 
 public enum CodeEditorBlock
 {
@@ -10,21 +9,22 @@ public enum CodeEditorBlock
 
 public class CodeEditor
 {
+    private readonly CodeEditorLineCountManager lineCountManager;
+    private readonly CodeEditorTextAreaSize textAreaSize;
+
+    private readonly CodeEditorSettings settings;
 
 
-    readonly CodeEditorLineCountManager lineCountManager;
-    readonly CodeEditorTextAreaSize textAreaSize;
-
+    [Inject]
     public CodeEditor(
-        CodeEditorSettings settings,
-        RectTransform content,
-        RectTransform areaVoidstart,
-        RectTransform blockVoidupdate,
-        RectTransform areaVoidupdate
+        CodeEditorLineCountManager lineCountManager,
+        CodeEditorTextAreaSize textAreaSize,
+        CodeEditorSettings settings
     )
     {
-        lineCountManager = new();
-        textAreaSize = new(lineCountManager, settings, content, areaVoidstart, blockVoidupdate, areaVoidupdate);
+        this.lineCountManager = lineCountManager;
+        this.textAreaSize = textAreaSize;
+        this.settings = settings;
     }
 
     public void Update()
