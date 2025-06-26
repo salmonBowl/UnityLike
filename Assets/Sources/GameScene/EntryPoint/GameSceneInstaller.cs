@@ -9,28 +9,29 @@ public class GameSceneInstaller : MonoInstaller
 
     [Space(20)]
 
-    [Header("開発に使う全てのゲームオブジェクトやコンポーネントを取得します")]
+    [Header("開発に使う全てのMonoBehaviourクラスを取得します")]
 
     [Header("CodeEditor関係")]
-    [SerializeField] private RectTransform content;
-    [SerializeField] private RectTransform blockVoidupdate;
-    [SerializeField] private RectTransform areaVoidstart;
-    [SerializeField] private RectTransform areaVoidupdate;
+    [SerializeField]
+    private CodeEditorTextAreaView codeEditorTextAreaView;
 
     // DIコンテナに依存関係をバインドします
     public override void InstallBindings()
     {
-        // SerializeFieldで取得したコンポーネントを登録します
+        // Entities層
         Container.Bind<CodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
-        Container.Bind<RectTransform>().WithId("content").FromInstance(content).AsCached();
-        Container.Bind<RectTransform>().WithId("blockVoidupdate").FromInstance(blockVoidupdate).AsCached();
-        Container.Bind<RectTransform>().WithId("areaVoidstart").FromInstance(areaVoidstart).AsCached();
-        Container.Bind<RectTransform>().WithId("areaVoidupdate").FromInstance(areaVoidupdate).AsCached();
+        // TextAreaLayoutDataはUseCaseが直接生成
 
-        // 依存関係をバインドします
-        Container.BindInterfacesAndSelfTo<GameRootGameScene>().AsSingle();
-        Container.BindInterfacesAndSelfTo<CodeEditor>().AsSingle();
-        Container.BindInterfacesAndSelfTo<CodeEditorLineCountManager>().AsSingle();
-        Container.BindInterfacesAndSelfTo<CodeEditorTextAreaView>().AsSingle();
+        // Use Cases層
+        Container.Bind<CodeEditorLineCountManager>().AsSingle();
+        Container.Bind<UpdateTextAreaUseCase>().AsSingle();
+
+        // Interface Adapters層
+        Container.Bind<ITextAreaLayoutPresenter>().To<TextAreaLayoutPresenter>().AsSingle();
+        Container.Bind<ITextAreaView>().FromInstance(codeEditorTextAreaView).AsSingle(); // MonoBehaviourをインターフェースとしてバインド
+
+        // 全体のシステム
+        Container.Bind<CodeEditor>().AsSingle();
+        Container.Bind<GameRootGameScene>().AsSingle().NonLazy();
     }
 }
