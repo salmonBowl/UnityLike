@@ -17,7 +17,7 @@ public class GameSceneInstaller : MonoInstaller
 
     public override void Start()
     {
-        base.Start();
+        //base.Start(); 空メソッド
 
         if (codeEditorSettings == null)
             Debug.LogError("GameSceneInstaller : CodeEditorSettingsが指定されていません");
@@ -28,6 +28,8 @@ public class GameSceneInstaller : MonoInstaller
     // DIコンテナに依存関係をバインドします
     public override void InstallBindings()
     {
+        Debug.Log("GameSceneInstaller.InstallBindings()");
+
         // Entities層
         Container.Bind<CodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
         // TextAreaLayoutDataはUseCaseが直接生成
@@ -40,10 +42,10 @@ public class GameSceneInstaller : MonoInstaller
         Container.Bind<ITextAreaLayoutPresenter>().To<TextAreaLayoutPresenter>().AsSingle();
         Container.Bind<ITextAreaView>().FromInstance(codeEditorTextAreaView).AsSingle(); // MonoBehaviourをインターフェースとしてバインド
         Container.Bind<ITextAreaInput>().FromInstance(codeEditorTextAreaView).AsSingle();
-        Container.Bind<CodeEditorInputController>().AsSingle();
+        Container.Bind<CodeEditorInputController>().AsSingle().NonLazy(); // 疎結合になりすぎて誰もこれのインスタンスを持たない
 
         // 全体のシステム
         Container.Bind<CodeEditor>().AsSingle();
-        Container.Bind<GameRootGameScene>().AsSingle().NonLazy();
+        Container.Bind<GameRootGameScene>().AsSingle();
     }
 }

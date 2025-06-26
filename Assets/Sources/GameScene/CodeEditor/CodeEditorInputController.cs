@@ -6,7 +6,6 @@ public interface ITextAreaInput
     public event Action<CodeEditorBlock, string> OnTextAreaInputChanged;
 }
 
-
 public class CodeEditorInputController : IInitializable, IDisposable
 {
     private readonly CodeEditorLineCountManager lineCountManager;
@@ -16,15 +15,26 @@ public class CodeEditorInputController : IInitializable, IDisposable
     [Inject]
     public CodeEditorInputController(
         CodeEditorLineCountManager lineCountManager,
-        UpdateTextAreaUseCase updateTextAreaUseCase
+        UpdateTextAreaUseCase updateTextAreaUseCase,
+        ITextAreaInput textAreaInput
         )
     {
         this.lineCountManager = lineCountManager;
         this.updateTextAreaUseCase = updateTextAreaUseCase;
+        this.textAreaInput = textAreaInput;
     }
 
     public void Initialize()
     {
+        UnityEngine.Debug.Log("CodeEditorInputController.Initialize()");
+
+        if (lineCountManager == null)
+            UnityEngine.Debug.LogError("CodeEditorInputController : lineCountManager‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+        if (updateTextAreaUseCase == null)
+            UnityEngine.Debug.LogError("CodeEditorInputController : updateTextAreaUseCase‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+        if (textAreaInput == null)
+            UnityEngine.Debug.LogError("CodeEditorInputController : textAreaInput‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+
         // View¨Controller¨LineCount
         textAreaInput.OnTextAreaInputChanged += OnTextInputChanged;
         

@@ -81,6 +81,8 @@ public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
      */
     public void OnAreaVoidstartTextChanged(string newText)
     {
+        //Debug.Log("CodeEditorTextAreaUI : OnAreaVoidstartTextChanged");
+
         OnTextAreaInputChanged?.Invoke(CodeEditorBlock.VoidStart, newText);
     }
     public void OnAreaVoidupdateTextChanged(string newText)
