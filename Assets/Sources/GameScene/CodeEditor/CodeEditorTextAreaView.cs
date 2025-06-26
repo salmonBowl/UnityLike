@@ -1,31 +1,37 @@
 using UnityEngine;
 using Zenject;
 
-public class CodeEditorTextAreaSize
+public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView
 {
     private readonly CodeEditorLineCountManager lineCountManager;
     private readonly CodeEditorSettings settings;
 
+    [SerializeField]
+    private RectTransform content;
 
-    [Inject(Id = "content")]
-    private readonly RectTransform content;
+    [SerializeField]
+    private RectTransform areaVoidstart;
+    [SerializeField]
+    private RectTransform areaVoidupdate;
 
-    [Inject(Id = "areaVoidstart")]
-    private readonly RectTransform areaVoidstart;
-
-    [Inject(Id = "blockVoidupdate")]
-    private readonly RectTransform blockVoidupdate;
-    [Inject(Id = "areaVoidupdate")]
-    private readonly RectTransform areaVoidupdate;
+    [SerializeField]
+    private RectTransform blockVoidupdate;
 
     [Inject]
-    public CodeEditorTextAreaSize(CodeEditorLineCountManager lineCountManager, CodeEditorSettings settings)
+    public CodeEditorTextAreaView(CodeEditorLineCountManager lineCountManager, CodeEditorSettings settings)
     {
         this.lineCountManager = lineCountManager;
         this.settings = settings;
     }
 
-    public void Update()
+    public float GetContentWidth() => content.rect.width;
+
+    public void SetContentSize()
+    {
+
+    }
+
+    public void Execute()
     {
         //Debug.Log("textAreaSize.Update()");
 

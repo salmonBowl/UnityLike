@@ -9,7 +9,7 @@ public interface ITextAreaView
     void SetAreaVoidupdateLayout(Vector2 size, Vector2 position);
     void SetBlockVoidupdatePosition(Vector2 position);
 
-    float SetContentWidth();
+    float GetContentWidth();
 }
 
 public class TextAreaLayoutPresenter : ITextAreaLayoutPresenter
@@ -24,7 +24,7 @@ public class TextAreaLayoutPresenter : ITextAreaLayoutPresenter
 
     public void PresenterLayout(TextAreaLayoutData layoutData)
     {
-        view.SetContentSize(new Vector2(view.SetContentWidth(), layoutData.ContentHeight));
+        view.SetContentSize(new Vector2(view.GetContentWidth(), layoutData.ContentHeight));
 
         view.SetAreaVoidstartLayout(layoutData.AreaVoidstartSize, layoutData.AreaVoidstartPosition);
 

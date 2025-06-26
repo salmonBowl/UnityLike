@@ -10,7 +10,7 @@ public enum CodeEditorBlock
 public class CodeEditor
 {
     private readonly CodeEditorLineCountManager lineCountManager;
-    private readonly CodeEditorTextAreaSize textAreaSize;
+    private readonly CodeEditorTextAreaView textAreaSize;
 
     private readonly CodeEditorSettings settings;
 
@@ -18,7 +18,7 @@ public class CodeEditor
     [Inject]
     public CodeEditor(
         CodeEditorLineCountManager lineCountManager,
-        CodeEditorTextAreaSize textAreaSize,
+        CodeEditorTextAreaView textAreaSize,
         CodeEditorSettings settings
     )
     {

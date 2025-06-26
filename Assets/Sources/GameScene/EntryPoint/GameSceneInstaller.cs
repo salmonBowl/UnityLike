@@ -31,6 +31,6 @@ public class GameSceneInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<GameRootGameScene>().AsSingle();
         Container.BindInterfacesAndSelfTo<CodeEditor>().AsSingle();
         Container.BindInterfacesAndSelfTo<CodeEditorLineCountManager>().AsSingle();
-        Container.BindInterfacesAndSelfTo<CodeEditorTextAreaSize>().AsSingle();
+        Container.BindInterfacesAndSelfTo<CodeEditorTextAreaView>().AsSingle();
     }
 }
