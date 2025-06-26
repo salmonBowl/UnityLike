@@ -32,7 +32,6 @@ public class CodeEditor
         // lineCount‚ÍUI‚©‚ç‚ÌƒCƒxƒ“ƒg‹ì“®‚È‚Ì‚ÅUpdate‚ª‚¢‚ç‚È‚¢
         //lineCountManager.Update();
 
-        textAreaSize.DebugGenerateClass();
         textAreaSize.Update();
     }
 }

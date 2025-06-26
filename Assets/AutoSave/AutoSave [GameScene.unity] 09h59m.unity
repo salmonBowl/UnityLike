@@ -3340,7 +3340,7 @@ GameObject:
   - component: {fileID: 1788240997}
   - component: {fileID: 1788240996}
   m_Layer: 0
-  m_Name: GetAllGameScene
+  m_Name: GameRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3373,11 +3373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2933c1bda34434b4580090594ff09a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  codeEditorSettings: {fileID: 11400000, guid: edfea24ced3ee0c4bac1514a2d51484a, type: 2}
-  content: {fileID: 1679052516}
-  areaVoidstart: {fileID: 1705077550}
-  blockVoidupdate: {fileID: 1602699583}
-  areaVoidupdate: {fileID: 1436336179}
 --- !u!114 &1788240996
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,8 +25,10 @@ public class CodeEditorTextAreaSize
         this.settings = settings;
     }
 
-    public void DebugGenerateClass()
+    public void Update()
     {
+        //Debug.Log("textAreaSize.Update()");
+
         if (settings == null)
         {
             Debug.LogError("codeEditorSetting‚ªŽw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
@@ -52,11 +54,6 @@ public class CodeEditorTextAreaSize
             Debug.LogError("areaVoidupdate‚ªŽw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
             return;
         }
-    }
-
-    public void Update()
-    {
-        //Debug.Log("textAreaSize.Update()");
 
         //areaVoidstart.anchoredPosition = new Vector2(0, 1f);
         //areaVoidupdate.anchoredPosition = new Vector2(0, heightVoidstart - 0.2f);
