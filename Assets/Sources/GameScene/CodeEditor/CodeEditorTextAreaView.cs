@@ -80,7 +80,7 @@ public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView
 
     public void Execute()
     {
-        //Debug.Log("textAreaSize.Update()");
+        Debug.Log("textAreaSize.Update()");
 
         if (settings == null)
         {

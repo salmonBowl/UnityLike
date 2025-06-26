@@ -24,6 +24,12 @@ public class TextAreaLayoutPresenter : ITextAreaLayoutPresenter
 
     public void PresenterLayout(TextAreaLayoutData layoutData)
     {
+        if (view == null)
+        {
+            UnityEngine.Debug.LogError("TextAreaLayoutPresenter : view‚ªŽw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+            return;
+        }
+
         view.SetContentSize(new Vector2(view.GetContentWidth(), layoutData.ContentHeight));
 
         view.SetAreaVoidstartLayout(layoutData.AreaVoidstartSize, layoutData.AreaVoidstartPosition);

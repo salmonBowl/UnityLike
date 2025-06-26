@@ -15,6 +15,16 @@ public class GameSceneInstaller : MonoInstaller
     [SerializeField]
     private CodeEditorTextAreaView codeEditorTextAreaView;
 
+    public override void Start()
+    {
+        base.Start();
+
+        if (codeEditorSettings == null)
+            Debug.LogError("GameSceneInstaller : CodeEditorSettingsが指定されていません");
+        if (codeEditorTextAreaView == null)
+            Debug.LogError("GameSceneInstaller : CodeEditorTextAreaViewが指定されていません");
+    }
+
     // DIコンテナに依存関係をバインドします
     public override void InstallBindings()
     {
