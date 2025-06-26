@@ -5,9 +5,9 @@ public interface ITextAreaView
 {
     // 各RectTransformのサイズと位置を設定するメソッド
     void SetContentSize(Vector2 size);
-    void SetAreaVoidstartLayout(Vector2 size, Vector2 position);
-    void SetAreaVoidupdateLayout(Vector2 size, Vector2 position);
-    void SetBlockVoidupdatePosition(Vector2 position);
+    void SetAreaVoidstartLayout(Vector2 size, Vector2 anchoredPosition);
+    void SetAreaVoidupdateLayout(Vector2 size, Vector2 anchoredPosition);
+    void SetBlockVoidupdatePosition(Vector2 anchoredPosition);
 
     float GetContentWidth();
 }
