@@ -3498,7 +3498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   codeEditorSettings: {fileID: 11400000, guid: edfea24ced3ee0c4bac1514a2d51484a, type: 2}
-  codeEditorTextAreaView: {fileID: 0}
+  codeEditorTextAreaView: {fileID: 432131775}
 --- !u!1 &1856146404
 GameObject:
   m_ObjectHideFlags: 0

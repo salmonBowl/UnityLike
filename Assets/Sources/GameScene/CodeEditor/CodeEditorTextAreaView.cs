@@ -1,11 +1,7 @@
 using UnityEngine;
-using Zenject;
 
 public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView
 {
-    private readonly CodeEditorLineCountManager lineCountManager;
-    private readonly CodeEditorSettings settings;
-
     [SerializeField]
     private RectTransform content;
 
@@ -16,13 +12,6 @@ public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView
 
     [SerializeField]
     private RectTransform blockVoidupdate;
-
-    [Inject]
-    public CodeEditorTextAreaView(CodeEditorLineCountManager lineCountManager, CodeEditorSettings settings)
-    {
-        this.lineCountManager = lineCountManager;
-        this.settings = settings;
-    }
 
     public float GetContentWidth()
     {
@@ -35,7 +24,7 @@ public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView
         return content.rect.width;
     }
 
-    public void SetContentSize(Vector2 size)
+    public void SetContentSize(Vector2 anchoredSize)
     {
         if (content == null)
         {
@@ -43,7 +32,7 @@ public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView
             return;
         }
 
-        areaVoidupdate.sizeDelta = size;
+        content.sizeDelta = anchoredSize;
     }
     public void SetAreaVoidstartLayout(Vector2 size, Vector2 anchoredPosition)
     {
@@ -58,6 +47,8 @@ public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView
     }
     public void SetAreaVoidupdateLayout(Vector2 size, Vector2 anchoredPosition)
     {
+        //Debug.Log("SetAreaViudupdateLayout()");
+
         if (areaVoidupdate == null)
         {
             Debug.LogError("areaVoidupdate‚ªŽw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
@@ -76,16 +67,5 @@ public class CodeEditorTextAreaView : MonoBehaviour, ITextAreaView
         }
 
         blockVoidupdate.anchoredPosition = anchoredPosition;
-    }
-
-    public void Execute()
-    {
-        Debug.Log("textAreaSize.Update()");
-
-        if (settings == null)
-        {
-            Debug.LogError("codeEditorSetting‚ªŽw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
-            return;
-        }
     }
 }

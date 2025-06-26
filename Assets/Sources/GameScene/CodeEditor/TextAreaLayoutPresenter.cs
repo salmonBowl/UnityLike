@@ -1,10 +1,10 @@
-using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 using Zenject;
 
 public interface ITextAreaView
 {
     // 各RectTransformのサイズと位置を設定するメソッド
-    void SetContentSize(Vector2 size);
+    void SetContentSize(Vector2 anchoredSize);
     void SetAreaVoidstartLayout(Vector2 size, Vector2 anchoredPosition);
     void SetAreaVoidupdateLayout(Vector2 size, Vector2 anchoredPosition);
     void SetBlockVoidupdatePosition(Vector2 anchoredPosition);
@@ -30,7 +30,7 @@ public class TextAreaLayoutPresenter : ITextAreaLayoutPresenter
             return;
         }
 
-        view.SetContentSize(new Vector2(view.GetContentWidth(), layoutData.ContentHeight));
+        view.SetContentSize(new Vector2(0, layoutData.ContentHeight));
 
         view.SetAreaVoidstartLayout(layoutData.AreaVoidstartSize, layoutData.AreaVoidstartPosition);
 
