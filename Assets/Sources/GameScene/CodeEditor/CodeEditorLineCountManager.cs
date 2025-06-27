@@ -1,26 +1,33 @@
-using UnityEngine;
+using System;
 
 public class CodeEditorLineCountManager
 {
-    public int LineCountVoidstart => lineCountVoidstart;
-    public int LineCountVoidupdate => lineCountVoidupdate;
+    public int LineCountVoidstart { get; private set; }
+    public int LineCountVoidupdate { get; private set; }
 
-    private int lineCountVoidstart = 5;
-    private int lineCountVoidupdate;
+    public event Action OnLineCountChanged;
+
+    public CodeEditorLineCountManager()
+    {
+        LineCountVoidstart = 1;
+        LineCountVoidupdate = 1;
+    }
 
     public void SetLineCount(CodeEditorBlock block, int value)
     {
         switch (block)
         {
             case CodeEditorBlock.VoidStart:
-                lineCountVoidstart = value;
+                LineCountVoidstart = value;
                 break;
             case CodeEditorBlock.VoidUpdate:
-                lineCountVoidupdate = value;
+                LineCountVoidupdate = value;
                 break;
             default:
-                Debug.LogError($"想定されていないブロックが指定されました : CodeEditorLineCountManager.SetLineCount({block}, {value})");
+                UnityEngine.Debug.LogError($"想定されていないブロックが指定されました : CodeEditorLineCountManager.SetLineCount({block}, {value})");
                 break;
         }
+
+        OnLineCountChanged?.Invoke();
     }
 }

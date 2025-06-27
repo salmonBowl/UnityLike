@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2628e7e472a5d9744bb4ebbe7085f74d, type: 3}
   m_Name: CpdeEditorSettings
   m_EditorClassIdentifier: 
-  fontSize: 0.5
-  lineHeight: 1.5
-  lowerHeightInputField: 3
+  FontSize: 0.5
+  LineHeight: 0.72
+  AreaHeightOffset: 0.2
+  LowerHeightInputField: 3

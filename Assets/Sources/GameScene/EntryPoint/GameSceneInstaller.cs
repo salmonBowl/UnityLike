@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UnityEngine;
 using Zenject;
 
@@ -9,28 +10,53 @@ public class GameSceneInstaller : MonoInstaller
 
     [Space(20)]
 
-    [Header("開発に使う全てのゲームオブジェクトやコンポーネントを取得します")]
+    [Header("開発に使う全てのMonoBehaviourクラスを取得します")]
 
     [Header("CodeEditor関係")]
-    [SerializeField] private RectTransform content;
-    [SerializeField] private RectTransform blockVoidupdate;
-    [SerializeField] private RectTransform areaVoidstart;
-    [SerializeField] private RectTransform areaVoidupdate;
+    [SerializeField]
+    private CodeEditorTextAreaUI codeEditorTextAreaView;
+
+    public override void Start()
+    {
+        //base.Start(); 空メソッド
+
+        if (codeEditorSettings == null)
+            Debug.LogError("GameSceneInstaller : CodeEditorSettingsが指定されていません");
+        if (codeEditorTextAreaView == null)
+            Debug.LogError("GameSceneInstaller : CodeEditorTextAreaViewが指定されていません");
+    }
 
     // DIコンテナに依存関係をバインドします
     public override void InstallBindings()
     {
-        // SerializeFieldで取得したコンポーネントを登録します
-        Container.Bind<CodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
-        Container.Bind<RectTransform>().WithId("content").FromInstance(content).AsCached();
-        Container.Bind<RectTransform>().WithId("blockVoidupdate").FromInstance(blockVoidupdate).AsCached();
-        Container.Bind<RectTransform>().WithId("areaVoidstart").FromInstance(areaVoidstart).AsCached();
-        Container.Bind<RectTransform>().WithId("areaVoidupdate").FromInstance(areaVoidupdate).AsCached();
+        Debug.Log("GameSceneInstaller.InstallBindings()");
 
-        // 依存関係をバインドします
-        Container.BindInterfacesAndSelfTo<GameRootGameScene>().AsSingle();
-        Container.BindInterfacesAndSelfTo<CodeEditor>().AsSingle();
-        Container.BindInterfacesAndSelfTo<CodeEditorLineCountManager>().AsSingle();
-        Container.BindInterfacesAndSelfTo<CodeEditorTextAreaSize>().AsSingle();
+        // Entities層
+        Container.Bind<CodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
+        // TextAreaLayoutDataはUseCaseが直接生成
+
+        // Use Cases層
+        Container.Bind<CodeEditorLineCountManager>().AsSingle();
+        Container.Bind<UpdateTextAreaUseCase>().AsSingle();
+
+        // Interface Adapters層
+        Container.Bind<ITextAreaLayoutPresenter>().To<TextAreaLayoutPresenter>().AsSingle();
+        Container.Bind<ITextAreaView>().FromInstance(codeEditorTextAreaView).AsSingle(); // MonoBehaviourをインターフェースとしてバインド
+        Container.Bind<ITextAreaInput>().FromInstance(codeEditorTextAreaView).AsSingle();
+        Container.Bind<IGetInputFieldText>().FromInstance(codeEditorTextAreaView).AsSingle();
+        Container.BindInterfacesAndSelfTo<Kernel>()
+           .FromSubContainerResolve().ByMethod(KernelInstaller).AsSingle();
+
+        // 全体のシステム
+        Container.Bind<CodeEditor>().AsSingle();
+        Container.Bind<GameRootGameScene>().AsSingle();
+    }
+    private void KernelInstaller(DiContainer subContainer)
+    {
+        subContainer.Bind<Kernel>().AsSingle();
+
+        // Initialize()を使うためKernelをバインドします
+        subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
+         // 疎結合になりすぎて誰もこれのインスタンスを持たない
     }
 }
