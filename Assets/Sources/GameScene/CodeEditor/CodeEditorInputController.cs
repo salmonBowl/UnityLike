@@ -58,6 +58,8 @@ public class CodeEditorInputController : IInitializable, IDisposable
     }
     private void OnTextInputChanged(CodeEditorBlock block, string newText)
     {
+        UnityEngine.Debug.Log("CodeEditorInputController | newText : " + newText);
+
         int newLineCount = CalculateLineCount(newText);
 
         UnityEngine.Debug.Log($"CodeEditorInputController | block : {block}, LineCount : {newLineCount}");
@@ -70,6 +72,6 @@ public class CodeEditorInputController : IInitializable, IDisposable
         if (string.IsNullOrEmpty(text))
             return 1;
 
-        return text.Split('\n').Length + 1;
+        return text.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None).Length;
     }
 }
