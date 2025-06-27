@@ -21,7 +21,7 @@ public class TitleSceneAll : MonoBehaviour
     bool IsTitleUpdate;
     float panelAlpha;
 
-    bool pointedButton = false;
+    float angleDegDestination = 0;
 
     void Start()
     {
@@ -35,13 +35,11 @@ public class TitleSceneAll : MonoBehaviour
     {
         if (IsTitleUpdate)
         {
-            float angleDegDestination = pointedButton? 120 : 0;
-
             // 滑らかに角度を変化
             UnityIcon.rotation = Quaternion.Lerp(
                 Quaternion.Euler(0, 0, angleDegDestination),
                 UnityIcon.rotation,
-                9.5f
+                0.9f
                 );
         }
         else // シーン遷移のフェードアウト
@@ -67,13 +65,17 @@ public class TitleSceneAll : MonoBehaviour
         panel.color = panelColor;
     }
 
-    public void ButtonPointerEnter()
+    public void ButtonCreateNewProjectPointerEnter()
     {
-        pointedButton = true;
+        angleDegDestination = -120;
+    }
+    public void ButtonLoadProjectPointerEnter()
+    {
+        angleDegDestination = 120;
     }
     public void ButtonPointerExit()
     {
-        pointedButton = false;
+        angleDegDestination = 0;
     }
 
     public void CreateNewProject()
