@@ -37,12 +37,12 @@ public class UpdateTextAreaUseCase
         // InputFieldのサイズを計算
 
         float heightVoidstart = Mathf.Max(
-            settings.lowerHeightInputField,
-            settings.lineHeight * lineCountManager.LineCountVoidstart
+            settings.LowerHeightInputField,
+            settings.LineHeight * lineCountManager.LineCountVoidstart + settings.AreaHeightOffset
             );
         float heightVoidupdate = Mathf.Max(
-            settings.lowerHeightInputField,
-            settings.lineHeight * lineCountManager.LineCountVoidupdate
+            settings.LowerHeightInputField,
+            settings.LineHeight * lineCountManager.LineCountVoidupdate + settings.AreaHeightOffset
             );
 
         // レイアウトデータを生成

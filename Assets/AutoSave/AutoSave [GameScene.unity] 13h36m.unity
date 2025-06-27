@@ -242,7 +242,7 @@ MonoBehaviour:
       - m_Target: {fileID: 432131775}
         m_TargetAssemblyTypeName: CodeEditorTextAreaUI, Assembly-CSharp
         m_MethodName: OnAreaVoidupdateTextChanged
-        m_Mode: 5
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1780,7 +1780,7 @@ MonoBehaviour:
       - m_Target: {fileID: 432131775}
         m_TargetAssemblyTypeName: CodeEditorTextAreaUI, Assembly-CSharp
         m_MethodName: OnAreaVoidstartTextChanged
-        m_Mode: 5
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
