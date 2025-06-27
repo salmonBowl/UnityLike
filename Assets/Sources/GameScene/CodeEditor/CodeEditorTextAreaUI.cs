@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput, IGetInputFieldText
 {
@@ -18,9 +18,9 @@ public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
 
     [Header("InputFieldŠÖŒW")]
     [SerializeField]
-    private InputField inputFieldVoidstart;
+    private TMP_InputField inputFieldVoidstart;
     [SerializeField]
-    private InputField inputFieldVoidupdate;
+    private TMP_InputField inputFieldVoidupdate;
 
     public event Action<CodeEditorBlock, string> OnTextAreaInputChanged;
 

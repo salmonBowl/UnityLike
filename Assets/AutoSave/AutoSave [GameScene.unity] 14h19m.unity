@@ -154,10 +154,10 @@ RectTransform:
   - {fileID: 1867283744}
   m_Father: {fileID: 1436336179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5.5, y: -1.5}
-  m_SizeDelta: {x: 11, y: 3}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &61857285
 MonoBehaviour:
@@ -242,7 +242,7 @@ MonoBehaviour:
       - m_Target: {fileID: 432131775}
         m_TargetAssemblyTypeName: CodeEditorTextAreaUI, Assembly-CSharp
         m_MethodName: OnAreaVoidupdateTextChanged
-        m_Mode: 5
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_GlobalFontAsset: {fileID: 11400000, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
   m_OnFocusSelectAll: 0
   m_ResetOnDeActivation: 0
-  m_KeepTextSelectionVisible: 1
+  m_KeepTextSelectionVisible: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
@@ -1215,6 +1215,8 @@ MonoBehaviour:
   areaVoidstart: {fileID: 1705077550}
   areaVoidupdate: {fileID: 1436336179}
   blockVoidupdate: {fileID: 1602699583}
+  inputFieldVoidstart: {fileID: 868099849}
+  inputFieldVoidupdate: {fileID: 61857285}
 --- !u!1 &466921367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,7 +1782,7 @@ MonoBehaviour:
       - m_Target: {fileID: 432131775}
         m_TargetAssemblyTypeName: CodeEditorTextAreaUI, Assembly-CSharp
         m_MethodName: OnAreaVoidstartTextChanged
-        m_Mode: 5
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1809,7 +1811,7 @@ MonoBehaviour:
   m_GlobalFontAsset: {fileID: 11400000, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
   m_OnFocusSelectAll: 0
   m_ResetOnDeActivation: 0
-  m_KeepTextSelectionVisible: 1
+  m_KeepTextSelectionVisible: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
