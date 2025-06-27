@@ -1,8 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
 {
+    [Header("配置関係")]
     [SerializeField]
     private RectTransform content;
 
@@ -13,6 +15,12 @@ public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
 
     [SerializeField]
     private RectTransform blockVoidupdate;
+
+    [Header("InputField関係")]
+    [SerializeField]
+    private InputField inputFieldVoidstart;
+    [SerializeField]
+    private InputField inputFieldVoidupdate;
 
     public event Action<CodeEditorBlock, string> OnTextAreaInputChanged;
 
@@ -35,7 +43,7 @@ public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
     {
         if (content == null)
         {
-            Debug.LogError("contentが指定されていません");
+            Debug.LogError("contentがアタッチされていません");
             return;
         }
 
@@ -45,7 +53,7 @@ public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
     {
         if (areaVoidstart == null)
         {
-            Debug.LogError("areaVoidstartが指定されていません");
+            Debug.LogError("areaVoidstartがアタッチされていません");
             return;
         }
 
@@ -58,7 +66,7 @@ public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
 
         if (areaVoidupdate == null)
         {
-            Debug.LogError("areaVoidupdateが指定されていません");
+            Debug.LogError("areaVoidupdateがアタッチされていません");
             return;
         }
 
@@ -69,11 +77,38 @@ public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
     {
         if (blockVoidupdate == null)
         {
-            Debug.LogError("blockVoidupdateが指定されていません");
+            Debug.LogError("blockVoidupdateがアタッチされていません");
             return;
         }
 
         blockVoidupdate.anchoredPosition = anchoredPosition;
+    }
+
+    public void SetTextInputField(CodeEditorBlock block, string text)
+    {
+        switch(block)
+        {
+            case CodeEditorBlock.VoidStart:
+
+                if (!inputFieldVoidstart)
+                {
+                    Debug.LogError("inputFieldVoidstartがアタッチされていません");
+                    return;
+                }
+                inputFieldVoidstart.text = text;
+
+                break;
+            case CodeEditorBlock.VoidUpdate:
+
+                if (!inputFieldVoidupdate)
+                {
+                    Debug.LogError("inputFieldVoidupdateがアタッチされていません");
+                    return;
+                }
+                inputFieldVoidstart.text = text;
+
+                break;
+        }
     }
 
     /*
