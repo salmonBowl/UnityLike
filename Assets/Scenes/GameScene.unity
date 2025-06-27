@@ -266,7 +266,7 @@ MonoBehaviour:
   m_GlobalFontAsset: {fileID: 11400000, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
   m_OnFocusSelectAll: 0
   m_ResetOnDeActivation: 0
-  m_KeepTextSelectionVisible: 1
+  m_KeepTextSelectionVisible: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
@@ -1215,6 +1215,8 @@ MonoBehaviour:
   areaVoidstart: {fileID: 1705077550}
   areaVoidupdate: {fileID: 1436336179}
   blockVoidupdate: {fileID: 1602699583}
+  inputFieldVoidstart: {fileID: 0}
+  inputFieldVoidupdate: {fileID: 0}
 --- !u!1 &466921367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,7 +1811,7 @@ MonoBehaviour:
   m_GlobalFontAsset: {fileID: 11400000, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
   m_OnFocusSelectAll: 0
   m_ResetOnDeActivation: 0
-  m_KeepTextSelectionVisible: 1
+  m_KeepTextSelectionVisible: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
