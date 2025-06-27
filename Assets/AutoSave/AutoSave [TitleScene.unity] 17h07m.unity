@@ -1308,8 +1308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 902049396}
-  buttonNewStart: {fileID: 0}
-  buttonLoad: {fileID: 0}
+  buttonNewStart: {fileID: 1702696032}
+  buttonLoad: {fileID: 758478369}
   UnityIcon: {fileID: 0}
 --- !u!4 &1399111757
 Transform:

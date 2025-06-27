@@ -15,4 +15,4 @@ MonoBehaviour:
   FontSize: 0.5
   LineHeight: 0.72
   AreaHeightOffset: 0.2
-  LowerHeightInputField: 3
+  LowerHeightInputField: 0.9
