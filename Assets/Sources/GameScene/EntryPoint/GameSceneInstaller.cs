@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UnityEngine;
 using Zenject;
 
@@ -42,10 +43,21 @@ public class GameSceneInstaller : MonoInstaller
         Container.Bind<ITextAreaLayoutPresenter>().To<TextAreaLayoutPresenter>().AsSingle();
         Container.Bind<ITextAreaView>().FromInstance(codeEditorTextAreaView).AsSingle(); // MonoBehaviourをインターフェースとしてバインド
         Container.Bind<ITextAreaInput>().FromInstance(codeEditorTextAreaView).AsSingle();
-        Container.Bind<CodeEditorInputController>().AsSingle().NonLazy(); // 疎結合になりすぎて誰もこれのインスタンスを持たない
+        Container.BindInterfacesAndSelfTo<Greeter>()
+           .FromSubContainerResolve().ByMethod(KernelInstaller).AsSingle().NonLazy();
 
         // 全体のシステム
         Container.Bind<CodeEditor>().AsSingle();
         Container.Bind<GameRootGameScene>().AsSingle();
     }
+    private void KernelInstaller(DiContainer subContainer)
+    {
+        subContainer.Bind<Greeter>().AsSingle();
+
+        subContainer.Bind<CodeEditorInputController>().AsSingle().NonLazy(); // 疎結合になりすぎて誰もこれのインスタンスを持たない
+    }
+}
+public class Greeter : Kernel
+{
+    public Greeter() => Debug.Log("Create Greeter!");
 }

@@ -19,6 +19,8 @@ public class CodeEditorInputController : IInitializable, IDisposable
         ITextAreaInput textAreaInput
         )
     {
+        UnityEngine.Debug.Log("CodeEditorInputController.Constructor()");
+
         this.lineCountManager = lineCountManager;
         this.updateTextAreaUseCase = updateTextAreaUseCase;
         this.textAreaInput = textAreaInput;
