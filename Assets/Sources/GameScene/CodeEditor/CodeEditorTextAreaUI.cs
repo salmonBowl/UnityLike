@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
+public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput, IGetInputFieldText
 {
     [Header("配置関係")]
     [SerializeField]
@@ -24,6 +24,9 @@ public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
 
     public event Action<CodeEditorBlock, string> OnTextAreaInputChanged;
 
+    /*
+        Get
+     */
     public float GetContentWidth()
     {
         if (content == null)
@@ -33,6 +36,32 @@ public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
         }
 
         return content.rect.width;
+    }
+    public string GetInputFieldText(CodeEditorBlock block)
+    {
+        switch (block)
+        {
+            case CodeEditorBlock.VoidStart:
+
+                if (!inputFieldVoidstart)
+                {
+                    Debug.LogError("inputFieldVoidstartがアタッチされていません");
+                    return "";
+                }
+                return inputFieldVoidstart.text;
+            case CodeEditorBlock.VoidUpdate:
+
+                if (!inputFieldVoidupdate)
+                {
+                    Debug.LogError("inputFieldVoidupdateがアタッチされていません");
+                    return "";
+                }
+                return inputFieldVoidupdate.text;
+
+            default:
+                Debug.LogError("CodeEditorTextAreaUI.GetInputFieldText : 記述されていないEnum値です");
+                return "";
+        }
     }
 
     /*
@@ -86,7 +115,7 @@ public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
 
     public void SetTextInputField(CodeEditorBlock block, string text)
     {
-        switch(block)
+        switch (block)
         {
             case CodeEditorBlock.VoidStart:
 
@@ -108,6 +137,9 @@ public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput
                 inputFieldVoidstart.text = text;
 
                 break;
+            default:
+                Debug.LogError("CodeEditorTextAreaUI.SetTextInputField : 記述されていないEnum値です");
+                return;
         }
     }
 

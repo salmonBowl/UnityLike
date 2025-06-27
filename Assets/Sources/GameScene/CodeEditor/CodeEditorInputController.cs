@@ -3,7 +3,11 @@ using Zenject;
 
 public interface ITextAreaInput
 {
-    public event Action<CodeEditorBlock, string> OnTextAreaInputChanged;
+    event Action<CodeEditorBlock, string> OnTextAreaInputChanged;
+}
+public interface IGetInputFieldText
+{
+    string GetInputFieldText(CodeEditorBlock block);
 }
 
 public class CodeEditorInputController : IInitializable, IDisposable
@@ -11,12 +15,14 @@ public class CodeEditorInputController : IInitializable, IDisposable
     private readonly CodeEditorLineCountManager lineCountManager;
     private readonly UpdateTextAreaUseCase updateTextAreaUseCase;
     private readonly ITextAreaInput textAreaInput;
+    private readonly IGetInputFieldText getInputFieldText;
 
     [Inject]
     public CodeEditorInputController(
         CodeEditorLineCountManager lineCountManager,
         UpdateTextAreaUseCase updateTextAreaUseCase,
-        ITextAreaInput textAreaInput
+        ITextAreaInput textAreaInput,
+        IGetInputFieldText getInputFieldText
         )
     {
         //UnityEngine.Debug.Log("CodeEditorInputController.Constructor()");
@@ -24,6 +30,7 @@ public class CodeEditorInputController : IInitializable, IDisposable
         this.lineCountManager = lineCountManager;
         this.updateTextAreaUseCase = updateTextAreaUseCase;
         this.textAreaInput = textAreaInput;
+        this.getInputFieldText = getInputFieldText;
     }
 
     public void Initialize()
@@ -44,7 +51,10 @@ public class CodeEditorInputController : IInitializable, IDisposable
         lineCountManager.OnLineCountChanged += OnLineCountChangedHandler;
 
         // èâä˙ï\é¶ÇÃÇΩÇﬂÇ…àÍìxÇæÇØé¿çs
-        updateTextAreaUseCase.Execute();
+        // VoidStart
+        OnTextInputChanged(CodeEditorBlock.VoidStart, getInputFieldText.GetInputFieldText(CodeEditorBlock.VoidStart));
+        // VoidUpdate
+        OnTextInputChanged(CodeEditorBlock.VoidUpdate, getInputFieldText.GetInputFieldText(CodeEditorBlock.VoidUpdate));
     }
     public void Dispose()
     {
