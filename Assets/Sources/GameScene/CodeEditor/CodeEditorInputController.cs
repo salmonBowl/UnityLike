@@ -19,7 +19,7 @@ public class CodeEditorInputController : IInitializable, IDisposable
         ITextAreaInput textAreaInput
         )
     {
-        UnityEngine.Debug.Log("CodeEditorInputController.Constructor()");
+        //UnityEngine.Debug.Log("CodeEditorInputController.Constructor()");
 
         this.lineCountManager = lineCountManager;
         this.updateTextAreaUseCase = updateTextAreaUseCase;
@@ -28,7 +28,7 @@ public class CodeEditorInputController : IInitializable, IDisposable
 
     public void Initialize()
     {
-        UnityEngine.Debug.Log("CodeEditorInputController.Initialize()");
+        //UnityEngine.Debug.Log("CodeEditorInputController.Initialize()");
 
         if (lineCountManager == null)
             UnityEngine.Debug.LogError("CodeEditorInputController : lineCountManagerÇ™ê›íËÇ≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ");
@@ -58,11 +58,11 @@ public class CodeEditorInputController : IInitializable, IDisposable
     }
     private void OnTextInputChanged(CodeEditorBlock block, string newText)
     {
-        UnityEngine.Debug.Log("CodeEditorInputController | newText : " + newText);
+        //UnityEngine.Debug.Log("CodeEditorInputController | newText : " + newText);
 
         int newLineCount = CalculateLineCount(newText);
 
-        UnityEngine.Debug.Log($"CodeEditorInputController | block : {block}, LineCount : {newLineCount}");
+        //UnityEngine.Debug.Log($"CodeEditorInputController | block : {block}, LineCount : {newLineCount}");
 
         lineCountManager.SetLineCount(block, newLineCount);
     }
