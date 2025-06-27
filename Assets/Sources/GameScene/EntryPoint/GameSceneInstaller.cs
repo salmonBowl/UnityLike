@@ -43,8 +43,8 @@ public class GameSceneInstaller : MonoInstaller
         Container.Bind<ITextAreaLayoutPresenter>().To<TextAreaLayoutPresenter>().AsSingle();
         Container.Bind<ITextAreaView>().FromInstance(codeEditorTextAreaView).AsSingle(); // MonoBehaviourをインターフェースとしてバインド
         Container.Bind<ITextAreaInput>().FromInstance(codeEditorTextAreaView).AsSingle();
-        Container.BindInterfacesAndSelfTo<Greeter>()
-           .FromSubContainerResolve().ByMethod(KernelInstaller).AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<Kernel>()
+           .FromSubContainerResolve().ByMethod(KernelInstaller).AsSingle();
 
         // 全体のシステム
         Container.Bind<CodeEditor>().AsSingle();
@@ -52,12 +52,10 @@ public class GameSceneInstaller : MonoInstaller
     }
     private void KernelInstaller(DiContainer subContainer)
     {
-        subContainer.Bind<Greeter>().AsSingle();
+        subContainer.Bind<Kernel>().AsSingle();
 
-        subContainer.Bind<CodeEditorInputController>().AsSingle().NonLazy(); // 疎結合になりすぎて誰もこれのインスタンスを持たない
+        // Initialize()を使うためKernelをバインドします
+        subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
+         // 疎結合になりすぎて誰もこれのインスタンスを持たない
     }
-}
-public class Greeter : Kernel
-{
-    public Greeter() => Debug.Log("Create Greeter!");
 }
