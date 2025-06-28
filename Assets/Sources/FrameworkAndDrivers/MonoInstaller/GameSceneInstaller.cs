@@ -61,6 +61,7 @@ public class GameSceneInstaller : MonoInstaller
         Container.Bind<ITextAreaInput>().FromInstance(codeEditorTextAreaView).AsSingle();
         Container.Bind<IGetInputFieldText>().FromInstance(codeEditorTextAreaView).AsSingle();
 
+        // エントリーポイント
         Container.Bind<GameRootGameScene>().AsSingle();
 
 
@@ -85,6 +86,21 @@ public class GameSceneInstaller : MonoInstaller
 
         // Initialize()などのメソッドを使用するクラスでKernelをバインドします
 
+
+        /*
+         *  --- Use Cases層 ---
+         */
+
+        /*
+         *  --- Interface Adapters層 ---
+         */
+
         subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
+
+        /*
+         *  --- Frameworks & Drivers層 ---
+         */
+
+
     }
 }
