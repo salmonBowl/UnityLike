@@ -30,26 +30,18 @@ namespace UnityLike.UseCases.Compiler
         /// </summary>
         public Token GetNextToken()
         {
-            if (IsEndOfFile())
-            {
-                return new Token(TokenType.EOF, "\0", currentLine, currentColumn);
-            }
-
-            // トークンが完成するまで読み取りを進めます
+            // 空白文字をスキップします
+            // またその途中でファイルの終端に達したらEOFを返します
             while (true)
             {
                 if (IsEndOfFile())
-                    return new Token(TokenType.EOF, "\0", currentLine, currentColumn);
-
-                char nextChar = Peek();
-
-                if (Array.IndexOf(Constants.whitespaces, nextChar) == -1)
                 {
-                    // nextCharが何かのトークンになる文字のとき
+                    return new Token(TokenType.EOF, "\0", currentLine, currentColumn);
+                }
 
-                    Consume();
-
-                    // ここに処理を書きます
+                // 次の文字が空白かどうか
+                if (Array.IndexOf(Constants.whiteSpaceChars, Peek()) == -1)
+                {
                     break;
                 }
                 else
@@ -59,7 +51,17 @@ namespace UnityLike.UseCases.Compiler
                 }
             }
 
-            return new Token(TokenType.Unknown, "", currentLine, currentColumn);
+            // 空白文字をスキップしているためこの文字は何かの意味を持ちます
+            char nextChar = Peek();
+
+
+            Consume();
+
+
+
+            // 記述していない例外は全てTokenType.Unknownとして返します
+
+            return new Token(TokenType.Unknown, nextChar.ToString(), currentLine, currentColumn);
         }
 
         /// <summary>
