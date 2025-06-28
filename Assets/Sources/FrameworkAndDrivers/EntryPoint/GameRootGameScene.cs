@@ -5,16 +5,15 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
     public class GameRootGameScene
     {
         // CodeEditor
-        private readonly CodeEditor codeEditor;
+        //private readonly CodeEditor codeEditor;
 
 
 
         //private readonly RectTransform    ;
 
         [Inject]
-        public GameRootGameScene(CodeEditor codeEditor)
+        public GameRootGameScene()
         {
-            this.codeEditor = codeEditor;
         }
 
         public void Start()
@@ -24,7 +23,6 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
 
         public void Update()
         {
-            codeEditor.Update();
 
 
         }

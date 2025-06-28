@@ -3,7 +3,8 @@ using UnityEngine;
 using TMPro;
 
 using UnityLike.Entities.CodeEditor;
-using UnityLike.InterfaceAdapter.Presenter;
+using UnityLike.InterfaceAdapters.Controller;
+using UnityLike.InterfaceAdapters.Presenter;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {

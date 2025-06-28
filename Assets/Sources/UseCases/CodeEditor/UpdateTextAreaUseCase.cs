@@ -3,7 +3,8 @@ using Mathf = UnityEngine.Mathf;
 using Zenject;
 
 using UnityLike.Entities.CodeEditor;
-using UnityLike.InterfaceAdapters;
+using UnityLike.Entities.Shared;
+using UnityLike.InterfaceAdapters.Presenter;
 
 namespace UnityLike.UseCases.CodeEditor
 {
@@ -11,13 +12,13 @@ namespace UnityLike.UseCases.CodeEditor
     {
 
         private readonly LineCountManager lineCountManager;
-        private readonly CodeEditorSettings settings;
+        private readonly ICodeEditorSettings settings;
         private readonly ITextAreaLayoutPresenter layoutPresenter;
 
         [Inject]
         public UpdateTextAreaUseCase(
             LineCountManager lineCountManager,
-            CodeEditorSettings settings,
+            ICodeEditorSettings settings,
             ITextAreaLayoutPresenter layoutPresenter
             )
         {

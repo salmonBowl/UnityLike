@@ -2,15 +2,15 @@ using UnityEngine;
 using Zenject;
 
 // Entities層のusing
-using UnityLike.Entities.CodeEditor;
-//using UnityLike.Entities.;
+// ただしこの層がインスタンスとして使われることは基本ない
+using UnityLike.Entities.Shared;
 
 // UseCases層のusing
 using UnityLike.UseCases.CodeEditor;
 
 // InterfaceAdapter層のusing
-using UnityLike.InterfaceAdapter.Presenter;
-using UnityLike.InterfaceAdapter.Controller;
+using UnityLike.InterfaceAdapters.Presenter;
+using UnityLike.InterfaceAdapters.Controller;
 
 // FramewoekAndDrivers層のusing
 using UnityLike.FrameworkAndDrivers.CodeEditor;
@@ -94,7 +94,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              *  ただしそれを持つクラスでメンバーnullを出さないためにバインドしています
              */
 
-            Container.Bind<CodeEditor>().AsSingle();
+            //Container.Bind<CodeEditor>().AsSingle();
 
         }
         private void KernelInstaller(DiContainer subContainer)
@@ -112,7 +112,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              *  --- Interface Adapters層 ---
              */
 
-            subContainer.BindInterfacesTo<InputController>().AsSingle().NonLazy();
+            subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
 
             /*
              *  --- Frameworks & Drivers層 ---

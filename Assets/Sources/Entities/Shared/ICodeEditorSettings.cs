@@ -1,7 +1,7 @@
 
-namespace UnityLike.Entities.CodeEditor
+namespace UnityLike.Entities.Shared
 {
-    interface ICodeEditorSettings
+    public interface ICodeEditorSettings
     {
         float FontSize { get; }
         float LineHeight { get; }
