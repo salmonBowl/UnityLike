@@ -16,7 +16,7 @@ namespace UnityLike.UseCases.Compiler
             string sourceCode
             )
         {
-            this.sourceCode = sourceCode ?? throw new ArgumentException();
+            this.sourceCode = sourceCode ?? throw new ArgumentNullException("Compiler.Lexer.Lexer() : sourceCodeにnullの文字列が渡されました");
             currentIndex = 0;
             currentLine = 1;
             currentColumn = 1;
@@ -39,11 +39,11 @@ namespace UnityLike.UseCases.Compiler
         /// <summary>
         /// 現在の文字を消費し、読み取り位置を1つ先に進めます
         /// </summary>
-        /// <exception cref="ArgumentException">ファイルが終端に達している状態で読み取りを進めようとしています</exception>
+        /// <exception cref="InvalidOperationException">ファイルが終端に達している状態で読み取りを進めようとしています</exception>
         public void Consume()
         {
             if (IsEndOfFile())
-                throw new ArgumentException();
+                throw new InvalidOperationException("Compiler.Lexer:ILexer.Consume() : これ以上読み取り位置を進められません");
 
             if (sourceCode[currentIndex] == '\n')
             {
@@ -77,7 +77,15 @@ namespace UnityLike.UseCases.Compiler
         /// </summary>
         public Token GetNextToken()
         {
-            return;
+            if (IsEndOfFile())
+            {
+                return new Token(TokenType.EOF, );
+            }
+
+            char nextChar = Peek();
+            Consume();
+
+            return new Token(TokenType.Unknown, );
         }
     }
 }
