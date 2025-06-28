@@ -16,7 +16,7 @@ Shader "Custom/GeometricBackground"
 
         float freq = 6;
         float waveIntensity = 0.05;
-        float waveRadius = 0.3;
+        float waveRadius = 0.33;
 
         float distanceFromWave = l - waveRadius + sin(theta * freq) * waveIntensity;
         float bright = 0.004 / abs(distanceFromWave);
@@ -25,7 +25,7 @@ Shader "Custom/GeometricBackground"
 
         //float brightFiltered = min(bright, 4) * clamp(1.4 - distanceFromCircle, 0, 1);
 
-        float3 color = (0, 0.2, 1) * bright;
+        float3 color = (0, 0.2, 1) * min(bright, 1);
 
         float alpha = 1;
 
