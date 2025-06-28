@@ -261,7 +261,7 @@ MonoBehaviour:
     new Vector3(1, 0, 0);\r\n}\r\nif (Input.GetKey(KeyCode.LeftArrow))\r\n{\r\n   
     transform.position -= new Vector3(1, 0, 0);\r\n}\r\n\r\nif (transform.position.y
     <= -5) //\u3082\u3057\u5730\u9762\u306B\u63A5\u5730\u3057\u3066\u3044\u308B\u306A\u3089\r\n{\r\n   
-    transform.position.y = -5;\r\n    velocity.y = 0;\r\n  \r\n    if (Input.GetKeyDown(KeyCode.UpArrow))\r\n   
+    transform.position.y = -5;\r\n    velocity.y = 0;\r\n\r\n    if (Input.GetKeyDown(KeyCode.UpArrow))\r\n   
     {\r\n        velocity.y = 1;\r\n    }\r\n}\r\nvelocity.y -= 0.05f;\r\n\r\ntransform.position
     += Velocity;\n"
   m_CaretBlinkRate: 0.85
@@ -682,7 +682,7 @@ MonoBehaviour:
     new Vector3(1, 0, 0);\r\n}\r\nif (Input.GetKey(KeyCode.LeftArrow))\r\n{\r\n   
     transform.position -= new Vector3(1, 0, 0);\r\n}\r\n\r\nif (transform.position.y
     <= -5) //\u3082\u3057\u5730\u9762\u306B\u63A5\u5730\u3057\u3066\u3044\u308B\u306A\u3089\r\n{\r\n   
-    transform.position.y = -5;\r\n    velocity.y = 0;\r\n  \r\n    if (Input.GetKeyDown(KeyCode.UpArrow))\r\n   
+    transform.position.y = -5;\r\n    velocity.y = 0;\r\n\r\n    if (Input.GetKeyDown(KeyCode.UpArrow))\r\n   
     {\r\n        velocity.y = 1;\r\n    }\r\n}\r\nvelocity.y -= 0.05f;\r\n\r\ntransform.position
     += Velocity;\n\u200B"
   m_isRightToLeft: 0

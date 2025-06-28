@@ -1,12 +1,5 @@
 using Zenject;
 
-public enum CodeEditorBlock
-{
-    VoidStart,
-    VoidUpdate,
-    MaxNum
-}
-
 public class CodeEditor
 {
     private readonly CodeEditorLineCountManager lineCountManager;
@@ -32,6 +25,6 @@ public class CodeEditor
         // lineCount‚ÍUI‚©‚ç‚ÌƒCƒxƒ“ƒg‹ì“®‚È‚Ì‚ÅUpdate‚ª‚¢‚ç‚È‚¢
         //lineCountManager.Update();
 
-        updateTextAreaUseCase.Execute();
+        //updateTextAreaUseCase.Execute();
     }
 }
