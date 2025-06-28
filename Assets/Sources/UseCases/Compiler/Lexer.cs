@@ -35,8 +35,29 @@ namespace UnityLike.UseCases.Compiler
                 return new Token(TokenType.EOF, "\0", currentLine, currentColumn);
             }
 
-            char nextChar = Peek();
-            Consume();
+            // トークンが完成するまで読み取りを進めます
+            while (true)
+            {
+                if (IsEndOfFile())
+                    return new Token(TokenType.EOF, "\0", currentLine, currentColumn);
+
+                char nextChar = Peek();
+
+                if (Array.IndexOf(Constants.whitespaces, nextChar) == -1)
+                {
+                    // nextCharが何かのトークンになる文字のとき
+
+                    Consume();
+
+                    // ここに処理を書きます
+                    break;
+                }
+                else
+                {
+                    // 空白文字ならスキップします
+                    Consume();
+                }
+            }
 
             return new Token(TokenType.Unknown, "", currentLine, currentColumn);
         }
