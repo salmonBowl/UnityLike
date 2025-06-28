@@ -1,14 +1,17 @@
 using UnityEngine;
 using Zenject;
 
-public class GameRootMonoBehaviour : MonoBehaviour
+namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
-    [Inject]
-    private readonly GameRootGameScene game;
+    public class GameRootMonoBehaviour : MonoBehaviour
+    {
+        [Inject]
+        private readonly GameRootGameScene game;
 
-    void Start() => game.Start();
-    void Update() => game.Update();
+        void Start() => game.Start();
+        void Update() => game.Update();
 
-    // ’ŠÛ¢ŠE‚Ö‚Ì“Ë“ü! ‚Á‚Ä‚©‚ñ‚¶‚Å‚©‚Á‚±‚æ‚­‚È‚¢‚Å‚·‚©
+        // ’ŠÛ¢ŠE‚Ö‚Ì“Ë“ü! ‚Á‚Ä‚©‚ñ‚¶‚Å‚©‚Á‚±‚æ‚­‚È‚¢‚Å‚·‚©
 
+    }
 }

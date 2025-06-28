@@ -1,29 +1,32 @@
 using Zenject;
 
-public class GameRootGameScene
+namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
-    // CodeEditor
-    private readonly CodeEditor codeEditor;
-
-
-
-    //private readonly RectTransform    ;
-
-    [Inject]
-    public GameRootGameScene(CodeEditor codeEditor)
+    public class GameRootGameScene
     {
-        this.codeEditor = codeEditor;
-    }
-
-    public void Start()
-    {
-
-    }
-
-    public void Update()
-    {
-        codeEditor.Update();
+        // CodeEditor
+        private readonly CodeEditor codeEditor;
 
 
+
+        //private readonly RectTransform    ;
+
+        [Inject]
+        public GameRootGameScene(CodeEditor codeEditor)
+        {
+            this.codeEditor = codeEditor;
+        }
+
+        public void Start()
+        {
+
+        }
+
+        public void Update()
+        {
+            codeEditor.Update();
+
+
+        }
     }
 }

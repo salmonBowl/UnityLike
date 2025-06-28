@@ -1,7 +1,10 @@
 
-public enum CodeEditorBlock
+namespace UnityLike.Entities.CodeEditor
 {
-    VoidStart,
-    VoidUpdate,
-    MaxNum
+    public enum CodeEditorBlock
+    {
+        VoidStart,
+        VoidUpdate,
+        MaxNum
+    }
 }
