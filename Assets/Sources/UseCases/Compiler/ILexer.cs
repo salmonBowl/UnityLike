@@ -14,14 +14,14 @@ namespace UnityLike.UseCases.Compiler
         void Consume();
 
         /// <summary>
+        /// ファイルを読み取りが終端に達したかを判定します
+        /// </summary>
+        bool IsEndOfFile();
+
+        /// <summary>
         /// 次のトークンを生成し返します
         /// 字句解析の主要なメソッドです
         /// </summary>
         Token GetNextToken();
-
-        /// <summary>
-        /// ファイルを読み取りが終端に達したかを判定します
-        /// </summary>
-        bool IsEndOfFile();
     }
 }
