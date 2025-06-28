@@ -5,7 +5,7 @@ namespace UnityLike.Entities.Compiler
     {
         Identifier, // •Ï”‚âŠÖ”‚È‚Ç‚Ì¯•Êq
 
-        NumberReteral, // ”š
+        NumberLiteral, // ”š
 
         Unknown, // “ü—Í’†‚â“ü—Íƒ~ƒX‚È‚Ç
 

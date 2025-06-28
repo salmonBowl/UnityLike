@@ -24,17 +24,13 @@ namespace UnityLike.Entities.Compiler
         /// <summary>
         /// ƒg[ƒNƒ“‚Ìî•ñ‚ğ•¶š—ñ‚Æ‚µ‚Äæ“¾‚µ‚Ü‚·
         /// </summary>
-        public override string ToString()
+        public override string ToString() // Token.ToString
         {
-            string stringTokenType = TokenType.ToString(); // Enum.ToString;
-            string stringLineCount = LineCount.ToString(); // int.ToString;
-            string stringColumnCount = ColumnCount.ToString(); // int.ToString;
+            string stringTokenType = TokenType.ToString(); // Enum.ToString
+            string stringLineCount = LineCount.ToString(); // int.ToString
+            string stringColumnCount = ColumnCount.ToString(); // int.ToString
 
-            return
-                "[TokenType : " + stringTokenType +
-                ", Value : " + Value + 
-                ", LineCount : " + stringLineCount + 
-                ", ColumnCount ; " + stringColumnCount;
+            return $"[TokenType : {stringTokenType}, Value : {Value}, LineCount : {stringLineCount}, ColumnCount ; {stringColumnCount}]";
         }
     }
 }
