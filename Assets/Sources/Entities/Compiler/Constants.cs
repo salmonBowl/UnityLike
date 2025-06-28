@@ -3,7 +3,7 @@ namespace UnityLike.Entities.Compiler
 {
     public class Constants
     {
-        public static char[] whiteSpaces =
+        public static char[] whiteSpaceChars =
         {
             ' ',
             '\t',
