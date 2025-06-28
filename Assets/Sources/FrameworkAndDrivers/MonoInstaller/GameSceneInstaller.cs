@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using UnityEngine;
 using Zenject;
 
@@ -31,32 +30,61 @@ public class GameSceneInstaller : MonoInstaller
     {
         Debug.Log("GameSceneInstaller.InstallBindings()");
 
-        // Entities層
-        Container.Bind<CodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
-        // TextAreaLayoutDataはUseCaseが直接生成
+        /*
+         *  --- Entities層 --
+         */
 
-        // Use Cases層
+        // ScriptableObject
+        Container.Bind<CodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
+
+        /*
+         *  --- Use Cases層 ---
+         */
+
         Container.Bind<CodeEditorLineCountManager>().AsSingle();
         Container.Bind<UpdateTextAreaUseCase>().AsSingle();
 
-        // Interface Adapters層
+        /*
+         *  --- Interface Adapters層 ---
+         */
+
         Container.Bind<ITextAreaLayoutPresenter>().To<TextAreaLayoutPresenter>().AsSingle();
-        Container.Bind<ITextAreaView>().FromInstance(codeEditorTextAreaView).AsSingle(); // MonoBehaviourをインターフェースとしてバインド
+        
+        //
+
+        /*
+         *  --- Frameworks & Drivers層 ---
+         */
+
+        // MonoBehaviourをインターフェースとしてバインド
+        Container.Bind<ITextAreaView>().FromInstance(codeEditorTextAreaView).AsSingle();
         Container.Bind<ITextAreaInput>().FromInstance(codeEditorTextAreaView).AsSingle();
         Container.Bind<IGetInputFieldText>().FromInstance(codeEditorTextAreaView).AsSingle();
-        Container.BindInterfacesAndSelfTo<Kernel>()
-           .FromSubContainerResolve().ByMethod(KernelInstaller).AsSingle();
 
-        // 全体のシステム
-        Container.Bind<CodeEditor>().AsSingle();
         Container.Bind<GameRootGameScene>().AsSingle();
+
+
+        /*
+         *  --- Kernelのバインド ---
+         */
+
+        Container.BindInterfacesAndSelfTo<Kernel>().FromSubContainerResolve().ByMethod(KernelInstaller).AsSingle();
+
+
+        /*
+         *  --- 使用されていないクラス ---
+         *  ただしそれを持つクラスでメンバーnullを出さないためにバインドしています
+         */
+
+        Container.Bind<CodeEditor>().AsSingle();
+
     }
     private void KernelInstaller(DiContainer subContainer)
     {
         subContainer.Bind<Kernel>().AsSingle();
 
-        // Initialize()を使うためKernelをバインドします
+        // Initialize()などのメソッドを使用するクラスでKernelをバインドします
+
         subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
-         // 疎結合になりすぎて誰もこれのインスタンスを持たない
     }
 }
