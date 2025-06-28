@@ -1,41 +1,44 @@
 using Vector2 = UnityEngine.Vector2;
 using Zenject;
 
-public interface ITextAreaView
+namespace UnityLike.InterfaceAdapters.Presenter
 {
-    // 各RectTransformのサイズと位置を設定するメソッド
-    void SetContentSize(Vector2 anchoredSize);
-    void SetAreaVoidstartLayout(Vector2 size, Vector2 anchoredPosition);
-    void SetAreaVoidupdateLayout(Vector2 size, Vector2 anchoredPosition);
-    void SetBlockVoidupdatePosition(Vector2 anchoredPosition);
-
-    float GetContentWidth();
-}
-
-public class TextAreaLayoutPresenter : ITextAreaLayoutPresenter
-{
-    private readonly ITextAreaView view;
-
-    [Inject]
-    public TextAreaLayoutPresenter(ITextAreaView view)
+    public interface ITextAreaView
     {
-        this.view = view;
+        // 各RectTransformのサイズと位置を設定するメソッド
+        void SetContentSize(Vector2 anchoredSize);
+        void SetAreaVoidstartLayout(Vector2 size, Vector2 anchoredPosition);
+        void SetAreaVoidupdateLayout(Vector2 size, Vector2 anchoredPosition);
+        void SetBlockVoidupdatePosition(Vector2 anchoredPosition);
+
+        float GetContentWidth();
     }
 
-    public void PresenterLayout(TextAreaLayoutData layoutData)
+    public class TextAreaLayoutPresenter : ITextAreaLayoutPresenter
     {
-        if (view == null)
+        private readonly ITextAreaView view;
+
+        [Inject]
+        public TextAreaLayoutPresenter(ITextAreaView view)
         {
-            UnityEngine.Debug.LogError("TextAreaLayoutPresenter : viewが指定されていません");
-            return;
+            this.view = view;
         }
 
-        view.SetContentSize(new Vector2(0, layoutData.ContentHeight));
+        public void PresenterLayout(TextAreaLayoutData layoutData)
+        {
+            if (view == null)
+            {
+                UnityEngine.Debug.LogError("TextAreaLayoutPresenter : viewが指定されていません");
+                return;
+            }
 
-        view.SetAreaVoidstartLayout(layoutData.AreaVoidstartSize, layoutData.AreaVoidstartPosition);
+            view.SetContentSize(new Vector2(0, layoutData.ContentHeight));
 
-        view.SetAreaVoidupdateLayout(layoutData.AreaVoidupdateSize, layoutData.AreaVoidupdatePosition);
+            view.SetAreaVoidstartLayout(layoutData.AreaVoidstartSize, layoutData.AreaVoidstartPosition);
 
-        view.SetBlockVoidupdatePosition(layoutData.BlockVoidupdatePosition);
+            view.SetAreaVoidupdateLayout(layoutData.AreaVoidupdateSize, layoutData.AreaVoidupdatePosition);
+
+            view.SetBlockVoidupdatePosition(layoutData.BlockVoidupdatePosition);
+        }
     }
 }

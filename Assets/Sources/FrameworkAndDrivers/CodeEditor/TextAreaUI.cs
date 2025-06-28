@@ -7,7 +7,7 @@ using UnityLike.InterfaceAdapter.Presenter;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
-    public class CodeEditorTextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput, IGetInputFieldText
+    public class TextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput, IGetInputFieldText
     {
         [Header("”z’uŠÖŒW")]
         [SerializeField]

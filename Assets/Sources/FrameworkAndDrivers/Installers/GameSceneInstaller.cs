@@ -14,6 +14,7 @@ using UnityLike.InterfaceAdapter.Controller;
 
 // FramewoekAndDrivers‘w‚Ìusing
 using UnityLike.FrameworkAndDrivers.CodeEditor;
+using UnityLike.FrameworkAndDrivers.Settings;
 
 namespace UnityLike.FrameworkAndDrivers.Installers
 {
@@ -29,7 +30,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
 
         [Header("CodeEditorŠÖŒW")]
         [SerializeField]
-        private CodeEditorTextAreaUI codeEditorTextAreaView;
+        private TextAreaUI codeEditorTextAreaView;
 
         public override void Start()
         {
@@ -51,13 +52,13 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              */
 
             // ScriptableObject
-            Container.Bind<CodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
+            Container.Bind<ICodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
 
             /*
              *  --- Use Cases‘w ---
              */
 
-            Container.Bind<CodeEditorLineCountManager>().AsSingle();
+            Container.Bind<LineCountManager>().AsSingle();
             Container.Bind<UpdateTextAreaUseCase>().AsSingle();
 
             /*
@@ -111,7 +112,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              *  --- Interface Adapters‘w ---
              */
 
-            subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
+            subContainer.BindInterfacesTo<InputController>().AsSingle().NonLazy();
 
             /*
              *  --- Frameworks & Drivers‘w ---

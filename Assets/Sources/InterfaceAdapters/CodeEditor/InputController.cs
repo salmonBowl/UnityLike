@@ -10,7 +10,7 @@ public interface IGetInputFieldText
     string GetInputFieldText(CodeEditorBlock block);
 }
 
-public class CodeEditorInputController : IInitializable, IDisposable
+public class InputController : IInitializable, IDisposable
 {
     private readonly CodeEditorLineCountManager lineCountManager;
     private readonly UpdateTextAreaUseCase updateTextAreaUseCase;
@@ -18,7 +18,7 @@ public class CodeEditorInputController : IInitializable, IDisposable
     private readonly IGetInputFieldText getInputFieldText;
 
     [Inject]
-    public CodeEditorInputController(
+    public InputController(
         CodeEditorLineCountManager lineCountManager,
         UpdateTextAreaUseCase updateTextAreaUseCase,
         ITextAreaInput textAreaInput,

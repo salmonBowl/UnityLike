@@ -1,15 +1,17 @@
 using System;
 
-namespace UnityLike.Entities.CodeEditor
+using UnityLike.Entities.CodeEditor;
+
+namespace UnityLike.UseCases.CodeEditor
 {
-    public class CodeEditorLineCountManager
+    public class LineCountManager
     {
         public int LineCountVoidstart { get; private set; }
         public int LineCountVoidupdate { get; private set; }
 
         public event Action OnLineCountChanged;
 
-        public CodeEditorLineCountManager()
+        public LineCountManager()
         {
             LineCountVoidstart = 1;
             LineCountVoidupdate = 1;
