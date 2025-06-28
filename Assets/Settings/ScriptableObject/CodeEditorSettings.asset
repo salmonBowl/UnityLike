@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2628e7e472a5d9744bb4ebbe7085f74d, type: 3}
   m_Name: CodeEditorSettings
   m_EditorClassIdentifier: 
-  FontSize: 0.5
-  LineHeight: 0.72
-  AreaHeightOffset: 0.2
-  LowerHeightInputField: 0.9
+  <FontSize>k__BackingField: 0.5
+  <LineHeight>k__BackingField: 0.72
+  <AreaHeightOffset>k__BackingField: 0.2
+  <LowerHeightInputField>k__BackingField: 1.2
