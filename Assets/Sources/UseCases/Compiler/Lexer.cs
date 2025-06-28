@@ -81,13 +81,13 @@ namespace UnityLike.UseCases.Compiler
         {
             if (IsEndOfFile())
             {
-                return new Token(TokenType.EOF, );
+                return new Token(TokenType.EOF, "\0", currentLine, currentColumn);
             }
 
             char nextChar = Peek();
             Consume();
 
-            return new Token(TokenType.Unknown, );
+            return new Token(TokenType.Unknown, "", currentLine, currentColumn);
         }
     }
 }
