@@ -1,3 +1,4 @@
+using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
 {

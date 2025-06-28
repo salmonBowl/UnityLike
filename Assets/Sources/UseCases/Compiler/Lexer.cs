@@ -1,6 +1,8 @@
 using System;
 using Zenject;
 
+using UnityLike.Entities.Compiler;
+
 namespace UnityLike.UseCases.Compiler
 {
     public class Lexer : ILexer
