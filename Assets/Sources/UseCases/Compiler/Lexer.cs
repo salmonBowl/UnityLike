@@ -26,8 +26,8 @@ namespace UnityLike.UseCases.Compiler
             { "/=", TokenType.DivideEquals },
             { "++", TokenType.Increment },
             { "--", TokenType.Decrement },
-            { "<=", TokenType.LessThanOrEqual },
-            { ">=", TokenType.GreaterThanOrEqual }
+            { ">=", TokenType.GreaterThanOrEqual },
+            { "<=", TokenType.LessThanOrEqual }
         };
 
         private readonly Dictionary<char, TokenType> oneCharOperators = new()
@@ -38,8 +38,8 @@ namespace UnityLike.UseCases.Compiler
             { '/', TokenType.Divide },
             { '=', TokenType.Equals },
             { '!', TokenType.Unknown }, // '!'単体はUnknownですが、2文字で != になる可能性があります
-            { '<', TokenType.LessThan },
-            { '>', TokenType.GreaterThan }
+            { '>', TokenType.GreaterThan },
+            { '<', TokenType.LessThan }
         };
         #endregion
 
@@ -94,140 +94,16 @@ namespace UnityLike.UseCases.Compiler
                 string tokenValue = ReadWhile(firstChar, c => char.IsLetterOrDigit(c) || c == '_');
                 return new Token(TokenType.Identifier, tokenValue, tokenLine, tokenColumn);
             }
+            // 数字
             else if (char.IsDigit(firstChar))
             {
                 string tokenValue = ReadWhile(firstChar, c => char.IsDigit(c));
                 return new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn);
             }
-            else if (firstChar == '+')
+            // 演算子
+            else if (oneCharOperators.TryGetValue(firstChar, out TokenType oneCharTokenType))
             {
-                Consume();
-                char nextChar = Peek();
-
-                if (nextChar == '=')
-                {
-                    Consume();
-                    return new Token(TokenType.PlusEquals, "+=", tokenLine, tokenColumn);
-                }
-                else if (nextChar == '+')
-                {
-                    Consume();
-                    return new Token(TokenType.Increment, "++", tokenLine, tokenColumn);
-                }
-                else
-                {
-                    return new Token(TokenType.Plus, "+", tokenLine, tokenColumn);
-                }
-            }
-            else if (firstChar == '-')
-            {
-                Consume();
-                char nextChar = Peek();
-
-                if (nextChar == '=')
-                {
-                    Consume();
-                    return new Token(TokenType.MinusEquals, "-=", tokenLine, tokenColumn);
-                }
-                else if (nextChar == '-')
-                {
-                    Consume();
-                    return new Token(TokenType.Decrement, "--", tokenLine, tokenColumn);
-                }
-                else
-                {
-                    return new Token(TokenType.Minus, "-", tokenLine, tokenColumn);
-                }
-            }
-            else if (firstChar == '*')
-            {
-                Consume();
-                char nextChar = Peek();
-
-                if (nextChar == '=')
-                {
-                    Consume();
-                    return new Token(TokenType.MultiplyEquals, "*=", tokenLine, tokenColumn);
-                }
-                else
-                {
-                    return new Token(TokenType.Multiply, "*", tokenLine, tokenColumn);
-                }
-            }
-            else if (firstChar == '/')
-            {
-                Consume();
-                char nextChar = Peek();
-
-                if (nextChar == '=')
-                {
-                    Consume();
-                    return new Token(TokenType.DivideEquals, "/=", tokenLine, tokenColumn);
-                }
-                else
-                {
-                    return new Token(TokenType.Divide, "/", tokenLine, tokenColumn);
-                }
-            }
-            else if (firstChar == '=')
-            {
-                Consume();
-                char nextChar = Peek();
-
-                if (nextChar == '=')
-                {
-                    Consume();
-                    return new Token(TokenType.EqualEquals, "==", tokenLine, tokenColumn);
-                }
-                else
-                {
-                    return new Token(TokenType.Equals, "=", tokenLine, tokenColumn);
-                }
-            }
-            else if (firstChar == '!')
-            {
-                Consume();
-                char nextChar = Peek();
-
-                if (nextChar == '=')
-                {
-                    Consume();
-                    return new Token(TokenType.NotEquals, "!=", tokenLine, tokenColumn);
-                }
-                else
-                {
-                    return new Token(TokenType.Unknown, "!", tokenLine, tokenColumn);
-                }
-            }
-            else if (firstChar == '<')
-            {
-                Consume();
-                char nextChar = Peek();
-
-                if (nextChar == '=')
-                {
-                    Consume();
-                    return new Token(TokenType.GreaterThanOrEqual, "<=", tokenLine, tokenColumn);
-                }
-                else
-                {
-                    return new Token(TokenType.GreaterThan, "<", tokenLine, tokenColumn);
-                }
-            }
-            else if (firstChar == '>')
-            {
-                Consume();
-                char nextChar = Peek();
-
-                if (nextChar == '=')
-                {
-                    Consume();
-                    return new Token(TokenType.LessThanOrEqual, ">=", tokenLine, tokenColumn);
-                }
-                else
-                {
-                    return new Token(TokenType.LessThan, ">", tokenLine, tokenColumn);
-                }
+                return ReadOperatorToken(oneCharTokenType, firstChar, tokenLine, tokenColumn);
             }
             else
             {
@@ -239,7 +115,7 @@ namespace UnityLike.UseCases.Compiler
         }
 
         /// <summary>
-        /// 各種類のトークンを検出する際に共通した処理をまとめました
+        /// 識別子やリテラルのトークンを検出する際に共通した処理をまとめました
         /// </summary>
         private string ReadWhile(char firstChar, Func<char, bool> predicate)
         {
@@ -254,6 +130,32 @@ namespace UnityLike.UseCases.Compiler
             }
 
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// 演算子のトークンを一斉に検出します
+        /// </summary>
+        /// <returns>最終的なトークンをここで返します</returns>
+        private Token ReadOperatorToken(TokenType oneCharTokenType, char firstChar, int tokenLine, int tokenColumn)
+        {
+            // 1文字ならdictionaryに引っかかった
+
+            if (IsEndOfFile())
+                // 必要ないが念のため
+                return new Token(oneCharTokenType, firstChar.ToString(), tokenLine, tokenColumn);
+
+            // 2文字にしたときにもdictionaryに存在するかどうかを検出
+            Consume();
+            string twoChars = firstChar.ToString() + Peek().ToString();
+
+            if (twoCharOperators.TryGetValue(twoChars, out TokenType twoCharTokenType))
+            {
+                return new Token(twoCharTokenType, twoChars, tokenLine, tokenColumn);
+            }
+            else
+            {
+                return new Token(oneCharTokenType, firstChar.ToString(), tokenLine, tokenColumn);
+            }
         }
 
         /// <summary>
