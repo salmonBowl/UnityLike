@@ -1,4 +1,6 @@
 using System;
+using System.Text;
+using System.Collections.Generic;
 using Zenject;
 
 using UnityLike.Entities.Compiler;
@@ -12,6 +14,34 @@ namespace UnityLike.UseCases.Compiler
         private int currentIndex;
         private int currentLine;
         private int currentColumn;
+
+        #region dictionaryの定義
+        private readonly Dictionary<string, TokenType> twoCharOperators = new()
+        {
+            { "==", TokenType.EqualEquals },
+            { "!=", TokenType.NotEquals },
+            { "+=", TokenType.PlusEquals },
+            { "-=", TokenType.MinusEquals },
+            { "*=", TokenType.MultiplyEquals },
+            { "/=", TokenType.DivideEquals },
+            { "++", TokenType.Increment },
+            { "--", TokenType.Decrement },
+            { ">=", TokenType.GreaterThanOrEqual },
+            { "<=", TokenType.LessThanOrEqual }
+        };
+
+        private readonly Dictionary<char, TokenType> oneCharOperators = new()
+        {
+            { '+', TokenType.Plus },
+            { '-', TokenType.Minus },
+            { '*', TokenType.Multiply },
+            { '/', TokenType.Divide },
+            { '=', TokenType.Equals },
+            { '!', TokenType.Unknown }, // '!'単体はUnknownですが、2文字で != になる可能性があります
+            { '>', TokenType.GreaterThan },
+            { '<', TokenType.LessThan }
+        };
+        #endregion
 
         [Inject]
         public Lexer(
@@ -51,23 +81,89 @@ namespace UnityLike.UseCases.Compiler
                 }
             }
 
-            // 空白文字をスキップしているためこの文字は何かの意味を持ちます
-            char nextChar = Peek();
+            // トークンの検出を行っていきます
 
+            int tokenLine = currentLine;
+            int tokenColumn = currentColumn;
 
+            char firstChar = Peek();
+
+            // 識別子
+            if (char.IsLetter(firstChar))
+            {
+                string tokenValue = ReadWhile(firstChar, c => char.IsLetterOrDigit(c) || c == '_');
+                return new Token(TokenType.Identifier, tokenValue, tokenLine, tokenColumn);
+            }
+            // 数字
+            else if (char.IsDigit(firstChar))
+            {
+                string tokenValue = ReadWhile(firstChar, c => char.IsDigit(c));
+                return new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn);
+            }
+            // 演算子
+            else if (oneCharOperators.TryGetValue(firstChar, out TokenType oneCharTokenType))
+            {
+                Consume();
+                return ReadOperatorToken(oneCharTokenType, firstChar, tokenLine, tokenColumn);
+            }
+            else
+            {
+                // 記述していない例外は全てTokenType.Unknownとして返します
+
+                Consume();
+                return new Token(TokenType.Unknown, firstChar.ToString(), tokenLine, tokenColumn);
+            }
+        }
+
+        /// <summary>
+        /// 識別子やリテラルのトークンを検出する際に共通した処理をまとめました
+        /// </summary>
+        private string ReadWhile(char firstChar, Func<char, bool> predicate)
+        {
+            StringBuilder builder = new(firstChar);
             Consume();
 
+            while (!IsEndOfFile() && predicate(Peek()))
+                // IsEndOfFileは必要ないが念のため
+            {
+                builder.Append(Peek());
+                Consume();
+            }
 
+            return builder.ToString();
+        }
 
-            // 記述していない例外は全てTokenType.Unknownとして返します
+        /// <summary>
+        /// 演算子のトークンを一斉に検出します
+        /// </summary>
+        /// <returns>最終的なトークンをここで返します</returns>
+        private Token ReadOperatorToken(TokenType oneCharTokenType, char firstChar, int tokenLine, int tokenColumn)
+        {
+            // 1文字ならdictionaryに引っかかった
 
-            return new Token(TokenType.Unknown, nextChar.ToString(), currentLine, currentColumn);
+            // 必要ないが念のため
+            if (IsEndOfFile())
+                return new Token(oneCharTokenType, firstChar.ToString(), tokenLine, tokenColumn);
+
+            // 2文字にしたときにもdictionaryに存在するかどうかを検出
+            // 2文字stringの生成
+            string twoChars = firstChar.ToString() + Peek().ToString();
+
+            if (twoCharOperators.TryGetValue(twoChars, out TokenType twoCharTokenType))
+            {
+                Consume();
+                return new Token(twoCharTokenType, twoChars, tokenLine, tokenColumn);
+            }
+            else
+            {
+                return new Token(oneCharTokenType, firstChar.ToString(), tokenLine, tokenColumn);
+            }
         }
 
         /// <summary>
         /// 読み取り位置は進めず、先読みして次の文字を返します
         /// </summary>
-        public char Peek()
+        private char Peek()
         {
             if (IsEndOfFile()) // ファイルが終わるなら
             {
@@ -82,7 +178,7 @@ namespace UnityLike.UseCases.Compiler
         /// 現在の文字を消費し、読み取り位置を1つ先に進めます
         /// </summary>
         /// <exception cref="InvalidOperationException"></exception>
-        public void Consume()
+        private void Consume()
         {
             if (IsEndOfFile())
                 throw new InvalidOperationException("Compiler.Lexer:ILexer.Consume() : これ以上読み取りを進められません");
@@ -109,7 +205,7 @@ namespace UnityLike.UseCases.Compiler
         /// <summary>
         /// ファイルの読み取り位置が終端に達したかを判定します
         /// </summary>
-        public bool IsEndOfFile()
+        private bool IsEndOfFile()
         {
             return (sourceCode.Length <= currentIndex);
             // ラムダ式ではなく不等号

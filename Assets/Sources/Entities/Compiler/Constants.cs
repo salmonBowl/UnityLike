@@ -10,5 +10,9 @@ namespace UnityLike.Entities.Compiler
             '\n',
             '\r'
         };
+        public static char[] addIdentifierChars =
+        {
+            '_',
+        };
     }
 }
