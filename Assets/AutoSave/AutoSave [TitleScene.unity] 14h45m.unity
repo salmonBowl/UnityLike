@@ -214,11 +214,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 975477556}
-  - {fileID: 902049394}
   - {fileID: 1180756042}
   - {fileID: 1721424554}
   - {fileID: 1702696031}
   - {fileID: 758478368}
+  - {fileID: 902049394}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -860,7 +860,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1399111756}
         m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
-        m_MethodName: EldenEnd
+        m_MethodName: LoadProject
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1247,7 +1247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -69}
   m_SizeDelta: {x: 800, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &975477557
@@ -1458,7 +1458,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1399111756}
         m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
-        m_MethodName: EldenStart
+        m_MethodName: CreateNewProject
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
