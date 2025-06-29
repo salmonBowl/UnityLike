@@ -103,6 +103,7 @@ namespace UnityLike.UseCases.Compiler
             // 演算子
             else if (oneCharOperators.TryGetValue(firstChar, out TokenType oneCharTokenType))
             {
+                Consume();
                 return ReadOperatorToken(oneCharTokenType, firstChar, tokenLine, tokenColumn);
             }
             else
@@ -140,16 +141,17 @@ namespace UnityLike.UseCases.Compiler
         {
             // 1文字ならdictionaryに引っかかった
 
+            // 必要ないが念のため
             if (IsEndOfFile())
-                // 必要ないが念のため
                 return new Token(oneCharTokenType, firstChar.ToString(), tokenLine, tokenColumn);
 
             // 2文字にしたときにもdictionaryに存在するかどうかを検出
-            Consume();
+            // 2文字stringの生成
             string twoChars = firstChar.ToString() + Peek().ToString();
 
             if (twoCharOperators.TryGetValue(twoChars, out TokenType twoCharTokenType))
             {
+                Consume();
                 return new Token(twoCharTokenType, twoChars, tokenLine, tokenColumn);
             }
             else
