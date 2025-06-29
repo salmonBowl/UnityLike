@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Zenject;
 
 using UnityLike.Entities.Compiler;
@@ -51,17 +52,65 @@ namespace UnityLike.UseCases.Compiler
                 }
             }
 
-            // 空白文字をスキップしているためこの文字は何かの意味を持ちます
-            char nextChar = Peek();
+            // トークンの検出を行っていきます
+
+            StringBuilder tokenValue = new();
+            int tokenLine = currentLine;
+            int tokenColumn = currentColumn;
+
+            // 識別子
+            for (int i = 0; true; i++)
+            {
+                if (i == 0)
+                {
+                    // 1文字目の検出なら
+
+                    char nextChar = Peek();
+
+                    if (char.IsLetter(nextChar))
+                    {
+                        // アルファベットならループを始めます
+                        tokenValue.Append(nextChar);
+                        Consume();
+                    }
+                    else
+                    {
+                        // 識別子を構成する文字以外なら次の検出に移ります
+                        break;
+                    }
+                }
+                else
+                {
+                    // 2文字目以降の読み取りなら
+
+                    char nextChar = Peek();
+
+                    /*
+                        EOFの場合はnextCharに\0が入るため、問題なく動作する...はず...
+                     */
+
+                    if (char.IsLetter(nextChar) || Array.IndexOf(Constants.addIdentifierChars, nextChar) != -1)
+                    {
+                        tokenValue.Append(nextChar);
+                        Consume();
+                    }
+                    else
+                    {
+                        return new Token(TokenType.Identifier, tokenValue.ToString(), tokenLine, tokenColumn);
+                    }
+                }
+            }
 
 
-            Consume();
 
+            {
+                // 記述していない例外は全てTokenType.Unknownとして返します
 
+                char nextChar = Peek();
+                Consume();
 
-            // 記述していない例外は全てTokenType.Unknownとして返します
-
-            return new Token(TokenType.Unknown, nextChar.ToString(), currentLine, currentColumn);
+                return new Token(TokenType.Unknown, nextChar.ToString(), currentLine, currentColumn);
+            }
         }
 
         /// <summary>
