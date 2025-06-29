@@ -28,7 +28,7 @@ Shader "Custom/GeometricBackground"
         
         // ‚¸‚ç‚·
         //pos.y -= -0.2;
-        
+        /*
         float l = length(pos);
         float distanceFromCircle = abs(l - 0.5);
         float theta = atan2(pos.y, pos.x);
@@ -51,24 +51,19 @@ Shader "Custom/GeometricBackground"
         bright = clamp(bright, 0, 1);
 
         float3 baseColor = float3(0, 1, 0.8) * bright;
-        /*
-        float t = _Time;
-
-        float3 c;
-        float l, z = t;
-        for (int i = 0; i < 3; i++)
-        {
-            float2 p1 = pos;
-            float2 p2 = pos;
-            p1 -= 0.5;
-            p1.x *= uv.x / uv.y;
-            z += 0.7;
-            l = length(p1);
-            p2 += p1 / l * (sin(z) + 1) * abs(sin(l * 9 - z * 2));
-            c[i] = 0.01 / length(fmod(uv, 1.0) - 0.5);
-        }
-        float3 baseColor = c / l;
         */
+	    uv.x -= 0.5;
+	    uv.y -= 0.5;
+	    
+	    float3 baseColor = float3(0, 0, 0);
+	    for(float i = 0.0; i < 10.0; i++)
+	    {
+		    float t = (0.11) * -15;
+	    
+		    uv.y += sin(uv.x * (i + 1.0) + t + i / 2.0) * 0.1;
+		    float fTemp = abs(1.0 / uv.y / 100.0);
+		    baseColor += float3(fTemp * (10.0 - i) / 10.0, fTemp * i / 10.0, pow(fTemp,0.99) * 1.5);
+	    }
 
         float alpha = 1;
 
