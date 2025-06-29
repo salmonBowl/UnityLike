@@ -7,8 +7,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using TMPro;
-using System;
 
 public class TitleSceneAll : MonoBehaviour
 {
@@ -18,7 +16,7 @@ public class TitleSceneAll : MonoBehaviour
 
     [SerializeField] RectTransform UnityIcon;
 
-    bool IsTitleUpdate;
+    bool isFadeOut;
     float panelAlpha;
 
     float angleDegDestination = 0;
@@ -26,36 +24,34 @@ public class TitleSceneAll : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-        IsTitleUpdate = true;
+        isFadeOut = false;
         panelAlpha = 0f;
         buttonNewStart.interactable = true;
         buttonLoad.interactable = true;
     }
     void Update()
     {
-        if (IsTitleUpdate)
-        {
-            // 滑らかに角度を変化
-            UnityIcon.rotation = Quaternion.Lerp(
-                Quaternion.Euler(0, 0, angleDegDestination),
-                UnityIcon.rotation,
-                0.9f
-                );
-        }
-        else // シーン遷移のフェードアウト
+        // 滑らかに角度を変化
+        UnityIcon.rotation = Quaternion.Lerp(
+            Quaternion.Euler(0, 0, angleDegDestination),
+            UnityIcon.rotation,
+            0.9f
+            );
+
+        if (isFadeOut) // シーン遷移のフェードアウト
         {
             if (panelAlpha == 1)
             {
                 SceneManager.LoadScene(1);
             }
 
-            IncreasePanelAlpha(0.01f);
+            IncreasePanelAlpha(0.05f);
             SetPanelColorAlpha(panelAlpha);
         }
     }
-    void IncreasePanelAlpha(float increase)
+    void IncreasePanelAlpha(float value)
     {
-        panelAlpha += increase;
+        panelAlpha += (1.03f - panelAlpha) * value;
         panelAlpha = Mathf.Clamp01(panelAlpha);
     }
     void SetPanelColorAlpha(float panelAlpha)
@@ -67,23 +63,26 @@ public class TitleSceneAll : MonoBehaviour
 
     public void ButtonCreateNewProjectPointerEnter()
     {
+        if (!isFadeOut)
         angleDegDestination = -120;
     }
     public void ButtonLoadProjectPointerEnter()
     {
+        if (!isFadeOut)
         angleDegDestination = 120;
     }
     public void ButtonPointerExit()
     {
+        if (!isFadeOut)
         angleDegDestination = 0;
     }
 
     public void CreateNewProject()
     {
-        IsTitleUpdate = false;
+        isFadeOut = true;
     }
     public void LoadProject()
     {
-        IsTitleUpdate = false;
+        isFadeOut = true;
     }
 }
