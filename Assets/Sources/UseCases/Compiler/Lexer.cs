@@ -54,69 +54,53 @@ namespace UnityLike.UseCases.Compiler
 
             // トークンの検出を行っていきます
 
-            StringBuilder tokenValue = new();
             int tokenLine = currentLine;
             int tokenColumn = currentColumn;
 
+            char firstChar = Peek();
+
             // 識別子
-            for (int i = 0; true; i++)
+            if (char.IsLetter(firstChar))
             {
-                if (i == 0)
-                {
-                    // 1文字目の検出なら
-
-                    char nextChar = Peek();
-
-                    if (char.IsLetter(nextChar))
-                    {
-                        // アルファベットならループを始めます
-                        tokenValue.Append(nextChar);
-                        Consume();
-                    }
-                    else
-                    {
-                        // 識別子を構成する文字以外なら次の検出に移ります
-                        break;
-                    }
-                }
-                else
-                {
-                    // 2文字目以降の読み取りなら
-
-                    char nextChar = Peek();
-
-                    /*
-                        EOFの場合はnextCharに\0が入るため、問題なく動作する...はず...
-                     */
-
-                    if (char.IsLetter(nextChar) || Array.IndexOf(Constants.addIdentifierChars, nextChar) != -1)
-                    {
-                        tokenValue.Append(nextChar);
-                        Consume();
-                    }
-                    else
-                    {
-                        return new Token(TokenType.Identifier, tokenValue.ToString(), tokenLine, tokenColumn);
-                    }
-                }
+                string tokenValue = ReadWhile(firstChar, c => char.IsLetterOrDigit(c) || c == '_');
+                return new Token(TokenType.Identifier, tokenValue, tokenLine, tokenColumn);
             }
-
-
-
+            else if (char.IsDigit(firstChar))
+            {
+                string tokenValue = ReadWhile(firstChar, c => char.IsDigit(c));
+                return new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn);
+            }
+            else
             {
                 // 記述していない例外は全てTokenType.Unknownとして返します
 
-                char nextChar = Peek();
-                Consume();
-
-                return new Token(TokenType.Unknown, nextChar.ToString(), currentLine, currentColumn);
+                string tokenValue = ReadWhile(firstChar, c => false);
+                return new Token(TokenType.Unknown, tokenValue, tokenLine, tokenColumn);
             }
+        }
+
+        /// <summary>
+        /// 各種類のトークンを検出する際に共通した処理をまとめました
+        /// </summary>
+        private string ReadWhile(char firstChar, Func<char, bool> predicate)
+        {
+            StringBuilder builder = new(firstChar);
+            Consume();
+
+            while (!IsEndOfFile() && predicate(Peek()))
+                // IsEndOfFileは必要ないが念のため
+            {
+                builder.Append(Peek());
+                Consume();
+            }
+
+            return builder.ToString();
         }
 
         /// <summary>
         /// 読み取り位置は進めず、先読みして次の文字を返します
         /// </summary>
-        public char Peek()
+        private char Peek()
         {
             if (IsEndOfFile()) // ファイルが終わるなら
             {
@@ -131,7 +115,7 @@ namespace UnityLike.UseCases.Compiler
         /// 現在の文字を消費し、読み取り位置を1つ先に進めます
         /// </summary>
         /// <exception cref="InvalidOperationException"></exception>
-        public void Consume()
+        private void Consume()
         {
             if (IsEndOfFile())
                 throw new InvalidOperationException("Compiler.Lexer:ILexer.Consume() : これ以上読み取りを進められません");
@@ -158,7 +142,7 @@ namespace UnityLike.UseCases.Compiler
         /// <summary>
         /// ファイルの読み取り位置が終端に達したかを判定します
         /// </summary>
-        public bool IsEndOfFile()
+        private bool IsEndOfFile()
         {
             return (sourceCode.Length <= currentIndex);
             // ラムダ式ではなく不等号
