@@ -70,6 +70,76 @@ namespace UnityLike.UseCases.Compiler
                 string tokenValue = ReadWhile(firstChar, c => char.IsDigit(c));
                 return new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn);
             }
+            else if (firstChar == '+')
+            {
+                Consume();
+                char nextChar = Peek();
+
+                if (nextChar == '=')
+                {
+                    Consume();
+                    return new Token(TokenType.PlusEquals, "+=", tokenLine, tokenColumn);
+                }
+                else if (nextChar == '+')
+                {
+                    Consume();
+                    return new Token(TokenType.Increment, "++", tokenLine, tokenColumn);
+                }
+                else
+                {
+                    return new Token(TokenType.Plus, "+", tokenLine, tokenColumn);
+                }
+            }
+            else if (firstChar == '-')
+            {
+                Consume();
+                char nextChar = Peek();
+
+                if (nextChar == '=')
+                {
+                    Consume();
+                    return new Token(TokenType.MinusEquals, "-=", tokenLine, tokenColumn);
+                }
+                else if (nextChar == '-')
+                {
+                    Consume();
+                    return new Token(TokenType.Decrement, "--", tokenLine, tokenColumn);
+                }
+                else
+                {
+                    return new Token(TokenType.Minus, "-", tokenLine, tokenColumn);
+                }
+            }
+            else if (firstChar == '*')
+            {
+                Consume();
+                char nextChar = Peek();
+
+                if (nextChar == '=')
+                {
+                    Consume();
+                    return new Token(TokenType.MultiplyEquals, "*=", tokenLine, tokenColumn);
+                }
+                else
+                {
+                    return new Token(TokenType.Multiply, "*", tokenLine, tokenColumn);
+                }
+            }
+            else if (firstChar == '/')
+            {
+                Consume();
+                char nextChar = Peek();
+
+                if (nextChar == '=')
+                {
+                    Consume();
+                    return new Token(TokenType.DivideEquals, "/=", tokenLine, tokenColumn);
+                }
+                else
+                {
+                    return new Token(TokenType.Divide, "/", tokenLine, tokenColumn);
+                }
+            }
             else
             {
                 // 記述していない例外は全てTokenType.Unknownとして返します
