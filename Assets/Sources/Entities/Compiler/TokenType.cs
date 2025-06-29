@@ -19,14 +19,16 @@ namespace UnityLike.Entities.Compiler
         MinusEquals,
         MultiplyEquals,
         DivideEquals,
+        Increment,
+        Decrement,
 
         // ”äŠr‰‰ŽZŽq
         EqualEquals,
         NotEquals,
-        LessThan,
-        LessThanOrEqual,
         GreaterThan,
         GreaterThanOrEqual,
+        LessThan,
+        LessThanOrEqual,
 
         Unknown, // “ü—Í’†‚â“ü—Íƒ~ƒX‚È‚Ç
 

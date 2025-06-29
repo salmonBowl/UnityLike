@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Collections.Generic;
 using Zenject;
 
 using UnityLike.Entities.Compiler;
@@ -13,6 +14,34 @@ namespace UnityLike.UseCases.Compiler
         private int currentIndex;
         private int currentLine;
         private int currentColumn;
+
+        #region dictionaryの定義
+        private readonly Dictionary<string, TokenType> twoCharOperators = new()
+        {
+            { "==", TokenType.EqualEquals },
+            { "!=", TokenType.NotEquals },
+            { "+=", TokenType.PlusEquals },
+            { "-=", TokenType.MinusEquals },
+            { "*=", TokenType.MultiplyEquals },
+            { "/=", TokenType.DivideEquals },
+            { "++", TokenType.Increment },
+            { "--", TokenType.Decrement },
+            { "<=", TokenType.LessThanOrEqual },
+            { ">=", TokenType.GreaterThanOrEqual }
+        };
+
+        private readonly Dictionary<char, TokenType> oneCharOperators = new()
+        {
+            { '+', TokenType.Plus },
+            { '-', TokenType.Minus },
+            { '*', TokenType.Multiply },
+            { '/', TokenType.Divide },
+            { '=', TokenType.Equals },
+            { '!', TokenType.Unknown }, // '!'単体はUnknownですが、2文字で != になる可能性があります
+            { '<', TokenType.LessThan },
+            { '>', TokenType.GreaterThan }
+        };
+        #endregion
 
         [Inject]
         public Lexer(
@@ -140,12 +169,72 @@ namespace UnityLike.UseCases.Compiler
                     return new Token(TokenType.Divide, "/", tokenLine, tokenColumn);
                 }
             }
+            else if (firstChar == '=')
+            {
+                Consume();
+                char nextChar = Peek();
+
+                if (nextChar == '=')
+                {
+                    Consume();
+                    return new Token(TokenType.EqualEquals, "==", tokenLine, tokenColumn);
+                }
+                else
+                {
+                    return new Token(TokenType.Equals, "=", tokenLine, tokenColumn);
+                }
+            }
+            else if (firstChar == '!')
+            {
+                Consume();
+                char nextChar = Peek();
+
+                if (nextChar == '=')
+                {
+                    Consume();
+                    return new Token(TokenType.NotEquals, "!=", tokenLine, tokenColumn);
+                }
+                else
+                {
+                    return new Token(TokenType.Unknown, "!", tokenLine, tokenColumn);
+                }
+            }
+            else if (firstChar == '<')
+            {
+                Consume();
+                char nextChar = Peek();
+
+                if (nextChar == '=')
+                {
+                    Consume();
+                    return new Token(TokenType.GreaterThanOrEqual, "<=", tokenLine, tokenColumn);
+                }
+                else
+                {
+                    return new Token(TokenType.GreaterThan, "<", tokenLine, tokenColumn);
+                }
+            }
+            else if (firstChar == '>')
+            {
+                Consume();
+                char nextChar = Peek();
+
+                if (nextChar == '=')
+                {
+                    Consume();
+                    return new Token(TokenType.LessThanOrEqual, ">=", tokenLine, tokenColumn);
+                }
+                else
+                {
+                    return new Token(TokenType.LessThan, ">", tokenLine, tokenColumn);
+                }
+            }
             else
             {
                 // 記述していない例外は全てTokenType.Unknownとして返します
 
-                string tokenValue = ReadWhile(firstChar, c => false);
-                return new Token(TokenType.Unknown, tokenValue, tokenLine, tokenColumn);
+                Consume();
+                return new Token(TokenType.Unknown, firstChar.ToString(), tokenLine, tokenColumn);
             }
         }
 
