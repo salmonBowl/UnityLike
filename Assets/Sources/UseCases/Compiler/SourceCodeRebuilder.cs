@@ -6,8 +6,8 @@ namespace UnityLike.UseCases.Compiler
     public class SourceCodeRebuilder
     {
         private readonly Token[] tokenArray;
-        private StringBuilder sourceCode;
-        private StringBuilder richSourceCode;
+        private readonly StringBuilder sourceCode;
+        private readonly StringBuilder richSourceCode; //ƒƒ“ƒo[ŠÖ”‚µ‚©g‚í‚È‚¢‚½‚ßreadonly
 
         public SourceCodeRebuilder(Token[] tokenArray)
         {
