@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using UnityLike.Entities.Compiler;
 
@@ -30,14 +31,17 @@ namespace UnityLike.UseCases.Compiler
 
                 if (currentToken.TokenType == TokenType.Return)
                 {
-                    // 改行トークンを使って
+                    // 改行トークンを使って改行を判定します
+                    // 改行トークン以外による不正な改行を次のブロックで判定します
 
                     sourceCode.Append('\n');
                     richSourceCode.Append("<color=\"blue\">\\n</color>\n");
                 }
                 else if (currentToken.LineCount != currentLine)
                 {
-
+                    // 不正な改行を判定します
+                    // どのExeptionを使うのか分からなかった
+                    throw new Exception("SourceCodeRebuilder : 改行トークンが検出されていない不正な改行を検出しました");
                 }
 
                 // 空白を補完します
@@ -56,12 +60,12 @@ namespace UnityLike.UseCases.Compiler
         /// 再構成したソースコードを取得します
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="System.InvalidOperationException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         public string GetSourceCodeRebuild()
         {
             if (sourceCode == null)
             {
-                throw new System.InvalidOperationException("SourceCodeRebuilder : Executeの前にGetが呼ばれました");
+                throw new InvalidOperationException("SourceCodeRebuilder : Executeの前にGetが呼ばれました");
             }
             return sourceCode.ToString();
         }
@@ -70,12 +74,12 @@ namespace UnityLike.UseCases.Compiler
         /// リッチテキスト化されたソースコードを取得します
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="System.InvalidOperationException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         public string GetRichSourceCode()
         {
             if (sourceCode == null)
             {
-                throw new System.InvalidOperationException("SourceCodeRebuilder : Executeの前にGetが呼ばれました");
+                throw new InvalidOperationException("SourceCodeRebuilder : Executeの前にGetが呼ばれました");
             }
             return richSourceCode.ToString();
         }
