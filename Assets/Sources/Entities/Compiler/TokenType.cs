@@ -32,6 +32,7 @@ namespace UnityLike.Entities.Compiler
 
         Unknown, // 入力中や入力ミスなど
 
+        Return, // 改行トークン
         EOF // 終端文字トークン
     }
 }
