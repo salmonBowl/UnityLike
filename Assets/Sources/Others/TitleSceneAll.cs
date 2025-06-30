@@ -31,7 +31,8 @@ public class TitleSceneAll : MonoBehaviour
     }
     void Update()
     {
-        // 滑らかに角度を変化
+        // 滑らかに角度を変化させます
+        // フェードアウトに関係なく動作
         UnityIcon.rotation = Quaternion.Lerp(
             Quaternion.Euler(0, 0, angleDegDestination),
             UnityIcon.rotation,
@@ -45,13 +46,17 @@ public class TitleSceneAll : MonoBehaviour
                 SceneManager.LoadScene(1);
             }
 
-            IncreasePanelAlpha(0.05f);
+            IncreasePanelAlpha(1.05f);
             SetPanelColorAlpha(panelAlpha);
         }
     }
-    void IncreasePanelAlpha(float value)
+    void IncreasePanelAlpha(float increaseRatio)
     {
-        panelAlpha += (1.03f - panelAlpha) * value;
+        // フェードアウトの終端速度を調整します
+        // 反比例のグラフを少し下にずらすような計算
+        float adjustIncreaseSpeed = 1.03f;
+
+        panelAlpha += (adjustIncreaseSpeed - panelAlpha) * (increaseRatio - 1);
         panelAlpha = Mathf.Clamp01(panelAlpha);
     }
     void SetPanelColorAlpha(float panelAlpha)
