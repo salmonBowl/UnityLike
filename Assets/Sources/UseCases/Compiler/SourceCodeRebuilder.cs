@@ -5,6 +5,16 @@ using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
 {
+    /*
+        SourceCodeRebuilder
+            トークン列からソースコードを再構成するクラスです
+            
+            SourceCodeRebuilder(Token[])
+            
+            RebuildExecute()
+            GetSourceCodeRebuild()
+            GetRichSourceCode()
+     */
     public class SourceCodeRebuilder
     {
         private readonly Token[] tokenArray;
