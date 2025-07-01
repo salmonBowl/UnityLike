@@ -12,6 +12,10 @@ namespace UnityLike.Entities.Compiler
             '\r'
         };
 
+        // テキストエディタ―で改行した時に表示される文字です
+        // 現在は\nを表示されています
+        public static string returnText = "\\n";
+
         public static readonly Dictionary<string, TokenType> twoCharOperators = new()
         {
             { "==", TokenType.EqualEquals },
@@ -41,7 +45,7 @@ namespace UnityLike.Entities.Compiler
         private static readonly string operatorColor = "#FFFFFF";
         public static readonly Dictionary<TokenType, string> syntaxHighlightColors = new()
         {
-            { TokenType.Identifier, "#" },
+            { TokenType.Identifier, "#86DEFE" },
 
             #region 演算子
             { TokenType.NumberLiteral, operatorColor },
@@ -64,10 +68,13 @@ namespace UnityLike.Entities.Compiler
             { TokenType.LessThanOrEqual, operatorColor },
             #endregion
 
-            // エラーを赤色
+            // エラーを赤色に
             { TokenType.Unknown, "#FF0000" },
 
-            { TokenType.Return, "#" },
+            #region キーワード (制御構文や型名など)
+            #endregion
+
+            { TokenType.Return, "#00FF00" },
         };
     }
 }
