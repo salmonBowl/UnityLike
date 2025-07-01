@@ -8,7 +8,8 @@ namespace UnityLike.InterfaceAdapters.Presenter
 {
     public class CodeEditorPresenter
     {
-        private readonly Lexer lexer;
+        /*
+         * Injectじゃない! 間違ってました
         private readonly SourceCodeRebuilder rebuilder;
 
         [Inject]
@@ -17,10 +18,21 @@ namespace UnityLike.InterfaceAdapters.Presenter
             this.lexer = lexer;
             this.rebuilder = rebuilder;
         }
+        */
 
-        public void OnCodeChanged()
+        private Lexer lexer;
+
+        public void OnCodeChanged(string sourceCode)
         {
+            lexer = new(sourceCode);
+
             Token[] tokenArray = GenerateTokenArray();
+
+            SourceCodeRebuilder rebuilder = new(tokenArray);
+
+            rebuilder.RebuildExecute();
+            string sourceCodeRebuild = rebuilder.GetSourceCodeRebuild();
+            string richSourceCode = rebuilder.GetRichSourceCode();
         }
 
         private Token[] GenerateTokenArray()
@@ -32,6 +44,7 @@ namespace UnityLike.InterfaceAdapters.Presenter
             {
                 tokenList.Add(currentToken);
             }
+            tokenList.Add(currentToken); // EOFトークンも必要なので追加
 
             return tokenList.ToArray();
         }
