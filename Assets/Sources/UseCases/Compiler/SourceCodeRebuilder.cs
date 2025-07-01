@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
@@ -41,7 +42,7 @@ namespace UnityLike.UseCases.Compiler
                 {
                     // 不正な改行を判定します
                     // どのExeptionを使うのか分からなかった
-                    throw new Exception("SourceCodeRebuilder : 改行トークンが検出されていない不正な改行を検出しました");
+                    throw new Exception("SourceCodeRebuilder : 改行トークンのない不正な改行を検出しました");
                 }
 
                 // 空白を補完します
@@ -50,10 +51,29 @@ namespace UnityLike.UseCases.Compiler
                 richSourceCode.Append(' ', spaceRequiedCount);
 
                 // トークンを書き込みます
+
+                // sourceCode
                 sourceCode.Append(currentToken.Value);
+                // richSourceCode
+                RichSourceCodeAppendRichText(currentToken);
             }
 
             return;
+        }
+        private void RichSourceCodeAppendRichText(Token currentToken)
+        {
+            if (Constants.syntaxHighlightColors.ContainsKey(currentToken.TokenType) == false)
+            {
+                throw new System.Collections.Generic.KeyNotFoundException(
+                    "SourceCodeRebuilder : 指定されたTokenTypeにつける色がConstantsで登録されていません");
+            }
+
+            string syntaxColor = Constants.syntaxHighlightColors[currentToken.TokenType]
+                ?? throw new Exception("SourceCodeRebuilder : 取得したsyntaxColorがnullです");
+
+            richSourceCode.Append($"<color={syntaxColor}>");
+            richSourceCode.Append(currentToken.Value);
+            richSourceCode.Append("</color>");
         }
 
         /// <summary>
