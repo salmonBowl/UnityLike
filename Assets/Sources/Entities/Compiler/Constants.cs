@@ -17,9 +17,9 @@ namespace UnityLike.Entities.Compiler
         // string型として[\\n]が保存され、これがさらにTMP上で[\n]と表示されます
         public static string returnText = "\\\\n";
 
-        #region 1文字 / 2文字
+        #region 文字→TokenType のdictionary
 
-        public static readonly Dictionary<string, TokenType> twoCharOperators = new()
+        public static readonly Dictionary<string, TokenType> TwoCharOperators = new()
         {
             { "==", TokenType.EqualEquals },
             { "!=", TokenType.NotEquals },
@@ -32,7 +32,7 @@ namespace UnityLike.Entities.Compiler
             { ">=", TokenType.GreaterThanOrEqual },
             { "<=", TokenType.LessThanOrEqual }
         };
-        public static readonly Dictionary<char, TokenType> oneCharOperators = new()
+        public static readonly Dictionary<char, TokenType> OneCharOperators = new()
         {
             { '+', TokenType.Plus },
             { '-', TokenType.Minus },
@@ -45,6 +45,8 @@ namespace UnityLike.Entities.Compiler
 
             { '.', TokenType.Dot },
             { ',', TokenType.Comma },
+            { ';', TokenType.SemiColon },
+
             { '(', TokenType.LeftParen },
             { ')', TokenType.RightParen },
             { '{', TokenType.LeftBrace },
@@ -52,15 +54,35 @@ namespace UnityLike.Entities.Compiler
             { '[', TokenType.LeftBracket },
             { ']', TokenType.RightBracket }
         };
+        public static readonly Dictionary<string, TokenType> KeyWords = new()
+        {
+            { "if", TokenType.If },
+            { "else", TokenType.Else },
+            { "for", TokenType.For },
+            { "while", TokenType.While },
+
+            { "int", TokenType.TypeStandard },
+            { "float", TokenType.TypeStandard },
+            { "bool", TokenType.TypeStandard },
+            { "string", TokenType.TypeStandard },
+
+            { "new", TokenType.New },
+            { "null", TokenType.Null },
+            { "true", TokenType.True },
+            { "false", TokenType.False },
+            { "public", TokenType.Public },
+            { "private", TokenType.Private }
+        };
 
         #endregion
 
         private static readonly string operatorColor = "#FFFFFF";
+        private static readonly string controlSyntaxColor = "#FF00FF";
         public static readonly Dictionary<TokenType, string> syntaxHighlightColors = new()
         {
             { TokenType.Identifier, "#86DEFE" },
 
-            #region 演算子
+            #region 演算子、かっこなど
             { TokenType.NumberLiteral, operatorColor },
             { TokenType.Plus, operatorColor },
             { TokenType.Minus, operatorColor },
@@ -79,12 +101,35 @@ namespace UnityLike.Entities.Compiler
             { TokenType.GreaterThanOrEqual, operatorColor },
             { TokenType.LessThan, operatorColor },
             { TokenType.LessThanOrEqual, operatorColor },
+
+            { TokenType.Dot, operatorColor },
+            { TokenType.Comma, operatorColor },
+
+            { TokenType.LeftParen, operatorColor },
+            { TokenType.RightParen, operatorColor },
+            { TokenType.LeftBrace, operatorColor },
+            { TokenType.RightBrace, operatorColor },
+            { TokenType.LeftBracket, operatorColor },
+            { TokenType.RightBracket, operatorColor },
             #endregion
+
+            { TokenType.SemiColon, "#FFFFFF" },
 
             // エラーを赤色に
             { TokenType.Unknown, "#FF0000" },
 
             #region キーワード (制御構文や型名など)
+            { TokenType.If, controlSyntaxColor },
+            { TokenType.Else, controlSyntaxColor },
+            { TokenType.For, controlSyntaxColor },
+            { TokenType.While, controlSyntaxColor },
+            { TokenType.TypeStandard, "#0000FF" },
+            { TokenType.New, "#0000FF" },
+            { TokenType.Null, "#0000FF" },
+            { TokenType.True, "#0000FF" },
+            { TokenType.False, "#0000FF" },
+            { TokenType.Public, "#0000FF" },
+            { TokenType.Private, "#0000FF" },
             #endregion
 
             { TokenType.Return, "#00FF00" },

@@ -42,6 +42,7 @@ namespace UnityLike.Entities.Compiler
         // “_
         Dot,
         Comma,
+        SemiColon,
 
         // Š‡ŒÊ—Þ
         LeftParen,

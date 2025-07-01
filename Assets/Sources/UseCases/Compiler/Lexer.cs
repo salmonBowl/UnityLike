@@ -15,34 +15,6 @@ namespace UnityLike.UseCases.Compiler
         private int currentLine;
         private int currentColumn;
 
-        #region dictionaryの定義
-        private readonly Dictionary<string, TokenType> twoCharOperators = new()
-        {
-            { "==", TokenType.EqualEquals },
-            { "!=", TokenType.NotEquals },
-            { "+=", TokenType.PlusEquals },
-            { "-=", TokenType.MinusEquals },
-            { "*=", TokenType.MultiplyEquals },
-            { "/=", TokenType.DivideEquals },
-            { "++", TokenType.Increment },
-            { "--", TokenType.Decrement },
-            { ">=", TokenType.GreaterThanOrEqual },
-            { "<=", TokenType.LessThanOrEqual }
-        };
-
-        private readonly Dictionary<char, TokenType> oneCharOperators = new()
-        {
-            { '+', TokenType.Plus },
-            { '-', TokenType.Minus },
-            { '*', TokenType.Multiply },
-            { '/', TokenType.Divide },
-            { '=', TokenType.Equals },
-            { '!', TokenType.Unknown }, // '!'単体はUnknownですが、2文字で != になる可能性があります
-            { '>', TokenType.GreaterThan },
-            { '<', TokenType.LessThan }
-        };
-        #endregion
-
         [Inject]
         public Lexer(
             string sourceCode
@@ -103,7 +75,7 @@ namespace UnityLike.UseCases.Compiler
             }
             // 1文字または2文字
             // 主に演算子や括弧類
-            else if (oneCharOperators.TryGetValue(firstChar, out TokenType oneCharTokenType))
+            else if (Constants.OneCharOperators.TryGetValue(firstChar, out TokenType oneCharTokenType))
             {
                 Consume();
                 return ReadOperatorToken(oneCharTokenType, firstChar, tokenLine, tokenColumn);
@@ -156,7 +128,7 @@ namespace UnityLike.UseCases.Compiler
             // 2文字stringの生成
             string twoChars = firstChar.ToString() + Peek().ToString();
 
-            if (twoCharOperators.TryGetValue(twoChars, out TokenType twoCharTokenType))
+            if (Constants.TwoCharOperators.TryGetValue(twoChars, out TokenType twoCharTokenType))
             {
                 Consume();
                 return new Token(twoCharTokenType, twoChars, tokenLine, tokenColumn);
