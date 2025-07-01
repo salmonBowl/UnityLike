@@ -71,13 +71,22 @@ namespace UnityLike.Entities.Compiler
             { "int", TokenType.TypeStandard },
             { "float", TokenType.TypeStandard },
             { "bool", TokenType.TypeStandard },
-            { "string", TokenType.TypeStandard }
+            // これ以下はのちにクラス定義として組み込む仕組みを作るつもりです
+            { "string", TokenType.TypeStandard },
+
+            { "Vector2", TokenType.TypeOther },
+            { "Vector3", TokenType.TypeOther },
+            { "Color", TokenType.TypeOther },
+            { "Transform", TokenType.TypeOther },
+            { "Debug", TokenType.TypeOther },
+            { "Time", TokenType.TypeOther },
+            { "Mathf", TokenType.TypeOther }
         };
 
         #endregion
 
         private static readonly string operatorColor = "#FFFFFF";
-        private static readonly string controlSyntaxColor = "#DF00FF";
+        private static readonly string controlSyntaxColor = "#D846FF";
         private static readonly string constBlue = "#569CD6";
         public static readonly Dictionary<TokenType, string> syntaxHighlightColors = new()
         {
