@@ -9,7 +9,7 @@ namespace UnityLike.UseCases.Compiler
     {
         private readonly Token[] tokenArray;
         private readonly StringBuilder sourceCode;
-        private readonly StringBuilder richSourceCode; //メンバー関数しか使わないためreadonly
+        private readonly StringBuilder richSourceCode; //メンバー関数の.Appendしか使わないためreadonly
 
         public SourceCodeRebuilder(Token[] tokenArray)
         {

@@ -106,6 +106,12 @@ namespace UnityLike.UseCases.Compiler
                 Consume();
                 return ReadOperatorToken(oneCharTokenType, firstChar, tokenLine, tokenColumn);
             }
+            // 改行
+            else if (firstChar == '\n')
+            {
+                Consume(); // 改行もConsumeで処理できる
+                return new Token(TokenType.Return, "\n", tokenLine, tokenColumn);
+            }
             else
             {
                 // 記述していない例外は全てTokenType.Unknownとして返します
