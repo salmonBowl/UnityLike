@@ -5,7 +5,6 @@ using Zenject;
 using UnityLike.Entities.CodeEditor;
 using UnityLike.Entities.Compiler;
 using UnityLike.UseCases.Compiler;
-using UnityLike.FrameworkAndDrivers.CodeEditor;
 
 namespace UnityLike.InterfaceAdapters.Presenter
 {
@@ -23,14 +22,14 @@ namespace UnityLike.InterfaceAdapters.Presenter
         }
         */
 
-        // 要修正！！！一時的なものです！！！
-        private readonly ICompilerPresenter view;
+        // アウトプット
+        private readonly ISyntaxTextView view;
 
         private Lexer lexer;
         public event Action<CodeEditorBlock, string> OnCompiled;
 
         [Inject]
-        public CompilerPresenter(ICompilerPresenter view)
+        public CompilerPresenter(ISyntaxTextView view)
         {
             this.view = view;
         }
@@ -44,10 +43,10 @@ namespace UnityLike.InterfaceAdapters.Presenter
             SourceCodeRebuilder rebuilder = new(tokenArray);
 
             rebuilder.RebuildExecute();
+
             //string sourceCodeRebuild = rebuilder.GetSourceCodeRebuild();
             string richSourceCode = rebuilder.GetRichSourceCode();
 
-            // 要修正!
             view.SetViewText(block, richSourceCode);
         }
 

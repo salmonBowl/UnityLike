@@ -7,7 +7,7 @@ using UnityLike.InterfaceAdapters.Presenter;
 
 namespace UnityLike.InterfaceAdapters.Controller
 {
-    public class CodeEditorInputController : IInitializable, IDisposable
+    public class CodeEditorInputController : IInitializable, IDisposable, ICodeChangeInputPort
     {
         private readonly LineCountManager lineCountManager;
         private readonly UpdateTextAreaUseCase updateTextAreaUseCase;
@@ -76,8 +76,10 @@ namespace UnityLike.InterfaceAdapters.Controller
             int newLineCount = CalculateLineCount(newText);
             lineCountManager.SetLineCount(block, newLineCount);
 
-            // コンパイルします
-            compilerPresenter.OnCodeChanged(block, newText);
+            // 変更を通知します
+            // これは例えばCompilerPresenterなどが受け取ります
+
+            //compilerPresenter.OnCodeChanged(block, newText);
         }
 
         private int CalculateLineCount(string text)
