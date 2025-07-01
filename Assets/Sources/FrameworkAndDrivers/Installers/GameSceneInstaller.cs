@@ -73,6 +73,9 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              *  --- Frameworks & Drivers層 ---
              */
 
+            // 要修正
+            Container.Bind<TextAreaUI>().FromInstance(codeEditorTextAreaView).AsSingle();
+
             // MonoBehaviourをインターフェースとしてバインド
             Container.Bind<ITextAreaView>().FromInstance(codeEditorTextAreaView).AsSingle();
             Container.Bind<ITextAreaInput>().FromInstance(codeEditorTextAreaView).AsSingle();
