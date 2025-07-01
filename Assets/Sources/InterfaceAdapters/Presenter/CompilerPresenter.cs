@@ -1,12 +1,14 @@
+using System;
 using System.Collections.Generic;
 using Zenject;
 
+using UnityLike.Entities.CodeEditor;
 using UnityLike.Entities.Compiler;
 using UnityLike.UseCases.Compiler;
 
 namespace UnityLike.InterfaceAdapters.Presenter
 {
-    public class CodeEditorPresenter
+    public class CompilerPresenter : ICompilerPresenter
     {
         /*
          * Inject‚¶‚á‚È‚¢! ŠÔˆá‚Á‚Ä‚Ü‚µ‚½
@@ -21,8 +23,9 @@ namespace UnityLike.InterfaceAdapters.Presenter
         */
 
         private Lexer lexer;
+        public event Action<CodeEditorBlock, string> OnCompiled;
 
-        public void OnCodeChanged(string sourceCode)
+        public void OnCodeChanged(CodeEditorBlock block, string sourceCode)
         {
             lexer = new(sourceCode);
 
