@@ -8,7 +8,7 @@ using UnityLike.InterfaceAdapters.Presenter;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
-    public class TextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput, IGetInputFieldText
+    public class TextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput, IGetInputFieldText, ISyntaxTextView
     {
         [Header("配置関係")]
         [SerializeField]
@@ -27,8 +27,13 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         private TMP_InputField inputFieldVoidstart;
         [SerializeField]
         private TMP_InputField inputFieldVoidupdate;
+        [SerializeField]
+        private TextMeshProUGUI viewTextVoidstart;
+        [SerializeField]
+        private TextMeshProUGUI viewTextVoidupdate;
 
         public event Action<CodeEditorBlock, string> OnTextAreaInputChanged;
+
 
         /*
             Get
@@ -140,11 +145,40 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
                         Debug.LogError("inputFieldVoidupdateがアタッチされていません");
                         return;
                     }
-                    inputFieldVoidstart.text = text;
+                    inputFieldVoidupdate.text = text;
 
                     break;
                 default:
                     Debug.LogError("CodeEditorTextAreaUI.SetTextInputField : 記述されていないEnum値です");
+                    return;
+            }
+        }
+        public void SetViewText(CodeEditorBlock block, string text)
+        {
+            switch (block)
+            {
+                case CodeEditorBlock.VoidStart:
+
+                    if (!viewTextVoidstart)
+                    {
+                        Debug.LogError("viewTextVoidstartがアタッチされていません");
+                        return;
+                    }
+                    viewTextVoidstart.text = text;
+
+                    break;
+                case CodeEditorBlock.VoidUpdate:
+
+                    if (!viewTextVoidupdate)
+                    {
+                        Debug.LogError("viewTextVoidupdateがアタッチされていません");
+                        return;
+                    }
+                    viewTextVoidupdate.text = text;
+
+                    break;
+                default:
+                    Debug.LogError("CodeEditorTextAreaUI.SetViewText : 記述されていないEnum値です");
                     return;
             }
         }

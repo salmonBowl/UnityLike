@@ -3,6 +3,7 @@ using Zenject;
 
 using UnityLike.Entities.CodeEditor;
 using UnityLike.UseCases.CodeEditor;
+using UnityLike.InterfaceAdapters.Presenter;
 
 namespace UnityLike.InterfaceAdapters.Controller
 {
@@ -13,12 +14,15 @@ namespace UnityLike.InterfaceAdapters.Controller
         private readonly ITextAreaInput textAreaInput;
         private readonly IGetInputFieldText getInputFieldText;
 
+        private readonly ICodeChangeInputPort codeChange;
+
         [Inject]
         public CodeEditorInputController(
             LineCountManager lineCountManager,
             UpdateTextAreaUseCase updateTextAreaUseCase,
             ITextAreaInput textAreaInput,
-            IGetInputFieldText getInputFieldText
+            IGetInputFieldText getInputFieldText,
+            ICodeChangeInputPort codeChange
             )
         {
             //UnityEngine.Debug.Log("CodeEditorInputController.Constructor()");
@@ -27,6 +31,8 @@ namespace UnityLike.InterfaceAdapters.Controller
             this.updateTextAreaUseCase = updateTextAreaUseCase;
             this.textAreaInput = textAreaInput;
             this.getInputFieldText = getInputFieldText;
+
+            this.codeChange = codeChange;
         }
 
         public void Initialize()
@@ -66,11 +72,12 @@ namespace UnityLike.InterfaceAdapters.Controller
         {
             //UnityEngine.Debug.Log("CodeEditorInputController | newText : " + newText);
 
+            // InputFieldの高さを変更します
             int newLineCount = CalculateLineCount(newText);
-
-            //UnityEngine.Debug.Log($"CodeEditorInputController | block : {block}, LineCount : {newLineCount}");
-
             lineCountManager.SetLineCount(block, newLineCount);
+
+            // インターフェイスを通じてコンパイルシステムに送ります
+            codeChange.OnCodeChanged(block, newText);
         }
 
         private int CalculateLineCount(string text)

@@ -77,6 +77,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
             Container.Bind<ITextAreaView>().FromInstance(codeEditorTextAreaView).AsSingle();
             Container.Bind<ITextAreaInput>().FromInstance(codeEditorTextAreaView).AsSingle();
             Container.Bind<IGetInputFieldText>().FromInstance(codeEditorTextAreaView).AsSingle();
+            Container.Bind<ISyntaxTextView>().FromInstance(codeEditorTextAreaView).AsSingle();
 
             // エントリーポイント
             Container.Bind<GameRootGameScene>().AsSingle();
@@ -113,6 +114,8 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              */
 
             subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
+
+            subContainer.Bind<ICodeChangeInputPort>().To<CompilerPresenter>().AsSingle();
 
             /*
              *  --- Frameworks & Drivers層 ---
