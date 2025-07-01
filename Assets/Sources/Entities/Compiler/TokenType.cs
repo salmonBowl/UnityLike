@@ -31,28 +31,13 @@ namespace UnityLike.Entities.Compiler
         LessThanOrEqual,
 
         /*
-            括弧類 まで新規追加
+            制御構文 まで新規追加
             これのシンタックスハイライト部分はまだ実装されていません
          */
 
-        // 関数実行のために必要なもの
-        COLON,
-        COMMA,
-
-        // 組み込み型 (青色で表示します)
-        TYPE_STANDARD, //intやfloatなどの変数で、voidなどの関数宣言はこのエンジンで使われない
-
-        // キーワード
-        IF,
-        ELSE,
-        FOR,
-        WHILE,
-        NEW,
-        NULL,
-        TRUE,
-        FALSE,
-        PUBLIC,
-        PRIVATE,
+        // 点
+        Dot,
+        Comma,
 
         // 括弧類
         LEFT_PAREN,
@@ -61,6 +46,24 @@ namespace UnityLike.Entities.Compiler
         RIGHT_BRACE,
         LEFT_BRACKET,
         RIGHT_BRACKET,
+
+        // キーワード
+
+        // 組み込み型 (青色で表示します)
+        TypeStandard, //intやfloatなどの変数で、voidなどの関数宣言はこのエンジンで使われない
+
+        // 制御構文
+        If,
+        Else,
+        For,
+        While,
+        New,
+        Null,
+        True,
+        False,
+        Public,
+        Private,
+
     
         Unknown, // 入力中や入力ミスなど
 
