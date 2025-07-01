@@ -7,14 +7,14 @@ using UnityLike.InterfaceAdapters.Presenter;
 
 namespace UnityLike.InterfaceAdapters.Controller
 {
-    public class CodeEditorInputController : IInitializable, IDisposable, ICodeChangeInputPort
+    public class CodeEditorInputController : IInitializable, IDisposable
     {
         private readonly LineCountManager lineCountManager;
         private readonly UpdateTextAreaUseCase updateTextAreaUseCase;
         private readonly ITextAreaInput textAreaInput;
         private readonly IGetInputFieldText getInputFieldText;
 
-        private readonly CompilerPresenter compilerPresenter;
+        private readonly ICodeChangeInputPort codeChange;
 
         [Inject]
         public CodeEditorInputController(
@@ -22,7 +22,7 @@ namespace UnityLike.InterfaceAdapters.Controller
             UpdateTextAreaUseCase updateTextAreaUseCase,
             ITextAreaInput textAreaInput,
             IGetInputFieldText getInputFieldText,
-            CompilerPresenter compilerPresenter
+            ICodeChangeInputPort codeChange
             )
         {
             //UnityEngine.Debug.Log("CodeEditorInputController.Constructor()");
@@ -32,7 +32,7 @@ namespace UnityLike.InterfaceAdapters.Controller
             this.textAreaInput = textAreaInput;
             this.getInputFieldText = getInputFieldText;
 
-            this.compilerPresenter = compilerPresenter;
+            this.codeChange = codeChange;
         }
 
         public void Initialize()
@@ -76,10 +76,8 @@ namespace UnityLike.InterfaceAdapters.Controller
             int newLineCount = CalculateLineCount(newText);
             lineCountManager.SetLineCount(block, newLineCount);
 
-            // 変更を通知します
-            // これは例えばCompilerPresenterなどが受け取ります
-
-            //compilerPresenter.OnCodeChanged(block, newText);
+            // インターフェイスを通じてコンパイルシステムに送ります
+            codeChange.OnCodeChanged(block, newText);
         }
 
         private int CalculateLineCount(string text)

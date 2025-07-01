@@ -115,6 +115,8 @@ namespace UnityLike.FrameworkAndDrivers.Installers
 
             subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
 
+            subContainer.Bind<ICodeChangeInputPort>().To<CompilerPresenter>().AsSingle();
+
             /*
              *  --- Frameworks & Drivers‘w ---
              */

@@ -8,7 +8,7 @@ using UnityLike.UseCases.Compiler;
 
 namespace UnityLike.InterfaceAdapters.Presenter
 {
-    public class CompilerPresenter
+    public class CompilerPresenter : ICodeChangeInputPort
     {
         /*
          * Inject‚¶‚á‚È‚¢! ŠÔˆá‚Á‚Ä‚Ü‚µ‚½
