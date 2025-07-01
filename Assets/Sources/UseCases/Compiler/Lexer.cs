@@ -65,7 +65,17 @@ namespace UnityLike.UseCases.Compiler
             if (char.IsLetter(firstChar))
             {
                 string tokenValue = ReadWhile(c => char.IsLetterOrDigit(c) || c == '_');
-                return new Token(TokenType.Identifier, tokenValue, tokenLine, tokenColumn);
+
+                // キーワードに一致するかを判定します
+                if (Constants.KeyWords.TryGetValue(tokenValue, out TokenType keyWordTokenType))
+                {
+                    return new Token(keyWordTokenType, tokenValue, tokenLine, tokenColumn);
+                }
+                else
+                {
+                    // 識別子
+                    return new Token(TokenType.Identifier, tokenValue, tokenLine, tokenColumn);
+                }
             }
             // 数字
             else if (char.IsDigit(firstChar))
