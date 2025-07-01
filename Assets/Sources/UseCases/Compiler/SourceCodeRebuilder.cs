@@ -72,10 +72,12 @@ namespace UnityLike.UseCases.Compiler
                 // 改行トークンを使って改行を判定します
                 // 改行トークン以外による不正な改行を次のブロックで判定します
 
+                // sourceCode
                 sourceCode.Append('\n');
+                // richSourceCode
                 // 表示上では任意の改行文字(returnText)を生成します
                 string returnSyntaxColor = Constants.syntaxHighlightColors[TokenType.Return];
-                richSourceCode.Append($"<color={Constants.returnText}>{returnSyntaxColor}</color>\n");
+                richSourceCode.Append($"<color={returnSyntaxColor}>{Constants.returnText}</color>\n");
 
                 currentLine++;
                 currentColumn = 1;

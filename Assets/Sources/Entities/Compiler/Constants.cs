@@ -14,7 +14,8 @@ namespace UnityLike.Entities.Compiler
 
         // テキストエディタ―で改行した時に表示される文字です
         // 現在は\nを表示されています
-        public static string returnText = "\\n";
+        // string型として[\\n]が保存され、これがさらにTMP上で[\n]と表示されます
+        public static string returnText = "\\\\n";
 
         public static readonly Dictionary<string, TokenType> twoCharOperators = new()
         {
