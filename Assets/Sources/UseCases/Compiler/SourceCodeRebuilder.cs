@@ -35,6 +35,7 @@ namespace UnityLike.UseCases.Compiler
 
             foreach (Token currentToken in tokenArray)
             {
+                //UnityEngine.Debug.Log("currentToken : " + currentToken);
                 // 1. ‹ó”’‚ğ•âŠ®‚µ‚Ü‚·
                 int spaceRequiedCount = currentToken.ColumnCount - currentColumn;
                 currentColumn += spaceRequiedCount;
@@ -58,6 +59,8 @@ namespace UnityLike.UseCases.Compiler
                 sourceCode.Append(currentToken.Value);
                 // richSourceCode
                 RichSourceCodeAppendRichText(currentToken);
+                // Ÿ‚Ì‚½‚ß‚É•¶šˆÊ’u‚ği‚ß‚é
+                currentColumn += currentToken.Value.Length;
             }
 
             return;

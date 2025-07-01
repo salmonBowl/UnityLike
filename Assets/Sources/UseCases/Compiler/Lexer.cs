@@ -91,13 +91,13 @@ namespace UnityLike.UseCases.Compiler
             // 識別子
             if (char.IsLetter(firstChar))
             {
-                string tokenValue = ReadWhile(firstChar, c => char.IsLetterOrDigit(c) || c == '_');
+                string tokenValue = ReadWhile(c => char.IsLetterOrDigit(c) || c == '_');
                 return new Token(TokenType.Identifier, tokenValue, tokenLine, tokenColumn);
             }
             // 数字
             else if (char.IsDigit(firstChar))
             {
-                string tokenValue = ReadWhile(firstChar, c => char.IsDigit(c));
+                string tokenValue = ReadWhile(c => char.IsDigit(c));
                 return new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn);
             }
             // 演算子
@@ -124,10 +124,9 @@ namespace UnityLike.UseCases.Compiler
         /// <summary>
         /// 識別子やリテラルのトークンを検出する際に共通した処理をまとめました
         /// </summary>
-        private string ReadWhile(char firstChar, Func<char, bool> predicate)
+        private string ReadWhile(Func<char, bool> predicate)
         {
-            StringBuilder builder = new(firstChar);
-            Consume();
+            StringBuilder builder = new();
 
             while (!IsEndOfFile() && predicate(Peek()))
                 // IsEndOfFileは必要ないが念のため
