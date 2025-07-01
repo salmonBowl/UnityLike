@@ -17,7 +17,9 @@ namespace UnityLike.Entities.Compiler
         // string型として[\\n]が保存され、これがさらにTMP上で[\n]と表示されます
         public static string returnText = "\\\\n";
 
-        public static readonly Dictionary<string, TokenType> twoCharOperators = new()
+        #region 文字→TokenType のdictionary
+
+        public static readonly Dictionary<string, TokenType> TwoCharOperators = new()
         {
             { "==", TokenType.EqualEquals },
             { "!=", TokenType.NotEquals },
@@ -30,7 +32,7 @@ namespace UnityLike.Entities.Compiler
             { ">=", TokenType.GreaterThanOrEqual },
             { "<=", TokenType.LessThanOrEqual }
         };
-        public static readonly Dictionary<char, TokenType> oneCharOperators = new()
+        public static readonly Dictionary<char, TokenType> OneCharOperators = new()
         {
             { '+', TokenType.Plus },
             { '-', TokenType.Minus },
@@ -39,16 +41,58 @@ namespace UnityLike.Entities.Compiler
             { '=', TokenType.Equals },
             { '!', TokenType.Unknown }, // '!'単体はUnknownですが、2文字で != になる可能性があります
             { '>', TokenType.GreaterThan },
-            { '<', TokenType.LessThan }
+            { '<', TokenType.LessThan },
+
+            { '.', TokenType.Dot },
+            { ',', TokenType.Comma },
+            { ';', TokenType.SemiColon },
+
+            { '(', TokenType.LeftParen },
+            { ')', TokenType.RightParen },
+            { '{', TokenType.LeftBrace },
+            { '}', TokenType.RightBrace },
+            { '[', TokenType.LeftBracket },
+            { ']', TokenType.RightBracket }
+        };
+        public static readonly Dictionary<string, TokenType> KeyWords = new()
+        {
+            { "if", TokenType.If },
+            { "else", TokenType.Else },
+            { "for", TokenType.For },
+            { "while", TokenType.While },
+
+            { "new", TokenType.New },
+            { "null", TokenType.Null },
+            { "true", TokenType.True },
+            { "false", TokenType.False },
+            { "public", TokenType.Public },
+            { "private", TokenType.Private },
+
+            { "int", TokenType.TypeStandard },
+            { "float", TokenType.TypeStandard },
+            { "bool", TokenType.TypeStandard },
+            // これ以下はのちにクラス定義として組み込む仕組みを作るつもりです
+            { "string", TokenType.TypeStandard },
+
+            { "Vector2", TokenType.TypeOther },
+            { "Vector3", TokenType.TypeOther },
+            { "Color", TokenType.TypeOther },
+            { "Transform", TokenType.TypeOther },
+            { "Debug", TokenType.TypeOther },
+            { "Time", TokenType.TypeOther },
+            { "Mathf", TokenType.TypeOther }
         };
 
+        #endregion
 
         private static readonly string operatorColor = "#FFFFFF";
+        private static readonly string controlSyntaxColor = "#D846FF";
+        private static readonly string constBlue = "#569CD6";
         public static readonly Dictionary<TokenType, string> syntaxHighlightColors = new()
         {
             { TokenType.Identifier, "#86DEFE" },
 
-            #region 演算子
+            #region 演算子、かっこなど
             { TokenType.NumberLiteral, operatorColor },
             { TokenType.Plus, operatorColor },
             { TokenType.Minus, operatorColor },
@@ -67,13 +111,38 @@ namespace UnityLike.Entities.Compiler
             { TokenType.GreaterThanOrEqual, operatorColor },
             { TokenType.LessThan, operatorColor },
             { TokenType.LessThanOrEqual, operatorColor },
+
+            { TokenType.Dot, operatorColor },
+            { TokenType.Comma, operatorColor },
+
+            { TokenType.LeftParen, operatorColor },
+            { TokenType.RightParen, operatorColor },
+            { TokenType.LeftBrace, operatorColor },
+            { TokenType.RightBrace, operatorColor },
+            { TokenType.LeftBracket, operatorColor },
+            { TokenType.RightBracket, operatorColor },
             #endregion
+
+            { TokenType.SemiColon, "#FFFFFF" },
 
             // エラーを赤色に
             { TokenType.Unknown, "#FF0000" },
 
             #region キーワード (制御構文や型名など)
+            { TokenType.If, controlSyntaxColor },
+            { TokenType.Else, controlSyntaxColor },
+            { TokenType.For, controlSyntaxColor },
+            { TokenType.While, controlSyntaxColor },
+            { TokenType.New, constBlue },
+            { TokenType.Null, constBlue },
+            { TokenType.True, constBlue },
+            { TokenType.False, constBlue },
+            { TokenType.Public, constBlue },
+            { TokenType.Private, constBlue },
             #endregion
+            
+            { TokenType.TypeStandard, constBlue },
+            { TokenType.TypeOther, "#00FFAE" },
 
             { TokenType.Return, "#00FF00" },
         };

@@ -10,23 +10,10 @@ namespace UnityLike.InterfaceAdapters.Presenter
 {
     public class CompilerPresenter : ICodeChangeInputPort
     {
-        /*
-         * Injectじゃない! 間違ってました
-        private readonly SourceCodeRebuilder rebuilder;
-
-        [Inject]
-        public CodeEditorPresenter(Lexer lexer, SourceCodeRebuilder rebuilder)
-        {
-            this.lexer = lexer;
-            this.rebuilder = rebuilder;
-        }
-        */
-
         // アウトプット
         private readonly ISyntaxTextView view;
 
         private Lexer lexer;
-        public event Action<CodeEditorBlock, string> OnCompiled;
 
         [Inject]
         public CompilerPresenter(ISyntaxTextView view)

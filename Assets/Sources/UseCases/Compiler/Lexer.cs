@@ -15,34 +15,6 @@ namespace UnityLike.UseCases.Compiler
         private int currentLine;
         private int currentColumn;
 
-        #region dictionaryの定義
-        private readonly Dictionary<string, TokenType> twoCharOperators = new()
-        {
-            { "==", TokenType.EqualEquals },
-            { "!=", TokenType.NotEquals },
-            { "+=", TokenType.PlusEquals },
-            { "-=", TokenType.MinusEquals },
-            { "*=", TokenType.MultiplyEquals },
-            { "/=", TokenType.DivideEquals },
-            { "++", TokenType.Increment },
-            { "--", TokenType.Decrement },
-            { ">=", TokenType.GreaterThanOrEqual },
-            { "<=", TokenType.LessThanOrEqual }
-        };
-
-        private readonly Dictionary<char, TokenType> oneCharOperators = new()
-        {
-            { '+', TokenType.Plus },
-            { '-', TokenType.Minus },
-            { '*', TokenType.Multiply },
-            { '/', TokenType.Divide },
-            { '=', TokenType.Equals },
-            { '!', TokenType.Unknown }, // '!'単体はUnknownですが、2文字で != になる可能性があります
-            { '>', TokenType.GreaterThan },
-            { '<', TokenType.LessThan }
-        };
-        #endregion
-
         [Inject]
         public Lexer(
             string sourceCode
@@ -88,11 +60,22 @@ namespace UnityLike.UseCases.Compiler
 
             char firstChar = Peek();
 
-            // 識別子
+            // アルファベット
+            // 通常は識別子、キーワードを例外処理
             if (char.IsLetter(firstChar))
             {
                 string tokenValue = ReadWhile(c => char.IsLetterOrDigit(c) || c == '_');
-                return new Token(TokenType.Identifier, tokenValue, tokenLine, tokenColumn);
+
+                // キーワードに一致するかを判定します
+                if (Constants.KeyWords.TryGetValue(tokenValue, out TokenType keyWordTokenType))
+                {
+                    return new Token(keyWordTokenType, tokenValue, tokenLine, tokenColumn);
+                }
+                else
+                {
+                    // 識別子
+                    return new Token(TokenType.Identifier, tokenValue, tokenLine, tokenColumn);
+                }
             }
             // 数字
             else if (char.IsDigit(firstChar))
@@ -100,8 +83,9 @@ namespace UnityLike.UseCases.Compiler
                 string tokenValue = ReadWhile(c => char.IsDigit(c));
                 return new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn);
             }
-            // 演算子
-            else if (oneCharOperators.TryGetValue(firstChar, out TokenType oneCharTokenType))
+            // 1文字または2文字
+            // 主に演算子や括弧類
+            else if (Constants.OneCharOperators.TryGetValue(firstChar, out TokenType oneCharTokenType))
             {
                 Consume();
                 return ReadOperatorToken(oneCharTokenType, firstChar, tokenLine, tokenColumn);
@@ -154,7 +138,7 @@ namespace UnityLike.UseCases.Compiler
             // 2文字stringの生成
             string twoChars = firstChar.ToString() + Peek().ToString();
 
-            if (twoCharOperators.TryGetValue(twoChars, out TokenType twoCharTokenType))
+            if (Constants.TwoCharOperators.TryGetValue(twoChars, out TokenType twoCharTokenType))
             {
                 Consume();
                 return new Token(twoCharTokenType, twoChars, tokenLine, tokenColumn);
