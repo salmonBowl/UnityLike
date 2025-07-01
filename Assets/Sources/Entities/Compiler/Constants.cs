@@ -17,6 +17,8 @@ namespace UnityLike.Entities.Compiler
         // string型として[\\n]が保存され、これがさらにTMP上で[\n]と表示されます
         public static string returnText = "\\\\n";
 
+        #region 1文字 / 2文字
+
         public static readonly Dictionary<string, TokenType> twoCharOperators = new()
         {
             { "==", TokenType.EqualEquals },
@@ -39,9 +41,19 @@ namespace UnityLike.Entities.Compiler
             { '=', TokenType.Equals },
             { '!', TokenType.Unknown }, // '!'単体はUnknownですが、2文字で != になる可能性があります
             { '>', TokenType.GreaterThan },
-            { '<', TokenType.LessThan }
+            { '<', TokenType.LessThan },
+
+            { '.', TokenType.Dot },
+            { ',', TokenType.Comma },
+            { '(', TokenType.LeftParen },
+            { ')', TokenType.RightParen },
+            { '{', TokenType.LeftBrace },
+            { '}', TokenType.RightBrace },
+            { '[', TokenType.LeftBracket },
+            { ']', TokenType.RightBracket }
         };
 
+        #endregion
 
         private static readonly string operatorColor = "#FFFFFF";
         public static readonly Dictionary<TokenType, string> syntaxHighlightColors = new()

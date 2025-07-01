@@ -5,7 +5,11 @@ namespace UnityLike.Entities.Compiler
     {
         Identifier, // 変数や関数などの識別子
 
-        NumberLiteral, // 数字
+        // リテラル
+        NumberLiteral,
+        Null,
+        True,
+        False,
 
         // 算術演算子
         Plus,
@@ -40,12 +44,12 @@ namespace UnityLike.Entities.Compiler
         Comma,
 
         // 括弧類
-        LEFT_PAREN,
-        RIGHT_PAREN,
-        LEFT_BRACE,
-        RIGHT_BRACE,
-        LEFT_BRACKET,
-        RIGHT_BRACKET,
+        LeftParen,
+        RightParen,
+        LeftBrace,
+        RightBrace,
+        LeftBracket,
+        RightBracket,
 
         // キーワード
 
@@ -57,10 +61,8 @@ namespace UnityLike.Entities.Compiler
         Else,
         For,
         While,
+
         New,
-        Null,
-        True,
-        False,
         Public,
         Private,
 

@@ -88,7 +88,8 @@ namespace UnityLike.UseCases.Compiler
 
             char firstChar = Peek();
 
-            // 識別子
+            // アルファベット
+            // 通常は識別子、キーワードを例外処理
             if (char.IsLetter(firstChar))
             {
                 string tokenValue = ReadWhile(c => char.IsLetterOrDigit(c) || c == '_');
@@ -100,7 +101,8 @@ namespace UnityLike.UseCases.Compiler
                 string tokenValue = ReadWhile(c => char.IsDigit(c));
                 return new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn);
             }
-            // 演算子
+            // 1文字または2文字
+            // 主に演算子や括弧類
             else if (oneCharOperators.TryGetValue(firstChar, out TokenType oneCharTokenType))
             {
                 Consume();
