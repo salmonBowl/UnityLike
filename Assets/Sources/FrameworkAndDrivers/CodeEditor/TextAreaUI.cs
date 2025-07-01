@@ -27,6 +27,10 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         private TMP_InputField inputFieldVoidstart;
         [SerializeField]
         private TMP_InputField inputFieldVoidupdate;
+        [SerializeField]
+        private TextMeshProUGUI viewTextVoidstart;
+        [SerializeField]
+        private TextMeshProUGUI viewTextVoidupdate;
 
         public event Action<CodeEditorBlock, string> OnTextAreaInputChanged;
 

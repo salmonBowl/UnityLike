@@ -1500,6 +1500,8 @@ MonoBehaviour:
   blockVoidupdate: {fileID: 1602699583}
   inputFieldVoidstart: {fileID: 868099849}
   inputFieldVoidupdate: {fileID: 61857285}
+  viewTextVoidstart: {fileID: 198054990}
+  viewTextVoidupdate: {fileID: 389990090}
 --- !u!1 &466921367
 GameObject:
   m_ObjectHideFlags: 0
