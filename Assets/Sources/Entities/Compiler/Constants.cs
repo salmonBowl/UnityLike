@@ -61,23 +61,24 @@ namespace UnityLike.Entities.Compiler
             { "for", TokenType.For },
             { "while", TokenType.While },
 
-            { "int", TokenType.TypeStandard },
-            { "float", TokenType.TypeStandard },
-            { "bool", TokenType.TypeStandard },
-            { "string", TokenType.TypeStandard },
-
             { "new", TokenType.New },
             { "null", TokenType.Null },
             { "true", TokenType.True },
             { "false", TokenType.False },
             { "public", TokenType.Public },
-            { "private", TokenType.Private }
+            { "private", TokenType.Private },
+
+            { "int", TokenType.TypeStandard },
+            { "float", TokenType.TypeStandard },
+            { "bool", TokenType.TypeStandard },
+            { "string", TokenType.TypeStandard }
         };
 
         #endregion
 
         private static readonly string operatorColor = "#FFFFFF";
-        private static readonly string controlSyntaxColor = "#FF00FF";
+        private static readonly string controlSyntaxColor = "#DF00FF";
+        private static readonly string constBlue = "#569CD6";
         public static readonly Dictionary<TokenType, string> syntaxHighlightColors = new()
         {
             { TokenType.Identifier, "#86DEFE" },
@@ -123,14 +124,16 @@ namespace UnityLike.Entities.Compiler
             { TokenType.Else, controlSyntaxColor },
             { TokenType.For, controlSyntaxColor },
             { TokenType.While, controlSyntaxColor },
-            { TokenType.TypeStandard, "#0000FF" },
-            { TokenType.New, "#0000FF" },
-            { TokenType.Null, "#0000FF" },
-            { TokenType.True, "#0000FF" },
-            { TokenType.False, "#0000FF" },
-            { TokenType.Public, "#0000FF" },
-            { TokenType.Private, "#0000FF" },
+            { TokenType.New, constBlue },
+            { TokenType.Null, constBlue },
+            { TokenType.True, constBlue },
+            { TokenType.False, constBlue },
+            { TokenType.Public, constBlue },
+            { TokenType.Private, constBlue },
             #endregion
+            
+            { TokenType.TypeStandard, constBlue },
+            { TokenType.TypeOther, "#00FFAE" },
 
             { TokenType.Return, "#00FF00" },
         };

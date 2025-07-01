@@ -55,7 +55,8 @@ namespace UnityLike.Entities.Compiler
         // キーワード
 
         // 組み込み型 (青色で表示します)
-        TypeStandard, //intやfloatなどの変数で、voidなどの関数宣言はこのエンジンで使われない
+        TypeStandard, //intやfloatなどの変数で、voidなどの関数宣言についてはこのエンジンで使われない
+        TypeOther, // UnityEngine.Vector3や自作型など
 
         // 制御構文
         If,
@@ -66,7 +67,6 @@ namespace UnityLike.Entities.Compiler
         New,
         Public,
         Private,
-
     
         Unknown, // 入力中や入力ミスなど
 
