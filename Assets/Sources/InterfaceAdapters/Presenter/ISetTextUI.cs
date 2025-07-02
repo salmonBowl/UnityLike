@@ -2,8 +2,9 @@ using UnityLike.Entities.CodeEditor;
 
 namespace UnityLike.InterfaceAdapters.Presenter
 {
-    public interface ISyntaxTextView
+    public interface ISetTextUI
     {
+        void SetTextInputField(CodeEditorBlock block, string text);
         void SetViewText(CodeEditorBlock block, string text);
     }
 }

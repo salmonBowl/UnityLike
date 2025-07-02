@@ -55,7 +55,7 @@ namespace UnityLike.UseCases.Compiler
                 }
 
                 // 4. BackSlashÇ»ÇÁì¡éÍÇ»ëÄçÏÇÇµÇ‹Ç∑
-                if (RebuildExecuteBackSlash(currentToken, ref currentLine, ref currentColumn))
+                if (RebuildExecuteBackSlash(currentToken, ref currentColumn))
                 {
                     continue;
                 }
@@ -99,7 +99,7 @@ namespace UnityLike.UseCases.Compiler
 
             return false;
         }
-        private bool RebuildExecuteBackSlash(Token currentToken, ref int currentLine, ref int currentColumn)
+        private bool RebuildExecuteBackSlash(Token currentToken, ref int currentColumn)
         {
             if (currentToken.TokenType == TokenType.BackSlash)
             {
@@ -109,7 +109,7 @@ namespace UnityLike.UseCases.Compiler
                 // sourceCode
                 sourceCode.Append("\\<s></s>");
 
-                currentColumn += 8;
+                currentColumn += 1; // \ï™ÇÃ1ÇæÇØÇ≈Ç∑
 
                 return true;
             }

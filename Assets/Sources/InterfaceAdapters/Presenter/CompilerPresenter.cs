@@ -11,12 +11,12 @@ namespace UnityLike.InterfaceAdapters.Presenter
     public class CompilerPresenter : ICodeChangeInputPort
     {
         // アウトプット
-        private readonly ISyntaxTextView view;
+        private readonly ISetTextUI view;
 
         private Lexer lexer;
 
         [Inject]
-        public CompilerPresenter(ISyntaxTextView view)
+        public CompilerPresenter(ISetTextUI view)
         {
             this.view = view;
         }
@@ -35,6 +35,7 @@ namespace UnityLike.InterfaceAdapters.Presenter
             //string sourceCodeRebuild = rebuilder.GetSourceCodeRebuild();
             string richSourceCode = rebuilder.GetRichSourceCode();
 
+            view.SetTextInputField(block, sourceCode);
             view.SetViewText(block, richSourceCode);
         }
 

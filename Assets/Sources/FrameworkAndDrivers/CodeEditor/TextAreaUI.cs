@@ -8,7 +8,7 @@ using UnityLike.InterfaceAdapters.Presenter;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
-    public class TextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput, IGetInputFieldText, ISyntaxTextView
+    public class TextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput, IGetInputFieldText, ISetTextUI
     {
         [Header("配置関係")]
         [SerializeField]
@@ -135,7 +135,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
                         Debug.LogError("inputFieldVoidstartがアタッチされていません");
                         return;
                     }
-                    inputFieldVoidstart.text = text;
+                    inputFieldVoidstart.SetTextWithoutNotify(text); // これが重要! ないと無限ループを起こします
 
                     break;
                 case CodeEditorBlock.VoidUpdate:
@@ -145,7 +145,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
                         Debug.LogError("inputFieldVoidupdateがアタッチされていません");
                         return;
                     }
-                    inputFieldVoidupdate.text = text;
+                    inputFieldVoidupdate.SetTextWithoutNotify(text);
 
                     break;
                 default:
