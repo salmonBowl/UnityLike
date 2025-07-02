@@ -130,6 +130,7 @@ namespace UnityLike.Entities.Compiler
 
             // エラーを赤色に
             { TokenType.Unknown, "#FF0000" },
+            { TokenType.BackSlash, "#FF0000" },
 
             #region キーワード (制御構文や型名など)
             { TokenType.If, controlSyntaxColor },

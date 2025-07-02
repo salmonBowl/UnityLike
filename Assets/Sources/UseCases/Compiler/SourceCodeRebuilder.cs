@@ -104,12 +104,14 @@ namespace UnityLike.UseCases.Compiler
             if (currentToken.TokenType == TokenType.BackSlash)
             {
                 // BackSlashには\→\<s></s>という操作を加えます
-                // これはInputFieldの表示バグを防ぐためで、sourceCodeのみに必要になります
+                // これはInputFieldの表示バグを防ぐためで、sourceCodeのみに適用します
 
                 // sourceCode
                 sourceCode.Append("\\<s></s>");
+                // richSourceCode(通常)
+                RichSourceCodeAppendRichText(currentToken);
 
-                currentColumn += 1; // \分の1だけです
+                currentColumn++; // \分の1だけです
 
                 return true;
             }

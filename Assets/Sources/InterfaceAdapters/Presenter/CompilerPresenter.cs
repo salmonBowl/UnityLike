@@ -32,10 +32,10 @@ namespace UnityLike.InterfaceAdapters.Presenter
 
             rebuilder.RebuildExecute();
 
-            //string sourceCodeRebuild = rebuilder.GetSourceCodeRebuild();
+            string sourceCodeRebuild = rebuilder.GetSourceCodeRebuild();
             string richSourceCode = rebuilder.GetRichSourceCode();
 
-            view.SetTextInputField(block, sourceCode);
+            view.SetTextInputField(block, sourceCodeRebuild);
             view.SetViewText(block, richSourceCode);
         }
 
