@@ -207,14 +207,14 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
+  m_ContentType: 9
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 2
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 8
   m_RegexValue: 
   m_GlobalPointSize: 0.5
   m_CharacterLimit: 0
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   isAlert: 0
-  m_InputValidator: {fileID: 0}
+  m_InputValidator: {fileID: 11400000, guid: e11db83f77ca51d4caf3d7510d28aaf7, type: 2}
   m_ShouldActivateOnSelect: 1
 --- !u!114 &61857286
 MonoBehaviour:
@@ -2032,14 +2032,14 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
+  m_ContentType: 9
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 2
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 8
   m_RegexValue: 
   m_GlobalPointSize: 0.5
   m_CharacterLimit: 0
@@ -2096,7 +2096,7 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 1
   m_LineLimit: 0
   isAlert: 0
-  m_InputValidator: {fileID: 0}
+  m_InputValidator: {fileID: 11400000, guid: e11db83f77ca51d4caf3d7510d28aaf7, type: 2}
   m_ShouldActivateOnSelect: 1
 --- !u!114 &868099850
 MonoBehaviour:
@@ -4066,8 +4066,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 255
-  m_fontColor: {r: 1, g: 0, b: 0, a: 0}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

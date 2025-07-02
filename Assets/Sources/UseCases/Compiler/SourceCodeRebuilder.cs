@@ -54,13 +54,7 @@ namespace UnityLike.UseCases.Compiler
                     continue;
                 }
 
-                // 4. BackSlashなら特殊な操作をします
-                if (RebuildExecuteBackSlash(currentToken, ref currentColumn))
-                {
-                    continue;
-                }
-
-                // 5. 通常のトークンならトークンを書き込みます
+                // 4. 通常のトークンならトークンを書き込みます
                 // sourceCode
                 sourceCode.Append(currentToken.Value);
                 // richSourceCode
@@ -97,25 +91,6 @@ namespace UnityLike.UseCases.Compiler
                 throw new Exception("SourceCodeRebuilder : 改行トークンのない不正な改行を検出しました");
             }
 
-            return false;
-        }
-        private bool RebuildExecuteBackSlash(Token currentToken, ref int currentColumn)
-        {
-            if (currentToken.TokenType == TokenType.BackSlash)
-            {
-                // BackSlashには\→\<s></s>という操作を加えます
-                // これはInputFieldの表示バグを防ぐためで、sourceCodeのみに適用します
-
-                // sourceCode
-                sourceCode.Append("\\<s></s>");
-                // richSourceCode(通常)
-                RichSourceCodeAppendRichText(currentToken);
-
-                currentColumn++; // \分の1だけです
-
-                return true;
-            }
-            
             return false;
         }
         private void RichSourceCodeAppendRichText(Token currentToken)

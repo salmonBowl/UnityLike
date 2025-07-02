@@ -22,7 +22,7 @@ namespace UnityLike.InterfaceAdapters.Presenter
 
         public void OnCodeChanged(CodeEditorBlock block, string sourceCode)
         {
-            string normalizedSourceCode = sourceCode.Replace("\r\n", "\n").Replace("\\<s></s>", "\\");
+            string normalizedSourceCode = sourceCode.Replace("\r\n", "\n").Replace("\\\\", "\\");
             lexer = new(normalizedSourceCode);
 
 
@@ -44,7 +44,7 @@ namespace UnityLike.InterfaceAdapters.Presenter
             view.SetViewText(block, richSourceCode);
 
             int caretPosShiftCount = sourceCodeRebuild.Length - sourceCode.Length;
-            view.ShiftCaretPosition(block, caretPosShiftCount);
+            //view.ShiftCaretPosition(block, caretPosShiftCount);
         }
 
         private Token[] GenerateTokenArray()
