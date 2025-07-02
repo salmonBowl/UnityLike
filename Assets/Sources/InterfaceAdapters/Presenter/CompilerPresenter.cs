@@ -23,7 +23,7 @@ namespace UnityLike.InterfaceAdapters.Presenter
 
         public void OnCodeChanged(CodeEditorBlock block, string sourceCode)
         {
-            string normalizedSourceCode = sourceCode.Replace("\r\n", "\n");
+            string normalizedSourceCode = sourceCode.Replace("\r\n", "\n").Replace("\\<s></s>", "\\");
             lexer = new(normalizedSourceCode);
 
             Token[] tokenArray = GenerateTokenArray();

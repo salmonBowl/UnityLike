@@ -69,7 +69,7 @@ namespace UnityLike.Entities.Compiler
         Private,
     
         Unknown, // 入力中や入力ミスなど
-
+        BackSlash, // トークンにすることでInputFieldのバグを防ぐ
         Return, // 改行トークン
         EOF // 終端トークン
     }

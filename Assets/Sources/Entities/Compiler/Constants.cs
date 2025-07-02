@@ -53,7 +53,9 @@ namespace UnityLike.Entities.Compiler
             { '{', TokenType.LeftBrace },
             { '}', TokenType.RightBrace },
             { '[', TokenType.LeftBracket },
-            { ']', TokenType.RightBracket }
+            { ']', TokenType.RightBracket },
+
+            { '\\', TokenType.BackSlash }
         };
         public static readonly Dictionary<string, TokenType> KeyWords = new()
         {
