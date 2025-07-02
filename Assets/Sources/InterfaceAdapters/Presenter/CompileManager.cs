@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Zenject;
 
@@ -8,7 +7,7 @@ using UnityLike.UseCases.Compiler;
 
 namespace UnityLike.InterfaceAdapters.Presenter
 {
-    public class CompilerPresenter : ICodeChangeInputPort
+    public class CompileManager : ICodeChangeInputPort
     {
         // アウトプット
         private readonly ISetTextUI view;
@@ -16,7 +15,7 @@ namespace UnityLike.InterfaceAdapters.Presenter
         private Lexer lexer;
 
         [Inject]
-        public CompilerPresenter(ISetTextUI view)
+        public CompileManager(ISetTextUI view)
         {
             this.view = view;
         }
@@ -26,9 +25,15 @@ namespace UnityLike.InterfaceAdapters.Presenter
             string normalizedSourceCode = sourceCode.Replace("\r\n", "\n").Replace("\\<s></s>", "\\");
             lexer = new(normalizedSourceCode);
 
+
+            // コンパイル
+
             Token[] tokenArray = GenerateTokenArray();
 
             SourceCodeRebuilder rebuilder = new(tokenArray);
+
+
+            // アウトプット
 
             rebuilder.RebuildExecute();
 
@@ -37,6 +42,9 @@ namespace UnityLike.InterfaceAdapters.Presenter
 
             view.SetTextInputField(block, sourceCodeRebuild);
             view.SetViewText(block, richSourceCode);
+
+            int caretPosShiftCount = sourceCodeRebuild.Length - sourceCode.Length;
+            view.ShiftCaretPosition(block, caretPosShiftCount);
         }
 
         private Token[] GenerateTokenArray()

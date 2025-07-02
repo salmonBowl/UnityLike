@@ -83,6 +83,7 @@ namespace UnityLike.Entities.Compiler
             { "Transform", TokenType.TypeOther },
             { "Debug", TokenType.TypeOther },
             { "Time", TokenType.TypeOther },
+            { "Input", TokenType.TypeOther },
             { "Mathf", TokenType.TypeOther }
         };
 
