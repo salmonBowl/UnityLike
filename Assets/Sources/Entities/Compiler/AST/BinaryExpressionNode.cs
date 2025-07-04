@@ -11,12 +11,12 @@ namespace UnityLike.Entities.Compiler
 
         public BinaryExpressionNode(
             ExpressionNode leftNode,
-            TokenType _operator,
+            TokenType @operator,
             ExpressionNode rightNode
             )
         {
             LeftNode = leftNode;
-            Operator = _operator;
+            Operator = @operator;
             RightNode = rightNode;
         }
     }
