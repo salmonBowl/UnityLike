@@ -1,7 +1,7 @@
 
 namespace UnityLike.Entities.Compiler
 {
-    public abstract class Expression : Node
+    public abstract class ExpressionNode : Node
     {
 
     }
