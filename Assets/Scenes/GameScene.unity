@@ -272,7 +272,7 @@ MonoBehaviour:
   m_ResetOnDeActivation: 0
   m_KeepTextSelectionVisible: 0
   m_RestoreOriginalTextOnEscape: 1
-  m_isRichTextEditingAllowed: 0
+  m_isRichTextEditingAllowed: 1
   m_LineLimit: 0
   isAlert: 0
   m_InputValidator: {fileID: 11400000, guid: e11db83f77ca51d4caf3d7510d28aaf7, type: 2}

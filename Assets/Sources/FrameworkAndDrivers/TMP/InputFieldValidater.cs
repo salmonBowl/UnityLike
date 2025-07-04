@@ -12,14 +12,14 @@ public class InputFieldValidater : TMP_InputValidator
     {
         if (ch == '\\')
         {
-            text = text.Insert(pos, "\\");
-            pos++;
+            text = text.Insert(pos, "\\\\");
+            pos += 2;
 
             return ch;
         }
 
         // テキストを更新
-        text += ch;
+        text = text.Insert(pos, ch.ToString());
         // 位置を移動
         pos++;
 

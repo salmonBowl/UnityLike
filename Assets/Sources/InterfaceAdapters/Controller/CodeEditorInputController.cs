@@ -77,7 +77,7 @@ namespace UnityLike.InterfaceAdapters.Controller
             lineCountManager.SetLineCount(block, newLineCount);
 
             // インターフェイスを通じてコンパイルシステムに送ります
-            codeChange.OnCodeChanged(block, newText);
+            codeChange.CompileSourceCode(block, newText);
         }
 
         private int CalculateLineCount(string text)

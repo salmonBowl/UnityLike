@@ -207,14 +207,14 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
+  m_ContentType: 9
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 2
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 8
   m_RegexValue: 
   m_GlobalPointSize: 0.5
   m_CharacterLimit: 0
@@ -257,13 +257,12 @@ MonoBehaviour:
   m_CaretColor: {r: 0, g: 1, b: 0, a: 1}
   m_CustomCaretColor: 1
   m_SelectionColor: {r: 0.40634382, g: 0.58652663, b: 0.81886786, a: 0.7882353}
-  m_Text: "if (Input.GetKey(KeyCode.RightArrow))\r\n{\r\n    transform.position +=
-    new Vector3(1, 0, 0);\r\n}\r\nif (Input.GetKey(KeyCode.LeftArrow))\r\n{\r\n   
-    transform.position -= new Vector3(1, 0, 0);\r\n}\r\n\r\nif (transform.position.y
-    <= -5) //\u3082\u3057\u5730\u9762\u306B\u63A5\u5730\u3057\u3066\u3044\u308B\u306A\u3089\r\n{\r\n   
-    transform.position.y = -5;\r\n    velocity.y = 0;\r\n\r\n    if (Input.GetKeyDown(KeyCode.UpArrow))\r\n   
-    {\r\n        velocity.y = 1;\r\n    }\r\n}\r\nvelocity.y -= 0.05f;\r\n\r\ntransform.position
-    += Velocity;\n"
+  m_Text: "if (Input.GetKey(KeyCode.RightArrow))\n{\n    transform.position += new
+    Vector3(1, 0, 0);\n}\nif (Input.GetKey(KeyCode.LeftArrow))\n{\n    transform.position
+    -= new Vector3(1, 0, 0);\n}\r\n\r\nif (transform.position.y <= -5) //\u3082\u3057\u5730\u9762\u306B\u63A5\u5730\u3057\u3066\u3044\u308B\u306A\u3089\n{\n   
+    transform.position.y = -5;\n    velocity.y = 0;\n    \n    if (input.GetKeyDown(KeyCode.UpArrow)\n   
+    {\n        velocity.y = 1;\n    }\n}\n\n// \u91CD\u529B\u5206\u3092\u7D99\u7D9A\u7684\u306B\u6E1B\u7B97\nVelocity.y
+    -= 0.05f;\n\ntransform.position += Velocity;\n"
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -273,10 +272,10 @@ MonoBehaviour:
   m_ResetOnDeActivation: 0
   m_KeepTextSelectionVisible: 0
   m_RestoreOriginalTextOnEscape: 1
-  m_isRichTextEditingAllowed: 0
+  m_isRichTextEditingAllowed: 1
   m_LineLimit: 0
   isAlert: 0
-  m_InputValidator: {fileID: 0}
+  m_InputValidator: {fileID: 11400000, guid: e11db83f77ca51d4caf3d7510d28aaf7, type: 2}
   m_ShouldActivateOnSelect: 1
 --- !u!114 &61857286
 MonoBehaviour:
@@ -815,13 +814,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "if (Input.GetKey(KeyCode.RightArrow))\r\n{\r\n    transform.position +=
-    new Vector3(1, 0, 0);\r\n}\r\nif (Input.GetKey(KeyCode.LeftArrow))\r\n{\r\n   
-    transform.position -= new Vector3(1, 0, 0);\r\n}\r\n\r\nif (transform.position.y
-    <= -5) //\u3082\u3057\u5730\u9762\u306B\u63A5\u5730\u3057\u3066\u3044\u308B\u306A\u3089\r\n{\r\n   
-    transform.position.y = -5;\r\n    velocity.y = 0;\r\n\r\n    if (Input.GetKeyDown(KeyCode.UpArrow))\r\n   
-    {\r\n        velocity.y = 1;\r\n    }\r\n}\r\nvelocity.y -= 0.05f;\r\n\r\ntransform.position
-    += Velocity;\n\u200B"
+  m_text: "if (Input.GetKey(KeyCode.RightArrow))\n{\n    transform.position += new
+    Vector3(1, 0, 0);\n}\nif (Input.GetKey(KeyCode.LeftArrow))\n{\n    transform.position
+    -= new Vector3(1, 0, 0);\n}\r\n\r\nif (transform.position.y <= -5) //\u3082\u3057\u5730\u9762\u306B\u63A5\u5730\u3057\u3066\u3044\u308B\u306A\u3089\n{\n   
+    transform.position.y = -5;\n    velocity.y = 0;\n    \n    if (input.GetKeyDown(KeyCode.UpArrow)\n   
+    {\n        velocity.y = 1;\n    }\n}\n\n// \u91CD\u529B\u5206\u3092\u7D99\u7D9A\u7684\u306B\u6E1B\u7B97\nVelocity.y
+    -= 0.05f;\n\ntransform.position += Velocity;\n\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
   m_sharedMaterial: {fileID: 7155552369867759418, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
@@ -2082,8 +2080,8 @@ MonoBehaviour:
   m_CaretColor: {r: 0, g: 1, b: 0, a: 1}
   m_CustomCaretColor: 1
   m_SelectionColor: {r: 0.40634382, g: 0.58652663, b: 0.81886786, a: 0.7882353}
-  m_Text: "\rtransform.position = new Vector3(0, 0, 0);\r\nVector3 velocity = new
-    Vector3(0, 0, 0);\n\r"
+  m_Text: "\rtransform.position = new Vector3(0, 0, 0);\nVector3 Velocity = new Vector3(0,
+    0, 0);\n"
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -2096,7 +2094,7 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 1
   m_LineLimit: 0
   isAlert: 0
-  m_InputValidator: {fileID: 0}
+  m_InputValidator: {fileID: 11400000, guid: e11db83f77ca51d4caf3d7510d28aaf7, type: 2}
   m_ShouldActivateOnSelect: 1
 --- !u!114 &868099850
 MonoBehaviour:
@@ -4056,8 +4054,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\rtransform.position = new Vector3(0, 0, 0);\r\nVector3 velocity = new
-    Vector3(0, 0, 0);\n\r\u200B"
+  m_text: "\rtransform.position = new Vector3(0, 0, 0);\nVector3 Velocity = new Vector3(0,
+    0, 0);\n\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
   m_sharedMaterial: {fileID: 7155552369867759418, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
@@ -4066,8 +4064,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

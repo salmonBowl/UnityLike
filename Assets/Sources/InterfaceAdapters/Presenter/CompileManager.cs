@@ -20,10 +20,12 @@ namespace UnityLike.InterfaceAdapters.Presenter
             this.view = view;
         }
 
-        public void OnCodeChanged(CodeEditorBlock block, string sourceCode)
+        // TextAreaUIから受け取ります
+        public void CompileSourceCode(CodeEditorBlock block, string sourceCode)
         {
-            string normalizedSourceCode = sourceCode.Replace("\r\n", "\n").Replace("\\\\", "\\");
-            lexer = new(normalizedSourceCode);
+            // 準備
+
+            lexer = new(Normalize(sourceCode));
 
 
             // コンパイル
@@ -43,8 +45,21 @@ namespace UnityLike.InterfaceAdapters.Presenter
             view.SetTextInputField(block, sourceCodeRebuild);
             view.SetViewText(block, richSourceCode);
 
-            int caretPosShiftCount = sourceCodeRebuild.Length - sourceCode.Length;
+            //int caretPosShiftCount = sourceCodeRebuild.Length - sourceCode.Length;
             //view.ShiftCaretPosition(block, caretPosShiftCount);
+        }
+
+        private string Normalize(string text)
+        {
+            // TMPでは"\\\\"が\として表示されます
+            // "\\\\"("\\\\"をInputField上で消去しようとしたもの)は消去
+            string backSlashProcessed = text
+                .Replace("\\\\", "\v")  // \\を仮置き
+                .Replace("\\", "")     // \を消去
+                .Replace("\v", "\\"); // 仮置きを\\に戻す
+
+            string normalizedSourceCode = backSlashProcessed.Replace("\r\n", "\n");
+            return normalizedSourceCode;
         }
 
         private Token[] GenerateTokenArray()
