@@ -1,6 +1,10 @@
 
 namespace UnityLike.Entities.Compiler
 {
+    /// <summary>
+    /// ’P€ƒm[ƒh
+    /// -x‚â!x‚ğˆµ‚¢‚Ü‚·
+    /// </summary>
     public class UnaryExpressionNode : ExpressionNode
     {
         public TokenType Operator { get; }

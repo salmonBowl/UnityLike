@@ -1,9 +1,13 @@
 
 namespace UnityLike.Entities.Compiler
 {
+    /// <summary>
+    /// ‘ã“ü®ƒm[ƒh
+    /// int x = 0 ‚È‚Ç
+    /// </summary>
     public class VariableDeclarationStatementNode : StatementNode
     {
-        // ‹^—“I‚ÈÀ‘•
+        // ‹^—“I‚ÈÀ‘•‚ğ‚µ‚Ä‚¢‚Ü‚·
         // Œ»İ‚Í‚±‚Ì’†‚ÉTokenType.TypeStandard‚ğ“n‚µ‚Ü‚·
         public TokenType Type;
         public IdentifierNode Identifier { get; }
