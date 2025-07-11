@@ -1,4 +1,4 @@
-using UnityLike.Entities.Compiler;
+/*using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
 {
@@ -10,4 +10,4 @@ namespace UnityLike.UseCases.Compiler
         /// </summary>
         Token GetNextToken();
     }
-}
+}*/

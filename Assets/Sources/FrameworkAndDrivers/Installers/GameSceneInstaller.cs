@@ -3,7 +3,7 @@ using Zenject;
 
 // Entities層のusing
 // ただしこの層がインスタンスとして使われることは基本ない
-using UnityLike.Entities.Shared;
+//using UnityLike.Entities.Shared;
 
 // UseCases層のusing
 using UnityLike.UseCases.CodeEditor;
