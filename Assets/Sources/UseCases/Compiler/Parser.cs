@@ -26,10 +26,14 @@ namespace UnityLike.UseCases.Compiler
         /// <summary>
         /// 構文解析処理を行うメソッドです
         /// </summary>
-        public void Parse()
+        public void ParseExcute()
         {
 
         }
+
+        /// <summary>
+        /// currentTokenがexpectedTypeと一致するか確認し、一致すれば次のトークンへ進めます
+        /// </summary>
         void Consume()
         {
 
