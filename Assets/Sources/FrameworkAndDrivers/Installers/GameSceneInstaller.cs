@@ -52,7 +52,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              */
 
             // ScriptableObject
-            Container.Bind<ICodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
+            //Container.Bind<ICodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
 
             /*
              *  --- Use Cases‘w ---
@@ -113,7 +113,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
 
             subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
 
-            subContainer.Bind<ICodeChangeInputPort>().To<CompileManager>().AsSingle();
+            //subContainer.Bind<ICodeChangeInputPort>().To<CompileManager>().AsSingle();
 
             /*
              *  --- Frameworks & Drivers‘w ---
