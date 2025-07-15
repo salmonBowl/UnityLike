@@ -24,7 +24,6 @@ namespace UnityLike.UseCases.Compiler
             currentTokenIndex = 0;
         }
 
-        #region 補助メソッド
         /// <summary>
         /// 構文解析処理を行うメソッドです
         /// </summary>
@@ -33,19 +32,27 @@ namespace UnityLike.UseCases.Compiler
 
         }
 
-        ExpressionNode ConsumeWithGenerate()
+        #region 補助メソッド
+
+        void Consume()
         {
             currentTokenIndex++;
 
             if (tokenArray.Length <= currentTokenIndex)
                 throw new System.IndexOutOfRangeException("Parser : 範囲外のConsumeが行われました");
-
-            return CurrentTokenType switch
+        }
+        ExpressionNode ConsumeWithGenerate()
+        {
+            ExpressionNode retval = CurrentTokenType switch
             {
                 TokenType.Identifier => new IdentifierNode(CurrentToken.Value),
                 TokenType.NumberLiteral => new NumberLiteralNode(int.Parse(CurrentToken.Value)),
                 _ => null,
             };
+
+            Consume();
+
+            return retval;
         }
 
         /// <summary>
@@ -81,11 +88,11 @@ namespace UnityLike.UseCases.Compiler
         /// 再帰呼び出しの開始地点
         /// currentTokenから先がどんな構文になっているのかを再帰的に解析していきます
         /// </summary>
-        private ExpressionNode ParseExpression()
+        private ExpressionNode ParseStartExpression()
         {
             // 最も優先順位の低い演算子を呼び出します
 
-            return ;
+            return ParseAdditiveExpression();
         }
 
         /// <summary>
@@ -106,19 +113,54 @@ namespace UnityLike.UseCases.Compiler
         private ExpressionNode ParseParenExpression()
         {
             if (CurrentTokenType == TokenType.LeftParen)
-                ConsumeWithGenerate();
+                Consume();
             else
                 return AsUnknown();
 
-            ExpressionNode content = ParseExpression();
+            ExpressionNode content = ParseStartExpression();
 
             if (CurrentTokenType == TokenType.RightParen)
-                ConsumeWithGenerate();
+                Consume();
             else
                 return AsUnknown();
 
             return content;
         }
+        private ExpressionNode ParseUnaryExpression()
+        {
+            if (CurrentTokenType == TokenType.Minus)
+            {
+                Consume();
+                return new UnaryExpressionNode(TokenType.Minus, ParsePrimaryExpression());
+            }
+            else
+            {
+                return ParsePrimaryExpression();
+            }
+        }
+        private ExpressionNode ParseMultitiveExpression()
+        {
+            ExpressionNode leftExpression = ParseUnaryExpression();
+
+            if (CurrentTokenType == TokenType.Multiply)
+                return new BinaryExpressionNode(leftExpression, TokenType.Multiply, ParsePrimaryExpression());
+            else if (CurrentTokenType == TokenType.Divide)
+                return new BinaryExpressionNode(leftExpression, TokenType.Divide, ParsePrimaryExpression());
+            else
+                return leftExpression;
+        }
+        private ExpressionNode ParseAdditiveExpression()
+        {
+            ExpressionNode leftExpression = ParseMultitiveExpression();
+
+            if (CurrentTokenType == TokenType.Plus)
+                return new BinaryExpressionNode(leftExpression, TokenType.Plus, ParsePrimaryExpression());
+            else if (CurrentTokenType == TokenType.Minus)
+                return new BinaryExpressionNode(leftExpression, TokenType.Minus, ParsePrimaryExpression());
+            else
+                return leftExpression;
+        }
+
         #endregion
     }
 }
