@@ -32,12 +32,29 @@ namespace UnityLike.UseCases.Compiler
         {
 
         }
-        void Consume()
+
+        ExpressionNode ConsumeWithGenerate()
         {
             currentTokenIndex++;
 
             if (tokenArray.Length <= currentTokenIndex)
                 throw new System.IndexOutOfRangeException("Parser : 範囲外のConsumeが行われました");
+
+            return CurrentTokenType switch
+            {
+                TokenType.Identifier => new IdentifierNode(CurrentToken.Value),
+                TokenType.NumberLiteral => new NumberLiteralNode(int.Parse(CurrentToken.Value)),
+                _ => null,
+            };
+        }
+
+        /// <summary>
+        /// UnknownNodeを返します
+        /// </summary>
+        /// <returns></returns>
+        private UnknownNode AsUnknown()
+        {
+            return new UnknownNode(CurrentToken.Value);
         }
 
         /// <summary>
@@ -64,7 +81,7 @@ namespace UnityLike.UseCases.Compiler
         /// 再帰呼び出しの開始地点
         /// currentTokenから先がどんな構文になっているのかを再帰的に解析していきます
         /// </summary>
-        private Node ParseExpression()
+        private ExpressionNode ParseExpression()
         {
             // 最も優先順位の低い演算子を呼び出します
 
@@ -75,24 +92,32 @@ namespace UnityLike.UseCases.Compiler
         /// 再帰呼び出しの終端地点
         /// リテラルや識別子など、currentTokenに対する構文木の構成がここで決定されます
         /// </summary>
-        private Node ParsePrimaryExpression()
+        private ExpressionNode ParsePrimaryExpression()
         {
             return CurrentTokenType switch
             {
-                TokenType.Identifier => new IdentifierNode(CurrentToken.Value),
-                TokenType.NumberLiteral => new NumberLiteralNode(int.Parse(CurrentToken.Value)),
-                TokenType.LeftParen => new ,
-                _ => new UnknownNode()
+                TokenType.Identifier => ConsumeWithGenerate(),
+                TokenType.NumberLiteral => ConsumeWithGenerate(),
+                TokenType.LeftParen => ParseParenExpression(),
+                _ => AsUnknown()
             };
         }
 
-        private Node ParseParenExpression()
+        private ExpressionNode ParseParenExpression()
         {
             if (CurrentTokenType == TokenType.LeftParen)
-                Consume();
+                ConsumeWithGenerate();
             else
-                return new UnknownNode();
-            Node  ParseExpression();
+                return AsUnknown();
+
+            ExpressionNode content = ParseExpression();
+
+            if (CurrentTokenType == TokenType.RightParen)
+                ConsumeWithGenerate();
+            else
+                return AsUnknown();
+
+            return content;
         }
         #endregion
     }

@@ -1,4 +1,6 @@
 
+using System.Diagnostics;
+
 namespace UnityLike.Entities.Compiler
 {
     /// <summary>
@@ -17,6 +19,12 @@ namespace UnityLike.Entities.Compiler
         {
             Operator = @operator;
             Operand = operand;
+        }
+
+        public override void LogThis()
+        {
+            UnityEngine.Debug.Log("Unary : " + Operator.ToString());
+            Operand.LogThis();
         }
     }
 }

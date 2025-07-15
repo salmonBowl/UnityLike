@@ -19,5 +19,13 @@ namespace UnityLike.Entities.Compiler
             Operator = @operator;
             RightNode = rightNode;
         }
+
+        public override void LogThis()
+        {
+            UnityEngine.Debug.Log("Binary : " + Operator.ToString());
+            UnityEngine.Debug.Log("left and right");
+            LeftNode.LogThis();
+            RightNode.LogThis();
+        }
     }
 }

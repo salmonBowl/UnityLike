@@ -9,5 +9,10 @@ namespace UnityLike.Entities.Compiler
         {
             Name = name;
         }
+
+        public override void LogThis()
+        {
+            UnityEngine.Debug.Log("Identifier : " + Name);
+        }
     }
 }

@@ -9,5 +9,10 @@ namespace UnityLike.Entities.Compiler
         {
             Value = value;
         }
+
+        public override void LogThis()
+        {
+            UnityEngine.Debug.Log("Number : " + Value);
+        }
     }
 }
