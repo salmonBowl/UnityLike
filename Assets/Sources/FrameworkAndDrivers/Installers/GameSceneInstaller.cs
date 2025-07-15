@@ -3,7 +3,7 @@ using Zenject;
 
 // Entities‘w‚Ìusing
 // ‚½‚¾‚µ‚±‚Ì‘w‚ªƒCƒ“ƒXƒ^ƒ“ƒX‚Æ‚µ‚ÄŽg‚í‚ê‚é‚±‚Æ‚ÍŠî–{‚È‚¢
-//using UnityLike.Entities.Shared;
+using UnityLike.Entities.Shared;
 
 // UseCases‘w‚Ìusing
 using UnityLike.UseCases.CodeEditor;
@@ -52,7 +52,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              */
 
             // ScriptableObject
-            //Container.Bind<ICodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
+            Container.Bind<ICodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
 
             /*
              *  --- Use Cases‘w ---
@@ -113,7 +113,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
 
             subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
 
-            //subContainer.Bind<ICodeChangeInputPort>().To<CompileManager>().AsSingle();
+            subContainer.Bind<ICodeChangeInputPort>().To<CompileManager>().AsSingle();
 
             /*
              *  --- Frameworks & Drivers‘w ---

@@ -1,0 +1,238 @@
+using System;
+using UnityEngine;
+using TMPro;
+
+using UnityLike.Entities.CodeEditor;
+using UnityLike.InterfaceAdapters.Controller;
+using UnityLike.InterfaceAdapters.Presenter;
+
+namespace UnityLike.FrameworkAndDrivers.CodeEditor
+{
+    public class TextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput, IGetInputFieldText, ISetTextUI
+    {
+        [Header("配置関係")]
+        [SerializeField]
+        private RectTransform content;
+
+        [SerializeField]
+        private RectTransform areaVoidstart;
+        [SerializeField]
+        private RectTransform areaVoidupdate;
+
+        [SerializeField]
+        private RectTransform blockVoidupdate;
+
+        [Header("InputField関係")]
+        [SerializeField]
+        private TMP_InputField inputFieldVoidstart;
+        [SerializeField]
+        private TMP_InputField inputFieldVoidupdate;
+        [SerializeField]
+        private TextMeshProUGUI viewTextVoidstart;
+        [SerializeField]
+        private TextMeshProUGUI viewTextVoidupdate;
+
+        public event Action<CodeEditorBlock, string> OnTextAreaInputChanged;
+
+
+        /*
+            Get
+         */
+        #region ITextAreaView
+        public float GetContentWidth()
+        {
+            if (content == null)
+            {
+                Debug.LogError("contentが指定されていません");
+                return 0f;
+            }
+
+            return content.rect.width;
+        }
+        public string GetInputFieldText(CodeEditorBlock block)
+        {
+            switch (block)
+            {
+                case CodeEditorBlock.VoidStart:
+
+                    if (!inputFieldVoidstart)
+                    {
+                        Debug.LogError("inputFieldVoidstartがアタッチされていません");
+                        return "";
+                    }
+                    return inputFieldVoidstart.text;
+                case CodeEditorBlock.VoidUpdate:
+
+                    if (!inputFieldVoidupdate)
+                    {
+                        Debug.LogError("inputFieldVoidupdateがアタッチされていません");
+                        return "";
+                    }
+                    return inputFieldVoidupdate.text;
+
+                default:
+                    Debug.LogError("CodeEditorTextAreaUI.GetInputFieldText : 記述されていないEnum値です");
+                    return "";
+            }
+        }
+        #endregion
+
+        /*
+            ViewOutput
+         */
+        #region ITextAreaView
+        public void SetContentSize(Vector2 anchoredSize)
+        {
+            if (content == null)
+            {
+                Debug.LogError("contentがアタッチされていません");
+                return;
+            }
+
+            content.sizeDelta = anchoredSize;
+        }
+        public void SetAreaVoidstartLayout(Vector2 size, Vector2 anchoredPosition)
+        {
+            if (areaVoidstart == null)
+            {
+                Debug.LogError("areaVoidstartがアタッチされていません");
+                return;
+            }
+
+            areaVoidstart.sizeDelta = size;
+            areaVoidstart.anchoredPosition = anchoredPosition;
+        }
+        public void SetAreaVoidupdateLayout(Vector2 size, Vector2 anchoredPosition)
+        {
+            //Debug.Log("SetAreaViudupdateLayout()");
+
+            if (areaVoidupdate == null)
+            {
+                Debug.LogError("areaVoidupdateがアタッチされていません");
+                return;
+            }
+
+            areaVoidupdate.sizeDelta = size;
+            areaVoidupdate.anchoredPosition = anchoredPosition;
+        }
+        public void SetBlockVoidupdatePosition(Vector2 anchoredPosition)
+        {
+            if (blockVoidupdate == null)
+            {
+                Debug.LogError("blockVoidupdateがアタッチされていません");
+                return;
+            }
+
+            blockVoidupdate.anchoredPosition = anchoredPosition;
+        }
+        #endregion
+
+        #region ISetUI
+        public void SetTextInputField(CodeEditorBlock block, string text)
+        {
+            switch (block)
+            {
+                case CodeEditorBlock.VoidStart:
+
+                    if (!inputFieldVoidstart)
+                    {
+                        Debug.LogError("inputFieldVoidstartがアタッチされていません");
+                        return;
+                    }
+                    inputFieldVoidstart.SetTextWithoutNotify(text); // WithoutNotifyが重要! ないと無限ループを起こします
+
+                    break;
+                case CodeEditorBlock.VoidUpdate:
+
+                    if (!inputFieldVoidupdate)
+                    {
+                        Debug.LogError("inputFieldVoidupdateがアタッチされていません");
+                        return;
+                    }
+                    inputFieldVoidupdate.SetTextWithoutNotify(text);
+
+                    break;
+                default:
+                    Debug.LogError("CodeEditorTextAreaUI.SetTextInputField : 記述されていないEnum値です");
+                    return;
+            }
+        }
+        public void SetViewText(CodeEditorBlock block, string text)
+        {
+            switch (block)
+            {
+                case CodeEditorBlock.VoidStart:
+
+                    if (!viewTextVoidstart)
+                    {
+                        Debug.LogError("viewTextVoidstartがアタッチされていません");
+                        return;
+                    }
+                    viewTextVoidstart.text = text;
+
+                    break;
+                case CodeEditorBlock.VoidUpdate:
+
+                    if (!viewTextVoidupdate)
+                    {
+                        Debug.LogError("viewTextVoidupdateがアタッチされていません");
+                        return;
+                    }
+                    viewTextVoidupdate.text = text;
+
+                    break;
+                default:
+                    Debug.LogError("CodeEditorTextAreaUI.SetViewText : 記述されていないEnum値です");
+                    return;
+            }
+        }
+        public void ShiftCaretPosition(CodeEditorBlock block, int shiftCount)
+        {
+            switch (block)
+            {
+                case CodeEditorBlock.VoidStart:
+
+                    if (!inputFieldVoidstart)
+                    {
+                        Debug.LogError("inputFieldVoidstartがアタッチされていません");
+                        return;
+                    }
+                    Debug.Log("currentCaretPosition : " + inputFieldVoidstart.caretPosition);
+                    inputFieldVoidstart.caretPosition += shiftCount;
+
+                    break;
+                case CodeEditorBlock.VoidUpdate:
+
+                    if (!inputFieldVoidupdate)
+                    {
+                        Debug.LogError("inputFieldVoidupdateがアタッチされていません");
+                        return;
+                    }
+                    inputFieldVoidupdate.caretPosition += shiftCount;
+
+                    break;
+                default:
+                    Debug.LogError("CodeEditorTextAreaUI.SetTextInputField : 記述されていないEnum値です");
+                    return;
+            }
+        }
+        #endregion
+
+        /*
+            Input
+         */
+        #region ITextAreaInput
+        public void OnAreaVoidstartTextChanged(string newText)
+        {
+            //Debug.Log("CodeEditorTextAreaUI : OnAreaVoidstartTextChanged");
+            //Debug.Log("CodeEditorTextAreaUI.OnAreaVoidstartTextChanged : newText = " + newText);
+
+            OnTextAreaInputChanged?.Invoke(CodeEditorBlock.VoidStart, newText);
+        }
+        public void OnAreaVoidupdateTextChanged(string newText)
+        {
+            OnTextAreaInputChanged?.Invoke(CodeEditorBlock.VoidUpdate, newText);
+        }
+        #endregion
+    }
+}

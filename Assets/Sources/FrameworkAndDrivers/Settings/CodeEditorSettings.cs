@@ -5,7 +5,7 @@ using UnityLike.Entities.Shared;
 namespace UnityLike.FrameworkAndDrivers.Settings
 {
     [CreateAssetMenu(fileName = "CodeEditorSettings", menuName = "Scriptable Objects/CodeEditorSettings")]
-    public class CodeEditorSettings : ScriptableObject//, ICodeEditorSettings
+    public class CodeEditorSettings : ScriptableObject, ICodeEditorSettings
     {
         [field: SerializeField]
         public float FontSize { get; private set; } = 0.5f;
