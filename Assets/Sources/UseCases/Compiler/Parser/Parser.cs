@@ -83,6 +83,33 @@ namespace UnityLike.UseCases.Compiler
         #region AST
 
         // 構文木を再帰的な関数呼び出しにより構成していきます
+        /*
+         *  例 : 5 * (1 + 1)
+         *      
+         *      ParseStartExpression();
+         *      ...
+         *      ParseAdditiveExpression();
+         *      ParseMultipleExpression(); → BinaryExpressionNode(leftExpression, *, ParseStartExpression()) を生成
+         *      leftExpression = ParseUnaryExpression();
+         *      ParsePrimaryExpression(); → NumberLiteralNode(5) を生成
+         *      
+         *      ParseStartExpression();
+         *      ParseParenExpression(); → ParenNode(content) を生成
+         *      content = ParseStartExpression();
+         *      ...
+         *      ParseAdditiveExpression(); → BynaryExpressionNode(leftExpression, + , ParseStartExpression()) を生成
+         *      leftExpression = ParseUnaryExpression();
+         *      ParsePrimaryExpression() → NumberLiteralNode(1) を生成
+         *      
+         *      ParseStartExpression();
+         *      ...
+         *      ParsePrimaryExpression(); → NumberLiteral(1) を生成
+         *      
+         *      ↓
+         *      
+         *      Bynary(Number(5), *, Paren(Binary(Number(1), + ,Number(1)))) という形の構文木が、
+         *      最初のParseStartExpressionの戻り値として返される
+         */
 
         /// <summary>
         /// 再帰呼び出しの開始地点
@@ -124,7 +151,7 @@ namespace UnityLike.UseCases.Compiler
             else
                 return AsUnknown();
 
-            return content;
+            return new ParenNode(content);
         }
         private ExpressionNode ParseUnaryExpression()
         {
@@ -143,22 +170,38 @@ namespace UnityLike.UseCases.Compiler
             ExpressionNode leftExpression = ParseUnaryExpression();
 
             if (CurrentTokenType == TokenType.Multiply)
-                return new BinaryExpressionNode(leftExpression, TokenType.Multiply, ParsePrimaryExpression());
+            {
+                Consume();
+                return new BinaryExpressionNode(leftExpression, TokenType.Multiply, ParseStartExpression());
+            }
             else if (CurrentTokenType == TokenType.Divide)
-                return new BinaryExpressionNode(leftExpression, TokenType.Divide, ParsePrimaryExpression());
+            {
+                Consume();
+                return new BinaryExpressionNode(leftExpression, TokenType.Divide, ParseStartExpression());
+            }
             else
+            {
                 return leftExpression;
+            }
         }
         private ExpressionNode ParseAdditiveExpression()
         {
             ExpressionNode leftExpression = ParseMultitiveExpression();
 
             if (CurrentTokenType == TokenType.Plus)
-                return new BinaryExpressionNode(leftExpression, TokenType.Plus, ParsePrimaryExpression());
+            {
+                Consume();
+                return new BinaryExpressionNode(leftExpression, TokenType.Plus, ParseStartExpression());
+            }
             else if (CurrentTokenType == TokenType.Minus)
+            {
+                Consume();
                 return new BinaryExpressionNode(leftExpression, TokenType.Minus, ParsePrimaryExpression());
+            }
             else
+            {
                 return leftExpression;
+            }
         }
 
         #endregion
