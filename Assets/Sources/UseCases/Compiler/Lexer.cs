@@ -7,7 +7,7 @@ using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
 {
-    public class Lexer : ILexer
+    public class Lexer
     {
         private readonly string sourceCode;
 
