@@ -1,11 +1,11 @@
 
 namespace UnityLike.Entities.Compiler
 {
-    public class UnknownNode : ExpressionNode
+    public class UnknownExpressionNode : ExpressionNode
     {
         public string Value { get; }
 
-        public UnknownNode(string value)
+        public UnknownExpressionNode(string value)
         {
             Value = value;
         }

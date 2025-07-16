@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
@@ -9,11 +10,14 @@ namespace UnityLike.UseCases.Compiler
     /*
         public:
             void Parse();
+            List<StatementNode> GetParsedStatements();
      */
     public class Parser
     {
         private readonly Token[] tokenArray;
         private int currentTokenIndex;
+
+        private List<StatementNode> statements;
 
         private Token CurrentToken => tokenArray[currentTokenIndex];
         private TokenType CurrentTokenType => CurrentToken.TokenType;
@@ -29,7 +33,15 @@ namespace UnityLike.UseCases.Compiler
         /// </summary>
         public void Parse()
         {
-
+            statements = new();
+            while (CurrentTokenType != TokenType.EOF)
+            {
+                statements.Add(ParseStatement());
+            }
+        }
+        public List<StatementNode> GetParsedStatements()
+        {
+            return statements;
         }
 
         #region 補助メソッド
@@ -40,6 +52,9 @@ namespace UnityLike.UseCases.Compiler
 
             if (tokenArray.Length <= currentTokenIndex)
                 throw new System.IndexOutOfRangeException("Parser : 範囲外のConsumeが行われました");
+
+            if (tokenArray[currentTokenIndex - 1].TokenType == TokenType.EOF)
+                throw new System.InvalidOperationException("Parser : EOFから先に進めようとしています");
         }
         ExpressionNode ConsumeWithGenerate()
         {
@@ -59,9 +74,9 @@ namespace UnityLike.UseCases.Compiler
         /// UnknownNodeを返します
         /// </summary>
         /// <returns></returns>
-        private UnknownNode AsUnknown()
+        private UnknownExpressionNode AsUnknown()
         {
-            return new UnknownNode(CurrentToken.Value);
+            return new UnknownExpressionNode(CurrentToken.Value);
         }
 
         /// <summary>
@@ -80,9 +95,10 @@ namespace UnityLike.UseCases.Compiler
         }
         #endregion
 
-        #region AST
+        #region AST - Expression
 
         // 構文木を再帰的な関数呼び出しにより構成していきます
+        // エントリポイント : ParseExpression();
         /*
          *  例 : 5 * (1 + 1)
          *      
@@ -111,11 +127,16 @@ namespace UnityLike.UseCases.Compiler
          *      最初のParseStartExpressionの戻り値として返される
          */
 
+        /*
+            識別子システムを未実装
+            TokenType.TypeStandardで仮置きしています
+         */
+
         /// <summary>
         /// 再帰呼び出しの開始地点
         /// currentTokenから先がどんな構文になっているのかを再帰的に解析していきます
         /// </summary>
-        private ExpressionNode ParseStartExpression()
+        private ExpressionNode ParseExpression()
         {
             // 最も優先順位の低い演算子を呼び出します
 
@@ -144,7 +165,7 @@ namespace UnityLike.UseCases.Compiler
             else
                 return AsUnknown();
 
-            ExpressionNode content = ParseStartExpression();
+            ExpressionNode content = ParseExpression();
 
             if (CurrentTokenType == TokenType.RightParen)
                 Consume();
@@ -172,12 +193,12 @@ namespace UnityLike.UseCases.Compiler
             if (CurrentTokenType == TokenType.Multiply)
             {
                 Consume();
-                return new BinaryExpressionNode(leftExpression, TokenType.Multiply, ParseStartExpression());
+                return new BinaryExpressionNode(leftExpression, TokenType.Multiply, ParseExpression());
             }
             else if (CurrentTokenType == TokenType.Divide)
             {
                 Consume();
-                return new BinaryExpressionNode(leftExpression, TokenType.Divide, ParseStartExpression());
+                return new BinaryExpressionNode(leftExpression, TokenType.Divide, ParseExpression());
             }
             else
             {
@@ -191,7 +212,7 @@ namespace UnityLike.UseCases.Compiler
             if (CurrentTokenType == TokenType.Plus)
             {
                 Consume();
-                return new BinaryExpressionNode(leftExpression, TokenType.Plus, ParseStartExpression());
+                return new BinaryExpressionNode(leftExpression, TokenType.Plus, ParseExpression());
             }
             else if (CurrentTokenType == TokenType.Minus)
             {
@@ -202,6 +223,111 @@ namespace UnityLike.UseCases.Compiler
             {
                 return leftExpression;
             }
+        }
+
+        #endregion
+
+        #region AST - Statement
+
+        /*
+            エントリポイント : ParseStatement()
+            構文を解析して一つのStatementNodeを返します
+         */
+
+        private StatementNode ParseStatement()
+        {
+            if (CurrentTokenType == TokenType.TypeStandard || CurrentTokenType == TokenType.TypeOther)
+            {
+                return ParseVariableDeclarationStatement();
+            }
+            else
+            {
+                return ParseUnknownStatement();
+            }
+        }
+        private StatementNode ParseVariableDeclarationStatement()
+        {
+            int startTokenIndex = currentTokenIndex;
+            UnknownStatementNode Unknown()
+            {
+                currentTokenIndex = startTokenIndex;
+                return ParseUnknownStatement();
+            }
+
+            // Type
+            TypeNode typeNode;
+            if (CurrentTokenType == TokenType.TypeStandard)
+            {
+                typeNode = new(CurrentToken.Value);
+                Consume();
+            }
+            else
+            {
+                return Unknown();
+            }
+
+            // Identifier
+            IdentifierNode identifierNode;
+            if (CurrentTokenType == TokenType.Identifier)
+            {
+                identifierNode = new(CurrentToken.Value);
+                Consume();
+            }
+            else
+            {
+                return Unknown();
+            }
+
+            // =
+            if (CurrentTokenType == TokenType.Equals)
+            {
+                Consume();
+            }
+            else
+            {
+                return Unknown();
+            }
+
+            // cemicolon or init
+            if (CurrentTokenType == TokenType.SemiColon)
+            {
+                Consume();
+                return new VariableDeclarationStatementNode(typeNode, identifierNode);
+            }
+            else
+            {
+                // Expression
+                ExpressionNode expressionNode = ParseExpression();
+
+                // cemicolon
+                if (CurrentTokenType == TokenType.SemiColon)
+                    Consume();
+                else
+                    return Unknown();
+
+                return new VariableDeclarationStatementNode(typeNode, identifierNode, expressionNode);
+            }
+        }
+        private UnknownStatementNode ParseUnknownStatement()
+        {
+            List<Token> tokens = new();
+            while (true)
+            {
+                if (CurrentTokenType == TokenType.EOF)
+                {
+                    break;
+                }
+                if (CurrentTokenType == TokenType.SemiColon)
+                {
+                    tokens.Add(CurrentToken);
+                    Consume();
+                    break;
+                }
+
+                tokens.Add(CurrentToken);
+                Consume();
+            }
+            return new UnknownStatementNode(tokens.ToArray());
         }
 
         #endregion
