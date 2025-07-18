@@ -12,7 +12,7 @@ namespace UnityLike.Entities.Compiler
         // Œ»İ‚Í‚±‚Ì’†‚ÉTokenType.TypeStandard‚ğ“n‚µ‚Ü‚·
         public TypeNode Type;
         public IdentifierNode Identifier { get; }
-        public ExpressionNode? InitalValue { get; }
+        public ExpressionNode? InitalValue { get; } = null;
 
         public VariableDeclarationStatementNode(
             TypeNode type,

@@ -7,7 +7,7 @@ namespace UnityLike.Entities.Compiler
         
         public UnknownStatementNode(Token[] tokens)
         {
-
+            Tokens = tokens;
         }
     }
 }
