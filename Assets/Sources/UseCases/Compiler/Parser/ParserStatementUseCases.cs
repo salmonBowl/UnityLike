@@ -30,7 +30,7 @@ namespace UnityLike.UseCases.Compiler
             public IdentifierNode Identifier()
             {
                 IdentifierNode retval;
-                if (outher.CurrentTokenType == TokenType.TypeStandard)
+                if (outher.CurrentTokenType == TokenType.Identifier)
                 {
                     retval = new(outher.CurrentToken.Value);
                     outher.Consume();

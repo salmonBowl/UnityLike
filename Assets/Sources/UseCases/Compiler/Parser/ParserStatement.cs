@@ -17,139 +17,68 @@ namespace UnityLike.UseCases.Compiler
         {
             // 最初のTokenTypeを見てどの種類の解析を行うか決定します
 
-            return CurrentTokenType switch
+            // try-catchという方法で間違った文法ならUnknownStatementNodeを返すようにします
+            int startTokenIndex = currentTokenIndex;
+            try
             {
-                TokenType.TypeStandard => ParseVariableDeclarationStatement(),
-                TokenType.Identifier => ParseAssignmentStatement(),
-                _ => ParseUnknownStatement()
-            };
+                return CurrentTokenType switch
+                {
+                    TokenType.TypeStandard => ParseVariableDeclarationStatement(),
+                    TokenType.Identifier => ParseAssignmentStatement(),
+                    _ => ParseUnknownStatement()
+                };
+            }
+            catch
+            {
+                currentTokenIndex = startTokenIndex;
+                return ParseUnknownStatement();
+            }
         }
         private StatementNode ParseVariableDeclarationStatement()
         {
-            int startTokenIndex = currentTokenIndex;
             Usecase u = new(this);
 
-            // 関数に対応する書式を順番に読み込んでいく処理
-            // SyntaxErrorExceptionをu内で使って、間違った文法ならUnknownStatementNodeを返すようにします
-            try
-            {
-                // 変数宣言
+            // 正しい書式を順番に読み込んでいく処理です
+            // 書式が間違っているとuの関数内でSyntaxErrorExceptionが出されます
 
-                TypeNode typeNode = 
-                    u.Type();
-                IdentifierNode identifierNode = 
-                    u.Identifier();
+            // 変数宣言
 
-                if (u.Cemicolon())
-                    return new VariableDeclarationStatementNode(typeNode, identifierNode);
+            TypeNode typeNode =
+                u.Type();
+            IdentifierNode identifierNode =
+                u.Identifier();
 
-                // 宣言時初期化
-                _ = 
-                    u.Equals();
-                ExpressionNode expressionNode = 
-                    u.Expression();
-
-                if (u.Cemicolon())
-                    return new VariableDeclarationStatementNode(typeNode, identifierNode, expressionNode);
-
-                throw new SyntaxErrorException();
-            }
-            catch
-            {
-                currentTokenIndex = startTokenIndex;
-                return ParseUnknownStatement();
-            }
-            /*
-             以前のコード
-            // ローカル関数Unknownを定義
-            int startTokenIndex = currentTokenIndex;
-            UnknownStatementNode Unknown()
-            {
-                currentTokenIndex = startTokenIndex;
-                return ParseUnknownStatement();
-            }*/
-            /*
-            // Type
-            TypeNode typeNode;
-            if (CurrentTokenType == TokenType.TypeStandard)
-            {
-                typeNode = new(CurrentToken.Value);
-                Consume();
-            }
-            else
-            {
-                return Unknown();
-            }
-
-            // Identifier
-            IdentifierNode identifierNode;
-            if (CurrentTokenType == TokenType.Identifier)
-            {
-                identifierNode = new(CurrentToken.Value);
-                Consume();
-            }
-            else
-            {
-                return Unknown();
-            }
-
-            // ;
-            if (CurrentTokenType == TokenType.SemiColon)
-            {
-                Consume();
+            if (u.Cemicolon())
                 return new VariableDeclarationStatementNode(typeNode, identifierNode);
-            }
 
-            // セミコロンがなければ初期化を解析
+            // 宣言時初期化
+            _ =
+                u.Equals();
+            ExpressionNode expressionNode =
+                u.Expression();
 
-            // =
-            if (CurrentTokenType == TokenType.Equals)
-            {
-                Consume();
-            }
-            else
-            {
-                return Unknown();
-            }
-
-            // Expression
-            ExpressionNode expressionNode = ParseExpression();
-
-            // ;
-            if (CurrentTokenType == TokenType.SemiColon)
-            {
-                Consume();
+            if (u.Cemicolon())
                 return new VariableDeclarationStatementNode(typeNode, identifierNode, expressionNode);
-            }
 
-            return Unknown();*/
+            throw new SyntaxErrorException();
         }
         private StatementNode ParseAssignmentStatement()
         {
-            int startTokenIndex = currentTokenIndex;
             Usecase u = new(this);
 
-            try
-            {
-                TypeNode typeNode =
-                    u.Type();
-                IdentifierNode identifierNode =
-                    u.Identifier();
-                _ = 
-                    u.Equals();
-                ExpressionNode expressionNode =
-                    u.Expression();
+            // 代入式
 
-                if (u.Cemicolon())
-                    return new AsignmentStatementNode(identifierNode, expressionNode);
+            IdentifierNode identifierNode =
+                u.Identifier();
+            _ =
+                u.Equals();
+            ExpressionNode expressionNode =
+                u.Expression();
 
-                throw new SyntaxErrorException();
-            }
-            catch
-            {
-                currentTokenIndex = startTokenIndex;
-                return ParseUnknownStatement();
-            }
+            if (u.Cemicolon())
+                return new AsignmentStatementNode(identifierNode, expressionNode);
+
+            throw new SyntaxErrorException();
         }
         private UnknownStatementNode ParseUnknownStatement()
         {

@@ -51,13 +51,13 @@ namespace UnityLike.UseCases.Compiler
 
         void Consume()
         {
+            if (CurrentTokenType == TokenType.EOF)
+                throw new System.InvalidOperationException("Parser : EOFから先に進めようとしています");
+
             currentTokenIndex++;
 
             if (tokenArray.Length <= currentTokenIndex)
                 throw new System.IndexOutOfRangeException("Parser : 範囲外のConsumeが行われました");
-
-            if (tokenArray[currentTokenIndex - 1].TokenType == TokenType.EOF)
-                throw new System.InvalidOperationException("Parser : EOFから先に進めようとしています");
         }
         ExpressionNode ConsumeWithGenerate()
         {
@@ -65,7 +65,7 @@ namespace UnityLike.UseCases.Compiler
             {
                 TokenType.Identifier => new IdentifierNode(CurrentToken.Value),
                 TokenType.NumberLiteral => new NumberLiteralNode(int.Parse(CurrentToken.Value)),
-                _ => null,
+                _ => throw new System.NotSupportedException("Parser.ConsumeWithGenerate() : 設定されていないTokenTypeです")
             };
 
             Consume();

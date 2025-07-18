@@ -90,6 +90,11 @@ namespace UnityLike.UseCases.Compiler
 
             return new ParenNode(content);
         }
+        /*
+            ‰‰Z‚Ì—Dæ‡ˆÊ‚É]‚Á‚Ä—Dæ‡ˆÊ‚ª’á‚¢‰‰Z¨‚¾‚ñ‚¾‚ñ‚‚¢‰‰Z‚Æ‚¢‚¤‡˜‚ÅÄ‹A“I‚Éö‚Á‚Ä‚¢‚«‚Ü‚·
+            
+            Addtive ¨ Multitive ¨ Unary ¨ Primary
+         */
         private ExpressionNode ParseUnaryExpression()
         {
             if (CurrentTokenType == TokenType.Minus)
@@ -106,15 +111,11 @@ namespace UnityLike.UseCases.Compiler
         {
             ExpressionNode leftExpression = ParseUnaryExpression();
 
-            if (CurrentTokenType == TokenType.Multiply)
+            if (CurrentTokenType == TokenType.Multiply ||
+                CurrentTokenType == TokenType.Divide)
             {
                 Consume();
-                return new BinaryExpressionNode(leftExpression, TokenType.Multiply, ParseExpression());
-            }
-            else if (CurrentTokenType == TokenType.Divide)
-            {
-                Consume();
-                return new BinaryExpressionNode(leftExpression, TokenType.Divide, ParseExpression());
+                return new BinaryExpressionNode(leftExpression, TokenType.Multiply, ParseMultitiveExpression());
             }
             else
             {
@@ -125,15 +126,11 @@ namespace UnityLike.UseCases.Compiler
         {
             ExpressionNode leftExpression = ParseMultitiveExpression();
 
-            if (CurrentTokenType == TokenType.Plus)
+            if (CurrentTokenType == TokenType.Plus || 
+                CurrentTokenType == TokenType.Minus)
             {
                 Consume();
-                return new BinaryExpressionNode(leftExpression, TokenType.Plus, ParseExpression());
-            }
-            else if (CurrentTokenType == TokenType.Minus)
-            {
-                Consume();
-                return new BinaryExpressionNode(leftExpression, TokenType.Minus, ParsePrimaryExpression());
+                return new BinaryExpressionNode(leftExpression, TokenType.Plus, ParseAdditiveExpression());
             }
             else
             {
