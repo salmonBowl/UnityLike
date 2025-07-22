@@ -14,5 +14,10 @@ namespace UnityLike.Entities.Compiler
             Identifier = identifier;
             Value = value;
         }
+        public override void LogThis()
+        {
+            Identifier.LogThis();
+            Value.LogThis();
+        }
     }
 }

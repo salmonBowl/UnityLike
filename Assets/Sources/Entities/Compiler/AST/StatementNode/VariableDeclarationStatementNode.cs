@@ -28,5 +28,11 @@ namespace UnityLike.Entities.Compiler
             Type = type;
             Identifier = identifier;
         }
+        public override void LogThis()
+        {
+            Type.LogThis();
+            Identifier.LogThis();
+            InitalValue?.LogThis();
+        }
     }
 }
