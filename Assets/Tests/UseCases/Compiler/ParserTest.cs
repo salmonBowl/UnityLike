@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using UnityEngine.TestTools;
 using System.Collections.Generic;
 using UnityLike.Entities.Compiler;
 using UnityLike.UseCases.Compiler;
@@ -7,42 +8,31 @@ namespace UnityLike.Test
 {
     public class ParserTest
     {
-        readonly string mockSourceCode = 
-            "int x = 0;" +
-            "x = x + 1;" +
-            "" +
-            "";
-
-        Token[] tokenArray;
-
-        [SetUp]
-        public void SetupTokenArray()
-        {
-            Lexer lexer = new(mockSourceCode);
-            tokenArray = GenerateTokenArray(lexer);
-        }
-
         [Test]
-        public void TestParser()
+        public void TestParser_Declaration()
         {
-            Parser parser = new(tokenArray);
-
-            parser.Parse();
-
-            foreach(StatementNode statement in parser.GetParsedStatements())
-            {
-                statement.LogThis();
-            }
+            string source = "int x = 0;";
+            TestParseStatements(source);
         }
+        [Test]
+        public void TestParser_Assignment()
+        {
+            string source = "x = x + 1;";
+            TestParseStatements(source);
+        }
+
         private void TestParseStatements(string source)
         {
             Lexer lexer = new(source);
-            tokenArray = GenerateTokenArray(lexer);
+            Token[] tokenArray = GenerateTokenArray(lexer);
             Parser parser = new(tokenArray);
             parser.Parse();
 
             StatementNode firstParsedStatement = parser.GetParsedStatements()[0];
-            Assert.AreEqual(source, firstParsedStatement.ToString());
+
+            string expectedText = source;
+            string parsedText = firstParsedStatement.ToPrettyString();
+            Assert.AreEqual(expectedText, parsedText);
         }
 
         private Token[] GenerateTokenArray(Lexer lexer)

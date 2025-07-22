@@ -38,6 +38,6 @@ namespace UnityLike.Entities.Compiler
             $"{Type.ToPrettyString()} {Identifier.ToPrettyString()}" + 
             ((InitalValue == null) ? 
             ";" : 
-            $" = {InitalValue}");
+            $" = {InitalValue.ToPrettyString()};");
     }
 }
