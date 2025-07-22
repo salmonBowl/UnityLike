@@ -1,34 +1,26 @@
 using System;
-using System.Text;
 
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
 {
     /*
-        SourceCodeRebuilder
-            トークン列からソースコードを再構成するクラスです
-            
-            SourceCodeRebuilder(Token[])
-            
-            RebuildExecute()
-            GetSourceCodeRebuild()
-            GetRichSourceCode()
+        SourceCodeRebuilder(Token[])
+        
+        RebuildExecute()
+        GetSourceCodeRebuild()
+        GetRichSourceCode()
      */
-    public class SourceCodeRebuilder
+    public class RebuilderFromTokens : SourceCodeRebuilder
     {
         private readonly Token[] tokenArray;
-        private readonly StringBuilder sourceCode;
-        private readonly StringBuilder richSourceCode; //メンバー関数の.Appendしか使わないためreadonly
 
-        public SourceCodeRebuilder(Token[] tokenArray)
+        public RebuilderFromTokens(Token[] tokenArray)
         {
             this.tokenArray = tokenArray;
-            sourceCode = new();
-            richSourceCode = new();
         }
 
-        public void RebuildExecute()
+        public override void RebuildExecute()
         {
             int currentLine = 1;
             int currentColumn = 1;
@@ -115,7 +107,7 @@ namespace UnityLike.UseCases.Compiler
 
                 return true;
             }
-            
+
             return false;
         }
         private void RichSourceCodeAppendRichText(Token currentToken)
@@ -132,34 +124,6 @@ namespace UnityLike.UseCases.Compiler
             richSourceCode.Append($"<color={syntaxColor}>");
             richSourceCode.Append(currentToken.Value);
             richSourceCode.Append("</color>");
-        }
-
-        /// <summary>
-        /// 再構成したソースコードを取得します
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
-        public string GetSourceCodeRebuild()
-        {
-            if (sourceCode == null)
-            {
-                throw new InvalidOperationException("SourceCodeRebuilder : Executeの前にGetが呼ばれました");
-            }
-            return sourceCode.ToString();
-        }
-
-        /// <summary>
-        /// リッチテキスト化されたソースコードを取得します
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
-        public string GetRichSourceCode()
-        {
-            if (sourceCode == null)
-            {
-                throw new InvalidOperationException("SourceCodeRebuilder : Executeの前にGetが呼ばれました");
-            }
-            return richSourceCode.ToString();
         }
     }
 }
