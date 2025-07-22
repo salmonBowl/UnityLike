@@ -14,5 +14,6 @@ namespace UnityLike.Entities.Compiler
         {
             UnityEngine.Debug.Log("Number : " + Value);
         }
+        public override string ToPrettyString() => Value.ToString();
     }
 }

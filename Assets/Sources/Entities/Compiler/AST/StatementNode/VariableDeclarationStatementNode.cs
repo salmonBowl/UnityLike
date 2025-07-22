@@ -34,5 +34,10 @@ namespace UnityLike.Entities.Compiler
             Identifier.LogThis();
             InitalValue?.LogThis();
         }
+        public override string ToPrettyString() =>
+            $"{Type.ToPrettyString()} {Identifier.ToPrettyString()}" + 
+            ((InitalValue == null) ? 
+            ";" : 
+            $" = {InitalValue}");
     }
 }

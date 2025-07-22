@@ -32,5 +32,6 @@ namespace UnityLike.Entities.Compiler
 
             return $"[TokenType : {stringTokenType}, Value : {Value}, LineCount : {stringLineCount}, ColumnCount ; {stringColumnCount}]";
         }
+        public string ToPrettyString() => Value;
     }
 }

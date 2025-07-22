@@ -34,6 +34,16 @@ namespace UnityLike.Test
                 statement.LogThis();
             }
         }
+        private void TestParseStatements(string source)
+        {
+            Lexer lexer = new(source);
+            tokenArray = GenerateTokenArray(lexer);
+            Parser parser = new(tokenArray);
+            parser.Parse();
+
+            StatementNode firstParsedStatement = parser.GetParsedStatements()[0];
+            Assert.AreEqual(source, firstParsedStatement.ToString());
+        }
 
         private Token[] GenerateTokenArray(Lexer lexer)
         {

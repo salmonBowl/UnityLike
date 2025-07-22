@@ -26,5 +26,12 @@ namespace UnityLike.Entities.Compiler
             UnityEngine.Debug.Log("Unary : " + Operator.ToString());
             Operand.LogThis();
         }
+        public override string ToPrettyString() =>
+            Operator switch
+            {
+                TokenType.Minus => "-",
+                _ => throw new System.Exception()
+            }
+            + Operand.ToPrettyString();
     }
 }

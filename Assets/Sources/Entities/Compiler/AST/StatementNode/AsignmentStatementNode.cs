@@ -19,5 +19,6 @@ namespace UnityLike.Entities.Compiler
             Identifier.LogThis();
             Value.LogThis();
         }
+        public override string ToPrettyString() => $"{Identifier.ToPrettyString()} = {Value};";
     }
 }

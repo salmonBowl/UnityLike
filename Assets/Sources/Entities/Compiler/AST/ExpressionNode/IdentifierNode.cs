@@ -14,5 +14,6 @@ namespace UnityLike.Entities.Compiler
         {
             UnityEngine.Debug.Log("Identifier : " + Name);
         }
+        public override string ToPrettyString() => Name;
     }
 }

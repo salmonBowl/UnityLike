@@ -27,5 +27,16 @@ namespace UnityLike.Entities.Compiler
             LeftNode.LogThis();
             RightNode.LogThis();
         }
+        public override string ToPrettyString() => 
+            LeftNode.ToPrettyString() + " " + 
+            Operator switch
+            {
+                TokenType.Plus => "+",
+                TokenType.Minus => "-",
+                TokenType.Multiply => "*",
+                TokenType.Divide => "/",
+                _ => throw new System.NotSupportedException()
+            }
+            + " " + RightNode.ToPrettyString();
     }
 }

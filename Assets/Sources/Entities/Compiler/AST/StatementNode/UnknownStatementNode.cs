@@ -16,5 +16,14 @@ namespace UnityLike.Entities.Compiler
                 UnityEngine.Debug.Log(token.ToString());
             }
         }
+        public override string ToPrettyString()
+        {
+            string returnText = string.Empty;
+            foreach(var token in Tokens)
+            {
+                returnText += token.ToPrettyString();
+            }
+            return returnText;
+        }
     }
 }

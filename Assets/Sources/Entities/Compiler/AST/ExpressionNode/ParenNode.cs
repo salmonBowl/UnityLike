@@ -16,5 +16,6 @@ namespace UnityLike.Entities.Compiler
             Content.LogThis();
             UnityEngine.Debug.Log("Paren : )");
         }
+        public override string ToPrettyString() => $"({Content.ToPrettyString()})";
     }
 }
