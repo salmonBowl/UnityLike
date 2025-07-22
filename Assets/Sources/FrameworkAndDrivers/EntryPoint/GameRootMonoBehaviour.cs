@@ -5,8 +5,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
     public class GameRootMonoBehaviour : MonoBehaviour
     {
-        [Inject]
-        private readonly GameRootGameScene game;
+        private readonly GameRootGameScene game = new();
 
         void Start() => game.Start();
         void Update() => game.Update();

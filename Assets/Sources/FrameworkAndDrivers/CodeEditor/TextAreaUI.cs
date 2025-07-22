@@ -8,7 +8,7 @@ using UnityLike.InterfaceAdapters.Presenter;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
-    public class TextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput, IGetInputFieldText, ISyntaxTextView
+    public class TextAreaUI : MonoBehaviour, ITextAreaView, ITextAreaInput, IGetInputFieldText, ISetTextUI
     {
         [Header("配置関係")]
         [SerializeField]
@@ -38,6 +38,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         /*
             Get
          */
+        #region ITextAreaView
         public float GetContentWidth()
         {
             if (content == null)
@@ -74,11 +75,12 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
                     return "";
             }
         }
+        #endregion
 
         /*
-            View
+            ViewOutput
          */
-
+        #region ITextAreaView
         public void SetContentSize(Vector2 anchoredSize)
         {
             if (content == null)
@@ -123,7 +125,9 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
 
             blockVoidupdate.anchoredPosition = anchoredPosition;
         }
+        #endregion
 
+        #region ISetUI
         public void SetTextInputField(CodeEditorBlock block, string text)
         {
             switch (block)
@@ -135,7 +139,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
                         Debug.LogError("inputFieldVoidstartがアタッチされていません");
                         return;
                     }
-                    inputFieldVoidstart.text = text;
+                    inputFieldVoidstart.SetTextWithoutNotify(text); // WithoutNotifyが重要! ないと無限ループを起こします
 
                     break;
                 case CodeEditorBlock.VoidUpdate:
@@ -145,7 +149,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
                         Debug.LogError("inputFieldVoidupdateがアタッチされていません");
                         return;
                     }
-                    inputFieldVoidupdate.text = text;
+                    inputFieldVoidupdate.SetTextWithoutNotify(text);
 
                     break;
                 default:
@@ -182,10 +186,42 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
                     return;
             }
         }
+        public void ShiftCaretPosition(CodeEditorBlock block, int shiftCount)
+        {
+            switch (block)
+            {
+                case CodeEditorBlock.VoidStart:
+
+                    if (!inputFieldVoidstart)
+                    {
+                        Debug.LogError("inputFieldVoidstartがアタッチされていません");
+                        return;
+                    }
+                    Debug.Log("currentCaretPosition : " + inputFieldVoidstart.caretPosition);
+                    inputFieldVoidstart.caretPosition += shiftCount;
+
+                    break;
+                case CodeEditorBlock.VoidUpdate:
+
+                    if (!inputFieldVoidupdate)
+                    {
+                        Debug.LogError("inputFieldVoidupdateがアタッチされていません");
+                        return;
+                    }
+                    inputFieldVoidupdate.caretPosition += shiftCount;
+
+                    break;
+                default:
+                    Debug.LogError("CodeEditorTextAreaUI.SetTextInputField : 記述されていないEnum値です");
+                    return;
+            }
+        }
+        #endregion
 
         /*
             Input
          */
+        #region ITextAreaInput
         public void OnAreaVoidstartTextChanged(string newText)
         {
             //Debug.Log("CodeEditorTextAreaUI : OnAreaVoidstartTextChanged");
@@ -197,5 +233,6 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         {
             OnTextAreaInputChanged?.Invoke(CodeEditorBlock.VoidUpdate, newText);
         }
+        #endregion
     }
 }

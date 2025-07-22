@@ -15,7 +15,8 @@ namespace UnityLike.Entities.Compiler
         // テキストエディタ―で改行した時に表示される文字です
         // 現在は\nを表示されています
         // string型として[\\n]が保存され、これがさらにTMP上で[\n]と表示されます
-        public static string returnText = "\\\\n";
+        //public static string returnText = "\\\\n";
+        public static string returnText = "";
 
         #region 文字→TokenType のdictionary
 
@@ -52,7 +53,9 @@ namespace UnityLike.Entities.Compiler
             { '{', TokenType.LeftBrace },
             { '}', TokenType.RightBrace },
             { '[', TokenType.LeftBracket },
-            { ']', TokenType.RightBracket }
+            { ']', TokenType.RightBracket },
+
+            { '\\', TokenType.BackSlash },
         };
         public static readonly Dictionary<string, TokenType> KeyWords = new()
         {
@@ -80,6 +83,7 @@ namespace UnityLike.Entities.Compiler
             { "Transform", TokenType.TypeOther },
             { "Debug", TokenType.TypeOther },
             { "Time", TokenType.TypeOther },
+            { "Input", TokenType.TypeOther },
             { "Mathf", TokenType.TypeOther }
         };
 
@@ -122,11 +126,12 @@ namespace UnityLike.Entities.Compiler
             { TokenType.LeftBracket, operatorColor },
             { TokenType.RightBracket, operatorColor },
             #endregion
-
+            
             { TokenType.SemiColon, "#FFFFFF" },
 
             // エラーを赤色に
             { TokenType.Unknown, "#FF0000" },
+            { TokenType.BackSlash, "#FF0000" },
 
             #region キーワード (制御構文や型名など)
             { TokenType.If, controlSyntaxColor },

@@ -1,0 +1,43 @@
+#nullable enable
+
+namespace UnityLike.Entities.Compiler
+{
+    /// <summary>
+    /// ë„ì¸éÆÉmÅ[Éh
+    /// int x = 0 Ç»Ç«
+    /// </summary>
+    public class VariableDeclarationStatementNode : StatementNode
+    {
+        // ã^éóìIÇ»é¿ëïÇÇµÇƒÇ¢Ç‹Ç∑
+        // åªç›ÇÕÇ±ÇÃíÜÇ…TokenType.TypeStandardÇìnÇµÇ‹Ç∑
+        public TypeNode Type;
+        public IdentifierNode Identifier { get; }
+        public ExpressionNode? InitalValue { get; } = null;
+
+        public VariableDeclarationStatementNode(
+            TypeNode type,
+            IdentifierNode identifier,
+            ExpressionNode initalValue
+            )
+            : this(type, identifier)
+        {
+            InitalValue = initalValue;
+        }
+        public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier)
+        {
+            Type = type;
+            Identifier = identifier;
+        }
+        public override void LogThis()
+        {
+            Type.LogThis();
+            Identifier.LogThis();
+            InitalValue?.LogThis();
+        }
+        public override string ToPrettyString() =>
+            $"{Type.ToPrettyString()} {Identifier.ToPrettyString()}" + 
+            ((InitalValue == null) ? 
+            ";" : 
+            $" = {InitalValue.ToPrettyString()};");
+    }
+}
