@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace UnityLike.Entities.Compiler
 {
-    public class Constants
+    public class TokenConstants
     {
         public static readonly char[] whiteSpaceChars =
         {

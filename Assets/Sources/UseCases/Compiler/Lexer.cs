@@ -42,7 +42,7 @@ namespace UnityLike.UseCases.Compiler
                 }
 
                 // 次の文字が空白かどうか
-                if (Array.IndexOf(Constants.whiteSpaceChars, Peek()) == -1)
+                if (Array.IndexOf(TokenConstants.whiteSpaceChars, Peek()) == -1)
                 {
                     break;
                 }
@@ -67,7 +67,7 @@ namespace UnityLike.UseCases.Compiler
                 string tokenValue = ReadWhile(c => char.IsLetterOrDigit(c) || c == '_');
 
                 // キーワードに一致するかを判定します
-                if (Constants.KeyWords.TryGetValue(tokenValue, out TokenType keyWordTokenType))
+                if (TokenConstants.KeyWords.TryGetValue(tokenValue, out TokenType keyWordTokenType))
                 {
                     return new Token(keyWordTokenType, tokenValue, tokenLine, tokenColumn);
                 }
@@ -85,7 +85,7 @@ namespace UnityLike.UseCases.Compiler
             }
             // 1文字または2文字
             // 主に演算子や括弧類
-            else if (Constants.OneCharOperators.TryGetValue(firstChar, out TokenType oneCharTokenType))
+            else if (TokenConstants.OneCharOperators.TryGetValue(firstChar, out TokenType oneCharTokenType))
             {
                 Consume();
                 return ReadOperatorToken(oneCharTokenType, firstChar, tokenLine, tokenColumn);
@@ -138,7 +138,7 @@ namespace UnityLike.UseCases.Compiler
             // 2文字stringの生成
             string twoChars = firstChar.ToString() + Peek().ToString();
 
-            if (Constants.TwoCharOperators.TryGetValue(twoChars, out TokenType twoCharTokenType))
+            if (TokenConstants.TwoCharOperators.TryGetValue(twoChars, out TokenType twoCharTokenType))
             {
                 Consume();
                 return new Token(twoCharTokenType, twoChars, tokenLine, tokenColumn);

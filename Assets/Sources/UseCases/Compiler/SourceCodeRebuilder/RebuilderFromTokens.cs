@@ -74,8 +74,8 @@ namespace UnityLike.UseCases.Compiler
                 sourceCode.Append('\n');
                 // richSourceCode
                 // •\¦ã‚Å‚Í”CˆÓ‚Ì‰üs•¶š(returnText)‚ğ¶¬‚µ‚Ü‚·
-                string returnSyntaxColor = Constants.syntaxHighlightColors[TokenType.Return];
-                richSourceCode.Append($"<color={returnSyntaxColor}>{Constants.returnText}</color>\n");
+                string returnSyntaxColor = TokenConstants.syntaxHighlightColors[TokenType.Return];
+                richSourceCode.Append($"<color={returnSyntaxColor}>{TokenConstants.returnText}</color>\n");
 
                 currentLine++;
                 currentColumn = 1;
@@ -112,13 +112,13 @@ namespace UnityLike.UseCases.Compiler
         }
         private void RichSourceCodeAppendRichText(Token currentToken)
         {
-            if (Constants.syntaxHighlightColors.ContainsKey(currentToken.TokenType) == false)
+            if (TokenConstants.syntaxHighlightColors.ContainsKey(currentToken.TokenType) == false)
             {
                 throw new System.Collections.Generic.KeyNotFoundException(
                     "SourceCodeRebuilder : w’è‚³‚ê‚½TokenType‚É‚Â‚¯‚éF‚ªConstants‚Å“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
             }
 
-            string syntaxColor = Constants.syntaxHighlightColors[currentToken.TokenType]
+            string syntaxColor = TokenConstants.syntaxHighlightColors[currentToken.TokenType]
                 ?? throw new Exception("SourceCodeRebuilder : æ“¾‚µ‚½syntaxColor‚ªnull‚Å‚·");
 
             richSourceCode.Append($"<color={syntaxColor}>");
