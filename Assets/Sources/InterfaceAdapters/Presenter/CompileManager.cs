@@ -32,7 +32,7 @@ namespace UnityLike.InterfaceAdapters.Presenter
 
             Token[] tokenArray = GenerateTokenArray();
 
-            SourceCodeRebuilder rebuilder = new(tokenArray);
+            SourceCodeRebuilder rebuilder = new RebuilderFromTokens(tokenArray);
 
 
             // アウトプット
