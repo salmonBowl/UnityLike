@@ -1,12 +1,12 @@
 
 namespace UnityLike.Entities.Compiler
 {
-    public class AsignmentStatementNode : StatementNode
+    public class AssignmentStatementNode : StatementNode
     {
         public IdentifierNode Identifier { get; }
         public ExpressionNode Value { get; }
 
-        public AsignmentStatementNode(
+        public AssignmentStatementNode(
             IdentifierNode identifier,
             ExpressionNode value
             )
@@ -21,5 +21,8 @@ namespace UnityLike.Entities.Compiler
         }
         public override string ToPrettyString() =>
             $"{Identifier.ToPrettyString()} = {Value.ToPrettyString()};";
+
+        public override void ASTScan(ISemanticAnalyzer semantic) =>
+            semantic.VisitAssignmentStatement(this);
     }
 }

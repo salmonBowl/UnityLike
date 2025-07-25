@@ -76,7 +76,7 @@ namespace UnityLike.UseCases.Compiler
                 u.Expression();
 
             if (u.Cemicolon())
-                return new AsignmentStatementNode(identifierNode, expressionNode);
+                return new AssignmentStatementNode(identifierNode, expressionNode);
 
             throw new SyntaxErrorException();
         }

@@ -4,13 +4,10 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
     public class GameRootGameScene
     {
-        // CodeEditor
-        //private readonly CodeEditor codeEditor;
-
-
-
-        //private readonly RectTransform    ;
-
+        /*
+            ゲームループを記述します
+            現時点でゲームループを使う必要はないため、これはまだ使用されていないクラスです
+         */
         [Inject]
         public GameRootGameScene()
         {
@@ -23,7 +20,6 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
 
         public void Update()
         {
-
 
         }
     }

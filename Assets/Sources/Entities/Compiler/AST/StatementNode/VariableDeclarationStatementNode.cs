@@ -14,19 +14,18 @@ namespace UnityLike.Entities.Compiler
         public IdentifierNode Identifier { get; }
         public ExpressionNode? InitalValue { get; } = null;
 
-        public VariableDeclarationStatementNode(
-            TypeNode type,
-            IdentifierNode identifier,
-            ExpressionNode initalValue
-            )
-            : this(type, identifier)
-        {
-            InitalValue = initalValue;
-        }
         public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier)
         {
             Type = type;
             Identifier = identifier;
+        }
+        public VariableDeclarationStatementNode(
+            TypeNode type,
+            IdentifierNode identifier,
+            ExpressionNode initalValue
+            ) : this(type, identifier)
+        {
+            InitalValue = initalValue;
         }
         public override void LogThis()
         {
@@ -39,5 +38,7 @@ namespace UnityLike.Entities.Compiler
             ((InitalValue == null) ? 
             ";" : 
             $" = {InitalValue.ToPrettyString()};");
+        public override void ASTScan(ISemanticAnalyzer semantic) =>
+            semantic.VisitVariableDeclarationStatement(this);
     }
 }

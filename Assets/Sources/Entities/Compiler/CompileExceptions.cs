@@ -1,0 +1,11 @@
+using System;
+
+namespace UnityLike.Entities.Compiler
+{
+    // ç\ï∂âêÕ
+    public class SyntaxErrorException : Exception { }
+
+    // à”ñ°âêÕ
+    public class SemanticErrorException : Exception { }
+    public class ReDefinitionException : SemanticErrorException { }
+}

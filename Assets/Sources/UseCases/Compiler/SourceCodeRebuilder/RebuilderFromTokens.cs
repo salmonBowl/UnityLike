@@ -1,34 +1,26 @@
 using System;
-using System.Text;
 
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
 {
     /*
-        SourceCodeRebuilder
-            トークン列からソースコードを再構成するクラスです
-            
-            SourceCodeRebuilder(Token[])
-            
-            RebuildExecute()
-            GetSourceCodeRebuild()
-            GetRichSourceCode()
+        SourceCodeRebuilder(Token[])
+        
+        RebuildExecute()
+        GetSourceCodeRebuild()
+        GetRichSourceCode()
      */
-    public class SourceCodeRebuilder
+    public class RebuilderFromTokens : SourceCodeRebuilder
     {
         private readonly Token[] tokenArray;
-        private readonly StringBuilder sourceCode;
-        private readonly StringBuilder richSourceCode; //メンバー関数の.Appendしか使わないためreadonly
 
-        public SourceCodeRebuilder(Token[] tokenArray)
+        public RebuilderFromTokens(Token[] tokenArray)
         {
             this.tokenArray = tokenArray;
-            sourceCode = new();
-            richSourceCode = new();
         }
 
-        public void RebuildExecute()
+        public override void RebuildExecute()
         {
             int currentLine = 1;
             int currentColumn = 1;
@@ -82,8 +74,8 @@ namespace UnityLike.UseCases.Compiler
                 sourceCode.Append('\n');
                 // richSourceCode
                 // 表示上では任意の改行文字(returnText)を生成します
-                string returnSyntaxColor = Constants.syntaxHighlightColors[TokenType.Return];
-                richSourceCode.Append($"<color={returnSyntaxColor}>{Constants.returnText}</color>\n");
+                string returnSyntaxColor = TokenConstants.syntaxHighlightColors[TokenType.Return];
+                richSourceCode.Append($"<color={returnSyntaxColor}>{TokenConstants.returnText}</color>\n");
 
                 currentLine++;
                 currentColumn = 1;
@@ -115,51 +107,23 @@ namespace UnityLike.UseCases.Compiler
 
                 return true;
             }
-            
+
             return false;
         }
         private void RichSourceCodeAppendRichText(Token currentToken)
         {
-            if (Constants.syntaxHighlightColors.ContainsKey(currentToken.TokenType) == false)
+            if (TokenConstants.syntaxHighlightColors.ContainsKey(currentToken.TokenType) == false)
             {
                 throw new System.Collections.Generic.KeyNotFoundException(
                     "SourceCodeRebuilder : 指定されたTokenTypeにつける色がConstantsで登録されていません");
             }
 
-            string syntaxColor = Constants.syntaxHighlightColors[currentToken.TokenType]
+            string syntaxColor = TokenConstants.syntaxHighlightColors[currentToken.TokenType]
                 ?? throw new Exception("SourceCodeRebuilder : 取得したsyntaxColorがnullです");
 
             richSourceCode.Append($"<color={syntaxColor}>");
             richSourceCode.Append(currentToken.Value);
             richSourceCode.Append("</color>");
-        }
-
-        /// <summary>
-        /// 再構成したソースコードを取得します
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
-        public string GetSourceCodeRebuild()
-        {
-            if (sourceCode == null)
-            {
-                throw new InvalidOperationException("SourceCodeRebuilder : Executeの前にGetが呼ばれました");
-            }
-            return sourceCode.ToString();
-        }
-
-        /// <summary>
-        /// リッチテキスト化されたソースコードを取得します
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
-        public string GetRichSourceCode()
-        {
-            if (sourceCode == null)
-            {
-                throw new InvalidOperationException("SourceCodeRebuilder : Executeの前にGetが呼ばれました");
-            }
-            return richSourceCode.ToString();
         }
     }
 }

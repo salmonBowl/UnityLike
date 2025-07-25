@@ -32,7 +32,7 @@ namespace UnityLike.InterfaceAdapters.Presenter
 
             Token[] tokenArray = GenerateTokenArray();
 
-            SourceCodeRebuilder rebuilder = new(tokenArray);
+            SourceCodeRebuilder rebuilder = new RebuilderFromTokens(tokenArray);
 
 
             // アウトプット
@@ -52,7 +52,7 @@ namespace UnityLike.InterfaceAdapters.Presenter
         private string Normalize(string text)
         {
             // TMPでは"\\\\"が\として表示されます
-            // "\\\\"("\\\\"をInputField上で消去しようとしたもの)は消去
+            // "\\"("\\\\"をInputField上で消去しようとしたもの)は消去
             string backSlashProcessed = text
                 .Replace("\\\\", "\v")  // \\を仮置き
                 .Replace("\\", "")     // \を消去
