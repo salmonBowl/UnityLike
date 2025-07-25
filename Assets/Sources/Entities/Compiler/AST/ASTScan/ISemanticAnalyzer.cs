@@ -1,7 +1,7 @@
 
 namespace UnityLike.Entities.Compiler
 {
-    public interface ISemanticAnalizer
+    public interface ISemanticAnalyzer
     {
         // 各StatementNodeに対応するVisitメソッド
         void VisitVariableDeclarationStatement(VariableDeclarationStatementNode node);

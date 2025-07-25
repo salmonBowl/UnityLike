@@ -22,7 +22,7 @@ namespace UnityLike.Entities.Compiler
         public override string ToPrettyString() =>
             $"{Identifier.ToPrettyString()} = {Value.ToPrettyString()};";
 
-        public override void ASTScan(ISemanticAnalizer semantic) =>
+        public override void ASTScan(ISemanticAnalyzer semantic) =>
             semantic.VisitAssignmentStatement(this);
     }
 }

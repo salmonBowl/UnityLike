@@ -38,7 +38,7 @@ namespace UnityLike.Entities.Compiler
                 _ => throw new System.NotSupportedException()
             }
             + " " + RightNode.ToPrettyString();
-        public override void ASTScan(ISemanticAnalizer semantic) =>
+        public override void ASTScan(ISemanticAnalyzer semantic) =>
             semantic.VisitBinaryExpression(this);
     }
 }

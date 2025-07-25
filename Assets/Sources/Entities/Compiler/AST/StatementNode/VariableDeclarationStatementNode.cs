@@ -38,7 +38,7 @@ namespace UnityLike.Entities.Compiler
             ((InitalValue == null) ? 
             ";" : 
             $" = {InitalValue.ToPrettyString()};");
-        public override void ASTScan(ISemanticAnalizer semantic) =>
+        public override void ASTScan(ISemanticAnalyzer semantic) =>
             semantic.VisitVariableDeclarationStatement(this);
     }
 }

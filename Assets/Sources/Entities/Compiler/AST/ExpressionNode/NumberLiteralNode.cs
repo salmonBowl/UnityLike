@@ -15,7 +15,7 @@ namespace UnityLike.Entities.Compiler
             UnityEngine.Debug.Log("Number : " + Value);
         }
         public override string ToPrettyString() => Value.ToString();
-        public override void ASTScan(ISemanticAnalizer semantic) =>
+        public override void ASTScan(ISemanticAnalyzer semantic) =>
             semantic.VisitNumberLiteral(this);
     }
 }
