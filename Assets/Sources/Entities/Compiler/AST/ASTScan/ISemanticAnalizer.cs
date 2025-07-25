@@ -13,5 +13,8 @@ namespace UnityLike.Entities.Compiler
         void VisitNumberLiteral(NumberLiteralNode node);
         void VisitParenExpression(ParenNode node);
         void VisitUnaryExpression(UnaryExpressionNode node);
+
+        // TypeNode
+        void VisitTypeNode(TypeNode node);
     }
 }
