@@ -52,7 +52,7 @@ namespace UnityLike.InterfaceAdapters.Presenter
         private string Normalize(string text)
         {
             // TMP‚Å‚Í"\\\\"‚ª\‚Æ‚µ‚Ä•\¦‚³‚ê‚Ü‚·
-            // "\\\\"("\\\\"‚ğInputFieldã‚ÅÁ‹‚µ‚æ‚¤‚Æ‚µ‚½‚à‚Ì)‚ÍÁ‹
+            // "\\"("\\\\"‚ğInputFieldã‚ÅÁ‹‚µ‚æ‚¤‚Æ‚µ‚½‚à‚Ì)‚ÍÁ‹
             string backSlashProcessed = text
                 .Replace("\\\\", "\v")  // \\‚ğ‰¼’u‚«
                 .Replace("\\", "")     // \‚ğÁ‹

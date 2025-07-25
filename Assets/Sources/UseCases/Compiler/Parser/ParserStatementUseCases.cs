@@ -4,8 +4,6 @@ namespace UnityLike.UseCases.Compiler
 {
     partial class Parser
     {
-        private class SyntaxErrorException : System.Exception { }
-
         private class Usecase
         {
             readonly Parser outher;
