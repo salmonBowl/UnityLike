@@ -17,5 +17,7 @@ namespace UnityLike.Entities.Compiler
             UnityEngine.Debug.Log("Paren : )");
         }
         public override string ToPrettyString() => $"({Content.ToPrettyString()})";
+        public override void ASTScan(ISemanticAnalizer semantic) =>
+            semantic.VisitParenExpression(this);
     }
 }
