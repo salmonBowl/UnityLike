@@ -19,7 +19,14 @@ namespace UnityLike.UseCases.Compiler
         {
             foreach (var statement in statements)
             {
-                statement.ASTScan(this);
+                try
+                {
+                    statement.ASTScan(this);
+                }
+                catch (SemanticErrorException error)
+                {
+                    errors.Add(error);
+                }
             }
         }
     }

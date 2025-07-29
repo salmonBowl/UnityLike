@@ -6,7 +6,8 @@ namespace UnityLike.UseCases.Compiler
     {
         public void VisitTypeNode(TypeNode typeNode)
         {
-            // –¢ŽÀ‘•
+            if (TypeConstants.Types.TryGetValue(typeNode.Name, out _) == false)
+                throw new TypeNotFindException(typeNode.Name);
         }
         public void VisitBinaryExpression(BinaryExpressionNode bynaryExpression)
         {

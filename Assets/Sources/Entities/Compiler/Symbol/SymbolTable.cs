@@ -23,7 +23,7 @@ namespace UnityLike.Entities.Compiler
             // 再定義でないかをチェック
             if (symbols.ContainsKey(symbol.Name))
             {
-                throw new ReDefinitionException();
+                throw new ReDefinitionException(symbol.Name);
             }
 
             symbols.Add(symbol.Name, symbol);

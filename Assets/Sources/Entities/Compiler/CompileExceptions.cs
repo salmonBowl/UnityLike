@@ -6,6 +6,28 @@ namespace UnityLike.Entities.Compiler
     public class SyntaxErrorException : Exception { }
 
     // 意味解析
-    public class SemanticErrorException : Exception { }
-    public class ReDefinitionException : SemanticErrorException { }
+    /// <summary>
+    /// 意味解析エラーの基底クラスです
+    /// </summary>
+    public class SemanticErrorException : Exception
+    {
+        public override string Message { get; } = "文法エラーです";
+    }
+
+    public class ReDefinitionException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public ReDefinitionException(string identifierName)
+        {
+            Message = $"'{identifierName}'は既に定義されています";
+        }
+    }
+    public class TypeNotFindException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public TypeNotFindException(string typeName)
+        {
+            Message = $"型名'{typeName}'は存在しません";
+        }
+    }
 }
