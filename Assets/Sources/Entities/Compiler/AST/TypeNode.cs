@@ -1,6 +1,13 @@
 
 namespace UnityLike.Entities.Compiler
 {
+    /// <summary>
+    /// 構文木のうち型を表現するノードです。StatementNodeの構成要素になります。
+    /// </summary>
+    /*
+        Expressionとは全く違う扱いをするため、ExpressionNodeではなくNodeから継承しています
+        VariableDeclarationStatementNodeなどで使用されます
+     */
     public class TypeNode : Node
     {
         public string Name { get; }

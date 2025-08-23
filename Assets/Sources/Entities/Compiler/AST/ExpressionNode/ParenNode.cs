@@ -1,6 +1,9 @@
 
 namespace UnityLike.Entities.Compiler
 {
+    /// <summary>
+    /// 丸かっこを表現するノードです。Expressionをかっこで包み、これ自身もまたExpressionになります。
+    /// </summary>
     public class ParenNode : ExpressionNode
     {
         public ExpressionNode Content { get; }

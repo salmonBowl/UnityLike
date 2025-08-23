@@ -1,6 +1,10 @@
 
 namespace UnityLike.Entities.Compiler
 {
+    /// <summary>
+    /// 変数の宣言時に命名の部分を構成するノードです。IdentifierNodeを包む形を採用しています。
+    /// </summary>
+    // VariableDeclarationStatementNodeなどで使用されます
     public class DeclaratedIdentifierNode : ExpressionNode
     {
         public string Name { get; }
@@ -24,8 +28,7 @@ namespace UnityLike.Entities.Compiler
         public override string ToPrettyString() => Identifier.ToPrettyString();
         public override void ASTScan(ISemanticAnalyzer semantic)
         {
-            // IdentifierではないためIdentifierの意味解析は行いません
-            // 自分自身
+            // 内部のIdentifierには意味解析の機能を持たせず、自分自身のみ解析します
             semantic.VisitDeclaratedIdentifier(this);
         }
     }

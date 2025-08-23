@@ -2,11 +2,13 @@ using Zenject;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
+    /// <summary>
+    /// GameSceneのゲームループを管理します
+    /// </summary>
     public class GameRootGameScene
     {
-        /*
-            ゲームループを記述します
-            現時点でゲームループを使う必要はないため、これはまだ使用されていないクラスです
+       /*
+            現時点でゲームループを使う必要はないため、このクラスはまだ使用されていません
          */
         [Inject]
         public GameRootGameScene()

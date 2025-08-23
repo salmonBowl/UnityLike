@@ -1,6 +1,13 @@
 
 namespace UnityLike.Entities.Compiler
 {
+    /// <summary>
+    /// 変数へ代入する式を表すノードです
+    /// </summary>
+    /*
+     *  表現する式 : x = 5;
+     *  データ構造 : 代入式(型, 値)
+     */
     public class AssignmentStatementNode : StatementNode
     {
         public IdentifierNode Identifier { get; }

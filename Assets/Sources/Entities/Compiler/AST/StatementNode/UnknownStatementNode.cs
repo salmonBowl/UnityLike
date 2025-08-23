@@ -1,6 +1,9 @@
 
 namespace UnityLike.Entities.Compiler
 {
+    /// <summary>
+    /// Unknownな式を表すノードです。文法エラーを持つ式をこのノードで表現します。
+    /// </summary>
     public class UnknownStatementNode : StatementNode
     {
         public Token[] Tokens { get; }

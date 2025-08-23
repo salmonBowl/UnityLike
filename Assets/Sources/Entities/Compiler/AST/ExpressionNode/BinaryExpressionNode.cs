@@ -1,10 +1,15 @@
 
 namespace UnityLike.Entities.Compiler
 {
+    /// <summary>
+    /// 演算の構造を表すExpressionNodeです
+    /// </summary>
+    /*
+        BynaryExpression(LeftNode, +, RightNode)
+        → LeftNode + RightNode という値を表現
+     */
     public class BinaryExpressionNode : ExpressionNode
     {
-        //  1 + 1 のようなノード
-
         public ExpressionNode LeftNode { get; }
         public TokenType Operator { get; }
         public ExpressionNode RightNode { get; }

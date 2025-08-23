@@ -3,9 +3,13 @@
 namespace UnityLike.Entities.Compiler
 {
     /// <summary>
-    /// 代入式ノード
-    /// int x = 0 など
+    /// 変数宣言の式を表すノードです
     /// </summary>
+    /*
+     *  表現する式 : int x = 0;
+     *  データ構造 : 変数宣言式(int x ; , 代入式(x = 0 ;))
+     *  実際の形式 : VariableDeclarationStatementNode(TypeNode, DeclaratedIdentifierNode, AssignmentStatementNode);
+     */
     public class VariableDeclarationStatementNode : StatementNode
     {
         // 疑似的な実装をしています

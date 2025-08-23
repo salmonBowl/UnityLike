@@ -1,6 +1,9 @@
 
 namespace UnityLike.Entities.Compiler
 {
+    /// <summary>
+    /// 識別子を表現するノードです。Expressionの木構造の末端に位置します。
+    /// </summary>
     public class IdentifierNode : ExpressionNode
     {
         public string Name { get; }

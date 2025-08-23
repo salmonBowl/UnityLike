@@ -1,12 +1,10 @@
 
-using System.Diagnostics;
-
 namespace UnityLike.Entities.Compiler
 {
     /// <summary>
-    /// 単項ノード
-    /// -xや!xを扱います
+    /// 単項演算を表すノードです
     /// </summary>
+    //  例えば-xや!xを扱います
     public class UnaryExpressionNode : ExpressionNode
     {
         public TokenType Operator { get; }
