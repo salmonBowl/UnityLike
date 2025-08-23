@@ -29,7 +29,11 @@ namespace UnityLike.Entities.Compiler
             symbols.Add(symbol.Name, symbol);
         }
 
-        // 現在のスコープから親スコープへと遡ってシンボルを名前で探します
+        /// <summary>
+        /// 現在のスコープから親スコープへと遡ってシンボルを名前で探します
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>Symbol, null</returns>
         public Symbol LookUpSymbol(string name)
         {
             // 現在のスコープで見つかったならreturn

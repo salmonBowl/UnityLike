@@ -64,7 +64,7 @@ namespace UnityLike.UseCases.Compiler
             // 通常は識別子、キーワードを例外処理
             if (char.IsLetter(firstChar))
             {
-                string tokenValue = ReadWhile(c => char.IsLetterOrDigit(c) || c == '_');
+                string tokenValue = ReadIdentifier(c => char.IsLetterOrDigit(c) || c == '_');
 
                 // キーワードに一致するかを判定します
                 if (TokenConstants.KeyWords.TryGetValue(tokenValue, out TokenType keyWordTokenType))
@@ -80,8 +80,11 @@ namespace UnityLike.UseCases.Compiler
             // 数字
             else if (char.IsDigit(firstChar))
             {
-                string tokenValue = ReadWhile(c => char.IsDigit(c));
-                return new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn);
+                string tokenValue = ReadNumber();
+                if (float.TryParse(tokenValue, out _) || double.TryParse(tokenValue, out _))
+                    return new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn);
+                else
+                    return new Token(TokenType.Unknown, tokenValue, tokenLine, tokenColumn);
             }
             // 1文字または2文字
             // 主に演算子や括弧類
@@ -106,14 +109,30 @@ namespace UnityLike.UseCases.Compiler
         }
 
         /// <summary>
-        /// 識別子やリテラルのトークンを検出する際に共通した処理をまとめました
+        /// 識別子のトークンを読み取ります
         /// </summary>
-        private string ReadWhile(Func<char, bool> predicate)
+        private string ReadIdentifier(Func<char, bool> predicate)
         {
             StringBuilder builder = new();
 
             while (!IsEndOfFile() && predicate(Peek()))
                 // IsEndOfFileは必要ないが念のため
+            {
+                builder.Append(Peek());
+                Consume();
+            }
+
+            return builder.ToString();
+        }
+        /// <summary>
+        /// 数字のトークンを読み取ります
+        /// </summary>
+        /// <returns></returns>
+        private string ReadNumber()
+        {
+            StringBuilder builder = new();
+
+            while (!IsEndOfFile() && Array.IndexOf(TokenConstants.number, Peek()) != -1)
             {
                 builder.Append(Peek());
                 Consume();

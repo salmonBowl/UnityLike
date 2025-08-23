@@ -25,6 +25,9 @@ namespace UnityLike.Entities.Compiler
             }
             return returnText;
         }
-        public override void ASTScan(ISemanticAnalyzer semantic) { }
+        public override void ASTScan(ISemanticAnalyzer semantic)
+        {
+            // UnknownStatementÇ≈à”ñ°âêÕÇÕÇ»Çµ
+        }
     }
 }

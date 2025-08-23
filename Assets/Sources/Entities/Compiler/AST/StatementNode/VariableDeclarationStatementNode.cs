@@ -11,13 +11,13 @@ namespace UnityLike.Entities.Compiler
         // ‹^—“I‚ÈÀ‘•‚ğ‚µ‚Ä‚¢‚Ü‚·
         // Œ»İ‚Í‚±‚Ì’†‚ÉTokenType.TypeStandard‚ğ“n‚µ‚Ü‚·
         public TypeNode Type;
-        public IdentifierNode Identifier { get; }
-        public ExpressionNode? InitalValue { get; } = null;
+        public DeclaratedIdentifierNode DeclaratedIdentifier { get; }
+        public AssignmentStatementNode? InitalAssignment { get; } = null;
 
         public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier)
         {
             Type = type;
-            Identifier = identifier;
+            DeclaratedIdentifier = new DeclaratedIdentifierNode(identifier);
         }
         public VariableDeclarationStatementNode(
             TypeNode type,
@@ -25,20 +25,23 @@ namespace UnityLike.Entities.Compiler
             ExpressionNode initalValue
             ) : this(type, identifier)
         {
-            InitalValue = initalValue;
+            InitalAssignment = new AssignmentStatementNode(identifier, initalValue);
         }
         public override void LogThis()
         {
             Type.LogThis();
-            Identifier.LogThis();
-            InitalValue?.LogThis();
+            DeclaratedIdentifier.LogThis();
+            InitalAssignment?.LogThis();
         }
         public override string ToPrettyString() =>
-            $"{Type.ToPrettyString()} {Identifier.ToPrettyString()}" + 
-            ((InitalValue == null) ? 
-            ";" : 
-            $" = {InitalValue.ToPrettyString()};");
-        public override void ASTScan(ISemanticAnalyzer semantic) =>
+            Type.ToPrettyString() +
+            ((InitalAssignment == null) ?
+            $" {DeclaratedIdentifier};" :
+            InitalAssignment.ToPrettyString());
+        public override void ASTScan(ISemanticAnalyzer semantic)
+        {
+            // StatementNode‚Å‚Í©•ª©g‚ÌˆÓ–¡‰ğÍ‚Ì‚İs‚¢‚Ü‚·
             semantic.VisitVariableDeclarationStatement(this);
+        }
     }
 }

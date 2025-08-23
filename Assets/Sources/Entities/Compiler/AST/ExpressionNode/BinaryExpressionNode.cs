@@ -27,8 +27,8 @@ namespace UnityLike.Entities.Compiler
             LeftNode.LogThis();
             RightNode.LogThis();
         }
-        public override string ToPrettyString() => 
-            LeftNode.ToPrettyString() + " " + 
+        public override string ToPrettyString() =>
+            LeftNode.ToPrettyString() + " " +
             Operator switch
             {
                 TokenType.Plus => "+",
@@ -38,7 +38,11 @@ namespace UnityLike.Entities.Compiler
                 _ => throw new System.NotSupportedException()
             }
             + " " + RightNode.ToPrettyString();
-        public override void ASTScan(ISemanticAnalyzer semantic) =>
+        public override void ASTScan(ISemanticAnalyzer semantic)
+        {
+            LeftNode.ASTScan(semantic);
+            RightNode.ASTScan(semantic);
             semantic.VisitBinaryExpression(this);
+        }
     }
 }

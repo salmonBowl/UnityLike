@@ -33,7 +33,12 @@ namespace UnityLike.Entities.Compiler
                 _ => throw new System.Exception()
             }
             + Operand.ToPrettyString();
-        public override void ASTScan(ISemanticAnalyzer semantic) =>
+        public override void ASTScan(ISemanticAnalyzer semantic)
+        {
+            // Ä‹AŒÄ‚Ño‚µ
+            Operand.ASTScan(semantic);
+            // ©•ª©g
             semantic.VisitUnaryExpression(this);
+        }
     }
 }

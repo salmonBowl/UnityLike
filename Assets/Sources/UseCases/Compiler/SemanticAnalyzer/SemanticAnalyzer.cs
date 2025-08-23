@@ -6,13 +6,12 @@ namespace UnityLike.UseCases.Compiler
 {
     public partial class SemanticAnalyzer : ISemanticAnalyzer
     {
+        private readonly List<SemanticErrorException> errors = new();
         private SymbolTable currentScope;
-        private List<SemanticErrorException> errors;
         
         public SemanticAnalyzer()
         {
             currentScope = new(null);
-            errors = new();
         }
 
         public void Analyze(List<StatementNode> statements)

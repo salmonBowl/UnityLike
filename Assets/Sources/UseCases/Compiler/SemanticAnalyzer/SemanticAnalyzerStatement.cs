@@ -6,23 +6,34 @@ namespace UnityLike.UseCases.Compiler
     {
         public void VisitVariableDeclarationStatement(VariableDeclarationStatementNode node)
         {
+            // 各語句の意味解析を先に行う
+
+            node.Type.ASTScan(this);
+            node.DeclaratedIdentifier.ASTScan(this);
+
+            // 文全体の意味解析
+
             string typeName = node.Type.Name;
-            string identifierName = node.Identifier.Name;
-
-            TypeConstants.Types.TryGetValue(typeName, out TypeBase type);
-
-            if (currentScope.LookUpSymbol(identifierName) != null) // 変数が既に定義されていた場合
-            {
-                throw new ReDefinitionException(identifierName);
-            }
+            string identifierName = node.DeclaratedIdentifier.Name;
+            TypeBase type = TypeConstants.definedTypes[typeName];
 
             Symbol newSymbol = new(identifierName, type);
             currentScope.AddSymbol(newSymbol);
+
+            // 初期化があればInitalAssignmentStatementの走査に移る
+            node.InitalAssignment?.ASTScan(this);
         }
 
         public void VisitAssignmentStatement(AssignmentStatementNode node)
         {
-            // 未実装
+            // 各語句の意味解析を先に行う
+
+            node.Identifier.ASTScan(this);
+            node.Value.ASTScan(this);
+
+            // 文全体の意味解析
+
+            
         }
     }
 }

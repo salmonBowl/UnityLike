@@ -5,7 +5,7 @@ namespace UnityLike.Entities.Compiler
 {
     public class TypeConstants
     {
-        public static Dictionary<string, TypeBase> Types = new()
+        public readonly static Dictionary<string, TypeBase> definedTypes = new()
         {
             { "int", new PrimitiveType("int") },
             { "float", new PrimitiveType("float") },
@@ -13,5 +13,9 @@ namespace UnityLike.Entities.Compiler
             { "void", new PrimitiveType("void") },
             { "string", new PrimitiveType("string") },
         };
+        public void AddType(string typeName)
+        {
+            definedTypes.Add(typeName, new PrimitiveType(typeName));
+        }
     }
 }

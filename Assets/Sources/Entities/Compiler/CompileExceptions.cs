@@ -22,12 +22,20 @@ namespace UnityLike.Entities.Compiler
             Message = $"'{identifierName}'ÇÕä˘Ç…íËã`Ç≥ÇÍÇƒÇ¢Ç‹Ç∑";
         }
     }
-    public class TypeNotFindException : SemanticErrorException
+    public class TypeNotFoundException : SemanticErrorException
     {
         public override string Message { get; }
-        public TypeNotFindException(string typeName)
+        public TypeNotFoundException(string typeName)
         {
             Message = $"å^ñº'{typeName}'ÇÕë∂ç›ÇµÇ‹ÇπÇÒ";
+        }
+    }
+    public class IdentifierNotFoundException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public IdentifierNotFoundException(string typeName)
+        {
+            Message = $"'{typeName}'ÇÕíËã`Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ";
         }
     }
 }
