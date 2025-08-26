@@ -2,14 +2,16 @@ using System;
 
 namespace UnityLike.Entities.Compiler
 {
+    public class CompileException : Exception { }
+
     // 構文解析
-    public class SyntaxErrorException : Exception { }
+    public class SyntaxErrorException : CompileException { }
 
     // 意味解析
     /// <summary>
     /// 意味解析エラーの基底クラスです
     /// </summary>
-    public class SemanticErrorException : Exception
+    public class SemanticErrorException : CompileException
     {
         public override string Message { get; } = "文法エラーです";
     }
