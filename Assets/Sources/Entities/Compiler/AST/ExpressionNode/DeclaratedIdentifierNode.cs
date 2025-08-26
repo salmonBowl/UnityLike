@@ -20,6 +20,12 @@ namespace UnityLike.Entities.Compiler
             Name = matrix.Name;
             Identifier = matrix;
         }
+
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
+        {
+            Identifier.ColoredTokenScan(rebuilder);
+        }
+
         public override string ToPrettyString() => Identifier.ToPrettyString();
         public override void ASTScan(ISemanticAnalyzer semantic)
         {

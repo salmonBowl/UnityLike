@@ -11,10 +11,18 @@ namespace UnityLike.Entities.Compiler
     public class TypeNode : Node
     {
         public string Name { get; }
+        public ColoredToken NameToken { get; }
+
         public TypeNode(string name)
         {
             Name = name;
         }
+
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
+        {
+            rebuilder.ImportColoredToken(NameToken);
+        }
+
         public override string ToPrettyString() => Name;
         public override void ASTScan(ISemanticAnalyzer semantic)
         {

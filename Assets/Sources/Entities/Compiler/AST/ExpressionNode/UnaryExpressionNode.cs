@@ -10,6 +10,8 @@ namespace UnityLike.Entities.Compiler
         public TokenType Operator { get; }
         public ExpressionNode Operand { get; }
 
+        public ColoredToken OperatorToken { get; }
+
         public UnaryExpressionNode(
             TokenType @operator,
             ExpressionNode operand
@@ -17,6 +19,12 @@ namespace UnityLike.Entities.Compiler
         {
             Operator = @operator;
             Operand = operand;
+        }
+
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
+        {
+            rebuilder.ImportColoredToken(OperatorToken);
+            Operand.ColoredTokenScan(rebuilder);
         }
 
         public override string ToPrettyString() =>

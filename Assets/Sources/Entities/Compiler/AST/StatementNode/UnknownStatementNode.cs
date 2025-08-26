@@ -7,11 +7,21 @@ namespace UnityLike.Entities.Compiler
     public class UnknownStatementNode : StatementNode
     {
         public Token[] Tokens { get; }
+        public ColoredToken[] ColoredTokens { get; }
         
         public UnknownStatementNode(Token[] tokens)
         {
             Tokens = tokens;
         }
+
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
+        {
+            foreach(var cToken in ColoredTokens)
+            {
+                rebuilder.ImportColoredToken(cToken);
+            }
+        }
+
         public override string ToPrettyString()
         {
             string returnText = string.Empty;

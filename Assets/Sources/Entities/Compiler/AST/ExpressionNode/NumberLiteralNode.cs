@@ -7,10 +7,16 @@ namespace UnityLike.Entities.Compiler
     public class NumberLiteralNode : ExpressionNode
     {
         public int Value { get; }
+        public ColoredToken NumberToken { get; }
 
         public NumberLiteralNode(int value)
         {
             Value = value;
+        }
+
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
+        {
+            rebuilder.ImportColoredToken(NumberToken);
         }
 
         public override string ToPrettyString() => Value.ToString();

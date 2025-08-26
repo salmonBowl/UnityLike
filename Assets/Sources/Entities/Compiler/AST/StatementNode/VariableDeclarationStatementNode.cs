@@ -17,9 +17,9 @@ namespace UnityLike.Entities.Compiler
         public TypeNode Type;
         public DeclaratedIdentifierNode DeclaratedIdentifier { get; }
         public AssignmentStatementNode? InitalAssignment { get; } = null;
+
         public ColoredToken TypeToken { get; }
-        public ColoredToken IdentifierToken { get; }
-        public ColoredToken EqualToken { get; }
+        public ColoredToken DeclaratedIdentifierToken { get; }
         public ColoredToken CemicolonToken { get; }
 
         public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier)
@@ -38,7 +38,17 @@ namespace UnityLike.Entities.Compiler
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
-            
+            rebuilder.ImportColoredToken(TypeToken);
+            if (InitalAssignment == null)
+            {
+                rebuilder.ImportColoredToken(DeclaratedIdentifierToken);
+                rebuilder.ImportColoredToken(CemicolonToken);
+            }
+            else
+            {
+                InitalAssignment.ColoredTokenScan(rebuilder);
+            }
+
         }
 
         public override string ToPrettyString() =>

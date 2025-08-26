@@ -7,10 +7,16 @@ namespace UnityLike.Entities.Compiler
     public class IdentifierNode : ExpressionNode
     {
         public string Name { get; }
+        public ColoredToken IdentifierToken { get; }
 
         public IdentifierNode(string name)
         {
             Name = name;
+        }
+
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
+        {
+            rebuilder.ImportColoredToken(IdentifierToken);
         }
 
         public override string ToPrettyString() => Name;

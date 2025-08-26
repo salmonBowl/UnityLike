@@ -13,6 +13,10 @@ namespace UnityLike.Entities.Compiler
         public IdentifierNode Identifier { get; }
         public ExpressionNode Value { get; }
 
+        public ColoredToken IdentifierToken { get; }
+        public ColoredToken EqualToken { get; }
+        public ColoredToken CemicolonToken { get; }
+
         public AssignmentStatementNode(
             IdentifierNode identifier,
             ExpressionNode value
@@ -21,6 +25,15 @@ namespace UnityLike.Entities.Compiler
             Identifier = identifier;
             Value = value;
         }
+
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
+        {
+            rebuilder.ImportColoredToken(IdentifierToken);
+            rebuilder.ImportColoredToken(EqualToken);
+            Value.ColoredTokenScan(rebuilder);
+            rebuilder.ImportColoredToken(CemicolonToken);
+        }
+
         public override string ToPrettyString() =>
             $"{Identifier.ToPrettyString()} = {Value.ToPrettyString()};";
 

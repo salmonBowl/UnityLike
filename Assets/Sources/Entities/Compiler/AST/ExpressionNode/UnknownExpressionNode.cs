@@ -7,10 +7,16 @@ namespace UnityLike.Entities.Compiler
     public class UnknownExpressionNode : ExpressionNode
     {
         public string Value { get; }
+        public ColoredToken UnknownToken { get; }
 
         public UnknownExpressionNode(string value)
         {
             Value = value;
+        }
+
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
+        {
+            rebuilder.ImportColoredToken(UnknownToken);
         }
 
         public override string ToPrettyString() => Value;

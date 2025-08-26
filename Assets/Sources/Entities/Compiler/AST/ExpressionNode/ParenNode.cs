@@ -8,9 +8,19 @@ namespace UnityLike.Entities.Compiler
     {
         public ExpressionNode Content { get; }
 
+        public ColoredToken LeftParenToken { get; }
+        public ColoredToken RightParenToken { get; }
+
         public ParenNode(ExpressionNode content)
         {
             Content = content;
+        }
+
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
+        {
+            rebuilder.ImportColoredToken(LeftParenToken);
+            Content.ColoredTokenScan(rebuilder);
+            rebuilder.ImportColoredToken(RightParenToken);
         }
 
         public override string ToPrettyString() => $"({Content.ToPrettyString()})";
