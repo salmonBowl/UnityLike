@@ -13,6 +13,7 @@ namespace UnityLike.InterfaceAdapters.Presenter
         private readonly ISetTextUI view;
 
         private Lexer lexer;
+        private Parser parser;
 
         [Inject]
         public CompileManager(ISetTextUI view)
@@ -23,43 +24,51 @@ namespace UnityLike.InterfaceAdapters.Presenter
         // TextAreaUIから受け取ります
         public void CompileSourceCode(CodeEditorBlock block, string sourceCode)
         {
-            // 準備
+            // InputField内のテキストを正しい形へと修正します
+            FixInputFieldText(block, sourceCode);
 
+            // 以下コンパイルを行っていきます
+            /*
+             * 設計の再考により実際の処理はコンパイラではなくインタプリタという形に変更されました。
+             * 元のコードの名残でCompileという表現が使われています
+            */
+
+            // トークン解析
             lexer = new(Normalize(sourceCode));
-
-
-            // コンパイル
-
             Token[] tokenArray = GenerateTokenArray();
 
+              // 試験的にシンタックスハイライト化したものをテキストエディタ上で表示しています
             SourceCodeRebuilder rebuilder = new RebuilderFromTokens(tokenArray);
-
-
-            // アウトプット
-
             rebuilder.RebuildExecute();
-
-            string sourceCodeRebuild = rebuilder.GetSourceCodeRebuild();
             string richSourceCode = rebuilder.GetRichSourceCode();
-
-            view.SetTextInputField(block, sourceCodeRebuild);
             view.SetViewText(block, richSourceCode);
 
-            //int caretPosShiftCount = sourceCodeRebuild.Length - sourceCode.Length;
-            //view.ShiftCaretPosition(block, caretPosShiftCount);
+            // 構文木解析
+            parser = new(tokenArray);
+            parser.Parse();
+            List<StatementNode> statements = parser.GetParsedStatements();
+
+
         }
 
-        private string Normalize(string text)
+        /// <summary>
+        /// UnityのInputField内で発生する問題、backslashの数が合わないなどを調整します
+        /// </summary>
+        private void FixInputFieldText(CodeEditorBlock block, string sourceCode)
         {
             // TMPでは"\\\\"が\として表示されます
             // "\\"("\\\\"をInputField上で消去しようとしたもの)は消去
-            string backSlashProcessed = text
+            string backSlashProcessed = sourceCode
                 .Replace("\\\\", "\v")  // \\を仮置き
                 .Replace("\\", "")     // \を消去
                 .Replace("\v", "\\"); // 仮置きを\\に戻す
 
-            string normalizedSourceCode = backSlashProcessed.Replace("\r\n", "\n");
-            return normalizedSourceCode;
+            // InputFieldの内容を書き換えます
+            view.SetTextInputField(block, backSlashProcessed);
+        }
+        private string Normalize(string text)
+        {
+            return text.Replace("\r\n", "\n");
         }
 
         private Token[] GenerateTokenArray()

@@ -4,6 +4,9 @@ using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
 {
+    /// <summary>
+    /// 構文木を意味解析するクラスです。構文木そのものと相互作用して解析を進めるという設計をとっています。
+    /// </summary>
     public partial class SemanticAnalyzer : ISemanticAnalyzer
     {
         /// <summary>
