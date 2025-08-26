@@ -10,7 +10,7 @@ namespace UnityLike.UseCases.Compiler
         /// <returns></returns>
         private UnknownExpressionNode AsUnknown()
         {
-            return new UnknownExpressionNode(CurrentToken.Value);
+            return ASTFactory.UnknownNode(CurrentToken);
         }
 
         // \•¶–Ø‚ğÄ‹A“I‚ÈŠÖ”ŒÄ‚Ño‚µ‚É‚æ‚è\¬‚µ‚Ä‚¢‚«‚Ü‚·
@@ -76,6 +76,7 @@ namespace UnityLike.UseCases.Compiler
 
         private ExpressionNode ParseParenExpression()
         {
+            Token leftParen = CurrentToken;
             if (CurrentTokenType == TokenType.LeftParen)
                 Consume();
             else
@@ -83,12 +84,13 @@ namespace UnityLike.UseCases.Compiler
 
             ExpressionNode content = ParseExpression();
 
+            Token rightParen = CurrentToken;
             if (CurrentTokenType == TokenType.RightParen)
                 Consume();
             else
                 return AsUnknown();
 
-            return new ParenNode(content);
+            return ASTFactory.ParenNode(leftParen, content, rightParen);
         }
         /*
             ‰‰Z‚Ì—Dæ‡ˆÊ‚É]‚Á‚Ä—Dæ‡ˆÊ‚ª’á‚¢‰‰Z¨‚¾‚ñ‚¾‚ñ‚‚¢‰‰Z‚Æ‚¢‚¤‡˜‚ÅÄ‹A“I‚Éö‚Á‚Ä‚¢‚«‚Ü‚·
@@ -99,8 +101,9 @@ namespace UnityLike.UseCases.Compiler
         {
             if (CurrentTokenType == TokenType.Minus)
             {
+                Token @operator = CurrentToken;
                 Consume();
-                return new UnaryExpressionNode(TokenType.Minus, ParsePrimaryExpression());
+                return ASTFactory.UnaryExpressionNode(@operator, ParsePrimaryExpression());
             }
             else
             {
@@ -111,11 +114,11 @@ namespace UnityLike.UseCases.Compiler
         {
             ExpressionNode leftExpression = ParseUnaryExpression();
 
-            if (CurrentTokenType == TokenType.Multiply ||
-                CurrentTokenType == TokenType.Divide)
+            if (CurrentTokenType == TokenType.Multiply || CurrentTokenType == TokenType.Divide)
             {
+                Token @operator = CurrentToken;
                 Consume();
-                return new BinaryExpressionNode(leftExpression, TokenType.Multiply, ParseMultitiveExpression());
+                return ASTFactory.BinaryExpressionNode(leftExpression, @operator, ParseMultitiveExpression());
             }
             else
             {
@@ -126,11 +129,11 @@ namespace UnityLike.UseCases.Compiler
         {
             ExpressionNode leftExpression = ParseMultitiveExpression();
 
-            if (CurrentTokenType == TokenType.Plus || 
-                CurrentTokenType == TokenType.Minus)
+            if (CurrentTokenType == TokenType.Plus || CurrentTokenType == TokenType.Minus)
             {
+                Token @operator = CurrentToken;
                 Consume();
-                return new BinaryExpressionNode(leftExpression, TokenType.Plus, ParseAdditiveExpression());
+                return ASTFactory.BinaryExpressionNode(leftExpression, @operator, ParseAdditiveExpression());
             }
             else
             {

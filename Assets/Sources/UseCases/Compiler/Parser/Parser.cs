@@ -63,8 +63,8 @@ namespace UnityLike.UseCases.Compiler
         {
             ExpressionNode retval = CurrentTokenType switch
             {
-                TokenType.Identifier => new IdentifierNode(CurrentToken.Value),
-                TokenType.NumberLiteral => new NumberLiteralNode(int.Parse(CurrentToken.Value)),
+                TokenType.Identifier => ASTFactory.IdentifierNode(CurrentToken),
+                TokenType.NumberLiteral => ASTFactory.NumberLiteralNode(CurrentToken),
                 _ => throw new System.NotSupportedException("Parser.ConsumeWithGenerate() : İ’è‚³‚ê‚Ä‚¢‚È‚¢TokenType‚Å‚·")
             };
 
