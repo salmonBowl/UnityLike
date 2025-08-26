@@ -9,9 +9,10 @@ namespace UnityLike.Entities.Compiler
         public int Value { get; }
         public ColoredToken NumberToken { get; }
 
-        public NumberLiteralNode(int value)
+        public NumberLiteralNode(int value, ColoredToken numberToken)
         {
             Value = value;
+            NumberToken = numberToken;
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)

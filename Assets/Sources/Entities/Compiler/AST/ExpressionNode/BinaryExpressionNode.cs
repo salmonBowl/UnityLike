@@ -12,17 +12,19 @@ namespace UnityLike.Entities.Compiler
     {
         public ExpressionNode LeftNode { get; }
         public TokenType Operator { get; }
-        public ExpressionNode RightNode { get; }
         public ColoredToken OperatorToken { get; }
+        public ExpressionNode RightNode { get; }
 
         public BinaryExpressionNode(
             ExpressionNode leftNode,
             TokenType @operator,
+            ColoredToken operatorToken,
             ExpressionNode rightNode
             )
         {
             LeftNode = leftNode;
             Operator = @operator;
+            OperatorToken = operatorToken;
             RightNode = rightNode;
         }
 

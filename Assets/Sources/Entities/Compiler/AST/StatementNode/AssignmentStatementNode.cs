@@ -13,22 +13,21 @@ namespace UnityLike.Entities.Compiler
         public IdentifierNode Identifier { get; }
         public ExpressionNode Value { get; }
 
-        public ColoredToken IdentifierToken { get; }
         public ColoredToken EqualToken { get; }
         public ColoredToken CemicolonToken { get; }
 
-        public AssignmentStatementNode(
-            IdentifierNode identifier,
-            ExpressionNode value
-            )
+        public AssignmentStatementNode(IdentifierNode identifier, ColoredToken equalToken,
+            ExpressionNode value, ColoredToken cemicolonToken)
         {
             Identifier = identifier;
             Value = value;
+            EqualToken = equalToken;
+            CemicolonToken = cemicolonToken;
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
-            rebuilder.ImportColoredToken(IdentifierToken);
+            Identifier.ColoredTokenScan(rebuilder);
             rebuilder.ImportColoredToken(EqualToken);
             Value.ColoredTokenScan(rebuilder);
             rebuilder.ImportColoredToken(CemicolonToken);

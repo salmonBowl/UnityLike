@@ -6,14 +6,15 @@ namespace UnityLike.Entities.Compiler
     /// </summary>
     public class ParenNode : ExpressionNode
     {
-        public ExpressionNode Content { get; }
-
         public ColoredToken LeftParenToken { get; }
+        public ExpressionNode Content { get; }
         public ColoredToken RightParenToken { get; }
 
-        public ParenNode(ExpressionNode content)
+        public ParenNode(ColoredToken leftParenToken, ExpressionNode content, ColoredToken rightParenToken)
         {
+            LeftParenToken = leftParenToken;
             Content = content;
+            RightParenToken = rightParenToken;
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)

@@ -9,9 +9,10 @@ namespace UnityLike.Entities.Compiler
         public string Name { get; }
         public ColoredToken IdentifierToken { get; }
 
-        public IdentifierNode(string name)
+        public IdentifierNode(ColoredToken identifierToken)
         {
-            Name = name;
+            Name = identifierToken.Value;
+            IdentifierToken = identifierToken;
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)

@@ -10,10 +10,10 @@ namespace UnityLike.Entities.Compiler
         public string Name { get; }
         public IdentifierNode Identifier { get; }
 
-        public DeclaratedIdentifierNode(string name)
+        public DeclaratedIdentifierNode(ColoredToken identifierToken)
         {
-            Name = name;
-            Identifier = new IdentifierNode(name);
+            Name = identifierToken.Value;
+            Identifier = new IdentifierNode(identifierToken);
         }
         public DeclaratedIdentifierNode(IdentifierNode matrix)
         {

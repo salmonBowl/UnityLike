@@ -18,30 +18,27 @@ namespace UnityLike.Entities.Compiler
         public DeclaratedIdentifierNode DeclaratedIdentifier { get; }
         public AssignmentStatementNode? InitalAssignment { get; } = null;
 
-        public ColoredToken TypeToken { get; }
-        public ColoredToken DeclaratedIdentifierToken { get; }
         public ColoredToken CemicolonToken { get; }
 
-        public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier)
+        public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier, ColoredToken cemiColonToken)
         {
             Type = type;
             DeclaratedIdentifier = new DeclaratedIdentifierNode(identifier);
+            CemicolonToken = cemiColonToken;
         }
-        public VariableDeclarationStatementNode(
-            TypeNode type,
-            IdentifierNode identifier,
-            ExpressionNode initalValue
-            ) : this(type, identifier)
+        public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier,
+            ColoredToken equalToken, ExpressionNode initalValue, ColoredToken cemiColonToken
+            ) : this(type, identifier, cemiColonToken)
         {
-            InitalAssignment = new AssignmentStatementNode(identifier, initalValue);
+            InitalAssignment = new AssignmentStatementNode(identifier, equalToken, initalValue, cemiColonToken);
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
-            rebuilder.ImportColoredToken(TypeToken);
+            Type.ColoredTokenScan(rebuilder);
             if (InitalAssignment == null)
             {
-                rebuilder.ImportColoredToken(DeclaratedIdentifierToken);
+                DeclaratedIdentifier.ColoredTokenScan(rebuilder);
                 rebuilder.ImportColoredToken(CemicolonToken);
             }
             else

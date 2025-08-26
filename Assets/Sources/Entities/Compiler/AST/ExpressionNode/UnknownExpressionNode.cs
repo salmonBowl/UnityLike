@@ -9,9 +9,10 @@ namespace UnityLike.Entities.Compiler
         public string Value { get; }
         public ColoredToken UnknownToken { get; }
 
-        public UnknownExpressionNode(string value)
+        public UnknownExpressionNode(ColoredToken unknownToken)
         {
-            Value = value;
+            Value = unknownToken.Value;
+            UnknownToken = unknownToken;
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
