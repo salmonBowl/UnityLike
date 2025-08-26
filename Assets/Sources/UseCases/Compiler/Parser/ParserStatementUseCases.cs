@@ -30,7 +30,7 @@ namespace UnityLike.UseCases.Compiler
                 IdentifierNode retval;
                 if (outher.CurrentTokenType == TokenType.Identifier)
                 {
-                    retval = new(outher.CurrentToken.Value);
+                    retval = ASTFactory.IdentifierNode(outher.CurrentToken);
                     outher.Consume();
                 }
                 else
@@ -39,7 +39,7 @@ namespace UnityLike.UseCases.Compiler
                 }
                 return retval;
             }
-            public int Equals()
+            public ColoredToken Equals()
             {
                 if (outher.CurrentTokenType == TokenType.Equals)
                 {
@@ -49,16 +49,17 @@ namespace UnityLike.UseCases.Compiler
                 {
                     throw new SyntaxErrorException();
                 }
-                return 0;
+                return ASTFactory.TokenToColoredToken(outher.CurrentToken);
             }
-            public bool Cemicolon()
+            public ColoredToken Cemicolon()
             {
                 if (outher.CurrentTokenType == TokenType.SemiColon)
                 {
+                    Token cemicolon = outher.CurrentToken;
                     outher.Consume();
-                    return true;
+                    return ASTFactory.TokenToColoredToken(cemicolon);
                 }
-                return false;
+                return null;
             }
             public ExpressionNode Expression()
             {

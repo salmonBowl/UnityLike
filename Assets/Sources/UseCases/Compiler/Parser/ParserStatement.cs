@@ -47,18 +47,23 @@ namespace UnityLike.UseCases.Compiler
                 u.Type();
             IdentifierNode identifierNode =
                 u.Identifier();
+            ColoredToken cemicolon =
+                u.Cemicolon();
 
-            if (u.Cemicolon())
-                return new VariableDeclarationStatementNode(typeNode, identifierNode);
+            if (cemicolon != null)
+                return new VariableDeclarationStatementNode(typeNode, identifierNode, cemicolon);
 
             // êÈåæéûèâä˙âª
-            _ =
+            ColoredToken equals =
                 u.Equals();
             ExpressionNode expressionNode =
                 u.Expression();
+            cemicolon =
+                u.Cemicolon();
 
-            if (u.Cemicolon())
-                return new VariableDeclarationStatementNode(typeNode, identifierNode, expressionNode);
+            if (cemicolon != null)
+                return new VariableDeclarationStatementNode
+                    (typeNode, identifierNode, equals, expressionNode, cemicolon);
 
             throw new SyntaxErrorException();
         }
@@ -70,13 +75,15 @@ namespace UnityLike.UseCases.Compiler
 
             IdentifierNode identifierNode =
                 u.Identifier();
-            _ =
+            ColoredToken equals =
                 u.Equals();
             ExpressionNode expressionNode =
                 u.Expression();
+            ColoredToken cemicolon =
+                u.Cemicolon();
 
-            if (u.Cemicolon())
-                return new AssignmentStatementNode(identifierNode, expressionNode);
+            if (cemicolon != null)
+                return new AssignmentStatementNode(identifierNode, equals, expressionNode, cemicolon);
 
             throw new SyntaxErrorException();
         }

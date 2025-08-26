@@ -52,7 +52,7 @@ namespace UnityLike.Entities.Compiler
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        static ColoredToken TokenToColoredToken(Token token)
+        public static ColoredToken TokenToColoredToken(Token token)
         {
             return new ColoredToken(token.Value, token.LineCount, token.ColumnCount, GetColorFromToken(token));
         }
