@@ -20,11 +20,6 @@ namespace UnityLike.Entities.Compiler
             Name = matrix.Name;
             Identifier = matrix;
         }
-        public override void LogThis()
-        {
-            UnityEngine.Debug.Log("DeclaratedIdentifier : " + Name);
-            Identifier.LogThis();
-        }
         public override string ToPrettyString() => Identifier.ToPrettyString();
         public override void ASTScan(ISemanticAnalyzer semantic)
         {

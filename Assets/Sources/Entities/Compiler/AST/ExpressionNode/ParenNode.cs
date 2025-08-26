@@ -13,12 +13,6 @@ namespace UnityLike.Entities.Compiler
             Content = content;
         }
 
-        public override void LogThis()
-        {
-            UnityEngine.Debug.Log("Paren : (");
-            Content.LogThis();
-            UnityEngine.Debug.Log("Paren : )");
-        }
         public override string ToPrettyString() => $"({Content.ToPrettyString()})";
         public override void ASTScan(ISemanticAnalyzer semantic)
         {

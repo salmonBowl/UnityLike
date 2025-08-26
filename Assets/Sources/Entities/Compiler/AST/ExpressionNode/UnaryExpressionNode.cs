@@ -19,11 +19,6 @@ namespace UnityLike.Entities.Compiler
             Operand = operand;
         }
 
-        public override void LogThis()
-        {
-            UnityEngine.Debug.Log("Unary : " + Operator.ToString());
-            Operand.LogThis();
-        }
         public override string ToPrettyString() =>
             Operator switch
             {

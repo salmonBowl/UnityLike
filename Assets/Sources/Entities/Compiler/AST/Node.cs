@@ -6,7 +6,11 @@ namespace UnityLike.Entities.Compiler
     /// </summary>
     public abstract class Node
     {
-        public abstract void LogThis();
+        /// <summary>
+        /// ノードが保持するトークンを順次rebuilderに送ります。これによりソースコードの復元ができるようになります。
+        /// </summary>
+        /// <param name="rebuilder"></param>
+        public abstract void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder);
         public abstract string ToPrettyString();
         public abstract void ASTScan(ISemanticAnalyzer semantic);
     }

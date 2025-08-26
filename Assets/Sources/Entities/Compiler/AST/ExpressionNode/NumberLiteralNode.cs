@@ -13,10 +13,6 @@ namespace UnityLike.Entities.Compiler
             Value = value;
         }
 
-        public override void LogThis()
-        {
-            UnityEngine.Debug.Log("Number : " + Value);
-        }
         public override string ToPrettyString() => Value.ToString();
         public override void ASTScan(ISemanticAnalyzer semantic)
         {

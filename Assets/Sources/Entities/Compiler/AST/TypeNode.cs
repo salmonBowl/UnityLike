@@ -15,10 +15,6 @@ namespace UnityLike.Entities.Compiler
         {
             Name = name;
         }
-        public override void LogThis()
-        {
-            UnityEngine.Debug.Log("Type : " + Name);
-        }
         public override string ToPrettyString() => Name;
         public override void ASTScan(ISemanticAnalyzer semantic)
         {

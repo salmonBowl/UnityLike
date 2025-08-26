@@ -12,13 +12,6 @@ namespace UnityLike.Entities.Compiler
         {
             Tokens = tokens;
         }
-        public override void LogThis()
-        {
-            foreach (var token in Tokens)
-            {
-                UnityEngine.Debug.Log(token.ToString());
-            }
-        }
         public override string ToPrettyString()
         {
             string returnText = string.Empty;

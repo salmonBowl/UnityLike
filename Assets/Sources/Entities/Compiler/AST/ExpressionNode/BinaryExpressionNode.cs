@@ -13,6 +13,7 @@ namespace UnityLike.Entities.Compiler
         public ExpressionNode LeftNode { get; }
         public TokenType Operator { get; }
         public ExpressionNode RightNode { get; }
+        public ColoredToken OperatorToken { get; }
 
         public BinaryExpressionNode(
             ExpressionNode leftNode,
@@ -25,13 +26,13 @@ namespace UnityLike.Entities.Compiler
             RightNode = rightNode;
         }
 
-        public override void LogThis()
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
-            UnityEngine.Debug.Log("Binary : " + Operator.ToString());
-            UnityEngine.Debug.Log("left and right");
-            LeftNode.LogThis();
-            RightNode.LogThis();
+            LeftNode.ColoredTokenScan(rebuilder);
+            rebuilder.ImportColoredToken( OperatorToken );
+            RightNode.ColoredTokenScan(rebuilder);
         }
+
         public override string ToPrettyString() =>
             LeftNode.ToPrettyString() + " " +
             Operator switch
