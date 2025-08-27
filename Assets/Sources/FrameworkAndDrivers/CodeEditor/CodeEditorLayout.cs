@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 
-using UnityLike.Entities.CodeEditor;
 using UnityLike.InterfaceAdapters.TextAreaLayout;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
@@ -19,11 +17,6 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         [SerializeField]
         private RectTransform blockVoidupdate;
 
-        [SerializeField]
-        private InputFieldUI InputFieldVoidstart;
-        [SerializeField]
-        private InputFieldUI InputFieldVoidupdate;
-
         void Start() => AttachmentInspection();
         private void AttachmentInspection()
         {
@@ -35,8 +28,6 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
                 Debug.LogError("areaVoidupdateがアタッチされていません");
             if (!blockVoidupdate)
                 Debug.LogError("blockVoidupdateがアタッチされていません");
-            InputFieldVoidstart.AttachmentInspection();
-            InputFieldVoidupdate.AttachmentInspection();
         }
 
         public float GetContentWidth()

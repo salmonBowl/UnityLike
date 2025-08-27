@@ -5,11 +5,8 @@ using Zenject;
 using UnityLike.Entities.Shared;
 
 // UseCases層
-using UnityLike.UseCases.CodeEditor;
 
 // InterfaceAdapter層
-using UnityLike.InterfaceAdapters.CodeEditorInputController;
-using UnityLike.InterfaceAdapters.CodeManagement;
 using UnityLike.InterfaceAdapters.TextAreaLayout;
 
 // FramewoekAndDrivers層
@@ -23,6 +20,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
         [Header("ScriptableObjectファイルをアタッチします")]
         [SerializeField]
         private CodeEditorSettings codeEditorSettings;
+        public static CodeEditorSettings CodeEditorSettings;
 
         [Space(20)]
 
@@ -30,7 +28,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
 
         [Header("CodeEditor関係")]
         [SerializeField]
-        private CodeEditorLayout codeEditorLayout;
+        private CodeEditor.CodeEditor codeEditorLayout;
         [SerializeField]
         private CodeEditorUIEvents codeEditorUIEvents;
 
@@ -44,6 +42,8 @@ namespace UnityLike.FrameworkAndDrivers.Installers
                 Debug.LogError("GameSceneInstaller : CodeEditorLayoutがアタッチされていません");
             if (!codeEditorUIEvents)
                 Debug.LogError("GameSceneInstaller : CodeEditorUIEventsがアタッチされていません");
+
+            CodeEditorSettings = codeEditorSettings;
         }
 
         // DIコンテナに依存関係をバインドします
@@ -63,13 +63,12 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              */
 
             Container.Bind<LineCountManager>().AsSingle();
-            Container.Bind<UpdateTextAreaUseCase>().AsSingle();
+            Container.Bind<LayoutDataBuilder>().AsSingle();
 
             /*
              *  --- Interface Adapters層 ---
              */
 
-            Container.Bind<ITextAreaLayoutAdapter>().To<TextAreaLayoutAdapter>().AsSingle();
 
             //
 
@@ -79,13 +78,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
 
             // MonoBehaviourをインターフェースとしてバインド
             Container.Bind<ITextAreaView>().FromInstance(codeEditorLayout).AsSingle();
-            Container.Bind<ITextAreaInput>().FromInstance(codeEditorUIEvents).AsSingle();
 
-            /*
-             *  --- Kernelのバインド ---
-             */
-
-            Container.BindInterfacesAndSelfTo<Kernel>().FromSubContainerResolve().ByMethod(KernelInstaller).AsSingle();
 
 
             /*
@@ -94,31 +87,6 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              */
 
             //Container.Bind<CodeEditor>().AsSingle();
-
-        }
-        private void KernelInstaller(DiContainer subContainer)
-        {
-            subContainer.Bind<Kernel>().AsSingle();
-
-            // Initialize()などのメソッドを使用するクラスでKernelをバインドします
-
-
-            /*
-             *  --- Use Cases層 ---
-             */
-
-            /*
-             *  --- Interface Adapters層 ---
-             */
-
-            subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
-
-            subContainer.Bind<ICodeChangeInputPort>().To<CodeManager>().AsSingle();
-
-            /*
-             *  --- Frameworks & Drivers層 ---
-             */
-
 
         }
     }

@@ -2,21 +2,26 @@ using System;
 using UnityEngine;
 
 using UnityLike.Entities.CodeEditor;
-using UnityLike.InterfaceAdapters.CodeEditorInputController;
+using UnityLike.InterfaceAdapters.CodeEditorInputManagement;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
-    public class CodeEditorUIEvents : MonoBehaviour, ITextAreaInput
+    public class CodeEditorUIEvents : MonoBehaviour
     {
-        public event Action<CodeEditorBlock, string> OnCodeChanged;
+        private CodeEditorInputManager inputManager;
+        
+        public void SetInputManager(CodeEditorInputManager inputManager)
+        {
+            this.inputManager = inputManager;
+        }
 
         public void OnCodeChangedVoidstart(string newText)
         {
-            OnCodeChanged?.Invoke(CodeEditorBlock.VoidStart, newText);
+            inputManager.OnTextChanged(CodeEditorBlock.VoidStart, newText);
         }
         public void OnCodeChangedVoidupdate(string newText)
         {
-            OnCodeChanged?.Invoke(CodeEditorBlock.VoidUpdate, newText);
+            inputManager.OnTextChanged(CodeEditorBlock.VoidUpdate, newText);
         }
     }
 }

@@ -3,13 +3,12 @@ using UnityEngine;
 using TMPro;
 
 using UnityLike.Entities.CodeEditor;
-using UnityLike.InterfaceAdapters.CodeEditorInputController;
 using UnityLike.InterfaceAdapters.CodeManagement;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
     [Serializable]
-    public class InputFieldUI : IGetInputFieldText, ISetTextUI
+    public class InputFieldUI : ISetTextUI
     {
         public CodeEditorBlock block;
 
@@ -31,11 +30,6 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
                 Debug.LogError("inputFieldがアタッチされていません");
             if (!viewText)
                 Debug.LogError("viewTextがアタッチされていません");
-        }
-
-        public string GetInputFieldText()
-        {
-            return inputField.text;
         }
 
         public void SetTextInputField(string text)

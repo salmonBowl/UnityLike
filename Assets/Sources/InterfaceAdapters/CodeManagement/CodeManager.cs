@@ -3,7 +3,7 @@ using UnityLike.InterfaceAdapters.CodeEditorMouseOver;
 
 namespace UnityLike.InterfaceAdapters.CodeManagement
 {
-    public class CodeManager : ICodeChangeInputPort
+    public class CodeManager : ICodeChanged
     {
         private readonly CompileManager compile;
         private readonly CodeErrorPopup errorPopup;
