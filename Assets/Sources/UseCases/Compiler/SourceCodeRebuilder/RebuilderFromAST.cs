@@ -12,10 +12,12 @@ namespace UnityLike.UseCases.Compiler
         private readonly List<StatementNode> statements;
         private int currentLine;
         private int currentColumn;
+        public GenerateTokenList GenerateTokenList { get; }
 
         public RebuilderFromAST(List<StatementNode> statements)
         {
             this.statements = statements;
+            GenerateTokenList = new GenerateTokenList();
         }
 
         /// <summary>
@@ -25,6 +27,8 @@ namespace UnityLike.UseCases.Compiler
         {
             currentLine = 1;
             currentColumn = 1;
+
+            GenerateTokenList.ClearList();
 
             foreach(var statement in statements)
             {
@@ -38,6 +42,8 @@ namespace UnityLike.UseCases.Compiler
         /// <param name="cToken"></param>
         public void ImportColoredToken(ColoredToken cToken)
         {
+            GenerateTokenList.Add(cToken);
+
             // 1. s‚ª‡‚¤‚Ü‚Å‰üs‚µ‚Ü‚·
             while (currentLine != cToken.LineCount)
             {

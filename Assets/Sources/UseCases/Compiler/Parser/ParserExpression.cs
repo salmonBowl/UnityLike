@@ -70,7 +70,10 @@ namespace UnityLike.UseCases.Compiler
                 TokenType.Identifier => ConsumeWithGenerate(),
                 TokenType.NumberLiteral => ConsumeWithGenerate(),
                 TokenType.LeftParen => ParseParenExpression(),
-                _ => AsUnknown()
+                TokenType.Unknown => AsUnknown(),
+                TokenType.SemiColon => throw new SyntaxErrorException("•¶‚ªŠ®¬‚µ‚Ä‚¢‚Ü‚¹‚ñ"),
+                TokenType.RightParen => throw new SyntaxErrorException("’l‚ª‚ ‚è‚Ü‚¹‚ñ"),
+                _ => throw new SyntaxErrorException()
             };
         }
 
@@ -88,7 +91,7 @@ namespace UnityLike.UseCases.Compiler
             if (CurrentTokenType == TokenType.RightParen)
                 Consume();
             else
-                return AsUnknown();
+                throw new SyntaxErrorException(")‚ª•K—v‚Å‚·");
 
             return ASTFactory.ParenNode(leftParen, content, rightParen);
         }

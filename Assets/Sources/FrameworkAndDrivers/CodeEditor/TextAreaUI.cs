@@ -3,8 +3,9 @@ using UnityEngine;
 using TMPro;
 
 using UnityLike.Entities.CodeEditor;
-using UnityLike.InterfaceAdapters.Controller;
-using UnityLike.InterfaceAdapters.Presenter;
+using UnityLike.InterfaceAdapters.CodeEditorInputController;
+using UnityLike.InterfaceAdapters.TextAreaLayout;
+using UnityLike.InterfaceAdapters.CompileManager;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {

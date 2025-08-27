@@ -1,6 +1,6 @@
 using Vector2 = UnityEngine.Vector2;
 
-namespace UnityLike.InterfaceAdapters.Presenter
+namespace UnityLike.InterfaceAdapters.TextAreaLayout
 {
     public interface ITextAreaView
     {

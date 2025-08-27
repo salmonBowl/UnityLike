@@ -23,7 +23,9 @@ namespace UnityLike.Entities.Compiler
         /// <returns></returns>
         public static UnknownExpressionNode UnknownNode(Token token)
         {
-            return new UnknownExpressionNode(TokenToColoredToken(token));
+            ColoredToken cToken = TokenToColoredToken(token);
+            cToken.HasError("–³Œø‚È’PŒê‚Å‚·");
+            return new UnknownExpressionNode(cToken);
         }
 
         public static ParenNode ParenNode(Token leftParen, ExpressionNode content, Token rightParen)
@@ -45,6 +47,11 @@ namespace UnityLike.Entities.Compiler
             TokenType operatorTokenType = @operator.TokenType;
             ColoredToken cOperator = TokenToColoredToken(@operator);
             return new BinaryExpressionNode(leftNode, operatorTokenType, cOperator, rightNode);
+        }
+
+        public static TypeNode TypeNode(Token type)
+        {
+            return new TypeNode(TokenToColoredToken(type));
         }
 
         /// <summary>

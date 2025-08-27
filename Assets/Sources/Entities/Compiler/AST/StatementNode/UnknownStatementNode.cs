@@ -9,14 +9,14 @@ namespace UnityLike.Entities.Compiler
         public Token[] Tokens { get; }
         public ColoredToken[] ColoredTokens { get; }
         
-        public UnknownStatementNode(Token[] tokens)
+        public UnknownStatementNode(Token[] tokens, string errorMessage)
         {
             Tokens = tokens;
             ColoredTokens = new ColoredToken[Tokens.Length];
             for (int i = 0; i < Tokens.Length; i++)
             {
                 ColoredTokens[i] = ASTFactory.TokenToColoredToken(Tokens[i]);
-                ColoredTokens[i].HasError("•¶–@‚ª³‚µ‚­‚ ‚è‚Ü‚¹‚ñ");
+                ColoredTokens[i].HasError(errorMessage);
             }
         }
 

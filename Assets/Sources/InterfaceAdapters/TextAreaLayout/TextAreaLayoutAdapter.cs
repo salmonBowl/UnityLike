@@ -3,14 +3,14 @@ using Zenject;
 
 using UnityLike.Entities.CodeEditor;
 
-namespace UnityLike.InterfaceAdapters.Presenter
+namespace UnityLike.InterfaceAdapters.TextAreaLayout
 {
-    public class TextAreaLayoutPresenter : ITextAreaLayoutPresenter
+    public class TextAreaLayoutAdapter : ITextAreaLayoutAdapter
     {
         private readonly ITextAreaView view;
 
         [Inject]
-        public TextAreaLayoutPresenter(ITextAreaView view)
+        public TextAreaLayoutAdapter(ITextAreaView view)
         {
             this.view = view;
         }

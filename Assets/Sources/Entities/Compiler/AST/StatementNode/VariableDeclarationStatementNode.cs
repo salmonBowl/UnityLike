@@ -20,17 +20,17 @@ namespace UnityLike.Entities.Compiler
 
         public ColoredToken SemicolonToken { get; }
 
-        public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier, ColoredToken cemicolonToken)
+        public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier, ColoredToken semicolonToken)
         {
             Type = type;
             DeclaratedIdentifier = new DeclaratedIdentifierNode(identifier);
-            SemicolonToken = cemicolonToken;
+            SemicolonToken = semicolonToken;
         }
         public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier,
-            ColoredToken equalToken, ExpressionNode initalValue, ColoredToken cemicolonToken
-            ) : this(type, identifier, cemicolonToken)
+            ColoredToken equalToken, ExpressionNode initalValue, ColoredToken semicolonToken
+            ) : this(type, identifier, semicolonToken)
         {
-            InitalAssignment = new AssignmentStatementNode(identifier, equalToken, initalValue, cemicolonToken);
+            InitalAssignment = new AssignmentStatementNode(identifier, equalToken, initalValue, semicolonToken);
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)

@@ -13,9 +13,10 @@ namespace UnityLike.Entities.Compiler
         public string Name { get; }
         public ColoredToken NameToken { get; }
 
-        public TypeNode(string name)
+        public TypeNode(ColoredToken type)
         {
-            Name = name;
+            Name = type.Value;
+            NameToken = type;
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)

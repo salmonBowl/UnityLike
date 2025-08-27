@@ -25,13 +25,13 @@ namespace UnityLike.UseCases.Compiler
                 {
                     TokenType.TypeStandard => ParseVariableDeclarationStatement(),
                     TokenType.Identifier => ParseAssignmentStatement(),
-                    _ => ParseUnknownStatement()
+                    _ => ParseUnknownStatement("文法が正しくありません")
                 };
             }
-            catch
+            catch (SyntaxErrorException e)
             {
                 currentTokenIndex = startTokenIndex;
-                return ParseUnknownStatement();
+                return ParseUnknownStatement(e.Message);
             }
         }
         private StatementNode ParseVariableDeclarationStatement()
@@ -65,7 +65,7 @@ namespace UnityLike.UseCases.Compiler
                 return new VariableDeclarationStatementNode
                     (typeNode, identifierNode, equals, expressionNode, semicolon);
 
-            throw new SyntaxErrorException();
+            throw new SyntaxErrorException(";が必要です");
         }
         private StatementNode ParseAssignmentStatement()
         {
@@ -85,9 +85,9 @@ namespace UnityLike.UseCases.Compiler
             if (semicolon != null)
                 return new AssignmentStatementNode(identifierNode, equals, expressionNode, semicolon);
 
-            throw new SyntaxErrorException();
+            throw new SyntaxErrorException(";が必要です");
         }
-        private UnknownStatementNode ParseUnknownStatement()
+        private UnknownStatementNode ParseUnknownStatement(string errorMessage)
         {
             List<Token> tokens = new();
             while (true)
@@ -95,6 +95,11 @@ namespace UnityLike.UseCases.Compiler
                 if (CurrentTokenType == TokenType.EOF)
                 {
                     break;
+                }
+                if (CurrentTokenType == TokenType.Return)
+                {
+                    Consume();
+                    continue;
                 }
                 if (CurrentTokenType == TokenType.SemiColon)
                 {
@@ -106,7 +111,7 @@ namespace UnityLike.UseCases.Compiler
                 tokens.Add(CurrentToken);
                 Consume();
             }
-            return new UnknownStatementNode(tokens.ToArray());
+            return new UnknownStatementNode(tokens.ToArray(), errorMessage);
         }
     }
 }

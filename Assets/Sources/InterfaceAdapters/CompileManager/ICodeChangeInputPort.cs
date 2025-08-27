@@ -1,6 +1,6 @@
 using UnityLike.Entities.CodeEditor;
 
-namespace UnityLike.InterfaceAdapters.Presenter
+namespace UnityLike.InterfaceAdapters.CompileManager
 {
     public interface ICodeChangeInputPort
     {

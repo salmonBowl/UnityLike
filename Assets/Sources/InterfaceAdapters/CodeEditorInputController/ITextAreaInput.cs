@@ -2,7 +2,7 @@ using System;
 
 using UnityLike.Entities.CodeEditor;
 
-namespace UnityLike.InterfaceAdapters.Controller
+namespace UnityLike.InterfaceAdapters.CodeEditorInputController
 {
     public interface ITextAreaInput
     {

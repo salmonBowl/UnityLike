@@ -17,12 +17,12 @@ namespace UnityLike.Entities.Compiler
         public ColoredToken SemicolonToken { get; }
 
         public AssignmentStatementNode(IdentifierNode identifier, ColoredToken equalToken,
-            ExpressionNode value, ColoredToken cemicolonToken)
+            ExpressionNode value, ColoredToken semicolonToken)
         {
             Identifier = identifier;
             Value = value;
             EqualToken = equalToken;
-            SemicolonToken = cemicolonToken;
+            SemicolonToken = semicolonToken;
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)

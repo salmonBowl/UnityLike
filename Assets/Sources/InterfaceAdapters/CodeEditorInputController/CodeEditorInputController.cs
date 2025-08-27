@@ -3,9 +3,9 @@ using Zenject;
 
 using UnityLike.Entities.CodeEditor;
 using UnityLike.UseCases.CodeEditor;
-using UnityLike.InterfaceAdapters.Presenter;
+using UnityLike.InterfaceAdapters.CompileManager;
 
-namespace UnityLike.InterfaceAdapters.Controller
+namespace UnityLike.InterfaceAdapters.CodeEditorInputController
 {
     public class CodeEditorInputController : IInitializable, IDisposable
     {

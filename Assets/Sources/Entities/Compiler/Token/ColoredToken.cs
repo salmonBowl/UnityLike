@@ -40,5 +40,16 @@ namespace UnityLike.Entities.Compiler
             ErrorMessage = errorMessage;
             ChangeColor(TokenConstants.errorColor);
         }
+
+        /// <summary>
+        /// ƒg[ƒNƒ“‚Ìî•ñ‚ğ•¶š—ñ‚Æ‚µ‚Äæ“¾‚µ‚Ü‚·
+        /// </summary>
+        public override string ToString() // Token.ToString
+        {
+            string stringLineCount = LineCount.ToString(); // int.ToString
+            string stringColumnCount = ColumnCount.ToString(); // int.ToString
+
+            return $"[Value : {Value}, LineCount : {stringLineCount}, ColumnCount : {stringColumnCount}, ColorCode : {ColorCode}]";
+        }
     }
 }

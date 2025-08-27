@@ -1,8 +1,8 @@
 using UnityLike.Entities.CodeEditor;
 
-namespace UnityLike.InterfaceAdapters.Presenter
+namespace UnityLike.InterfaceAdapters.TextAreaLayout
 {
-    public interface ITextAreaLayoutPresenter
+    public interface ITextAreaLayoutAdapter
     {
         void PresenterLayout(TextAreaLayoutData layoutData);
     }

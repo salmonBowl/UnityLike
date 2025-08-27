@@ -4,7 +4,7 @@ using Zenject;
 
 using UnityLike.Entities.CodeEditor;
 using UnityLike.Entities.Shared;
-using UnityLike.InterfaceAdapters.Presenter;
+using UnityLike.InterfaceAdapters.TextAreaLayout;
 
 namespace UnityLike.UseCases.CodeEditor
 {
@@ -13,13 +13,13 @@ namespace UnityLike.UseCases.CodeEditor
 
         private readonly LineCountManager lineCountManager;
         private readonly ICodeEditorSettings settings;
-        private readonly ITextAreaLayoutPresenter layoutPresenter;
+        private readonly ITextAreaLayoutAdapter layoutPresenter;
 
         [Inject]
         public UpdateTextAreaUseCase(
             LineCountManager lineCountManager,
             ICodeEditorSettings settings,
-            ITextAreaLayoutPresenter layoutPresenter
+            ITextAreaLayoutAdapter layoutPresenter
             )
         {
             this.lineCountManager = lineCountManager;
