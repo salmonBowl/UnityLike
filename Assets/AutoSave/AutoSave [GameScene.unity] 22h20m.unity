@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 10792250}
   - component: {fileID: 10792249}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ErrorMessagae
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,17 +144,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10792247}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1856146408}
+  m_Father: {fileID: 1679052516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: 1.3499999}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &10792249
 MonoBehaviour:
@@ -176,10 +176,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "\u69CB\u6587\u30A8\u30E9\u30FC\u3067\u3059"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
+  m_sharedMaterial: {fileID: 7155552369867759418, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -203,15 +203,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1632,10 +1632,14 @@ MonoBehaviour:
   areaVoidstart: {fileID: 1705077550}
   areaVoidupdate: {fileID: 1436336179}
   blockVoidupdate: {fileID: 1602699583}
-  inputFieldVoidstart: {fileID: 868099849}
-  inputFieldVoidupdate: {fileID: 61857285}
-  viewTextVoidstart: {fileID: 198054990}
-  viewTextVoidupdate: {fileID: 389990090}
+  InputFieldVoidstart:
+    block: 0
+    inputField: {fileID: 868099849}
+    viewText: {fileID: 198054990}
+  InputFieldVoidupdate:
+    block: 1
+    inputField: {fileID: 61857285}
+    viewText: {fileID: 389990090}
 --- !u!1 &466921367
 GameObject:
   m_ObjectHideFlags: 0
@@ -3656,6 +3660,7 @@ RectTransform:
   - {fileID: 2059751604}
   - {fileID: 1602699583}
   - {fileID: 1462083830}
+  - {fileID: 10792248}
   m_Father: {fileID: 818905159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -3938,7 +3943,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   codeEditorSettings: {fileID: 11400000, guid: edfea24ced3ee0c4bac1514a2d51484a, type: 2}
-  codeEditorTextAreaView: {fileID: 432131775}
+  codeEditorLayout: {fileID: 0}
+  errorPopupUI: {fileID: 0}
 --- !u!1 &1856146404
 GameObject:
   m_ObjectHideFlags: 0
@@ -4036,7 +4042,6 @@ RectTransform:
   - {fileID: 1522955794}
   - {fileID: 535119420}
   - {fileID: 153979050}
-  - {fileID: 10792248}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

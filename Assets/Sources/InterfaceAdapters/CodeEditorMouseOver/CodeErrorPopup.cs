@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Zenject;
 
 using UnityLike.Entities.Compiler;
 
@@ -9,12 +10,14 @@ namespace UnityLike.InterfaceAdapters.CodeEditorMouseOver
     /// </summary>
     public class CodeErrorPopup
     {
-        private IPopupView view;
         private readonly CompileData data;
+        private readonly IPopupView view;
 
-        public CodeErrorPopup(CompileData data)
+        [Inject]
+        public CodeErrorPopup(CompileData data, IPopupView popup)
         {
             this.data = data;
+            view = popup;
         }
 
         /// <summary>

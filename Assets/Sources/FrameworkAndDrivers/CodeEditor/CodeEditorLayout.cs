@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 
+using UnityLike.Entities.CodeEditor;
 using UnityLike.InterfaceAdapters.TextAreaLayout;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
@@ -17,59 +19,47 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         [SerializeField]
         private RectTransform blockVoidupdate;
 
+        [SerializeField]
+        private InputFieldUI InputFieldVoidstart;
+        [SerializeField]
+        private InputFieldUI InputFieldVoidupdate;
+
+        void Start() => AttachmentInspection();
+        private void AttachmentInspection()
+        {
+            if (!content)
+                Debug.LogError("contentがアタッチされていません");
+            if (!areaVoidstart)
+                Debug.LogError("areaVoidstartがアタッチされていません");
+            if (!areaVoidupdate)
+                Debug.LogError("areaVoidupdateがアタッチされていません");
+            if (!blockVoidupdate)
+                Debug.LogError("blockVoidupdateがアタッチされていません");
+            InputFieldVoidstart.AttachmentInspection();
+            InputFieldVoidupdate.AttachmentInspection();
+        }
+
         public float GetContentWidth()
         {
-            if (content == null)
-            {
-                Debug.LogError("contentが指定されていません");
-                return 0f;
-            }
-
             return content.rect.width;
         }
 
         public void SetContentSize(Vector2 anchoredSize)
         {
-            if (content == null)
-            {
-                Debug.LogError("contentがアタッチされていません");
-                return;
-            }
-
             content.sizeDelta = anchoredSize;
         }
         public void SetAreaVoidstartLayout(Vector2 size, Vector2 anchoredPosition)
         {
-            if (areaVoidstart == null)
-            {
-                Debug.LogError("areaVoidstartがアタッチされていません");
-                return;
-            }
-
             areaVoidstart.sizeDelta = size;
             areaVoidstart.anchoredPosition = anchoredPosition;
         }
         public void SetAreaVoidupdateLayout(Vector2 size, Vector2 anchoredPosition)
         {
-            //Debug.Log("SetAreaViudupdateLayout()");
-
-            if (areaVoidupdate == null)
-            {
-                Debug.LogError("areaVoidupdateがアタッチされていません");
-                return;
-            }
-
             areaVoidupdate.sizeDelta = size;
             areaVoidupdate.anchoredPosition = anchoredPosition;
         }
         public void SetBlockVoidupdatePosition(Vector2 anchoredPosition)
         {
-            if (blockVoidupdate == null)
-            {
-                Debug.LogError("blockVoidupdateがアタッチされていません");
-                return;
-            }
-
             blockVoidupdate.anchoredPosition = anchoredPosition;
         }
     }

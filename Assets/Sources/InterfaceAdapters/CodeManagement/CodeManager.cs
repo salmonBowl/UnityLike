@@ -1,6 +1,5 @@
 using UnityLike.Entities.Compiler;
 using UnityLike.InterfaceAdapters.CodeEditorMouseOver;
-using UnityLike.InterfaceAdapters.CompileManagement;
 
 namespace UnityLike.InterfaceAdapters.CodeManagement
 {
@@ -10,11 +9,11 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
         private readonly CodeErrorPopup errorPopup;
         private CompileData data;
 
-        public CodeManager(ISetTextUI setTextUI)
+        public CodeManager(ISetTextUI setTextUI, IPopupView popup)
         {
             compile = new CompileManager(setTextUI);
             data = new CompileData();
-            errorPopup = new CodeErrorPopup(data);
+            errorPopup = new CodeErrorPopup(data, popup);
         }
 
         public void OnChangeCode(string sourceCode)

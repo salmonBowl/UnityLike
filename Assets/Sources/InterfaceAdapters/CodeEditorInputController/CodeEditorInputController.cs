@@ -37,17 +37,8 @@ namespace UnityLike.InterfaceAdapters.CodeEditorInputController
 
         public void Initialize()
         {
-            //UnityEngine.Debug.Log("CodeEditorInputController.Initialize()");
-
-            if (lineCountManager == null)
-                UnityEngine.Debug.LogError("CodeEditorInputController : lineCountManager‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
-            if (updateTextAreaUseCase == null)
-                UnityEngine.Debug.LogError("CodeEditorInputController : updateTextAreaUseCase‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
-            if (textAreaInput == null)
-                UnityEngine.Debug.LogError("CodeEditorInputController : textAreaInput‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
-
             // View¨Controller¨LineCount
-            textAreaInput.OnTextChanged += OnTextInputChanged;
+            textAreaInput.OnCodeChanged += OnTextInputChanged;
 
             //LineCount¨Controller¨UseCase.Execute
             lineCountManager.OnLineCountChanged += OnLineCountChangedHandler;
@@ -60,7 +51,7 @@ namespace UnityLike.InterfaceAdapters.CodeEditorInputController
         }
         public void Dispose()
         {
-            textAreaInput.OnTextChanged -= OnTextInputChanged;
+            textAreaInput.OnCodeChanged -= OnTextInputChanged;
             lineCountManager.OnLineCountChanged -= OnLineCountChangedHandler;
         }
 

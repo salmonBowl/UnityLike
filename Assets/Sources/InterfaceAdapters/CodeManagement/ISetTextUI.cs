@@ -1,6 +1,5 @@
-using UnityLike.Entities.CodeEditor;
 
-namespace UnityLike.InterfaceAdapters.CompileManagement
+namespace UnityLike.InterfaceAdapters.CodeManagement
 {
     public interface ISetTextUI
     {

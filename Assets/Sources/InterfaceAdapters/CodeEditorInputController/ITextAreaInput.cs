@@ -6,6 +6,6 @@ namespace UnityLike.InterfaceAdapters.CodeEditorInputController
 {
     public interface ITextAreaInput
     {
-        event Action<CodeEditorBlock, string> OnTextChanged;
+        event Action<CodeEditorBlock, string> OnCodeChanged;
     }
 }

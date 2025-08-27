@@ -4,7 +4,7 @@ using Zenject;
 using UnityLike.Entities.Compiler;
 using UnityLike.UseCases.Compiler;
 
-namespace UnityLike.InterfaceAdapters.CompileManagement
+namespace UnityLike.InterfaceAdapters.CodeManagement
 {
     public class CompileManager
     {

@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 10792248}
   - component: {fileID: 10792250}
   - component: {fileID: 10792249}
+  - component: {fileID: 10792251}
   m_Layer: 5
   m_Name: ErrorMessagae
   m_TagString: Untagged
@@ -255,6 +256,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10792247}
   m_CullTransparentMesh: 1
+--- !u!114 &10792251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10792247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7de0ffcb7ba674ebf014768291e9ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popup: {fileID: 0}
+  text: {fileID: 0}
 --- !u!1 &61857283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,10 +1647,14 @@ MonoBehaviour:
   areaVoidstart: {fileID: 1705077550}
   areaVoidupdate: {fileID: 1436336179}
   blockVoidupdate: {fileID: 1602699583}
-  inputFieldVoidstart: {fileID: 868099849}
-  inputFieldVoidupdate: {fileID: 61857285}
-  viewTextVoidstart: {fileID: 198054990}
-  viewTextVoidupdate: {fileID: 389990090}
+  InputFieldVoidstart:
+    block: 0
+    inputField: {fileID: 868099849}
+    viewText: {fileID: 198054990}
+  InputFieldVoidupdate:
+    block: 1
+    inputField: {fileID: 61857285}
+    viewText: {fileID: 389990090}
 --- !u!1 &466921367
 GameObject:
   m_ObjectHideFlags: 0
@@ -3939,7 +3958,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   codeEditorSettings: {fileID: 11400000, guid: edfea24ced3ee0c4bac1514a2d51484a, type: 2}
-  codeEditorTextAreaView: {fileID: 432131775}
+  codeEditorLayout: {fileID: 432131775}
+  errorPopupUI: {fileID: 10792251}
 --- !u!1 &1856146404
 GameObject:
   m_ObjectHideFlags: 0

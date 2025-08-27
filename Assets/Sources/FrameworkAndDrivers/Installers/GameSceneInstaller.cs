@@ -1,20 +1,18 @@
 using UnityEngine;
 using Zenject;
 
-// Entities層のusing
-// ただしこの層がインスタンスとして使われることは基本ない
+// Entities層
 using UnityLike.Entities.Shared;
 
-// UseCases層のusing
+// UseCases層
 using UnityLike.UseCases.CodeEditor;
 
-// InterfaceAdapter層のusing
+// InterfaceAdapter層
 using UnityLike.InterfaceAdapters.CodeEditorInputController;
 using UnityLike.InterfaceAdapters.CodeManagement;
-using UnityLike.InterfaceAdapters.CompileManagement;
 using UnityLike.InterfaceAdapters.TextAreaLayout;
 
-// FramewoekAndDrivers層のusing
+// FramewoekAndDrivers層
 using UnityLike.FrameworkAndDrivers.CodeEditor;
 using UnityLike.FrameworkAndDrivers.Settings;
 
@@ -28,20 +26,24 @@ namespace UnityLike.FrameworkAndDrivers.Installers
 
         [Space(20)]
 
-        [Header("開発に使う全てのMonoBehaviourクラスを取得します")]
+        [Header("開発に使う全てのMonoBehaviourクラスをアタッチします")]
 
         [Header("CodeEditor関係")]
         [SerializeField]
-        private CodeEditorLayout codeEditorTextAreaView;
+        private CodeEditorLayout codeEditorLayout;
+        [SerializeField]
+        private CodeEditorUIEvents codeEditorUIEvents;
 
         public override void Start()
         {
             //base.Start(); 空メソッド
 
-            if (codeEditorSettings == null)
+            if (!codeEditorSettings)
                 Debug.LogError("GameSceneInstaller : CodeEditorSettingsが指定されていません");
-            if (codeEditorTextAreaView == null)
-                Debug.LogError("GameSceneInstaller : CodeEditorTextAreaViewが指定されていません");
+            if (!codeEditorLayout)
+                Debug.LogError("GameSceneInstaller : CodeEditorLayoutがアタッチされていません");
+            if (!codeEditorUIEvents)
+                Debug.LogError("GameSceneInstaller : CodeEditorUIEventsがアタッチされていません");
         }
 
         // DIコンテナに依存関係をバインドします
@@ -76,12 +78,8 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              */
 
             // MonoBehaviourをインターフェースとしてバインド
-            Container.Bind<ITextAreaView>().FromInstance(codeEditorTextAreaView).AsSingle();
-            Container.Bind<ITextAreaInput>().FromInstance(codeEditorTextAreaView).AsSingle();
-            Container.Bind<IGetInputFieldText>().FromInstance(codeEditorTextAreaView).AsSingle();
-            Container.Bind<ISetTextUI>().FromInstance(codeEditorTextAreaView).AsSingle();
-
-
+            Container.Bind<ITextAreaView>().FromInstance(codeEditorLayout).AsSingle();
+            Container.Bind<ITextAreaInput>().FromInstance(codeEditorUIEvents).AsSingle();
 
             /*
              *  --- Kernelのバインド ---
