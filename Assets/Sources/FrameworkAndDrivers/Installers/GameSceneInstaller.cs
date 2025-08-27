@@ -9,8 +9,10 @@ using UnityLike.Entities.Shared;
 using UnityLike.UseCases.CodeEditor;
 
 // InterfaceAdapter‘w‚Ìusing
-using UnityLike.InterfaceAdapters.Presenter;
-using UnityLike.InterfaceAdapters.Controller;
+using UnityLike.InterfaceAdapters.CodeEditorInputController;
+using UnityLike.InterfaceAdapters.CodeManagement;
+using UnityLike.InterfaceAdapters.CompileManagement;
+using UnityLike.InterfaceAdapters.TextAreaLayout;
 
 // FramewoekAndDrivers‘w‚Ìusing
 using UnityLike.FrameworkAndDrivers.CodeEditor;
@@ -65,7 +67,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              *  --- Interface Adapters‘w ---
              */
 
-            Container.Bind<ITextAreaLayoutPresenter>().To<TextAreaLayoutPresenter>().AsSingle();
+            Container.Bind<ITextAreaLayoutAdapter>().To<TextAreaLayoutAdapter>().AsSingle();
 
             //
 
@@ -113,7 +115,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
 
             subContainer.BindInterfacesTo<CodeEditorInputController>().AsSingle().NonLazy();
 
-            subContainer.Bind<ICodeChangeInputPort>().To<CompileManager>().AsSingle();
+            subContainer.Bind<ICodeChangeInputPort>().To<CodeManager>().AsSingle();
 
             /*
              *  --- Frameworks & Drivers‘w ---

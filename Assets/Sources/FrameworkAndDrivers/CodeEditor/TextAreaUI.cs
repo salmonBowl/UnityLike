@@ -5,7 +5,7 @@ using TMPro;
 using UnityLike.Entities.CodeEditor;
 using UnityLike.InterfaceAdapters.CodeEditorInputController;
 using UnityLike.InterfaceAdapters.TextAreaLayout;
-using UnityLike.InterfaceAdapters.CompileManager;
+using UnityLike.InterfaceAdapters.CompileManagement;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {

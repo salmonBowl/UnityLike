@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using Zenject;
 
-using UnityLike.Entities.CodeEditor;
 using UnityLike.Entities.Compiler;
 using UnityLike.UseCases.Compiler;
 
-namespace UnityLike.InterfaceAdapters.CompileManager
+namespace UnityLike.InterfaceAdapters.CompileManagement
 {
-    public class CompileManager : ICodeChangeInputPort
+    public class CompileManager
     {
         // アウトプット
         private readonly ISetTextUI view;
@@ -15,19 +14,21 @@ namespace UnityLike.InterfaceAdapters.CompileManager
         private Lexer lexer;
         private Parser parser;
 
-        private readonly CompileData data = new();
-
         [Inject]
         public CompileManager(ISetTextUI view)
         {
             this.view = view;
         }
 
-        // TextAreaUIから受け取ります
-        public void CompileSourceCode(CodeEditorBlock block, string sourceCode)
+        /// <summary>
+        /// コンパイルを行います
+        /// </summary>
+        /// <param name="block"></param>
+        /// <param name="sourceCode"></param>
+        public void Execute(string sourceCode, ref CompileData saveTarget)
         {
             // InputField内のテキストを正しい形へと修正します
-            string fixedSourceCode = FixInputFieldText(block, sourceCode);
+            string fixedSourceCode = FixInputFieldText(sourceCode);
 
             // 以下コンパイルを行っていきます
             /*
@@ -48,27 +49,18 @@ namespace UnityLike.InterfaceAdapters.CompileManager
             RebuilderFromAST rebuilder = new(statements);
             rebuilder.RebuildExecute();
             string richSourceCode = rebuilder.GetRichSourceCode();
-            view.SetViewText(block, richSourceCode);
+            view.SetViewText(richSourceCode);
 
             // コンパイルしたデータを保存します
-            data.ColoredTokens = rebuilder.GenerateTokenList.GetData();
-            data.AST = statements;
-        }
-
-        /// <summary>
-        /// CompileManagerが保持するCompileDataを取得します
-        /// </summary>
-        /// <returns></returns>
-        public CompileData GetCompileData()
-        {
-            return data;
+            saveTarget.ColoredTokens = rebuilder.GenerateTokenList.GetData();
+            saveTarget.AST = statements;
         }
 
         /// <summary>
         /// UnityのInputField内で発生する問題、backslashの数が合わないなどを調整します
         /// </summary>
         /// <returns>調整後のInputFieldのテキストを返します</returns>
-        private string FixInputFieldText(CodeEditorBlock block, string sourceCode)
+        private string FixInputFieldText(string sourceCode)
         {
             // TMPでは"\\\\"が\として表示されます
             // "\\"("\\\\"をInputField上で消去しようとしたもの)は消去
@@ -78,7 +70,7 @@ namespace UnityLike.InterfaceAdapters.CompileManager
                 .Replace("\v", "\\\\"); // 仮置きを\\に戻す
 
             // InputFieldの内容を書き換えます
-            view.SetTextInputField(block, backSlashProcessed);
+            view.SetTextInputField(backSlashProcessed);
 
             // 調整後のInputFieldのテキストを返します
             return backSlashProcessed;

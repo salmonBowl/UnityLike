@@ -3,7 +3,7 @@ using Zenject;
 
 using UnityLike.Entities.CodeEditor;
 using UnityLike.UseCases.CodeEditor;
-using UnityLike.InterfaceAdapters.CompileManager;
+using UnityLike.InterfaceAdapters.CodeManagement;
 
 namespace UnityLike.InterfaceAdapters.CodeEditorInputController
 {
@@ -77,7 +77,7 @@ namespace UnityLike.InterfaceAdapters.CodeEditorInputController
             lineCountManager.SetLineCount(block, newLineCount);
 
             // インターフェイスを通じてコンパイルシステムに送ります
-            codeChange.CompileSourceCode(block, newText);
+            codeChange.OnChangeCode(newText);
         }
 
         private int CalculateLineCount(string text)
