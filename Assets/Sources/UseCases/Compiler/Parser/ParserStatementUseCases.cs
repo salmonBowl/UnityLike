@@ -51,7 +51,7 @@ namespace UnityLike.UseCases.Compiler
                 }
                 return ASTFactory.TokenToColoredToken(outher.CurrentToken);
             }
-            public ColoredToken Cemicolon()
+            public ColoredToken Semicolon()
             {
                 if (outher.CurrentTokenType == TokenType.SemiColon)
                 {

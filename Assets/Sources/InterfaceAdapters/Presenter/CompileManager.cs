@@ -37,18 +37,16 @@ namespace UnityLike.InterfaceAdapters.Presenter
             lexer = new(Normalize(sourceCode));
             Token[] tokenArray = GenerateTokenArray();
 
-              // 試験的にシンタックスハイライト化したものをテキストエディタ上で表示しています
-            SourceCodeRebuilder rebuilder = new RebuilderFromTokens(tokenArray);
-            rebuilder.RebuildExecute();
-            string richSourceCode = rebuilder.GetRichSourceCode();
-            view.SetViewText(block, richSourceCode);
-
             // 構文木解析
             parser = new(tokenArray);
             parser.Parse();
             List<StatementNode> statements = parser.GetParsedStatements();
 
-
+            // ソースコードを色を付けながら再構成し、テキストエディタへ表示します
+            RebuilderFromAST rebuilder = new(statements);
+            rebuilder.RebuildExecute();
+            string richSourceCode = rebuilder.GetRichSourceCode();
+            view.SetViewText(block, richSourceCode);
         }
 
         /// <summary>

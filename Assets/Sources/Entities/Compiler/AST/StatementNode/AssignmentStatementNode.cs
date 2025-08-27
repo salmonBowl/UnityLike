@@ -14,7 +14,7 @@ namespace UnityLike.Entities.Compiler
         public ExpressionNode Value { get; }
 
         public ColoredToken EqualToken { get; }
-        public ColoredToken CemicolonToken { get; }
+        public ColoredToken SemicolonToken { get; }
 
         public AssignmentStatementNode(IdentifierNode identifier, ColoredToken equalToken,
             ExpressionNode value, ColoredToken cemicolonToken)
@@ -22,7 +22,7 @@ namespace UnityLike.Entities.Compiler
             Identifier = identifier;
             Value = value;
             EqualToken = equalToken;
-            CemicolonToken = cemicolonToken;
+            SemicolonToken = cemicolonToken;
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
@@ -30,7 +30,7 @@ namespace UnityLike.Entities.Compiler
             Identifier.ColoredTokenScan(rebuilder);
             rebuilder.ImportColoredToken(EqualToken);
             Value.ColoredTokenScan(rebuilder);
-            rebuilder.ImportColoredToken(CemicolonToken);
+            rebuilder.ImportColoredToken(SemicolonToken);
         }
 
         public override string ToPrettyString() =>

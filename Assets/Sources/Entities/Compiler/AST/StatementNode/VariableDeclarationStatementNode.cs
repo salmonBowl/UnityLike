@@ -18,13 +18,13 @@ namespace UnityLike.Entities.Compiler
         public DeclaratedIdentifierNode DeclaratedIdentifier { get; }
         public AssignmentStatementNode? InitalAssignment { get; } = null;
 
-        public ColoredToken CemicolonToken { get; }
+        public ColoredToken SemicolonToken { get; }
 
         public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier, ColoredToken cemicolonToken)
         {
             Type = type;
             DeclaratedIdentifier = new DeclaratedIdentifierNode(identifier);
-            CemicolonToken = cemicolonToken;
+            SemicolonToken = cemicolonToken;
         }
         public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier,
             ColoredToken equalToken, ExpressionNode initalValue, ColoredToken cemicolonToken
@@ -39,7 +39,7 @@ namespace UnityLike.Entities.Compiler
             if (InitalAssignment == null)
             {
                 DeclaratedIdentifier.ColoredTokenScan(rebuilder);
-                rebuilder.ImportColoredToken(CemicolonToken);
+                rebuilder.ImportColoredToken(SemicolonToken);
             }
             else
             {

@@ -7,6 +7,7 @@ namespace UnityLike.Entities.Compiler
         public int LineCount { get; }
         public int ColumnCount { get; }
         public string ColorCode { get; private set; }
+        public string ErrorMessage { get; private set; } = string.Empty;
 
         public ColoredToken(
             string value,
@@ -28,6 +29,16 @@ namespace UnityLike.Entities.Compiler
         public void ChangeColor(string colorCode)
         {
             ColorCode = colorCode;
+        }
+
+        /// <summary>
+        /// このトークンがエラーである時、メッセージとともに色を赤に変更します
+        /// </summary>
+        /// <param name="errorMessage"></param>
+        public void HasError(string errorMessage)
+        {
+            ErrorMessage = errorMessage;
+            ChangeColor(TokenConstants.errorColor);
         }
     }
 }

@@ -64,6 +64,7 @@ namespace UnityLike.UseCases.Compiler
             richSourceCode.Append($"<color={returnSyntaxColor}>{TokenConstants.returnText}</color>\n");
 
             currentLine++;
+            currentColumn = 1;
         }
         private void FillSpaces(int cTokenColumnCount)
         {

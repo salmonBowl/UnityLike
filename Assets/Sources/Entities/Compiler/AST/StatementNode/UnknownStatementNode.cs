@@ -12,6 +12,12 @@ namespace UnityLike.Entities.Compiler
         public UnknownStatementNode(Token[] tokens)
         {
             Tokens = tokens;
+            ColoredTokens = new ColoredToken[Tokens.Length];
+            for (int i = 0; i < Tokens.Length; i++)
+            {
+                ColoredTokens[i] = ASTFactory.TokenToColoredToken(Tokens[i]);
+                ColoredTokens[i].HasError("•¶–@‚ª³‚µ‚­‚ ‚è‚Ü‚¹‚ñ");
+            }
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)

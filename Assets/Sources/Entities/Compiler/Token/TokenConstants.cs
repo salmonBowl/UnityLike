@@ -94,6 +94,7 @@ namespace UnityLike.Entities.Compiler
 
         #endregion
 
+        public static readonly string errorColor = "#FF0000";
         private static readonly string operatorColor = "#FFFFFF";
         private static readonly string controlSyntaxColor = "#D846FF";
         private static readonly string constBlue = "#569CD6";
@@ -135,8 +136,8 @@ namespace UnityLike.Entities.Compiler
             { TokenType.SemiColon, "#FFFFFF" },
 
             // エラーを赤色に
-            { TokenType.Unknown, "#FF0000" },
-            { TokenType.BackSlash, "#FF0000" },
+            { TokenType.Unknown, errorColor },
+            { TokenType.BackSlash, errorColor },
 
             #region キーワード (制御構文や型名など)
             { TokenType.If, controlSyntaxColor },
