@@ -4,7 +4,7 @@ namespace UnityLike.InterfaceAdapters.CodeEditorInputController
 {
     public interface IGetInputFieldText
     {
-        string GetInputFieldText(CodeEditorBlock block);
+        string GetInputFieldText();
     }
 
 }

@@ -32,7 +32,7 @@ namespace UnityLike.FrameworkAndDrivers.Installers
 
         [Header("CodeEditorŠÖŒW")]
         [SerializeField]
-        private TextAreaUI codeEditorTextAreaView;
+        private CodeEditorLayout codeEditorTextAreaView;
 
         public override void Start()
         {

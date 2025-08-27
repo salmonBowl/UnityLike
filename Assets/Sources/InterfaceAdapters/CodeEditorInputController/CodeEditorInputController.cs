@@ -47,20 +47,20 @@ namespace UnityLike.InterfaceAdapters.CodeEditorInputController
                 UnityEngine.Debug.LogError("CodeEditorInputController : textAreaInputÇ™ê›íËÇ≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ");
 
             // ViewÅ®ControllerÅ®LineCount
-            textAreaInput.OnTextAreaInputChanged += OnTextInputChanged;
+            textAreaInput.OnTextChanged += OnTextInputChanged;
 
             //LineCountÅ®ControllerÅ®UseCase.Execute
             lineCountManager.OnLineCountChanged += OnLineCountChangedHandler;
 
             // èâä˙ï\é¶ÇÃÇΩÇﬂÇ…àÍìxÇæÇØé¿çs
             // VoidStart
-            OnTextInputChanged(CodeEditorBlock.VoidStart, getInputFieldText.GetInputFieldText(CodeEditorBlock.VoidStart));
+            OnTextInputChanged(CodeEditorBlock.VoidStart, getInputFieldText.GetInputFieldText());
             // VoidUpdate
-            OnTextInputChanged(CodeEditorBlock.VoidUpdate, getInputFieldText.GetInputFieldText(CodeEditorBlock.VoidUpdate));
+            OnTextInputChanged(CodeEditorBlock.VoidUpdate, getInputFieldText.GetInputFieldText());
         }
         public void Dispose()
         {
-            textAreaInput.OnTextAreaInputChanged -= OnTextInputChanged;
+            textAreaInput.OnTextChanged -= OnTextInputChanged;
             lineCountManager.OnLineCountChanged -= OnLineCountChangedHandler;
         }
 
