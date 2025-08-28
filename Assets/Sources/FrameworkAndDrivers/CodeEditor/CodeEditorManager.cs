@@ -4,7 +4,7 @@ using UnityLike.InterfaceAdapters.CodeEditorInputManagement;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
-    [RequireComponent(typeof(CodeEditorUIEvents), typeof(CodeEditorLayout))]
+    [RequireComponent(typeof(CodeEditorUIEvents), typeof(CodeEditorLayout), typeof(UIPosCalculator))]
     public partial class CodeEditor : MonoBehaviour
     {
         [SerializeField]
@@ -14,6 +14,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
 
         private CodeEditorUIEvents codeEditorUIEvents;
         private CodeEditorLayout codeEditorLayout;
+        private UIPosCalculator codeEditorUICalculator;
         private CodeEditorInputManager inputManager;
 
         void Start()
@@ -22,9 +23,6 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             InputFieldVoidupdate.AttachmentInspection();
 
             MemberInitialize();
-
-            InputFieldVoidstart.Start();
-            InputFieldVoidupdate.Start();
 
             CodeInitialize();
         }
@@ -38,10 +36,18 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         {
             codeEditorUIEvents = GetComponent<CodeEditorUIEvents>();
             codeEditorLayout = GetComponent<CodeEditorLayout>();
+            codeEditorUICalculator = GetComponent<UIPosCalculator>();
+
+            codeEditorUICalculator.MemberInitialize();
+            InputFieldVoidstart.MemberInitialize();
+            InputFieldVoidupdate.MemberInitialize();
+
             inputManager = new CodeEditorInputManager(codeEditorLayout,
                 InputFieldVoidstart.codeManager, InputFieldVoidupdate.codeManager);
 
-            codeEditorUIEvents.SetInputManager(inputManager);
+            codeEditorUIEvents.DIInputManager(inputManager);
+            InputFieldVoidstart.DIMousePos(codeEditorUICalculator);
+            InputFieldVoidupdate.DIMousePos(codeEditorUICalculator);
         }
         private void CodeInitialize()
         {

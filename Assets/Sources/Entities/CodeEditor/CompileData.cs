@@ -10,11 +10,11 @@ namespace UnityLike.Entities.Compiler
         /// <summary>
         /// トークン列です。元のソースコードを復元できるだけの情報を持っています。
         /// </summary>
-        public List<ColoredToken> ColoredTokens { get; set; }
+        public List<ColoredToken> ColoredTokens { get; set; } = new();
 
         /// <summary>
         /// 構文木です。これを使って色々な走査ができます。
         /// </summary>
-        public List<StatementNode> AST { get; set; }
+        public List<StatementNode> AST { get; set; } = new();
     }
 }

@@ -4,7 +4,7 @@ using TMPro;
 
 using UnityLike.Entities.CodeEditor;
 using UnityLike.InterfaceAdapters.CodeManagement;
-using UnityLike.InterfaceAdapters.CodeEditorMouseOver;
+using System.Globalization;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
@@ -19,20 +19,21 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         public CodeManager codeManager;
 
         public ErrorPopupUI errorPopupUI;
+        public IUIPosCalculator mousePos;
 
-        private InputFieldUI()
+        public void MemberInitialize()
         {
             codeManager = new CodeManager(this, errorPopupUI);
-        }
-
-        public void Start()
-        {
             inputFieldText = inputField.textComponent;
         }
+        public void DIMousePos(IUIPosCalculator mousePos)
+        {
+            this.mousePos = mousePos;
+        }
+
         public void Update()
         {
-            Vector3 localMousePos = inputFieldText.rectTransform.InverseTransformPoint(Input.mousePosition);
-            codeManager.PopupRequied(localMousePos);
+            PopupRequire();
         }
 
         public void AttachmentInspection()
@@ -61,6 +62,12 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         public string GetInputFieldText()
         {
             return inputField.text;
+        }
+
+        private void PopupRequire()
+        {
+            Vector2Int textPos = mousePos.GetTextPosOnMouse(inputFieldText);
+            codeManager.PopupRequired(textPos);
         }
     }
 }

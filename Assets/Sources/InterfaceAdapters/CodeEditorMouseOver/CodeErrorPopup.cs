@@ -25,14 +25,15 @@ namespace UnityLike.InterfaceAdapters.CodeEditorMouseOver
         /// <param name="columnMousePos">マウスオーバーされている文字の位置を指定します</param>
         public void MessagePopUp(int mousePosX, int mousePosY)
         {
+            UnityEngine.Debug.Log(mousePosY + ", " + mousePosY);
             string tokenMessage = GetTokenMessageFromCharPos(mousePosX, mousePosY);
             
             view.SetText(tokenMessage);
 
             if (tokenMessage == string.Empty)
-                view.ShowPopup();
-            else
                 view.HidePopup();
+            else
+                view.ShowPopup();
         }
 
         public void EnterMouseOver()
@@ -49,6 +50,7 @@ namespace UnityLike.InterfaceAdapters.CodeEditorMouseOver
         private string GetTokenMessageFromCharPos(int localMousePosX, int localMousePosY)
         {
             List<ColoredToken> tokens = data.ColoredTokens;
+
             foreach(var token in tokens)
             {
                 if (IsOverTokenToMousePos(token, localMousePosX, localMousePosY))

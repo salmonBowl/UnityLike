@@ -13,10 +13,29 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         [SerializeField]
         private TextMeshProUGUI text;
 
+        [SerializeField]
+        private Canvas canvas;
+        private RectTransform canvasTransform;
+
+        void Start()
+        {
+            if (!popup)
+                Debug.LogError("popupがアタッチされていません");
+            if (!text)
+                Debug.LogError("textがアタッチされていません");
+            if (!canvas)
+                Debug.LogError("textがアタッチされていません");
+
+            canvasTransform = canvas.GetComponent<RectTransform>();
+        }
+
         public void ShowPopup()
         {
-            Vector3 offset = new Vector2(0.5f, 0.5f);
-            popup.position = Input.mousePosition + offset;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvasTransform, Input.mousePosition, canvas.worldCamera,
+                out var mousePosition);
+            Vector2 offset = new(0.5f, 0.5f);
+            popup.position = mousePosition + offset;
 
             popup.gameObject.SetActive(true);
         }

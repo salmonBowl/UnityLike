@@ -7,9 +7,12 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
     public class CodeEditorUIEvents : MonoBehaviour
     {
+        [SerializeField]
+        private Canvas canvas;
+
         private CodeEditorInputManager inputManager;
-        
-        public void SetInputManager(CodeEditorInputManager inputManager)
+
+        public void DIInputManager(CodeEditorInputManager inputManager)
         {
             this.inputManager = inputManager;
         }
