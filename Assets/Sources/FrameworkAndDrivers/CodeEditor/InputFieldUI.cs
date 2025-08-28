@@ -4,6 +4,7 @@ using TMPro;
 
 using UnityLike.Entities.CodeEditor;
 using UnityLike.InterfaceAdapters.CodeManagement;
+using UnityLike.InterfaceAdapters.CodeEditorMouseOver;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
@@ -12,7 +13,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
     {
         public CodeEditorBlock block;
 
-        public TMP_InputField inputField;
+        public TMP_InputField inputField; private TMP_Text inputFieldText;
         public TextMeshProUGUI viewText;
 
         public CodeManager codeManager;
@@ -22,6 +23,16 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         private InputFieldUI()
         {
             codeManager = new CodeManager(this, errorPopupUI);
+        }
+
+        public void Start()
+        {
+            inputFieldText = inputField.textComponent;
+        }
+        public void Update()
+        {
+            Vector3 localMousePos = inputFieldText.rectTransform.InverseTransformPoint(Input.mousePosition);
+            codeManager.PopupRequied(localMousePos);
         }
 
         public void AttachmentInspection()
@@ -45,6 +56,11 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         public void ShiftCaretPosition(int shiftCount)
         {
             inputField.caretPosition += shiftCount;
+        }
+
+        public string GetInputFieldText()
+        {
+            return inputField.text;
         }
     }
 }

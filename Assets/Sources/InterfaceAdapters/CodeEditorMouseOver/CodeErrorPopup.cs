@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Zenject;
 
 using UnityLike.Entities.Compiler;
 
@@ -13,7 +12,6 @@ namespace UnityLike.InterfaceAdapters.CodeEditorMouseOver
         private readonly CompileData data;
         private readonly IPopupView view;
 
-        [Inject]
         public CodeErrorPopup(CompileData data, IPopupView popup)
         {
             this.data = data;
@@ -25,9 +23,9 @@ namespace UnityLike.InterfaceAdapters.CodeEditorMouseOver
         /// </summary>
         /// <param name="lineMousePos">マウスオーバーされている文字の位置を指定します</param>
         /// <param name="columnMousePos">マウスオーバーされている文字の位置を指定します</param>
-        public void MessagePopUp(int lineMousePos, int columnMousePos)
+        public void MessagePopUp(int mousePosX, int mousePosY)
         {
-            string tokenMessage = GetTokenMessageFromCharPos(lineMousePos, columnMousePos);
+            string tokenMessage = GetTokenMessageFromCharPos(mousePosX, mousePosY);
             
             view.SetText(tokenMessage);
 
@@ -43,40 +41,46 @@ namespace UnityLike.InterfaceAdapters.CodeEditorMouseOver
         }
 
         /// <summary>
-        /// 行番号・列番号から、その場所にあるトークンが持つエラーメッセージを取得します
+        /// マウスの座標から、その場所にあるトークンが持つエラーメッセージを取得します
         /// </summary>
-        /// <param name="lineMousePos"></param>
-        /// <param name="columnMousePos"></param>
+        /// <param name="mousePosX"></param>
+        /// <param name="mousePosY"></param>
         /// <returns>トークンが見つかれば中身のメッセージを、そうでなければstring.Emptyを返します</returns>
-        private string GetTokenMessageFromCharPos(int lineMousePos, int columnMousePos)
+        private string GetTokenMessageFromCharPos(int localMousePosX, int localMousePosY)
         {
             List<ColoredToken> tokens = data.ColoredTokens;
             foreach(var token in tokens)
             {
-                // 行きすぎたらその場所にトークンは存在しない
-                if (lineMousePos < token.LineCount)
-                    return string.Empty;
-
-                // 行が合うまでスキップ
-                if (lineMousePos != token.LineCount)
-                    continue;
-
-                // 列が合うまでスキップ
-                if (columnMousePos < token.ColumnCount)
-                    continue;
-
-                // mousePosを含むトークンが見つかった場合、その中身のメッセージを返す
-                int tokenEndColumn = token.ColumnCount + token.Value.Length;
-                if (columnMousePos < tokenEndColumn)
+                if (IsOverTokenToMousePos(token, localMousePosX, localMousePosY))
                 {
                     return token.ErrorMessage;
                 }
-                else
-                {
-                    return string.Empty;
-                }
             }
             return string.Empty;
+        }
+
+        private bool IsOverTokenToMousePos(ColoredToken token, int localMousePosX, int localMousePosY)
+        {
+            // 矩形の範囲を整理します
+            int rectXMin = token.ColumnCount + token.Value.Length - 1;
+            int rectXMax = token.ColumnCount;
+            int rectY = token.LineCount;
+
+            // 当たり判定を行います
+            bool isOverX = IsPointInRangeInt(localMousePosX, rectXMin, rectXMax);
+            bool isOverY = IsPointInRangeInt(localMousePosY, rectY, rectY);
+
+            // x, y ともに衝突している時、マウスがトークンに触れていることが分かります
+            return isOverX && isOverY;
+        }
+
+        private bool IsPointInRangeInt(int target, int rangeNum1, int rangeNum2)
+        {
+            return (rangeNum1 - target) * (rangeNum2 - target) <= 0;
+            /*
+             * 範囲から出ている時には(rangeNum1-target)と(rangeNum2-tartget)が同符号になります
+             * 範囲内、つまり異符号の時、その積は負になります
+             */
         }
     }
 }

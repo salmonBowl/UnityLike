@@ -28,22 +28,20 @@ namespace UnityLike.FrameworkAndDrivers.Installers
 
         [Header("CodeEditor関係")]
         [SerializeField]
-        private CodeEditor.CodeEditor codeEditorLayout;
-        [SerializeField]
         private CodeEditorUIEvents codeEditorUIEvents;
 
+        public void Awake()
+        {
+            CodeEditorSettings = codeEditorSettings;
+        }
         public override void Start()
         {
             //base.Start(); 空メソッド
 
             if (!codeEditorSettings)
                 Debug.LogError("GameSceneInstaller : CodeEditorSettingsが指定されていません");
-            if (!codeEditorLayout)
-                Debug.LogError("GameSceneInstaller : CodeEditorLayoutがアタッチされていません");
             if (!codeEditorUIEvents)
                 Debug.LogError("GameSceneInstaller : CodeEditorUIEventsがアタッチされていません");
-
-            CodeEditorSettings = codeEditorSettings;
         }
 
         // DIコンテナに依存関係をバインドします
@@ -55,15 +53,9 @@ namespace UnityLike.FrameworkAndDrivers.Installers
              *  --- Entities層 --
              */
 
-            // ScriptableObject
-            Container.Bind<ICodeEditorSettings>().FromInstance(codeEditorSettings).AsSingle();
-
             /*
              *  --- Use Cases層 ---
              */
-
-            Container.Bind<LineCountManager>().AsSingle();
-            Container.Bind<LayoutDataBuilder>().AsSingle();
 
             /*
              *  --- Interface Adapters層 ---
@@ -75,9 +67,6 @@ namespace UnityLike.FrameworkAndDrivers.Installers
             /*
              *  --- Frameworks & Drivers層 ---
              */
-
-            // MonoBehaviourをインターフェースとしてバインド
-            Container.Bind<ITextAreaView>().FromInstance(codeEditorLayout).AsSingle();
 
 
 

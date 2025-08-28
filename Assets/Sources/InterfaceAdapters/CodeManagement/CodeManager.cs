@@ -1,3 +1,5 @@
+using Vector3 = UnityEngine.Vector3;
+
 using UnityLike.Entities.Compiler;
 using UnityLike.InterfaceAdapters.CodeEditorMouseOver;
 
@@ -12,13 +14,20 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
         public CodeManager(ISetTextUI setTextUI, IPopupView popup)
         {
             compile = new CompileManager(setTextUI);
-            data = new CompileData();
             errorPopup = new CodeErrorPopup(data, popup);
+            data = new CompileData();
         }
 
         public void OnChangeCode(string sourceCode)
         {
             compile.Execute(sourceCode, ref data);
+        }
+
+        public void PopupRequied(Vector3 localMousePos)
+        {
+            int x = (int)localMousePos.x;
+            int y = (int)localMousePos.y;
+            errorPopup.MessagePopUp(x, y);
         }
 
         /// <summary>
