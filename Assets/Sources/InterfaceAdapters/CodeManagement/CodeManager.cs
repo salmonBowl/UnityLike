@@ -33,6 +33,8 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
 
         public void PopupRequired(Vector2Int textPos)
         {
+            if (errorPopup == null)
+                UnityEngine.Debug.LogError("errorPopup‚ª‹ó‚Å‚·");
             errorPopup.MessagePopUp(textPos.x, textPos.y);
         }
 

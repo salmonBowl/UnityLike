@@ -49,7 +49,6 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             codeEditorLayout = GetComponent<CodeEditorLayout>();
             codeEditorUICalculator = GetComponent<UIPosCalculator>();
 
-            codeEditorUICalculator.MemberInitialize();
             InputFieldVoidstart.MemberInitialize();
             InputFieldVoidupdate.MemberInitialize();
 

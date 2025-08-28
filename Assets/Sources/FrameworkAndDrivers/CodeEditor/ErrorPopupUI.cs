@@ -15,7 +15,8 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
 
         [SerializeField]
         private Canvas canvas;
-        private RectTransform canvasTransform;
+        [SerializeField]
+        private RectTransform parentTransform;
 
         void Start()
         {
@@ -25,17 +26,17 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
                 Debug.LogError("textがアタッチされていません");
             if (!canvas)
                 Debug.LogError("textがアタッチされていません");
-
-            canvasTransform = canvas.GetComponent<RectTransform>();
+            if (!parentTransform)
+                Debug.LogError("parentTransformがアタッチされていません");
         }
 
         public void ShowPopup()
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                canvasTransform, Input.mousePosition, canvas.worldCamera,
+                parentTransform, Input.mousePosition, canvas.worldCamera,
                 out var mousePosition);
             Vector2 offset = new(0.5f, 0.5f);
-            popup.position = mousePosition + offset;
+            popup.localPosition = mousePosition + offset;
 
             popup.gameObject.SetActive(true);
         }

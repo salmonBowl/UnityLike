@@ -71,6 +71,8 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
 
         private void PopupRequire()
         {
+            if (!inputFieldText)
+                Debug.LogError("inputFieldText‚ª‹ó‚Å‚·");
             Vector2Int textPos = mousePos.GetTextPosOnMouse(inputFieldText);
             codeManager.PopupRequired(textPos);
         }

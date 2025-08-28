@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 using UnityLike.FrameworkAndDrivers.GameObjectManagement;
 
@@ -29,6 +30,9 @@ namespace UnityLike.FrameworkAndDrivers.EditSpace
         {
             if (Input.GetMouseButton(0))
             {
+                // UIに触れているならスキップ
+                if (EventSystem.current.IsPointerOverGameObject()) return;
+
                 // マウス位置からRayを生成
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
