@@ -20,6 +20,8 @@ namespace UnityLike.Entities.Compiler
             }
         }
 
+        public override void ExecuteCode() { }
+
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
             foreach(var cToken in ColoredTokens)

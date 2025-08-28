@@ -4,7 +4,6 @@ using TMPro;
 
 using UnityLike.Entities.CodeEditor;
 using UnityLike.InterfaceAdapters.CodeManagement;
-using System.Globalization;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {

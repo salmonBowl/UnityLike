@@ -6,16 +6,17 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 {
     public class GameObjectPrefab : MonoBehaviour
     {
-        [SerializeField] private CodeEditorManager codeEditorCanvas;
+        [SerializeField] private CodeEditorManager codeEditor;
+        [SerializeField] private GameObject codeEditorCanvas;
 
         private GameObject model;
 
-        public void ExecuteVoidStart() => codeEditorCanvas.ExecuteVoidStart();
-        public void ExecuteVoidUpdate() => codeEditorCanvas.ExecuteVoidUpdate();
+        public void ExecuteVoidStart() => codeEditor.ExecuteVoidStart();
+        public void ExecuteVoidUpdate() => codeEditor.ExecuteVoidUpdate();
 
         public void EditorSetActive(bool value)
         {
-            codeEditorCanvas.gameObject.SetActive(value);
+            codeEditorCanvas.SetActive(value);
         }
 
         public static GameObjectPrefab Instantiate(GameObject prefab, GameObject model)

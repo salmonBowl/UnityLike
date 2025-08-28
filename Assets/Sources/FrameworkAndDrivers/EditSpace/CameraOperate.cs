@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityLike.FrameworkAndDrivers.EditSpace
 {
-    public class Camera : MonoBehaviour
+    public class CameraOperate : MonoBehaviour
     {
         [SerializeField] private Texture2D mouseCursor_rotate;
         [SerializeField] private Texture2D mouseCursor_move;

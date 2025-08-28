@@ -33,6 +33,11 @@ namespace UnityLike.Entities.Compiler
             InitalAssignment = new AssignmentStatementNode(identifier, equalToken, initalValue, semicolonToken);
         }
 
+        public override void ExecuteCode()
+        {
+
+        }
+
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
             Type.ColoredTokenScan(rebuilder);

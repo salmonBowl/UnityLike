@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 {
-    public class GameObjectManager : MonoBehaviour
+    public class GameObjectManager : MonoBehaviour, IChangeSelected
     {
         [SerializeField] private GameObject gameObjectPrefab;
 
-        private List<GameObjectPrefab> gameObjects;
+        private readonly List<GameObjectPrefab> gameObjects = new();
         private GameObjectPrefab selectedGameObject;
 
         public void AddGameObject(GameObject model)
@@ -16,13 +16,18 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             gameObjects.Add(g);
         }
 
-        public void SelectObject(GameObjectPrefab target)
+        public void ChangeSelected(GameObjectPrefab target)
         {
-            selectedGameObject.EditorSetActive(false);
+            // 元々選択していたオブジェクトのエディターを閉じます
+            if (selectedGameObject)
+                selectedGameObject.EditorSetActive(false);
 
+            // selectedGameObjectを変更します
             selectedGameObject = target;
 
-            target.EditorSetActive(true);
+            // 新しく選択するオブジェクトのエディターを開きます
+            if (target)
+                target.EditorSetActive(true);
         }
 
         public void ExecuteVoidStart()
