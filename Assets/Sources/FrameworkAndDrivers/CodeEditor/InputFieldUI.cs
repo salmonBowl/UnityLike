@@ -35,6 +35,10 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         {
             PopupRequire();
         }
+        public void HidePopup()
+        {
+            errorPopupUI.HidePopup();
+        }
 
         public void AttachmentInspection()
         {

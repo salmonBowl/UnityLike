@@ -28,6 +28,8 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         }
         void Update()
         {
+            InputFieldVoidstart.HidePopup();
+
             InputFieldVoidstart.Update();
             InputFieldVoidupdate.Update();
         }

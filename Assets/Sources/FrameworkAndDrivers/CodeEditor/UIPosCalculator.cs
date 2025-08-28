@@ -30,7 +30,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             int line = text.textInfo.characterInfo[charIndex].lineNumber;
             int column = charIndex - text.textInfo.lineInfo[line].firstCharacterIndex;
 
-            return new Vector2Int(line + 1, column + 1);
+            return new Vector2Int(column + 1, line + 1);
         }
         private int GetCharIndexOnMouse(TMP_Text text)
         {
@@ -46,7 +46,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
 
             // ‹——£‚Å”äŠr
             float distance = Vector2.Distance(mouseWorldPos, charWorldPos);
-            if (distance < 0.3f)
+            if (distance < 0.5f)
                 return nearestIndex;
             else
                 return -1;
