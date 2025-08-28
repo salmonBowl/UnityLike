@@ -25,6 +25,11 @@ namespace UnityLike.Entities.Compiler
             SemicolonToken = semicolonToken;
         }
 
+        public override void ExecuteCode()
+        {
+            
+        }
+
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
             Identifier.ColoredTokenScan(rebuilder);

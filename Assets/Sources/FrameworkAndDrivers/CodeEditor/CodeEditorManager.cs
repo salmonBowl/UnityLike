@@ -5,7 +5,7 @@ using UnityLike.InterfaceAdapters.CodeEditorInputManagement;
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
     [RequireComponent(typeof(CodeEditorUIEvents), typeof(CodeEditorLayout), typeof(UIPosCalculator))]
-    public partial class CodeEditor : MonoBehaviour
+    public partial class CodeEditorManager : MonoBehaviour
     {
         [SerializeField]
         private InputFieldUI InputFieldVoidstart;
@@ -16,6 +16,15 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         private CodeEditorLayout codeEditorLayout;
         private UIPosCalculator codeEditorUICalculator;
         private CodeEditorInputManager inputManager;
+
+        public void ExecuteVoidStart()
+        {
+            InputFieldVoidstart.ExecuteCode();
+        }
+        public void ExecuteVoidUpdate()
+        {
+            InputFieldVoidupdate.ExecuteCode();
+        }
 
         void Start()
         {

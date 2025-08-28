@@ -31,6 +31,8 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             this.mousePos = mousePos;
         }
 
+        public void ExecuteCode() => codeManager.ExecuteCode();
+
         public void Update()
         {
             PopupRequire();

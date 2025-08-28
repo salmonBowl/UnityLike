@@ -23,6 +23,14 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
             compile.Execute(sourceCode, ref data);
         }
 
+        public void ExecuteCode()
+        {
+            foreach(var statement in data.AST)
+            {
+                statement.ExecuteCode();
+            }
+        }
+
         public void PopupRequired(Vector2Int textPos)
         {
             errorPopup.MessagePopUp(textPos.x, textPos.y);
