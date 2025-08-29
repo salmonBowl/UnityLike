@@ -10,7 +10,7 @@ namespace UnityLike.UseCases.Compiler
         /// <returns></returns>
         private UnknownExpressionNode AsUnknown()
         {
-            return new UnknownExpressionNode(CurrentToken.Value);
+            return ASTFactory.UnknownNode(CurrentToken);
         }
 
         // 構文木を再帰的な関数呼び出しにより構成していきます
@@ -70,12 +70,16 @@ namespace UnityLike.UseCases.Compiler
                 TokenType.Identifier => ConsumeWithGenerate(),
                 TokenType.NumberLiteral => ConsumeWithGenerate(),
                 TokenType.LeftParen => ParseParenExpression(),
-                _ => AsUnknown()
+                TokenType.Unknown => AsUnknown(),
+                TokenType.SemiColon => throw new SyntaxErrorException("文が完成していません"),
+                TokenType.RightParen => throw new SyntaxErrorException("値がありません"),
+                _ => throw new SyntaxErrorException()
             };
         }
 
         private ExpressionNode ParseParenExpression()
         {
+            Token leftParen = CurrentToken;
             if (CurrentTokenType == TokenType.LeftParen)
                 Consume();
             else
@@ -83,12 +87,13 @@ namespace UnityLike.UseCases.Compiler
 
             ExpressionNode content = ParseExpression();
 
+            Token rightParen = CurrentToken;
             if (CurrentTokenType == TokenType.RightParen)
                 Consume();
             else
-                return AsUnknown();
+                throw new SyntaxErrorException(")が必要です");
 
-            return new ParenNode(content);
+            return ASTFactory.ParenNode(leftParen, content, rightParen);
         }
         /*
             演算の優先順位に従って優先順位が低い演算→だんだん高い演算という順序で再帰的に潜っていきます
@@ -99,8 +104,9 @@ namespace UnityLike.UseCases.Compiler
         {
             if (CurrentTokenType == TokenType.Minus)
             {
+                Token @operator = CurrentToken;
                 Consume();
-                return new UnaryExpressionNode(TokenType.Minus, ParsePrimaryExpression());
+                return ASTFactory.UnaryExpressionNode(@operator, ParsePrimaryExpression());
             }
             else
             {
@@ -111,11 +117,11 @@ namespace UnityLike.UseCases.Compiler
         {
             ExpressionNode leftExpression = ParseUnaryExpression();
 
-            if (CurrentTokenType == TokenType.Multiply ||
-                CurrentTokenType == TokenType.Divide)
+            if (CurrentTokenType == TokenType.Multiply || CurrentTokenType == TokenType.Divide)
             {
+                Token @operator = CurrentToken;
                 Consume();
-                return new BinaryExpressionNode(leftExpression, TokenType.Multiply, ParseMultitiveExpression());
+                return ASTFactory.BinaryExpressionNode(leftExpression, @operator, ParseMultitiveExpression());
             }
             else
             {
@@ -126,11 +132,11 @@ namespace UnityLike.UseCases.Compiler
         {
             ExpressionNode leftExpression = ParseMultitiveExpression();
 
-            if (CurrentTokenType == TokenType.Plus || 
-                CurrentTokenType == TokenType.Minus)
+            if (CurrentTokenType == TokenType.Plus || CurrentTokenType == TokenType.Minus)
             {
+                Token @operator = CurrentToken;
                 Consume();
-                return new BinaryExpressionNode(leftExpression, TokenType.Plus, ParseAdditiveExpression());
+                return ASTFactory.BinaryExpressionNode(leftExpression, @operator, ParseAdditiveExpression());
             }
             else
             {

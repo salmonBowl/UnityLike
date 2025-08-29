@@ -11,6 +11,11 @@ namespace UnityLike.Entities.Compiler
             //'\n', :\nは改行トークンとして処理されるようになりました
             //'\r' // 最初に\r\nを\nに置換したので出てくることはありません
         };
+        public static readonly char[] number =
+        {
+            '0','1','2','3','4','5','6','7','8','9',
+            '.', 'f'
+        };
 
         // テキストエディタ―で改行した時に表示される文字です
         // 現在は\nを表示されています
@@ -89,6 +94,7 @@ namespace UnityLike.Entities.Compiler
 
         #endregion
 
+        public static readonly string errorColor = "#FF0000";
         private static readonly string operatorColor = "#FFFFFF";
         private static readonly string controlSyntaxColor = "#D846FF";
         private static readonly string constBlue = "#569CD6";
@@ -130,8 +136,8 @@ namespace UnityLike.Entities.Compiler
             { TokenType.SemiColon, "#FFFFFF" },
 
             // エラーを赤色に
-            { TokenType.Unknown, "#FF0000" },
-            { TokenType.BackSlash, "#FF0000" },
+            { TokenType.Unknown, errorColor },
+            { TokenType.BackSlash, errorColor },
 
             #region キーワード (制御構文や型名など)
             { TokenType.If, controlSyntaxColor },

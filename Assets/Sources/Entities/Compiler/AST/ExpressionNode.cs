@@ -1,11 +1,13 @@
 
 namespace UnityLike.Entities.Compiler
 {
-    /*
-        基本的なノードの基底クラスです
-            
-            Expression(leftparen, Expression(Expression(x), +, Expression(1)) rightparen)
-            これが (x+1) を表す
+    /// <summary>
+    /// Expressionの基底クラスです。
+    /// Expression自身で階層構造をなし、最終的にはStatementNodeの構成要素となります。
+    /// </summary>
+    /*  
+     *  Expression(leftparen, Expression(Expression(x), +, Expression(1)) rightparen)
+     *  → (x+1) の文を表す
     */
     public abstract class ExpressionNode : Node
     {

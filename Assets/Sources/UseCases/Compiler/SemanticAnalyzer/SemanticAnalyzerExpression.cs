@@ -6,7 +6,8 @@ namespace UnityLike.UseCases.Compiler
     {
         public void VisitTypeNode(TypeNode typeNode)
         {
-            // ñ¢é¿ëï
+            if (TypeConstants.definedTypes.TryGetValue(typeNode.Name, out _) == false)
+                throw new TypeNotFoundException(typeNode.Name);
         }
         public void VisitBinaryExpression(BinaryExpressionNode bynaryExpression)
         {
@@ -14,7 +15,12 @@ namespace UnityLike.UseCases.Compiler
         }
         public void VisitIdentifier(IdentifierNode identifier)
         {
-            // ñ¢é¿ëï
+            if (currentScope.LookUpSymbol(identifier.Name) != null)
+                throw new IdentifierNotFoundException(identifier.Name);
+        }
+        public void VisitDeclaratedIdentifier(DeclaratedIdentifierNode identifier)
+        {
+            // Ç±ÇÃÉmÅ[ÉhÇ…à”ñ°âêÕÇÃèàóùÇÕÇ†ÇËÇ‹ÇπÇÒ
         }
         public void VisitNumberLiteral(NumberLiteralNode numberLiteral)
         {

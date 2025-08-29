@@ -30,8 +30,6 @@ namespace UnityLike.Test
 
             StatementNode firstParsedStatement = parser.GetParsedStatements()[0];
 
-            firstParsedStatement.LogThis();
-
             string expectedText = source;
             string parsedText = firstParsedStatement.ToPrettyString();
             Assert.AreEqual(expectedText, parsedText);

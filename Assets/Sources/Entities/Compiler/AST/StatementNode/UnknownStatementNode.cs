@@ -1,21 +1,35 @@
 
 namespace UnityLike.Entities.Compiler
 {
+    /// <summary>
+    /// 無効な式を表すノードです。文法エラーを持つ式をこのノードで表現します。
+    /// </summary>
     public class UnknownStatementNode : StatementNode
     {
         public Token[] Tokens { get; }
+        public ColoredToken[] ColoredTokens { get; }
         
-        public UnknownStatementNode(Token[] tokens)
+        public UnknownStatementNode(Token[] tokens, string errorMessage)
         {
             Tokens = tokens;
-        }
-        public override void LogThis()
-        {
-            foreach (var token in Tokens)
+            ColoredTokens = new ColoredToken[Tokens.Length];
+            for (int i = 0; i < Tokens.Length; i++)
             {
-                UnityEngine.Debug.Log(token.ToString());
+                ColoredTokens[i] = ASTFactory.TokenToColoredToken(Tokens[i]);
+                ColoredTokens[i].HasError(errorMessage);
             }
         }
+
+        public override void ExecuteCode() { }
+
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
+        {
+            foreach(var cToken in ColoredTokens)
+            {
+                rebuilder.ImportColoredToken(cToken);
+            }
+        }
+
         public override string ToPrettyString()
         {
             string returnText = string.Empty;
@@ -25,6 +39,9 @@ namespace UnityLike.Entities.Compiler
             }
             return returnText;
         }
-        public override void ASTScan(ISemanticAnalyzer semantic) { }
+        public override void ASTScan(ISemanticAnalyzer semantic)
+        {
+            // UnknownStatementで意味解析はなし
+        }
     }
 }

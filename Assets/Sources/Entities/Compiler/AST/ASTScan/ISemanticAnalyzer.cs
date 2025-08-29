@@ -10,6 +10,7 @@ namespace UnityLike.Entities.Compiler
         // 各ExpressionNodeに対応するVisitメソッド
         void VisitBinaryExpression(BinaryExpressionNode node);
         void VisitIdentifier(IdentifierNode node);
+        void VisitDeclaratedIdentifier(DeclaratedIdentifierNode node);
         void VisitNumberLiteral(NumberLiteralNode node);
         void VisitParenExpression(ParenNode node);
         void VisitUnaryExpression(UnaryExpressionNode node);

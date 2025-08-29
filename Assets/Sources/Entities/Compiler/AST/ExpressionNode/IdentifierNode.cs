@@ -1,21 +1,30 @@
 
 namespace UnityLike.Entities.Compiler
 {
+    /// <summary>
+    /// 識別子を表現するノードです。Expressionの木構造の末端に位置します。
+    /// </summary>
     public class IdentifierNode : ExpressionNode
     {
         public string Name { get; }
+        public ColoredToken IdentifierToken { get; }
 
-        public IdentifierNode(string name)
+        public IdentifierNode(ColoredToken identifierToken)
         {
-            Name = name;
+            Name = identifierToken.Value;
+            IdentifierToken = identifierToken;
         }
 
-        public override void LogThis()
+        public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
-            UnityEngine.Debug.Log("Identifier : " + Name);
+            rebuilder.ImportColoredToken(IdentifierToken);
         }
+
         public override string ToPrettyString() => Name;
-        public override void ASTScan(ISemanticAnalyzer semantic) =>
+        public override void ASTScan(ISemanticAnalyzer semantic)
+        {
+            // 意味解析をします
             semantic.VisitIdentifier(this);
+        }
     }
 }

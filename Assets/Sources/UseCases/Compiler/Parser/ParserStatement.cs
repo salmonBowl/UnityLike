@@ -25,13 +25,13 @@ namespace UnityLike.UseCases.Compiler
                 {
                     TokenType.TypeStandard => ParseVariableDeclarationStatement(),
                     TokenType.Identifier => ParseAssignmentStatement(),
-                    _ => ParseUnknownStatement()
+                    _ => ParseUnknownStatement("文法が正しくありません")
                 };
             }
-            catch
+            catch (SyntaxErrorException e)
             {
                 currentTokenIndex = startTokenIndex;
-                return ParseUnknownStatement();
+                return ParseUnknownStatement(e.Message);
             }
         }
         private StatementNode ParseVariableDeclarationStatement()
@@ -47,20 +47,25 @@ namespace UnityLike.UseCases.Compiler
                 u.Type();
             IdentifierNode identifierNode =
                 u.Identifier();
+            ColoredToken semicolon =
+                u.Semicolon();
 
-            if (u.Cemicolon())
-                return new VariableDeclarationStatementNode(typeNode, identifierNode);
+            if (semicolon != null)
+                return new VariableDeclarationStatementNode(typeNode, identifierNode, semicolon);
 
             // 宣言時初期化
-            _ =
+            ColoredToken equals =
                 u.Equals();
             ExpressionNode expressionNode =
                 u.Expression();
+            semicolon =
+                u.Semicolon();
 
-            if (u.Cemicolon())
-                return new VariableDeclarationStatementNode(typeNode, identifierNode, expressionNode);
+            if (semicolon != null)
+                return new VariableDeclarationStatementNode
+                    (typeNode, identifierNode, equals, expressionNode, semicolon);
 
-            throw new SyntaxErrorException();
+            throw new SyntaxErrorException(";が必要です");
         }
         private StatementNode ParseAssignmentStatement()
         {
@@ -70,17 +75,19 @@ namespace UnityLike.UseCases.Compiler
 
             IdentifierNode identifierNode =
                 u.Identifier();
-            _ =
+            ColoredToken equals =
                 u.Equals();
             ExpressionNode expressionNode =
                 u.Expression();
+            ColoredToken semicolon =
+                u.Semicolon();
 
-            if (u.Cemicolon())
-                return new AssignmentStatementNode(identifierNode, expressionNode);
+            if (semicolon != null)
+                return new AssignmentStatementNode(identifierNode, equals, expressionNode, semicolon);
 
-            throw new SyntaxErrorException();
+            throw new SyntaxErrorException(";が必要です");
         }
-        private UnknownStatementNode ParseUnknownStatement()
+        private UnknownStatementNode ParseUnknownStatement(string errorMessage)
         {
             List<Token> tokens = new();
             while (true)
@@ -88,6 +95,11 @@ namespace UnityLike.UseCases.Compiler
                 if (CurrentTokenType == TokenType.EOF)
                 {
                     break;
+                }
+                if (CurrentTokenType == TokenType.Return)
+                {
+                    Consume();
+                    continue;
                 }
                 if (CurrentTokenType == TokenType.SemiColon)
                 {
@@ -99,7 +111,7 @@ namespace UnityLike.UseCases.Compiler
                 tokens.Add(CurrentToken);
                 Consume();
             }
-            return new UnknownStatementNode(tokens.ToArray());
+            return new UnknownStatementNode(tokens.ToArray(), errorMessage);
         }
     }
 }

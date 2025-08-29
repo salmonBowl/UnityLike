@@ -27,7 +27,6 @@ namespace UnityLike.UseCases.Compiler
 
             foreach (Token currentToken in tokenArray)
             {
-                //UnityEngine.Debug.Log("currentToken : " + currentToken);
                 // 1. ‹ó”’‚ð•âŠ®‚µ‚Ü‚·
                 int spaceRequiedCount = currentToken.ColumnCount - currentColumn;
                 currentColumn += spaceRequiedCount;
