@@ -1,5 +1,5 @@
-
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace UnityLike.FrameworkAndDrivers.EditSpace
 {
@@ -32,13 +32,13 @@ namespace UnityLike.FrameworkAndDrivers.EditSpace
             if (Input.GetMouseButton(1))
             {
                 // マウスの移動量を取得
-                angleX -= Input.GetAxis("Mouse Y") * rotateSpeed;
-                angleY += Input.GetAxis("Mouse X") * rotateSpeed;
+                angleX += Input.GetAxis("Mouse X") * rotateSpeed;
+                angleY -= Input.GetAxis("Mouse Y") * rotateSpeed;
 
                 // Y軸の回転を制限
                 angleY = Mathf.Clamp(angleY, -90f, 90f);
 
-                transform.eulerAngles = new Vector3(angleX, angleY, 0);
+                transform.eulerAngles = new Vector3(angleY, angleX, 0);
 
                 Cursor.SetCursor(mouseCursor_rotate, new Vector2(0, 0), CursorMode.Auto);
             }
@@ -59,6 +59,9 @@ namespace UnityLike.FrameworkAndDrivers.EditSpace
         }
         private void MouseScroll()
         {
+            // マウスがUIに触れているならスキップ
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+
             float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
             transform.position += scrollDelta * zoomSpeed * transform.forward;
         }

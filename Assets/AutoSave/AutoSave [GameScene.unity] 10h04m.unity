@@ -271,6 +271,7 @@ MonoBehaviour:
   popup: {fileID: 10792248}
   text: {fileID: 10792249}
   canvas: {fileID: 1856146407}
+  parentTransform: {fileID: 1679052516}
 --- !u!1 &61857283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,6 +1559,7 @@ MonoBehaviour:
   popup: {fileID: 373042694}
   text: {fileID: 373042696}
   canvas: {fileID: 1508648322}
+  parentTransform: {fileID: 434052227}
 --- !u!114 &373042696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5755,6 +5757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8511674b2a66c1949abf8c0b9b16aabe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editorSize: 0.1
 --- !u!114 &1508648320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7173,6 +7176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8511674b2a66c1949abf8c0b9b16aabe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editorSize: 0.1
 --- !u!1 &1867283743
 GameObject:
   m_ObjectHideFlags: 0

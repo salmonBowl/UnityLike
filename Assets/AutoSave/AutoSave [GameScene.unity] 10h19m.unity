@@ -271,7 +271,7 @@ MonoBehaviour:
   popup: {fileID: 10792248}
   text: {fileID: 10792249}
   canvas: {fileID: 1856146407}
-  canvasTransform: {fileID: 1856146408}
+  parentTransform: {fileID: 1679052516}
 --- !u!1 &61857283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1559,7 +1559,7 @@ MonoBehaviour:
   popup: {fileID: 373042694}
   text: {fileID: 373042696}
   canvas: {fileID: 1508648322}
-  canvasTransform: {fileID: 1508648323}
+  parentTransform: {fileID: 434052227}
 --- !u!114 &373042696
 MonoBehaviour:
   m_ObjectHideFlags: 0
