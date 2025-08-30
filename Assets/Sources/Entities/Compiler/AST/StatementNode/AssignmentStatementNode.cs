@@ -25,11 +25,6 @@ namespace UnityLike.Entities.Compiler
             SemicolonToken = semicolonToken;
         }
 
-        public override void ExecuteCode()
-        {
-            
-        }
-
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
             Identifier.ColoredTokenScan(rebuilder);
@@ -43,8 +38,7 @@ namespace UnityLike.Entities.Compiler
 
         public override void ASTScan(IInterpreter interpreter)
         {
-            // StatementNode‚Å‚Í©•ª©g‚ÌˆÓ–¡‰ğÍ‚Ì‚İs‚¢‚Ü‚·
-            interpreter.VisitAssignmentStatement(this);
+            interpreter.ExecuteAssignmentStatement(this);
         }
     }
 }

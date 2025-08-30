@@ -13,11 +13,6 @@ namespace UnityLike.UseCases.Interpreter
         /// 現在走査しているスコープを示します
         /// </summary>
         private SymbolTable currentScope;
-        
-        /// <summary>
-        /// 意味解析を終えたIdentifierの型をスタックします。これにより型比較の仕組みを作ります。
-        /// </summary>
-        private readonly Stack<TypeBase> typeStack = new();
 
         private void Initialize()
         {

@@ -4,8 +4,8 @@ namespace UnityLike.Entities.Compiler
     public interface IInterpreter
     {
         // Statement
-        void VisitVariableDeclarationStatement(VariableDeclarationStatementNode node);
-        void VisitAssignmentStatement(AssignmentStatementNode node);
+        void ExecuteVariableDeclarationStatement(VariableDeclarationStatementNode node);
+        void ExecuteAssignmentStatement(AssignmentStatementNode node);
 
         // Expression
         void VisitBinaryExpression(BinaryExpressionNode node);

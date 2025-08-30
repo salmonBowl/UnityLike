@@ -33,11 +33,6 @@ namespace UnityLike.Entities.Compiler
             InitalAssignment = new AssignmentStatementNode(identifier, equalToken, initalValue, semicolonToken);
         }
 
-        public override void ExecuteCode()
-        {
-
-        }
-
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
             Type.ColoredTokenScan(rebuilder);
@@ -60,8 +55,7 @@ namespace UnityLike.Entities.Compiler
             InitalAssignment.ToPrettyString());
         public override void ASTScan(IInterpreter interpreter)
         {
-            // StatementNode‚Å‚Í©•ª©g‚ÌˆÓ–¡‰ğÍ‚Ì‚İs‚¢‚Ü‚·
-            interpreter.VisitVariableDeclarationStatement(this);
+            interpreter.ExecuteVariableDeclarationStatement(this);
         }
     }
 }

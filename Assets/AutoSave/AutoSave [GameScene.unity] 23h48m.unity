@@ -6262,7 +6262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseCursor_rotate: {fileID: 2800000, guid: e34332d32d042074fb26bc40751db88a, type: 3}
   mouseCursor_move: {fileID: 2800000, guid: 1649e697ff95b2c478c0dc3178024b84, type: 3}
-  rotateSpeed: 3
+  rotateSpeed: 4.5
   moveSpeed: 0.35
   zoomSpeed: 7
 --- !u!114 &1496772249
