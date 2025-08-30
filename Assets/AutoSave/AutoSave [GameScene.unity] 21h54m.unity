@@ -1489,7 +1489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -321.5, y: -133.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &259228232
@@ -1508,9 +1508,9 @@ MonoBehaviour:
   lineLength: 5
   orbit:
     Position: {x: 0, y: 0}
-    Width: 128
+    Width: 124
     Height: 34
-    RoundRadius: 5
+    RoundRadius: 7
 --- !u!114 &259228233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1523,8 +1523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c1b845f3bf7774f80ceedd2f7f89ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: aaf1f905180a6374db1a7a33a8fbecae, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9851905, g: 1, b: 0.7754717, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1532,7 +1532,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   points: []
-  thickness: 10
+  thickness: 3
   center: 1
 --- !u!222 &259228234
 CanvasRenderer:
@@ -4764,7 +4764,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1145119335}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1125691254}
+        m_TargetAssemblyTypeName: UnityLike.FrameworkAndDrivers.GameRoop.PlayButtonsEventManager,
+          Base-Assembly
+        m_MethodName: OnPushedPauseButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1145119335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5284,7 +5297,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1324763425}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1125691254}
+        m_TargetAssemblyTypeName: UnityLike.FrameworkAndDrivers.GameRoop.PlayButtonsEventManager,
+          Base-Assembly
+        m_MethodName: OnPushedStopButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1324763425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6236,7 +6262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseCursor_rotate: {fileID: 2800000, guid: e34332d32d042074fb26bc40751db88a, type: 3}
   mouseCursor_move: {fileID: 2800000, guid: 1649e697ff95b2c478c0dc3178024b84, type: 3}
-  rotateSpeed: 3
+  rotateSpeed: 4.5
   moveSpeed: 0.35
   zoomSpeed: 7
 --- !u!114 &1496772249

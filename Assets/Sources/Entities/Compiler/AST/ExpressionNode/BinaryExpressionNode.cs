@@ -46,11 +46,11 @@ namespace UnityLike.Entities.Compiler
                 _ => throw new System.NotSupportedException()
             }
             + " " + RightNode.ToPrettyString();
-        public override void ASTScan(ISemanticAnalyzer semantic)
+        public override void ASTScan(IInterpreter interpreter)
         {
-            LeftNode.ASTScan(semantic);
-            RightNode.ASTScan(semantic);
-            semantic.VisitBinaryExpression(this);
+            LeftNode.ASTScan(interpreter);
+            RightNode.ASTScan(interpreter);
+            interpreter.VisitBinaryExpression(this);
         }
     }
 }

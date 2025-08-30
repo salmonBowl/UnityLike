@@ -41,10 +41,10 @@ namespace UnityLike.Entities.Compiler
         public override string ToPrettyString() =>
             $"{Identifier.ToPrettyString()} = {Value.ToPrettyString()};";
 
-        public override void ASTScan(ISemanticAnalyzer semantic)
+        public override void ASTScan(IInterpreter interpreter)
         {
             // StatementNode‚Å‚Í©•ª©g‚ÌˆÓ–¡‰ğÍ‚Ì‚İs‚¢‚Ü‚·
-            semantic.VisitAssignmentStatement(this);
+            interpreter.VisitAssignmentStatement(this);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
         /// </summary>
         /// <param name="block"></param>
         /// <param name="sourceCode"></param>
-        public void Execute(string sourceCode, ref CompileData saveTarget)
+        public void Execute(string sourceCode, CompileData saveTarget)
         {
             // InputField内のテキストを正しい形へと修正します
             string fixedSourceCode = FixInputFieldText(sourceCode);

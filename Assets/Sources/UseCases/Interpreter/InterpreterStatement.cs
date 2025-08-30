@@ -1,8 +1,9 @@
+
 using UnityLike.Entities.Compiler;
 
-namespace UnityLike.UseCases.Compiler
+namespace UnityLike.UseCases.Interpreter
 {
-    partial class SemanticAnalyzer : ISemanticAnalyzer
+    public partial class Interpreter : IInterpreter
     {
         public void VisitVariableDeclarationStatement(VariableDeclarationStatementNode node)
         {

@@ -58,10 +58,10 @@ namespace UnityLike.Entities.Compiler
             ((InitalAssignment == null) ?
             $" {DeclaratedIdentifier};" :
             InitalAssignment.ToPrettyString());
-        public override void ASTScan(ISemanticAnalyzer semantic)
+        public override void ASTScan(IInterpreter interpreter)
         {
             // StatementNode‚Å‚Í©•ª©g‚ÌˆÓ–¡‰ğÍ‚Ì‚İs‚¢‚Ü‚·
-            semantic.VisitVariableDeclarationStatement(this);
+            interpreter.VisitVariableDeclarationStatement(this);
         }
     }
 }

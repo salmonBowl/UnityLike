@@ -25,12 +25,12 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => $"({Content.ToPrettyString()})";
-        public override void ASTScan(ISemanticAnalyzer semantic)
+        public override void ASTScan(IInterpreter interpreter)
         {
             // Ä‹AŒÄ‚Ño‚µ
-            Content.ASTScan(semantic);
+            Content.ASTScan(interpreter);
             // ©•ª©g
-            semantic.VisitParenExpression(this);
+            interpreter.VisitParenExpression(this);
         }
     }
 }

@@ -1,6 +1,7 @@
 using Vector2Int = UnityEngine.Vector2Int;
 
 using UnityLike.Entities.Compiler;
+using UnityLike.UseCases.Interpreter;
 using UnityLike.InterfaceAdapters.CodeEditorMouseOver;
 
 namespace UnityLike.InterfaceAdapters.CodeManagement
@@ -8,8 +9,9 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
     public class CodeManager : ICodeChanged
     {
         private readonly CompileManager compile;
+        private readonly CompileData data;
+        private readonly Interpreter interpreter;
         private readonly CodeErrorPopup errorPopup;
-        private CompileData data;
 
         public CodeManager(ISetTextUI setTextUI, IPopupView popup)
         {
@@ -20,15 +22,12 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
 
         public void OnChangeCode(string sourceCode)
         {
-            compile.Execute(sourceCode, ref data);
+            compile.Execute(sourceCode, data);
         }
 
         public void ExecuteCode()
         {
-            foreach(var statement in data.AST)
-            {
-                statement.ExecuteCode();
-            }
+            interpreter.ExecuteCode(data.AST);
         }
 
         public void PopupRequired(Vector2Int textPos)

@@ -1489,7 +1489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -321.5, y: -133.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &259228232
@@ -1508,9 +1508,9 @@ MonoBehaviour:
   lineLength: 5
   orbit:
     Position: {x: 0, y: 0}
-    Width: 128
+    Width: 124
     Height: 34
-    RoundRadius: 5
+    RoundRadius: 7
 --- !u!114 &259228233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1523,8 +1523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c1b845f3bf7774f80ceedd2f7f89ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: aaf1f905180a6374db1a7a33a8fbecae, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9851905, g: 1, b: 0.7754717, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1532,7 +1532,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   points: []
-  thickness: 10
+  thickness: 3
   center: 1
 --- !u!222 &259228234
 CanvasRenderer:
@@ -4694,7 +4694,6 @@ GameObject:
   - component: {fileID: 1145119336}
   - component: {fileID: 1145119335}
   - component: {fileID: 1145119334}
-  - component: {fileID: 1145119338}
   - component: {fileID: 1145119337}
   m_Layer: 5
   m_Name: Pause
@@ -4765,7 +4764,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1145119335}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1125691254}
+        m_TargetAssemblyTypeName: UnityLike.FrameworkAndDrivers.GameRoop.PlayButtonsEventManager,
+          Base-Assembly
+        m_MethodName: OnPushedPauseButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1145119335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4816,22 +4828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2827d69a778e2164b9750a82d032f4aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 0}
---- !u!114 &1145119338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1145119332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc98fa82d9d3df408d242329b5173ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectManager: {fileID: 0}
-  buttonManager: {fileID: 0}
-  effectLineRenderer: {fileID: 0}
 --- !u!1 &1171087987
 GameObject:
   m_ObjectHideFlags: 0
@@ -5231,7 +5227,6 @@ GameObject:
   - component: {fileID: 1324763426}
   - component: {fileID: 1324763425}
   - component: {fileID: 1324763424}
-  - component: {fileID: 1324763428}
   - component: {fileID: 1324763427}
   m_Layer: 5
   m_Name: Stop
@@ -5302,7 +5297,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1324763425}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1125691254}
+        m_TargetAssemblyTypeName: UnityLike.FrameworkAndDrivers.GameRoop.PlayButtonsEventManager,
+          Base-Assembly
+        m_MethodName: OnPushedStopButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1324763425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5353,22 +5361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2827d69a778e2164b9750a82d032f4aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 0}
---- !u!114 &1324763428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1324763422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc98fa82d9d3df408d242329b5173ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectManager: {fileID: 0}
-  buttonManager: {fileID: 0}
-  effectLineRenderer: {fileID: 0}
 --- !u!1 &1348630538
 GameObject:
   m_ObjectHideFlags: 0
@@ -7890,7 +7882,6 @@ GameObject:
   - component: {fileID: 2079355928}
   - component: {fileID: 2079355927}
   - component: {fileID: 2079355926}
-  - component: {fileID: 2079355930}
   - component: {fileID: 2079355929}
   m_Layer: 5
   m_Name: Play
@@ -7961,7 +7952,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2079355927}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1125691254}
+        m_TargetAssemblyTypeName: UnityLike.FrameworkAndDrivers.GameRoop.PlayButtonsEventManager,
+          Base-Assembly
+        m_MethodName: OnPushedPlayButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2079355927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8012,22 +8016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2827d69a778e2164b9750a82d032f4aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 0}
---- !u!114 &2079355930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2079355924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc98fa82d9d3df408d242329b5173ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectManager: {fileID: 0}
-  buttonManager: {fileID: 0}
-  effectLineRenderer: {fileID: 0}
 --- !u!1 &2081095976
 GameObject:
   m_ObjectHideFlags: 0

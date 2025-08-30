@@ -19,42 +19,55 @@ namespace Radishmouse
         {
             SetVerticesDirty();
         }
-
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear();
 
-            if (points.Length < 2)
+            if (points == null || points.Length < 2)
                 return;
+
+            // 最初の頂点インデックス
+            int vertexIndex = 0;
 
             for (int i = 0; i < points.Length - 1; i++)
             {
-                // Create a line segment between the next two points
                 CreateLineSegment(points[i], points[i + 1], vh);
 
-                int index = i * 5;
+                // 矩形の4つの頂点に対応するインデックス
+                vh.AddTriangle(vertexIndex, vertexIndex + 1, vertexIndex + 3);
+                vh.AddTriangle(vertexIndex + 3, vertexIndex + 2, vertexIndex);
 
-                // Add the line segment to the triangles array
-                vh.AddTriangle(index, index + 1, index + 3);
-                vh.AddTriangle(index + 3, index + 2, index);
-
-                // These two triangles create the beveled edges
-                // between line segments using the end point of
-                // the last line segment and the start points of this one
-                if (i != 0)
-                {
-                    vh.AddTriangle(index, index - 1, index - 3);
-                    vh.AddTriangle(index + 1, index - 1, index - 2);
-                }
+                // 次のセグメントの開始インデックスを更新
+                vertexIndex += 4;
             }
         }
 
-        /// <summary>
-        /// Creates a rect from two points that acts as a line segment
-        /// </summary>
-        /// <param name="point1">The starting point of the segment</param>
-        /// <param name="point2">The endint point of the segment</param>
-        /// <param name="vh">The vertex helper that the segment is added to</param>
+        private void CreateLineSegment(Vector2 point1, Vector2 point2, VertexHelper vh)
+        {
+            // 線分の方向と法線ベクトルを計算
+            Vector2 direction = (point2 - point1).normalized;
+            Vector2 offset = new Vector2(-direction.y, direction.x) * thickness / 2f;
+
+            // Create vertex template
+            UIVertex vertex = UIVertex.simpleVert;
+            vertex.color = color;
+
+            // Create the start of the segment
+            vertex.position = point1 - offset;
+            vh.AddVert(vertex);
+            vertex.position = point1 + offset;
+            vh.AddVert(vertex);
+
+            // Create the end of the segment
+            vertex.position = point2 - offset;
+            vh.AddVert(vertex);
+            vertex.position = point2 + offset;
+            vh.AddVert(vertex);
+
+            // Also add the end point
+            vertex.position = point2 - offset;
+            //vh.AddVert(vertex);
+        }
         private void CreateLineSegment(Vector3 point1, Vector3 point2, VertexHelper vh)
         {
             Vector3 offset = center ? (rectTransform.sizeDelta / 2) : Vector2.zero;

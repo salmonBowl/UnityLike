@@ -21,10 +21,10 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => Name;
-        public override void ASTScan(ISemanticAnalyzer semantic)
+        public override void ASTScan(IInterpreter interpreter)
         {
             // ˆÓ–¡‰ğÍ‚ğ‚µ‚Ü‚·
-            semantic.VisitIdentifier(this);
+            interpreter.VisitIdentifier(this);
         }
     }
 }

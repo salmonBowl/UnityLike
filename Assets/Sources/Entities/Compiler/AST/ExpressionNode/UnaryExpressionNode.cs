@@ -1,3 +1,4 @@
+using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Compiler
 {
@@ -35,12 +36,12 @@ namespace UnityLike.Entities.Compiler
                 _ => throw new System.Exception()
             }
             + Operand.ToPrettyString();
-        public override void ASTScan(ISemanticAnalyzer semantic)
+        public override void ASTScan(IInterpreter interepreter)
         {
             // Ä‹AŒÄ‚Ño‚µ
-            Operand.ASTScan(semantic);
+            Operand.ASTScan(interepreter);
             // ©•ª©g
-            semantic.VisitUnaryExpression(this);
+            interepreter.VisitUnaryExpression(this);
         }
     }
 }

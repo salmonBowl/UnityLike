@@ -1,13 +1,13 @@
 
 namespace UnityLike.Entities.Compiler
 {
-    public interface ISemanticAnalyzer
+    public interface IInterpreter
     {
-        // 各StatementNodeに対応するVisitメソッド
+        // Statement
         void VisitVariableDeclarationStatement(VariableDeclarationStatementNode node);
         void VisitAssignmentStatement(AssignmentStatementNode node);
 
-        // 各ExpressionNodeに対応するVisitメソッド
+        // Expression
         void VisitBinaryExpression(BinaryExpressionNode node);
         void VisitIdentifier(IdentifierNode node);
         void VisitDeclaratedIdentifier(DeclaratedIdentifierNode node);
@@ -15,7 +15,7 @@ namespace UnityLike.Entities.Compiler
         void VisitParenExpression(ParenNode node);
         void VisitUnaryExpression(UnaryExpressionNode node);
 
-        // TypeNode
+        // Type
         void VisitTypeNode(TypeNode node);
     }
 }

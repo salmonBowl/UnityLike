@@ -27,10 +27,10 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => Identifier.ToPrettyString();
-        public override void ASTScan(ISemanticAnalyzer semantic)
+        public override void ASTScan(IInterpreter interpreter)
         {
             // 内部のIdentifierには意味解析の機能を持たせず、自分自身のみ解析します
-            semantic.VisitDeclaratedIdentifier(this);
+            interpreter.VisitDeclaratedIdentifier(this);
         }
     }
 }

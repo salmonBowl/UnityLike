@@ -18,45 +18,47 @@ namespace UnityLike.Entities.Shape
         /// <returns>メンバー変数のPositionを基準としたVector2の座標を返します</returns>
         public Vector2 CalculatePosition(float parameter)
         {
+            float hWidth = Width / 2;
+            float hHeight = Height / 2;
             // 制御点を指定します
             Vector2[][] controlPoints = new Vector2[][]
             {
                 // 右上
                 new Vector2[]
                 {
-                    new(Width - RoundRadius, Height),
-                    new(Width, Height),
-                    new(Width, Height - RoundRadius),
+                    new(hWidth - RoundRadius, hHeight),
+                    new(hWidth, hHeight),
+                    new(hWidth, hHeight - RoundRadius),
                 },
                 // 右
-                new Vector2[] { new(Width, Height - RoundRadius), new(Width, -Height + RoundRadius) },
+                new Vector2[] { new(hWidth, hHeight - RoundRadius), new(hWidth, -hHeight + RoundRadius) },
                 // 右下
                 new Vector2[]
                 {
-                    new(Width, -Height + RoundRadius),
-                    new(Width, -Height),
-                    new(Width - RoundRadius, -Height),
+                    new(hWidth, -hHeight + RoundRadius),
+                    new(hWidth, -hHeight),
+                    new(hWidth - RoundRadius, -hHeight),
                 },
                 // 下
-                new Vector2[] { new(Width - RoundRadius, -Height), new(-Width + RoundRadius, -Height) },
+                new Vector2[] { new(hWidth - RoundRadius, -hHeight), new(-hWidth + RoundRadius, -hHeight) },
                 // 左下
                 new Vector2[]
                 {
-                    new(-Width + RoundRadius, -Height),
-                    new(-Width, -Height),
-                    new(-Width, -Height + RoundRadius),
+                    new(-hWidth + RoundRadius, -hHeight),
+                    new(-hWidth, -hHeight),
+                    new(-hWidth, -hHeight + RoundRadius),
                 },
                 // 左
-                new Vector2[] { new(-Width, -Height + RoundRadius), new(-Width, Height - RoundRadius) },
+                new Vector2[] { new(-hWidth, -hHeight + RoundRadius), new(-hWidth, hHeight - RoundRadius) },
                 // 左上
                 new Vector2[]
                 {
-                    new(-Width, Height - RoundRadius),
-                    new(-Width, Height),
-                    new(-Width + RoundRadius, Height),
+                    new(-hWidth, hHeight - RoundRadius),
+                    new(-hWidth, hHeight),
+                    new(-hWidth + RoundRadius, hHeight),
                 },
                 // 上
-                new Vector2[] { new(-Width + RoundRadius, Height), new(Width - RoundRadius, Height) }
+                new Vector2[] { new(-hWidth + RoundRadius, hHeight), new(hWidth - RoundRadius, hHeight) }
             };
 
             // ジャグ配列から制御点のセットを取得

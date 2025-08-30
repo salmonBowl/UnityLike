@@ -21,7 +21,7 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => Value;
-        public override void ASTScan(ISemanticAnalyzer semantic)
+        public override void ASTScan(IInterpreter interpereter)
         {
             // UnknownExpression‚ÅˆÓ–¡‰ğÍ‚Í‚È‚µ
         }

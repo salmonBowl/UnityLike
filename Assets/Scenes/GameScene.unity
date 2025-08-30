@@ -1510,7 +1510,7 @@ MonoBehaviour:
     Position: {x: 0, y: 0}
     Width: 128
     Height: 34
-    RoundRadius: 5
+    RoundRadius: 7
 --- !u!114 &259228233
 MonoBehaviour:
   m_ObjectHideFlags: 0
