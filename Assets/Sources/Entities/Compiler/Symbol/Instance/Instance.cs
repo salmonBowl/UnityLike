@@ -6,7 +6,7 @@ namespace UnityLike.Entities.Symbol
         /// <summary>
         /// このインスタンスが属するクラス
         /// </summary>
-        public Class Class { get; }
+        public abstract Class Type { get; }
 
         // メンバーへのアクセス
         public abstract Instance GetMember(string name);

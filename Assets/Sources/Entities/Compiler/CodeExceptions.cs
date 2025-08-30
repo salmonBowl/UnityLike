@@ -24,28 +24,40 @@ namespace UnityLike.Entities.Compiler
     /// </summary>
     public class ExecuteException : CodeException { }
 
-    public class TypeNotFoundException : SemanticErrorException
+    public class TypeNotExistException : SemanticErrorException
     {
         public override string Message { get; }
-        public TypeNotFoundException(string typeName)
+        public TypeNotExistException(string typeName, ColoredToken token)
         {
             Message = $"型名'{typeName}'は存在しません";
+            token.HasError(Message);
+        }
+    }
+    public class MemberNotExistException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public MemberNotExistException(string memberName, ColoredToken token)
+        {
+            Message = $"メンバー'{memberName}'は存在しません";
+            token.HasError(Message);
         }
     }
     public class IdentifierNotFoundException : SemanticErrorException
     {
         public override string Message { get; }
-        public IdentifierNotFoundException(string typeName)
+        public IdentifierNotFoundException(string typeName, ColoredToken token)
         {
             Message = $"'{typeName}'は定義されていません";
+            token.HasError(Message);
         }
     }
     public class ReDefinitionException : ExecuteException
     {
         public override string Message { get; }
-        public ReDefinitionException(string identifierName)
+        public ReDefinitionException(string identifierName, ColoredToken token)
         {
             Message = $"'{identifierName}'は既に定義されています";
+            token.HasError(Message);
         }
     }
 }
