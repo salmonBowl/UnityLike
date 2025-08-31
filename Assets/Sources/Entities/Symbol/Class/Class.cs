@@ -8,11 +8,10 @@ namespace UnityLike.Entities.Symbol
         public abstract string Name { get; }
 
         /// <summary>
-        /// 新しいインスタンスを初期値で生成します
+        /// インスタンスの初期値を定義します。変数宣言の際などに使用してください。
         /// </summary>
-        /// <param name="args">インスタンス生成時の引数</param>
         /// <returns>生成したインスタンスを返します</returns>
-        public abstract Instance NewInstance(Instance[] args, ColoredToken[] argTokens, ColoredToken rightParen = null);
+        public abstract Instance GetInitalInstance();
         public abstract void TryMemberExists(string member, ColoredToken token);
     }
 }

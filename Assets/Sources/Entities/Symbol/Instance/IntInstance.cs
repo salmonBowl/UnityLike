@@ -14,15 +14,6 @@ namespace UnityLike.Entities.Symbol
             Value = value;
         }
 
-        public override Instance GetMember(string member, ColoredToken token)
-        {
-            throw new MemberNotExistException(member, token);
-        }
-        public override void SetMember(string member, Instance value, ColoredToken token)
-        {
-            throw new MemberNotExistException(member, token);
-        }
-
         public override float AsFloat()
         {
             return Value;

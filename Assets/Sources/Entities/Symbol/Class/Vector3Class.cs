@@ -4,11 +4,14 @@ namespace UnityLike.Entities.Symbol
 {
     public class Vector3Class : Class
     {
-        public static Vector3Class Instance => new();
+        public static Vector3Class Single => new();
 
         public override string Name => "Vector3";
 
-        public override Instance NewInstance(Instance[] args, ColoredToken[] argTokens, ColoredToken rightParen = null)
+        public override Instance GetInitalInstance()
+        {
+            return new Vector3Instance(0, 0, 0);
+        }
         {
             // ˆø”‚Ì”‚ª3‚Â‚Å‚ ‚é‚±‚Æ‚ğŠm”F
             if (args.Length != 3)

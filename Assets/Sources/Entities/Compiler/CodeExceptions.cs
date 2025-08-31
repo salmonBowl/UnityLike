@@ -42,6 +42,15 @@ namespace UnityLike.Entities.Compiler
             token.HasError(Message);
         }
     }
+    public class FunctionNotExistException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public FunctionNotExistException(string memberName, ColoredToken token)
+        {
+            Message = $"ÉÅÉìÉoÅ[ä÷êî'{memberName}'ÇÕë∂ç›ÇµÇ‹ÇπÇÒ";
+            token.HasError(Message);
+        }
+    }
     public class IdentifierNotFoundException : SemanticErrorException
     {
         public override string Message { get; }

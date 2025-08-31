@@ -17,8 +17,16 @@ namespace UnityLike.Entities.Symbol
         {
             ParentScope = parentScope;
         }
+        
+        public void AddMember(params Variable[] members)
+        {
+            foreach (var m in members)
+            {
+                variables.Add(m.Name, m);
+            }
+        }
 
-        public void AddVariable(Variable symbol, ColoredToken token)
+        public void AddUserVariable(Variable symbol, ColoredToken token)
         {
             // 再定義でないかをチェック
             if (variables.ContainsKey(symbol.Name))

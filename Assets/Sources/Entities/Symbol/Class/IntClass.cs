@@ -8,9 +8,9 @@ namespace UnityLike.Entities.Symbol
 
         public override string Name => "int";
 
-        public override Instance NewInstance(params Instance[] args)
+        public override Instance GetInitalInstance()
         {
-            return new IntInstance();
+            return new IntInstance(0);
         }
 
         public override void TryMemberExists(string member, ColoredToken token)
