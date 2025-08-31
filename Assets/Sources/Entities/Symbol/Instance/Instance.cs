@@ -21,7 +21,10 @@ namespace UnityLike.Entities.Symbol
         /// <param name="name">メンバー名</param>
         /// <param name="token">メンバー名のトークン</param>
         /// <returns>メンバー変数を返します</returns>
-        public abstract Variable GetMember(string name, ColoredToken token);
+        public Variable GetMember(string name, ColoredToken token)
+        {
+            return Member.LookUpVariable(name) ?? throw new MemberNotExistException(name, token);
+        }
 
         /// <summary>
         /// メンバー関数を実行します

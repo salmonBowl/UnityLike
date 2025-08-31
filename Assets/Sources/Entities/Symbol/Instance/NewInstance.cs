@@ -1,46 +1,47 @@
 
+using System;
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
 {
     /// <summary>
-    /// new式でのインスタンス生成に使用します。new式の形をシングルトンのメンバー関数だと見立てる設計を取りました。
+    /// new式でのインスタンス生成に使用します。new式の形をNewという仮想のインスタンスのメンバー関数だと見立てる設計を取りました。
     /// </summary>
     public class NewInstance : Instance
     {
         public override Class Type => Vector3Class.Single;
 
-        public override Variable GetMember(string member, ColoredToken token)
+        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen)
         {
-            throw new MemberNotExistException(member, token);
-        }
-
-        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null)
-        {
-            // 引数の数が3つであることを確認
-            if (args.Length != 3)
+            void ArgCheck(params string[] expected)
             {
-                throw new InvalidArgumentException(3, rightParen);
+                int argCount = expected.Length;
+                if (args.Length != argCount)
+                {
+                    throw new InvalidArgumentException(expected.Length, rightParen);
+                }
+                for (int i = 0; i < argCount; i++)
+                {
+                    Type expectedType = TypeCastConstants.TypeOf(expected[i]);
+                    bool castable = args[i].GetType().IsSubclassOf(expectedType);
+                    if (!castable)
+                    {
+                        throw new ArgumentInvalidTypeException(expected[i], argTokens[i]);
+                    }
+                }
             }
 
-            // 各引数の型をチェックし、値を代入
-            if (args[0] is not NumberInstance numberX)
+            switch (name)
             {
-                throw new ArgumentInvalidTypeException("float", argTokens[0]);
+                case "Vector3":
+                    ArgCheck("float", "float", "float");
+                    float x = ((NumberInstance)args[0]).AsFloat();
+                    float y = ((NumberInstance)args[1]).AsFloat();
+                    float z = ((NumberInstance)args[2]).AsFloat();
+                    return new Vector3Instance(x, y, z);
+                default:
+                    throw new TypeNotExistException(name, nameToken);
             }
-            if (args[1] is not NumberInstance numberY)
-            {
-                throw new ArgumentInvalidTypeException("float", argTokens[1]);
-            }
-            if (args[2] is not NumberInstance numberZ)
-            {
-                throw new ArgumentInvalidTypeException("float", argTokens[2]);
-            }
-
-            float x = numberX.AsFloat();
-            float y = numberY.AsFloat();
-            float z = numberZ.AsFloat();
-            return new Vector3Instance(x, y, z);
         }
     }
 }

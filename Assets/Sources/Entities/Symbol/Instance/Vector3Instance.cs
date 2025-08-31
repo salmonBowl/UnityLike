@@ -18,10 +18,5 @@ namespace UnityLike.Entities.Symbol
             Y.Value = new FloatInstance(y);
             Z.Value = new FloatInstance(z);
         }
-
-        public override Variable GetMember(string member, ColoredToken token)
-        {
-            throw new MemberNotExistException(member, token);
-        }
     }
 }

@@ -38,11 +38,11 @@ namespace UnityLike.Entities.Symbol
         }
 
         /// <summary>
-        /// 現在のスコープから親スコープへと遡ってシンボルを名前で探します
+        /// 現在のスコープから親スコープへと遡って変数を名前で探します
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Symbol, null</returns>
-        public Variable LookUpSymbol(string name)
+        public Variable LookUpVariable(string name)
         {
             // 現在のスコープで見つかったならreturn
             if (variables.TryGetValue(name, out var mySymbol))
@@ -57,7 +57,7 @@ namespace UnityLike.Entities.Symbol
             }
             else// if (ParentScope != null)
             {
-                return ParentScope.LookUpSymbol(name);
+                return ParentScope.LookUpVariable(name);
             }
         }
     }
