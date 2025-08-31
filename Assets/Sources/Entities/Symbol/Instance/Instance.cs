@@ -11,7 +11,12 @@ namespace UnityLike.Entities.Symbol
         public abstract Class Type { get; }
 
         /// <summary>
-        /// メンバー変数へのアクセス
+        /// メンバー変数を保持するテーブルです
+        /// </summary>
+        protected VariableTable Member { get; } = new(null);
+
+        /// <summary>
+        /// メンバー変数へアクセスします
         /// </summary>
         /// <param name="name">メンバー名</param>
         /// <param name="token">メンバー名のトークン</param>

@@ -1,11 +1,11 @@
 
 namespace UnityLike.Entities.Symbol
 {
-    public class IntInstance : NumberInstance
+    public class FloatInstance : NumberInstance
     {
-        public override Class Type => IntClass.Single;
+        public override Class Type => FloatClass.Single;
 
-        public IntInstance(int value)
+        public FloatInstance(float value)
         {
             Value = value;
         }

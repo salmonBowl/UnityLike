@@ -7,13 +7,11 @@ namespace UnityLike.Entities.Symbol
     {
         public override Class Type => Vector3Class.Single;
 
-        public VariableTable Member { get; } = new(null);
-
         public Vector3Instance(float x, float y, float z)
         {
-            Variable X = new("x", FloatInstance.Single);
-            Variable Y = new("y", FloatInstance.Single);
-            Variable Z = new("z", FloatInstance.Single);
+            Variable X = new("x", Type);
+            Variable Y = new("y", Type);
+            Variable Z = new("z", Type);
             Member.AddMember(X, Y, Z);
 
             X.Value = new FloatInstance(x);

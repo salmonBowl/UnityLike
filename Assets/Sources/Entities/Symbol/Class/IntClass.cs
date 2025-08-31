@@ -4,9 +4,7 @@ namespace UnityLike.Entities.Symbol
 {
     public class IntClass : Class
     {
-        public static IntClass Instance => new();
-
-        public override string Name => "int";
+        public static IntClass Single => new();
 
         public override Instance GetInitalInstance()
         {

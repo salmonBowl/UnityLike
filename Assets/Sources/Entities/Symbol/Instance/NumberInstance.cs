@@ -2,7 +2,7 @@ using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
 {
-    public abstract class NumberInstance : Instance
+    public abstract class NumberInstance : PrimitiveInstance
     {
         public override Variable GetMember(string member, ColoredToken token)
         {

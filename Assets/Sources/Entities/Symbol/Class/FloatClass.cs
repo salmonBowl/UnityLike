@@ -2,13 +2,13 @@ using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
 {
-    public class Vector3Class : Class
+    public class FloatClass : Class
     {
-        public static Vector3Class Single => new();
+        public static FloatClass Single => new();
 
         public override Instance GetInitalInstance()
         {
-            return new Vector3Instance(0, 0, 0);
+            return new IntInstance(0);
         }
 
         public override void TryMemberExists(string member, ColoredToken token)
