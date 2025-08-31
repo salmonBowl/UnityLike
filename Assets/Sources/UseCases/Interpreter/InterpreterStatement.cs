@@ -38,10 +38,10 @@ namespace UnityLike.UseCases.Interpreter
             object value = EvaluateExpression(node.Value);
 
             // シンボルテーブルで変数を検索し、値を更新
-            Symbol symbol = currentScope.LookUpSymbol(node.Identifier.Name);
+            Variable symbol = currentScope.LookUpSymbol(node.Identifier.Name);
             if (symbol == null)
             {
-                throw new IdentifierNotFoundException(node.Identifier.Name);
+                throw new IdentifierNotFoundException(node.Identifier.Name, node.Identifier.IdentifierToken);
             }
             symbol.Value = value; // シンボルに値を持たせる
         }

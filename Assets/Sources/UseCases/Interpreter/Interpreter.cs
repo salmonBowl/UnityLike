@@ -12,11 +12,11 @@ namespace UnityLike.UseCases.Interpreter
         /// <summary>
         /// 現在走査しているスコープを示します
         /// </summary>
-        private SymbolTable currentScope;
+        private VariableTable currentScope;
 
         private void Initialize()
         {
-            currentScope = new SymbolTable(null);
+            currentScope = new VariableTable(null);
         }
         private void Terminate()
         {

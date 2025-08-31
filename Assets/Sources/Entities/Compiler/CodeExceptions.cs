@@ -51,6 +51,25 @@ namespace UnityLike.Entities.Compiler
             token.HasError(Message);
         }
     }
+    public class InvalidArgumentException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public InvalidArgumentException(int argCount, ColoredToken token)
+        {
+            Message = $"ˆø”‚Ì”‚Í{argCount}‚É‚µ‚Ä‚­‚¾‚³‚¢";
+            token.HasError(Message);
+        }
+    }
+    public class ArgumentInvalidTypeException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public ArgumentInvalidTypeException(string expectedType, ColoredToken token)
+        {
+            Message = $"ˆø”‚ÌŒ^‚ªŠÔˆá‚Á‚Ä‚¢‚Ü‚·B{expectedType}Œ^‚Ì‚à‚Ì‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢";
+            token.HasError(Message);
+        }
+    }
+
     public class ReDefinitionException : ExecuteException
     {
         public override string Message { get; }

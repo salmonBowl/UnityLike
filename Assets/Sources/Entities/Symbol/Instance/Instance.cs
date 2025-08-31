@@ -1,4 +1,6 @@
 
+using UnityLike.Entities.Compiler;
+
 namespace UnityLike.Entities.Symbol
 {
     public abstract class Instance
@@ -9,7 +11,7 @@ namespace UnityLike.Entities.Symbol
         public abstract Class Type { get; }
 
         // メンバーへのアクセス
-        public abstract Instance GetMember(string name);
-        public abstract void SetMember(string name, Instance value);
+        public abstract Instance GetMember(string name, ColoredToken token);
+        public abstract void SetMember(string name, Instance value, ColoredToken token);
     }
 }

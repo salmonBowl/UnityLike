@@ -10,8 +10,7 @@ namespace UnityLike.Entities.Symbol
 
         public override Instance NewInstance(params Instance[] args)
         {
-            // ˆø”‚ª‚ ‚ê‚Î‰Šú’l‚ğİ’è
-            return new IntInstance(0);
+            return new IntInstance();
         }
 
         public override void TryMemberExists(string member, ColoredToken token)
@@ -19,5 +18,4 @@ namespace UnityLike.Entities.Symbol
             throw new MemberNotExistException(member, token);
         }
     }
-
 }
