@@ -6,6 +6,6 @@ namespace UnityLike.Entities.Compiler
     /// </summary>
     public abstract class StatementNode : Node
     {
-        public abstract void ExecuteCode();
+        public abstract void ASTScan(IVisitor interpreter);
     }
 }

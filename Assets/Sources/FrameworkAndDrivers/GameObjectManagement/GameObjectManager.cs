@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 {
-    public class GameObjectManager : MonoBehaviour, IChangeSelected
+    public class GameObjectManager : MonoBehaviour, IChangeSelected, ICodeExecute
     {
         [SerializeField] private GameObject gameObjectPrefab;
 

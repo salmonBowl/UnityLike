@@ -25,10 +25,5 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => Name;
-        public override void ASTScan(ISemanticAnalyzer semantic)
-        {
-            // ˆÓ–¡‰ğÍ‚ğ‚µ‚Ü‚·
-            semantic.VisitTypeNode(this);
-        }
     }
 }

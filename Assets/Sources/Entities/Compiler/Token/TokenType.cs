@@ -16,6 +16,10 @@ namespace UnityLike.Entities.Compiler
         Minus,
         Multiply,
         Divide,
+        Modulo,
+
+        // ’P€‰‰Zq
+        Not,
 
         // ‘ã“ü‰‰Zq
         Equals,

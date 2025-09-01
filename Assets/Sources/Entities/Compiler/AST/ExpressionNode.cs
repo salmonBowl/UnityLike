@@ -1,3 +1,4 @@
+using UnityLike.Entities.Symbol;
 
 namespace UnityLike.Entities.Compiler
 {
@@ -11,5 +12,6 @@ namespace UnityLike.Entities.Compiler
     */
     public abstract class ExpressionNode : Node
     {
+        public abstract Instance ASTScan(IVisitor interpreter);
     }
 }

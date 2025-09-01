@@ -15,7 +15,7 @@ namespace UnityLike.Entities.Compiler
         // ‹^—“I‚ÈÀ‘•‚ğ‚µ‚Ä‚¢‚Ü‚·
         // Œ»İ‚Í‚±‚Ì’†‚ÉTokenType.TypeStandard‚ğ“n‚µ‚Ü‚·
         public TypeNode Type;
-        public DeclaratedIdentifierNode DeclaratedIdentifier { get; }
+        public IdentifierNode DeclaratedIdentifier { get; }
         public AssignmentStatementNode? InitalAssignment { get; } = null;
 
         public ColoredToken SemicolonToken { get; }
@@ -23,7 +23,7 @@ namespace UnityLike.Entities.Compiler
         public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier, ColoredToken semicolonToken)
         {
             Type = type;
-            DeclaratedIdentifier = new DeclaratedIdentifierNode(identifier);
+            DeclaratedIdentifier = identifier;
             SemicolonToken = semicolonToken;
         }
         public VariableDeclarationStatementNode(TypeNode type, IdentifierNode identifier,
@@ -31,11 +31,6 @@ namespace UnityLike.Entities.Compiler
             ) : this(type, identifier, semicolonToken)
         {
             InitalAssignment = new AssignmentStatementNode(identifier, equalToken, initalValue, semicolonToken);
-        }
-
-        public override void ExecuteCode()
-        {
-
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
@@ -56,12 +51,11 @@ namespace UnityLike.Entities.Compiler
         public override string ToPrettyString() =>
             Type.ToPrettyString() +
             ((InitalAssignment == null) ?
-            $" {DeclaratedIdentifier};" :
+            $" {DeclaratedIdentifier.ToPrettyString()};" :
             InitalAssignment.ToPrettyString());
-        public override void ASTScan(ISemanticAnalyzer semantic)
+        public override void ASTScan(IVisitor interpreter)
         {
-            // StatementNode‚Å‚Í©•ª©g‚ÌˆÓ–¡‰ğÍ‚Ì‚İs‚¢‚Ü‚·
-            semantic.VisitVariableDeclarationStatement(this);
+            interpreter.ExecuteVariableDeclarationStatement(this);
         }
     }
 }

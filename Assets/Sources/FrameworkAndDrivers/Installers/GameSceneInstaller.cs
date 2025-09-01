@@ -2,16 +2,16 @@ using UnityEngine;
 using Zenject;
 
 // Entities‘w
-using UnityLike.Entities.Shared;
+using UnityLike.Entities.GameRoop;
 
 // UseCases‘w
 
 // InterfaceAdapter‘w
-using UnityLike.InterfaceAdapters.TextAreaLayout;
 
 // FramewoekAndDrivers‘w
 using UnityLike.FrameworkAndDrivers.CodeEditor;
 using UnityLike.FrameworkAndDrivers.Settings;
+using UnityLike.FrameworkAndDrivers.GameRoop;
 
 namespace UnityLike.FrameworkAndDrivers.Installers
 {
@@ -29,6 +29,12 @@ namespace UnityLike.FrameworkAndDrivers.Installers
         [Header("CodeEditorŠÖŒW")]
         [SerializeField]
         private CodeEditorUIEvents codeEditorUIEvents;
+
+        [Header("UIŠÖŒW")]
+        [SerializeField]
+        private GameRoopExecuter gameRoopExecuter;
+        [SerializeField]
+        private WhilePlayingEffect whilePlayingEffect;
 
         public void Awake()
         {
@@ -48,26 +54,6 @@ namespace UnityLike.FrameworkAndDrivers.Installers
         public override void InstallBindings()
         {
             Debug.Log("GameSceneInstaller.InstallBindings()");
-
-            /*
-             *  --- Entities‘w --
-             */
-
-            /*
-             *  --- Use Cases‘w ---
-             */
-
-            /*
-             *  --- Interface Adapters‘w ---
-             */
-
-
-            //
-
-            /*
-             *  --- Frameworks & Drivers‘w ---
-             */
-
 
 
             /*

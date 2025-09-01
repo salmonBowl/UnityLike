@@ -20,8 +20,6 @@ namespace UnityLike.Entities.Compiler
             }
         }
 
-        public override void ExecuteCode() { }
-
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
             foreach(var cToken in ColoredTokens)
@@ -39,9 +37,9 @@ namespace UnityLike.Entities.Compiler
             }
             return returnText;
         }
-        public override void ASTScan(ISemanticAnalyzer semantic)
+        public override void ASTScan(IVisitor interpreter)
         {
-            // UnknownStatementÇ≈à”ñ°âêÕÇÕÇ»Çµ
+            // UnknownStatementÇ≈é¿çsÇÕÇ»Çµ
         }
     }
 }
