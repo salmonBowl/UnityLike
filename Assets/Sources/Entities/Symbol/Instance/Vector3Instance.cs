@@ -31,7 +31,7 @@ namespace UnityLike.Entities.Symbol
             // ÇªÇ§Ç∑ÇÈÇ∆ñ≥å¿ÉãÅ[ÉvÇ∆Ç»Ç¡ÇƒÇµÇ‹Ç§ÇΩÇﬂàÍíUå©ëóÇË
         }
 
-        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen)
+        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen)
         {
             void ArgCheck(params string[] expected)
             {
@@ -44,7 +44,7 @@ namespace UnityLike.Entities.Symbol
                 {
                     if (!Castable(args[i], expected[i]))
                     {
-                        throw new ArgumentInvalidTypeException(expected[i], argTokens[i]);
+                        throw new ArgumentInvalidTypeException(expected[i], nameToken);
                     }
                 }
             }

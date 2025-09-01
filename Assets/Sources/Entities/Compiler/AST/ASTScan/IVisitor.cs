@@ -14,6 +14,7 @@ namespace UnityLike.Entities.Compiler
         Instance VisitNumberLiteral(IntLiteralNode node);
         Instance VisitParenExpression(ParenNode node);
         Instance VisitUnaryExpression(UnaryExpressionNode node);
+        Instance VisitNewExpression(NewExpressionNode node);
 
         // Variable
         Variable GetIdentifier(IdentifierNode node);

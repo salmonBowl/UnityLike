@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 
 namespace UnityLike.Entities.Compiler
 {
@@ -14,6 +15,7 @@ namespace UnityLike.Entities.Compiler
         {
             ColoredToken cDot = TokenToColoredToken(dot);
             ColoredToken cMember = TokenToColoredToken(member);
+            cMember.IsMember();
             return new MemberAccessNode(parent, cDot, cMember);
         }
         public static IntLiteralNode NumberLiteralNode(Token number)
@@ -58,6 +60,23 @@ namespace UnityLike.Entities.Compiler
         public static TypeNode TypeNode(Token type)
         {
             return new TypeNode(TokenToColoredToken(type));
+        }
+
+        public static NewExpressionNode NewNode(Token newToken, Token typeToken, Token leftParen, List<ExpressionNode> arguments, List<Token> commas, Token rightParen)
+        {
+            ColoredToken cNewToken = TokenToColoredToken(newToken);
+            ColoredToken cTypeToken = TokenToColoredToken(typeToken);
+            ColoredToken cLeftParen = TokenToColoredToken(leftParen);
+            ColoredToken cRightParen = TokenToColoredToken(rightParen);
+
+            ExpressionNode[] argumentArray = arguments.ToArray();
+            ColoredToken[] cCommas = new ColoredToken[commas.Count];
+            for (int i = 0; i < commas.Count; i++)
+            {
+                cCommas[i] = TokenToColoredToken(commas[i]);
+            }
+
+            return new NewExpressionNode(cNewToken, cTypeToken, cLeftParen, argumentArray, cCommas, cRightParen);
         }
 
         /// <summary>

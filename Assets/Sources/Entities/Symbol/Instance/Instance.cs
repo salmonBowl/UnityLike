@@ -33,7 +33,7 @@ namespace UnityLike.Entities.Symbol
         /// <param name="name">ŠÖ”–¼</param>
         /// <param name="args">ˆø”</param>
         /// <returns>ŠÖ”‚Ì•Ô‚è’l</returns>
-        public abstract Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null);
+        public abstract Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen = null);
 
         // Instance‚Ì‰‰Z‚ğs‚¢‚Ü‚·
         public abstract Instance Add(Instance other);

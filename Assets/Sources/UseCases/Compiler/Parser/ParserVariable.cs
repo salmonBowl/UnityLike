@@ -10,7 +10,7 @@ namespace UnityLike.UseCases.Compiler
             if (CurrentTokenType == TokenType.Identifier)
                 Consume();
             else
-                throw new SyntaxErrorException("•s–¾‚È•¶Žš—ñ‚Å‚·");
+                throw new System.InvalidProgramException("•s–¾‚È•¶Žš—ñ‚Å‚·");
 
             return MemberAccess(ASTFactory.IdentifierNode(identifier));
         }

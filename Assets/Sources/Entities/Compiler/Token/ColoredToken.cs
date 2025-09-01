@@ -42,6 +42,14 @@ namespace UnityLike.Entities.Compiler
         }
 
         /// <summary>
+        /// このトークンがメンバー変数である時、色をメンバー変数のものに変更します
+        /// </summary>
+        public void IsMember()
+        {
+            ColorCode = TokenConstants.syntaxHighlightColors[TokenType.Member];
+        }
+
+        /// <summary>
         /// トークンの情報を文字列として取得します
         /// </summary>
         public override string ToString() // Token.ToString

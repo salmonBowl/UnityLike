@@ -68,12 +68,13 @@ namespace UnityLike.UseCases.Compiler
             return CurrentTokenType switch
             {
                 TokenType.Identifier => ParseVariable(),
+                TokenType.New => ParseNewExpression(),
                 TokenType.NumberLiteral => ConsumeWithGenerate(),
                 TokenType.LeftParen => ParseParenExpression(),
                 TokenType.Unknown => AsUnknown(),
                 TokenType.SemiColon => throw new SyntaxErrorException("ï∂Ç™äÆê¨ÇµÇƒÇ¢Ç‹ÇπÇÒ"),
                 TokenType.RightParen => throw new SyntaxErrorException("ílÇ™Ç†ÇËÇ‹ÇπÇÒ"),
-                _ => throw new SyntaxErrorException()
+                _ => throw new SyntaxErrorException("ï∂ñ@Ç™ê≥ÇµÇ≠Ç†ÇËÇ‹ÇπÇÒ")
             };
         }
 

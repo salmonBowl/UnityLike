@@ -22,7 +22,7 @@ namespace UnityLike.Entities.Symbol
             return (string)Value;
         }
 
-        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null)
+        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen = null)
         {
             throw new MemberNotExistException(name, nameToken);
         }
