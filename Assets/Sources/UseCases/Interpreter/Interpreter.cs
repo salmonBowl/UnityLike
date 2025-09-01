@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using UnityLike.Entities.Compiler;
+using UnityLike.Entities.Symbol;
 
 namespace UnityLike.UseCases.Interpreter
 {

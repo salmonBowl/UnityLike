@@ -1,7 +1,7 @@
 
 namespace UnityLike.Entities.Compiler
 {
-    public interface IInterpreter
+    public interface IVisitor
     {
         // Statement
         void ExecuteVariableDeclarationStatement(VariableDeclarationStatementNode node);

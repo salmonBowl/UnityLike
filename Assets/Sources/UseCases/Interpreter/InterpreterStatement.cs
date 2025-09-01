@@ -3,7 +3,7 @@ using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Interpreter
 {
-    public partial class Interpreter : IInterpreter
+    public partial class Interpreter : IVisitor
     {
         public void ExecuteVariableDeclarationStatement(VariableDeclarationStatementNode node)
         {

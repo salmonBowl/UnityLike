@@ -27,7 +27,7 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => Identifier.ToPrettyString();
-        public override void ASTScan(IInterpreter interpreter)
+        public override void ASTScan(IVisitor interpreter)
         {
             // 内部のIdentifierには意味解析の機能を持たせず、自分自身のみ解析します
             interpreter.VisitDeclaratedIdentifier(this);

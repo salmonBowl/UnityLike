@@ -36,7 +36,7 @@ namespace UnityLike.Entities.Compiler
                 _ => throw new System.Exception()
             }
             + Operand.ToPrettyString();
-        public override void ASTScan(IInterpreter interepreter)
+        public override void ASTScan(IVisitor interepreter)
         {
             // Ä‹AŒÄ‚Ño‚µ
             Operand.ASTScan(interepreter);

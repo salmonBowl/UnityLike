@@ -25,7 +25,7 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => $"({Content.ToPrettyString()})";
-        public override void ASTScan(IInterpreter interpreter)
+        public override void ASTScan(IVisitor interpreter)
         {
             // Ä‹AŒÄ‚Ño‚µ
             Content.ASTScan(interpreter);

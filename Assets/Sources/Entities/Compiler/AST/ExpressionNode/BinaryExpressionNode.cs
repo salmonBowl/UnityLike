@@ -46,7 +46,7 @@ namespace UnityLike.Entities.Compiler
                 _ => throw new System.NotSupportedException()
             }
             + " " + RightNode.ToPrettyString();
-        public override void ASTScan(IInterpreter interpreter)
+        public override void ASTScan(IVisitor interpreter)
         {
             LeftNode.ASTScan(interpreter);
             RightNode.ASTScan(interpreter);

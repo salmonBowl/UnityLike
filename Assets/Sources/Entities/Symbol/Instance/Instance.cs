@@ -1,3 +1,4 @@
+using System;
 
 using UnityLike.Entities.Compiler;
 
@@ -33,5 +34,29 @@ namespace UnityLike.Entities.Symbol
         /// <param name="args">引数</param>
         /// <returns>関数の返り値</returns>
         public abstract Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null);
+
+        /// <summary>
+        /// Instanceがある型にキャストできるかを判定する補助メソッドです
+        /// </summary>
+        /// <param name="instance">判定したいしたいインスタンス</param>
+        /// <param name="typeName">キャストしたい型の名前</param>
+        /// <returns></returns>
+        protected bool Castable(Instance instance, string typeName)
+        {
+            Type expectedType = TypeCastConstants.TypeOf(typeName);
+            bool castable = instance.GetType().IsSubclassOf(expectedType);
+            return castable;
+        }
+        /// <summary>
+        /// メンバー変数の値を取得する補助メソッドです
+        /// </summary>
+        /// <param name="name">メンバー名</param>
+        /// <param name="token">メンバー名のトークン</param>
+        /// <returns>メンバー変数を返します</returns>
+        protected Instance GetMember(string name)
+        {
+            return Member.LookUpVariable(name).Value ??
+                throw new NotSupportedException($"メンバー変数'{name}'は存在しません");
+        }
     }
 }

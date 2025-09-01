@@ -53,7 +53,7 @@ namespace UnityLike.Entities.Compiler
             ((InitalAssignment == null) ?
             $" {DeclaratedIdentifier};" :
             InitalAssignment.ToPrettyString());
-        public override void ASTScan(IInterpreter interpreter)
+        public override void ASTScan(IVisitor interpreter)
         {
             interpreter.ExecuteVariableDeclarationStatement(this);
         }

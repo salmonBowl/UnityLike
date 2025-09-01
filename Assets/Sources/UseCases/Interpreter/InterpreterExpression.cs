@@ -1,13 +1,13 @@
-
 using UnityLike.Entities.Compiler;
+using UnityLike.Entities.Symbol;
 
 namespace UnityLike.UseCases.Interpreter
 {
-    public partial class Interpreter : IInterpreter
+    public partial class Interpreter : IVisitor
     {
         public void VisitTypeNode(TypeNode typeNode)
         {
-            if (TypeConstants.definedTypes.TryGetValue(typeNode.Name, out _) == false)
+            if (TypeRegistry. == false)
                 throw new TypeNotFoundException(typeNode.Name);
         }
         public void VisitBinaryExpression(BinaryExpressionNode bynaryExpression)
@@ -16,7 +16,7 @@ namespace UnityLike.UseCases.Interpreter
         }
         public void VisitIdentifier(IdentifierNode identifier)
         {
-            if (currentScope.LookUpSymbol(identifier.Name) != null)
+            if (currentScope.LookUpVariable(identifier.Name) != null)
                 throw new IdentifierNotFoundException(identifier.Name);
         }
         public void VisitDeclaratedIdentifier(DeclaratedIdentifierNode identifier)

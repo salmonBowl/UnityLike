@@ -36,7 +36,7 @@ namespace UnityLike.Entities.Compiler
         public override string ToPrettyString() =>
             $"{Identifier.ToPrettyString()} = {Value.ToPrettyString()};";
 
-        public override void ASTScan(IInterpreter interpreter)
+        public override void ASTScan(IVisitor interpreter)
         {
             interpreter.ExecuteAssignmentStatement(this);
         }

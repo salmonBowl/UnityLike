@@ -21,7 +21,7 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => Value.ToString();
-        public override void ASTScan(IInterpreter interpreter)
+        public override void ASTScan(IVisitor interpreter)
         {
             // ˆÓ–¡‰ğÍ‚ğ‚µ‚Ü‚·
             interpreter.VisitNumberLiteral(this);

@@ -37,7 +37,7 @@ namespace UnityLike.Entities.Compiler
             }
             return returnText;
         }
-        public override void ASTScan(IInterpreter interpreter)
+        public override void ASTScan(IVisitor interpreter)
         {
             // UnknownStatementÇ≈é¿çsÇÕÇ»Çµ
         }

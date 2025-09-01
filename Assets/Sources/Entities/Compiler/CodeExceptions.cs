@@ -65,7 +65,7 @@ namespace UnityLike.Entities.Compiler
         public override string Message { get; }
         public InvalidArgumentException(int argCount, ColoredToken token)
         {
-            Message = $"ˆø”‚Ì”‚Í{argCount}‚É‚µ‚Ä‚­‚¾‚³‚¢";
+            Message = $"ˆø”‚Ì”‚ªŠÔˆá‚Á‚Ä‚¢‚Ü‚·B³‚µ‚­‚Í{argCount}‚Å‚·";
             token.HasError(Message);
         }
     }
@@ -85,6 +85,15 @@ namespace UnityLike.Entities.Compiler
         public ReDefinitionException(string identifierName, ColoredToken token)
         {
             Message = $"'{identifierName}'‚ÍŠù‚É’è‹`‚³‚ê‚Ä‚¢‚Ü‚·";
+            token.HasError(Message);
+        }
+    }
+    public class ParseFailedException : ExecuteException
+    {
+        public override string Message { get; }
+        public ParseFailedException(string value, string expectedType, ColoredToken token)
+        {
+            Message = $"'{value}'‚Ì{expectedType}Œ^‚Ö‚Ì•ÏŠ·‚É¸”s‚µ‚Ü‚µ‚½";
             token.HasError(Message);
         }
     }

@@ -1,5 +1,3 @@
-
-using System;
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
@@ -22,9 +20,7 @@ namespace UnityLike.Entities.Symbol
                 }
                 for (int i = 0; i < argCount; i++)
                 {
-                    Type expectedType = TypeCastConstants.TypeOf(expected[i]);
-                    bool castable = args[i].GetType().IsSubclassOf(expectedType);
-                    if (!castable)
+                    if (!Castable(args[i], expected[i]))
                     {
                         throw new ArgumentInvalidTypeException(expected[i], argTokens[i]);
                     }
