@@ -1,15 +1,16 @@
+using UnityLike.Entities.Symbol;
 
 namespace UnityLike.Entities.Compiler
 {
     /// <summary>
     /// 数字リテラルを表現するノードです。Expressionの木構造の末端に位置します。
     /// </summary>
-    public class NumberLiteralNode : ExpressionNode
+    public class IntLiteralNode : ExpressionNode
     {
         public int Value { get; }
         public ColoredToken NumberToken { get; }
 
-        public NumberLiteralNode(int value, ColoredToken numberToken)
+        public IntLiteralNode(int value, ColoredToken numberToken)
         {
             Value = value;
             NumberToken = numberToken;
@@ -21,10 +22,6 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => Value.ToString();
-        public override void ASTScan(IVisitor interpreter)
-        {
-            // 意味解析をします
-            interpreter.VisitNumberLiteral(this);
-        }
+        public override Instance ASTScan(IVisitor interpreter) => interpreter.VisitNumberLiteral(this);
     }
 }

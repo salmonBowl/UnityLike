@@ -10,10 +10,10 @@ namespace UnityLike.Entities.Compiler
         {
             return new IdentifierNode(TokenToColoredToken(identifier));
         }
-        public static NumberLiteralNode NumberLiteralNode(Token number)
+        public static IntLiteralNode NumberLiteralNode(Token number)
         {
             int value = int.Parse(number.Value);
-            return new NumberLiteralNode(value, TokenToColoredToken(number));
+            return new IntLiteralNode(value, TokenToColoredToken(number));
         }
 
         /// <summary>

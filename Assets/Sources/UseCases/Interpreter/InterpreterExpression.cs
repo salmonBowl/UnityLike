@@ -1,3 +1,5 @@
+using System;
+
 using UnityLike.Entities.Compiler;
 using UnityLike.Entities.Symbol;
 
@@ -5,35 +7,66 @@ namespace UnityLike.UseCases.Interpreter
 {
     public partial class Interpreter : IVisitor
     {
-        public void VisitTypeNode(TypeNode typeNode)
+        public Instance VisitBinaryExpression(BinaryExpressionNode node)
         {
-            if (TypeRegistry. == false)
-                throw new TypeNotFoundException(typeNode.Name);
+            Instance value1 = node.LeftNode.ASTScan(this);
+            Instance value2 = node.RightNode.ASTScan(this);
+
+            try
+            {
+                return node.Operator switch
+                {
+                    TokenType.Plus => value1.Add(value2),
+                    TokenType.Minus => value1.Subtract(value2),
+                    TokenType.Multiply => value1.Multiply(value2),
+                    TokenType.Divide => value1.Divide(value2),
+                    _ => throw new InvalidOperatorException(node.OperatorToken)
+                };
+            }
+            catch (InvalidOperatorException operatorException)
+            {
+                throw new InvalidOperatorException(operatorException.Message, node.OperatorToken);
+            }
+            catch (DivideByZeroException zeroException)
+            {
+                throw new DivideByZeroExecuteException(zeroException.Message, node.OperatorToken);
+            }
         }
-        public void VisitBinaryExpression(BinaryExpressionNode bynaryExpression)
+        public Instance VisitIdentifier(IdentifierNode node)
         {
-            // –¢ŽÀ‘•
+            Variable variable = currentScope.LookUpVariable(node.Name)
+                ?? throw new IdentifierNotFoundException(node.Name, node.IdentifierToken);
+            return variable.Value;
         }
-        public void VisitIdentifier(IdentifierNode identifier)
+        public Instance VisitDeclaratedIdentifier(DeclaratedIdentifierNode node)
         {
-            if (currentScope.LookUpVariable(identifier.Name) != null)
-                throw new IdentifierNotFoundException(identifier.Name);
+            return node.Identifier.ASTScan(this);
         }
-        public void VisitDeclaratedIdentifier(DeclaratedIdentifierNode identifier)
+        public Instance VisitNumberLiteral(IntLiteralNode node)
         {
-            // ‚±‚Ìƒm[ƒh‚ÉˆÓ–¡‰ðÍ‚Ìˆ—‚Í‚ ‚è‚Ü‚¹‚ñ
+            return new FloatInstance(node.Value);
         }
-        public void VisitNumberLiteral(NumberLiteralNode numberLiteral)
+        public Instance VisitParenExpression(ParenNode node)
         {
-            // –¢ŽÀ‘•
+            return node.Content.ASTScan(this);
         }
-        public void VisitParenExpression(ParenNode parenExpression)
+        public Instance VisitUnaryExpression(UnaryExpressionNode node)
         {
-            // –¢ŽÀ‘•
-        }
-        public void VisitUnaryExpression(UnaryExpressionNode unaryExpression)
-        {
-            // –¢ŽÀ‘•
+            Instance operand = node.Operand.ASTScan(this);
+
+            try
+            {
+                return node.Operator switch
+                {
+                    TokenType.Minus => operand.Minus(),
+                    TokenType.Not => operand.Denial(),
+                    _ => throw new InvalidOperatorException(node.OperatorToken)
+                };
+            }
+            catch (InvalidOperatorException e)
+            {
+                throw new InvalidOperatorException(e.Message, node.OperatorToken);
+            }
         }
     }
 }

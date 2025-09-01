@@ -1,3 +1,4 @@
+using UnityLike.Entities.Symbol;
 
 namespace UnityLike.Entities.Compiler
 {
@@ -8,14 +9,11 @@ namespace UnityLike.Entities.Compiler
         void ExecuteAssignmentStatement(AssignmentStatementNode node);
 
         // Expression
-        void VisitBinaryExpression(BinaryExpressionNode node);
-        void VisitIdentifier(IdentifierNode node);
-        void VisitDeclaratedIdentifier(DeclaratedIdentifierNode node);
-        void VisitNumberLiteral(NumberLiteralNode node);
-        void VisitParenExpression(ParenNode node);
-        void VisitUnaryExpression(UnaryExpressionNode node);
-
-        // Type
-        void VisitTypeNode(TypeNode node);
+        Instance VisitBinaryExpression(BinaryExpressionNode node);
+        Instance VisitIdentifier(IdentifierNode node);
+        Instance VisitDeclaratedIdentifier(DeclaratedIdentifierNode node);
+        Instance VisitNumberLiteral(IntLiteralNode node);
+        Instance VisitParenExpression(ParenNode node);
+        Instance VisitUnaryExpression(UnaryExpressionNode node);
     }
 }

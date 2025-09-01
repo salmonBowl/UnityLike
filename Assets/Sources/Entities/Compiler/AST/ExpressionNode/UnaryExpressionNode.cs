@@ -1,4 +1,4 @@
-using UnityLike.Entities.Compiler;
+using UnityLike.Entities.Symbol;
 
 namespace UnityLike.Entities.Compiler
 {
@@ -36,12 +36,6 @@ namespace UnityLike.Entities.Compiler
                 _ => throw new System.Exception()
             }
             + Operand.ToPrettyString();
-        public override void ASTScan(IVisitor interepreter)
-        {
-            // Ä‹AŒÄ‚Ño‚µ
-            Operand.ASTScan(interepreter);
-            // Ž©•ªŽ©g
-            interepreter.VisitUnaryExpression(this);
-        }
+        public override Instance ASTScan(IVisitor interepreter) => interepreter.VisitUnaryExpression(this);
     }
 }

@@ -78,6 +78,37 @@ namespace UnityLike.Entities.Compiler
             token.HasError(Message);
         }
     }
+    public class InvalidTokenException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public InvalidTokenException(ColoredToken token)
+        {
+            Message = $"–³Œø‚È’PŒê‚Å‚·";
+            token.HasError(Message);
+        }
+    }
+    public class InvalidOperatorException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public InvalidOperatorException()
+        {
+            Message = $"–³Œø‚È‰‰Zq‚Å‚·";
+        }
+        public InvalidOperatorException(string message)
+        {
+            Message = message;
+        }
+        public InvalidOperatorException(ColoredToken token)
+        {
+            Message = $"–³Œø‚È‰‰Zq‚Å‚·";
+            token.HasError(Message);
+        }
+        public InvalidOperatorException(string message, ColoredToken token)
+        {
+            Message = message;
+            token.HasError(Message);
+        }
+    }
 
     public class ReDefinitionException : ExecuteException
     {
@@ -94,6 +125,15 @@ namespace UnityLike.Entities.Compiler
         public ParseFailedException(string value, string expectedType, ColoredToken token)
         {
             Message = $"'{value}'‚Ì{expectedType}Œ^‚Ö‚Ì•ÏŠ·‚É¸”s‚µ‚Ü‚µ‚½";
+            token.HasError(Message);
+        }
+    }
+    public class DivideByZeroExecuteException : ExecuteException
+    {
+        public override string Message { get; }
+        public DivideByZeroExecuteException(string message, ColoredToken token)
+        {
+            Message = message + $"0‚ÅœZ‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñ";
             token.HasError(Message);
         }
     }

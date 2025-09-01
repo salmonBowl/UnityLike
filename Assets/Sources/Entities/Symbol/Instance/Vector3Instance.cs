@@ -65,5 +65,91 @@ namespace UnityLike.Entities.Symbol
                     throw new MemberNotExistException(name, nameToken);
             }
         }
+
+        public override Instance Add(Instance other)
+        {
+            if (!Castable(other, "Vector3"))
+            {
+                Vector3Instance cOther = (Vector3Instance)other;
+                float x1 = ((NumberInstance)GetMember("x")).AsFloat();
+                float y1 = ((NumberInstance)GetMember("y")).AsFloat();
+                float z1 = ((NumberInstance)GetMember("z")).AsFloat();
+                float x2 = ((NumberInstance)cOther.GetMember("x")).AsFloat();
+                float y2 = ((NumberInstance)cOther.GetMember("y")).AsFloat();
+                float z2 = ((NumberInstance)cOther.GetMember("z")).AsFloat();
+
+                return new Vector3Instance(x1 + x2, y1 + y2, z1 + z2);
+            }
+            throw new InvalidOperatorException();
+        }
+        public override Instance Subtract(Instance other)
+        {
+            if (!Castable(other, "Vector3"))
+            {
+                Vector3Instance cOther = (Vector3Instance)other;
+                float x1 = ((NumberInstance)GetMember("x")).AsFloat();
+                float y1 = ((NumberInstance)GetMember("y")).AsFloat();
+                float z1 = ((NumberInstance)GetMember("z")).AsFloat();
+                float x2 = ((NumberInstance)cOther.GetMember("x")).AsFloat();
+                float y2 = ((NumberInstance)cOther.GetMember("y")).AsFloat();
+                float z2 = ((NumberInstance)cOther.GetMember("z")).AsFloat();
+
+                return new Vector3Instance(x1 - x2, y1 - y2, z1 - z2);
+            }
+            throw new InvalidOperatorException();
+        }
+        public override Instance Multiply(Instance other)
+        {
+            if (!Castable(other, "float"))
+            {
+                float x = ((NumberInstance)GetMember("x")).AsFloat();
+                float y = ((NumberInstance)GetMember("y")).AsFloat();
+                float z = ((NumberInstance)GetMember("z")).AsFloat();
+                float scalar = ((NumberInstance)other).AsFloat();
+
+                return new Vector3Instance(x * scalar, y * scalar, z * scalar);
+            }
+            throw new InvalidOperatorException();
+        }
+        public override Instance Divide(Instance other)
+        {
+            if (!Castable(other, "float"))
+            {
+                float x = ((NumberInstance)GetMember("x")).AsFloat();
+                float y = ((NumberInstance)GetMember("y")).AsFloat();
+                float z = ((NumberInstance)GetMember("z")).AsFloat();
+                float value = ((NumberInstance)other).AsFloat();
+
+                if (value == 0)
+                    throw new DivideByZeroException();
+                return new Vector3Instance(x / value, y / value, z / value);
+            }
+            throw new InvalidOperatorException();
+        }
+        public override Instance Modulo(Instance other)
+        {
+            if (!Castable(other, "float"))
+            {
+                float x = ((NumberInstance)GetMember("x")).AsFloat();
+                float y = ((NumberInstance)GetMember("y")).AsFloat();
+                float z = ((NumberInstance)GetMember("z")).AsFloat();
+                float value = ((NumberInstance)other).AsFloat();
+
+                return new Vector3Instance(x % value, y % value, z % value);
+            }
+            throw new InvalidOperatorException();
+        }
+        public override Instance Minus()
+        {
+            float x = ((NumberInstance)GetMember("x")).AsFloat();
+            float y = ((NumberInstance)GetMember("y")).AsFloat();
+            float z = ((NumberInstance)GetMember("z")).AsFloat();
+
+            return new Vector3Instance(-x, -y, -z);
+        }
+        public override Instance Denial()
+        {
+            throw new InvalidOperatorException();
+        }
     }
 }

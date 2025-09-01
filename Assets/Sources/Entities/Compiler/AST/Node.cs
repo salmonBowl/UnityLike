@@ -12,6 +12,5 @@ namespace UnityLike.Entities.Compiler
         /// <param name="rebuilder"></param>
         public abstract void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder);
         public abstract string ToPrettyString();
-        public abstract void ASTScan(IVisitor interpreter);
     }
 }

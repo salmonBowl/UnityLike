@@ -1,3 +1,4 @@
+using UnityLike.Entities.Symbol;
 
 namespace UnityLike.Entities.Compiler
 {
@@ -21,9 +22,10 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => Value;
-        public override void ASTScan(IVisitor interpereter)
+        public override Instance ASTScan(IVisitor interpereter)
         {
-            // UnknownExpressionÇ≈à”ñ°âêÕÇÕÇ»Çµ
+            // UnknownExpressionÇ≈ëñç∏ÇÕÇ»Çµ
+            throw new InvalidTokenException(UnknownToken);
         }
     }
 }

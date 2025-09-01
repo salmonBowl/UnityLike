@@ -35,6 +35,17 @@ namespace UnityLike.Entities.Symbol
         /// <returns>関数の返り値</returns>
         public abstract Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null);
 
+        // Instanceの演算を行います
+        public abstract Instance Add(Instance other);
+        public abstract Instance Subtract(Instance other);
+        public abstract Instance Multiply(Instance other);
+        public abstract Instance Divide(Instance other);
+        public abstract Instance Modulo(Instance other);
+        public abstract Instance Minus();
+        public abstract Instance Denial();
+
+        // --- 補助メソッド ---
+
         /// <summary>
         /// Instanceがある型にキャストできるかを判定する補助メソッドです
         /// </summary>
@@ -48,15 +59,16 @@ namespace UnityLike.Entities.Symbol
             return castable;
         }
         /// <summary>
-        /// メンバー変数の値を取得する補助メソッドです
+        /// メンバー変数の値を取得する補助メソッドです。処理実装のメンバー取得でのみ使用します。
         /// </summary>
         /// <param name="name">メンバー名</param>
         /// <param name="token">メンバー名のトークン</param>
         /// <returns>メンバー変数を返します</returns>
-        protected Instance GetMember(string name)
+        public Instance GetMember(string name)
         {
-            return Member.LookUpVariable(name).Value ??
+            Variable variable = Member.LookUpVariable(name) ??
                 throw new NotSupportedException($"メンバー変数'{name}'は存在しません");
+            return variable.Value;
         }
     }
 }

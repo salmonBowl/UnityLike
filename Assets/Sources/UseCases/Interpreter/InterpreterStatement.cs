@@ -1,5 +1,6 @@
 
 using UnityLike.Entities.Compiler;
+using UnityLike.Entities.Symbol;
 
 namespace UnityLike.UseCases.Interpreter
 {
@@ -7,43 +8,37 @@ namespace UnityLike.UseCases.Interpreter
     {
         public void ExecuteVariableDeclarationStatement(VariableDeclarationStatementNode node)
         {
-            // 各語句の意味解析を先に行う
+            // 変数を生成
+            string variableName = node.DeclaratedIdentifier.Name;
+            Class variableType = TypeRegistry.TypeOf(node.Type.Name, node.Type.NameToken);
+            Variable variable = new(variableName, variableType)
+            {
+                // 変数の初期値
+                Value = variableType.GetInitalInstance()
+            };
 
-            node.Type.ASTScan(this);
-            node.DeclaratedIdentifier.ASTScan(this);
+            // 変数の追加
+            currentScope.AddMember(variable);
 
-            object value = null;
-
-            // デフォルト値の決定（例: intは0、Vector3はVector3.zero）
-            // この部分はTypeConstantsなどから取得するロジックが必要
-            value = GetDefaultValue(node.Type.Name);
-
-            // 変数をシンボルテーブルに登録
-            currentScope.AddSymbol(node.DeclaratedIdentifier.Name, node.Type, value);
-
-            // 初期化があればInitalAssignmentStatementの走査に移る
+            // 初期化式があればInitalAssignmentStatementの走査に移る
             node.InitalAssignment?.ASTScan(this);
         }
 
         public void ExecuteAssignmentStatement(AssignmentStatementNode node)
         {
             // 各語句の意味解析を先に行う
-
             node.Identifier.ASTScan(this);
             node.Value.ASTScan(this);
 
-            // 文全体の意味解析
+            // 変数を検索
+            Variable variable = currentScope.LookUpVariable(node.Identifier.Name)
+                ?? throw new IdentifierNotFoundException(node.Identifier.Name, node.Identifier.IdentifierToken);
 
             // 右辺の式を評価して値を取得
-            object value = EvaluateExpression(node.Value);
+            Instance value = node.Value.ASTScan(this);
 
-            // シンボルテーブルで変数を検索し、値を更新
-            Variable symbol = currentScope.LookUpSymbol(node.Identifier.Name);
-            if (symbol == null)
-            {
-                throw new IdentifierNotFoundException(node.Identifier.Name, node.Identifier.IdentifierToken);
-            }
-            symbol.Value = value; // シンボルに値を持たせる
+            // 変数の値を更新
+            variable.Value = value;
         }
     }
 }
