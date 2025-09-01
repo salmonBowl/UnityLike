@@ -1508,7 +1508,7 @@ MonoBehaviour:
   lineLength: 5
   orbit:
     Position: {x: 0, y: 0}
-    Width: 128
+    Width: 124
     Height: 34
     RoundRadius: 7
 --- !u!114 &259228233
@@ -1523,8 +1523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c1b845f3bf7774f80ceedd2f7f89ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: aaf1f905180a6374db1a7a33a8fbecae, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9851905, g: 1, b: 0.7754717, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1532,7 +1532,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   points: []
-  thickness: 10
+  thickness: 3
   center: 1
 --- !u!222 &259228234
 CanvasRenderer:
@@ -6262,7 +6262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseCursor_rotate: {fileID: 2800000, guid: e34332d32d042074fb26bc40751db88a, type: 3}
   mouseCursor_move: {fileID: 2800000, guid: 1649e697ff95b2c478c0dc3178024b84, type: 3}
-  rotateSpeed: 3
+  rotateSpeed: 4.5
   moveSpeed: 0.35
   zoomSpeed: 7
 --- !u!114 &1496772249

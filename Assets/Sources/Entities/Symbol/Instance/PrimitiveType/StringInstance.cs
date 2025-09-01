@@ -26,5 +26,41 @@ namespace UnityLike.Entities.Symbol
         {
             throw new MemberNotExistException(name, nameToken);
         }
+
+        public override Instance Add(Instance other)
+        {
+            if (!Castable(other, "string"))
+            {
+                string value1 = AsString();
+                string value2 = ((StringInstance)other).AsString();
+
+                return new StringInstance(value1 + value2);
+            }
+            throw new InvalidOperatorException();
+        }
+        public override Instance Subtract(Instance other)
+        {
+            throw new InvalidOperatorException();
+        }
+        public override Instance Multiply(Instance other)
+        {
+            throw new InvalidOperatorException();
+        }
+        public override Instance Divide(Instance other)
+        {
+            throw new InvalidOperatorException();
+        }
+        public override Instance Modulo(Instance other)
+        {
+            throw new InvalidOperatorException();
+        }
+        public override Instance Minus()
+        {
+            throw new InvalidOperatorException();
+        }
+        public override Instance Denial()
+        {
+            throw new InvalidOperatorException();
+        }
     }
 }

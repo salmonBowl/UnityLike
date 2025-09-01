@@ -22,6 +22,6 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => Name;
-        public override Instance ASTScan(IVisitor interpreter) => interpreter.VisitIdentifier(this);
+        public override Variable GetVariable(IVisitor interpreter) => interpreter.GetIdentifier(this);
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
@@ -25,7 +24,7 @@ namespace UnityLike.Entities.Symbol
             Y.Value = new FloatInstance(y);
             Z.Value = new FloatInstance(z);
 
-            float magnitudeValue = (float)Math.Sqrt(x * x + y * y + z * z);
+            float magnitudeValue = (float)System.Math.Sqrt(x * x + y * y + z * z);
             magnitude.Value = new FloatInstance(magnitudeValue);
 
             // normalized‚ÍVector3‚ðŠi”[‚·‚é•K—v‚ª‚ ‚è‚Ü‚·
@@ -121,7 +120,7 @@ namespace UnityLike.Entities.Symbol
                 float value = ((NumberInstance)other).AsFloat();
 
                 if (value == 0)
-                    throw new DivideByZeroException();
+                    throw new System.DivideByZeroException();
                 return new Vector3Instance(x / value, y / value, z / value);
             }
             throw new InvalidOperatorException();
@@ -135,6 +134,8 @@ namespace UnityLike.Entities.Symbol
                 float z = ((NumberInstance)GetMember("z")).AsFloat();
                 float value = ((NumberInstance)other).AsFloat();
 
+                if (value == 0)
+                    throw new System.DivideByZeroException();
                 return new Vector3Instance(x % value, y % value, z % value);
             }
             throw new InvalidOperatorException();
