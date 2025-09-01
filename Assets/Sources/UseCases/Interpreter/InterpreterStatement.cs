@@ -1,4 +1,3 @@
-
 using UnityLike.Entities.Compiler;
 using UnityLike.Entities.Symbol;
 
@@ -27,14 +26,13 @@ namespace UnityLike.UseCases.Interpreter
         public void ExecuteAssignmentStatement(AssignmentStatementNode node)
         {
             // 各語句の意味解析を先に行う
-            node.Identifier.ASTScan(this);
+            node.Variable.ASTScan(this);
             node.Value.ASTScan(this);
 
-            // 変数を検索
-            Variable variable = currentScope.LookUpVariable(node.Identifier.Name)
-                ?? throw new IdentifierNotFoundException(node.Identifier.Name, node.Identifier.IdentifierToken);
+            // 左辺の値を取得
+            Variable variable = node.Variable.GetVariable(this);
 
-            // 右辺の式を評価して値を取得
+            // 右辺の値を取得
             Instance value = node.Value.ASTScan(this);
 
             // 変数の値を更新

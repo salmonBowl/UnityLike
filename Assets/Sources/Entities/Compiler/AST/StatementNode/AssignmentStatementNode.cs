@@ -10,16 +10,16 @@ namespace UnityLike.Entities.Compiler
      */
     public class AssignmentStatementNode : StatementNode
     {
-        public IdentifierNode Identifier { get; }
+        public VariableNode Variable { get; }
         public ExpressionNode Value { get; }
 
         public ColoredToken EqualToken { get; }
         public ColoredToken SemicolonToken { get; }
 
-        public AssignmentStatementNode(IdentifierNode identifier, ColoredToken equalToken,
+        public AssignmentStatementNode(VariableNode variable, ColoredToken equalToken,
             ExpressionNode value, ColoredToken semicolonToken)
         {
-            Identifier = identifier;
+            Variable = variable;
             Value = value;
             EqualToken = equalToken;
             SemicolonToken = semicolonToken;
@@ -27,14 +27,14 @@ namespace UnityLike.Entities.Compiler
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
-            Identifier.ColoredTokenScan(rebuilder);
+            Variable.ColoredTokenScan(rebuilder);
             rebuilder.ImportColoredToken(EqualToken);
             Value.ColoredTokenScan(rebuilder);
             rebuilder.ImportColoredToken(SemicolonToken);
         }
 
         public override string ToPrettyString() =>
-            $"{Identifier.ToPrettyString()} = {Value.ToPrettyString()};";
+            $"{Variable.ToPrettyString()} = {Value.ToPrettyString()};";
 
         public override void ASTScan(IVisitor interpreter)
         {

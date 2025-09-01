@@ -2,7 +2,7 @@ using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
 {
-    partial class Parser
+    public partial class Parser
     {
         private class Usecase
         {
@@ -65,6 +65,10 @@ namespace UnityLike.UseCases.Compiler
             public ExpressionNode Expression()
             {
                 return outher.ParseExpression();
+            }
+            public VariableNode Variable()
+            {
+                return outher.ParseVariable();
             }
         }
     }

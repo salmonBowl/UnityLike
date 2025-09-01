@@ -3,7 +3,7 @@ using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
 {
-    partial class Parser
+    public partial class Parser
     {
         /*
             エントリポイント : ParseStatement()
@@ -73,8 +73,8 @@ namespace UnityLike.UseCases.Compiler
 
             // 代入式
 
-            IdentifierNode identifierNode =
-                u.Identifier();
+            VariableNode variableNode =
+                u.Variable();
             ColoredToken equals =
                 u.Equals();
             ExpressionNode expressionNode =
@@ -83,7 +83,7 @@ namespace UnityLike.UseCases.Compiler
                 u.Semicolon();
 
             if (semicolon != null)
-                return new AssignmentStatementNode(identifierNode, equals, expressionNode, semicolon);
+                return new AssignmentStatementNode(variableNode, equals, expressionNode, semicolon);
 
             throw new SyntaxErrorException(";が必要です");
         }

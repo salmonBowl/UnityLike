@@ -2,7 +2,7 @@ using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler
 {
-    partial class Parser
+    public partial class Parser
     {
         /// <summary>
         /// UnknownExpressionNode‚ð•Ô‚µ‚Ü‚·
@@ -67,7 +67,7 @@ namespace UnityLike.UseCases.Compiler
         {
             return CurrentTokenType switch
             {
-                TokenType.Identifier => ConsumeWithGenerate(),
+                TokenType.Identifier => ParseVariable(),
                 TokenType.NumberLiteral => ConsumeWithGenerate(),
                 TokenType.LeftParen => ParseParenExpression(),
                 TokenType.Unknown => AsUnknown(),

@@ -10,6 +10,12 @@ namespace UnityLike.Entities.Compiler
         {
             return new IdentifierNode(TokenToColoredToken(identifier));
         }
+        public static MemberAccessNode MemberAccessNode(VariableNode parent, Token dot, Token member)
+        {
+            ColoredToken cDot = TokenToColoredToken(dot);
+            ColoredToken cMember = TokenToColoredToken(member);
+            return new MemberAccessNode(parent, cDot, cMember);
+        }
         public static IntLiteralNode NumberLiteralNode(Token number)
         {
             int value = int.Parse(number.Value);

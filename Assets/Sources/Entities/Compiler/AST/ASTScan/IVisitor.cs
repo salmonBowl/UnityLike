@@ -10,10 +10,14 @@ namespace UnityLike.Entities.Compiler
 
         // Expression
         Instance VisitBinaryExpression(BinaryExpressionNode node);
-        Instance VisitIdentifier(IdentifierNode node);
-        Instance VisitDeclaratedIdentifier(DeclaratedIdentifierNode node);
+        Instance VisitVariable(VariableNode node);
+        Instance VisitDeclaratedIdentifier(DeclaratedVariableNode node);
         Instance VisitNumberLiteral(IntLiteralNode node);
         Instance VisitParenExpression(ParenNode node);
         Instance VisitUnaryExpression(UnaryExpressionNode node);
+
+        // Variable
+        Variable GetIdentifier(IdentifierNode node);
+        Variable GetMemberAccess(MemberAccessNode node);
     }
 }

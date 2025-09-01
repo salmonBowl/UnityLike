@@ -5,15 +5,15 @@ namespace UnityLike.Entities.Compiler
     /// <summary>
     /// 識別子を表現するノードです。Expressionの木構造の末端に位置します。
     /// </summary>
-    public class IdentifierNode : ExpressionNode
+    public class IdentifierNode : VariableNode
     {
         public string Name { get; }
         public ColoredToken IdentifierToken { get; }
 
-        public IdentifierNode(ColoredToken identifierToken)
+        public IdentifierNode(ColoredToken variableToken)
         {
-            Name = identifierToken.Value;
-            IdentifierToken = identifierToken;
+            Name = variableToken.Value;
+            IdentifierToken = variableToken;
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)

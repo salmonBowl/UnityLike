@@ -32,15 +32,9 @@ namespace UnityLike.UseCases.Interpreter
                 throw new DivideByZeroExecuteException(zeroException.Message, node.OperatorToken);
             }
         }
-        public Instance VisitIdentifier(IdentifierNode node)
+        public Instance VisitVariable(VariableNode node)
         {
-            Variable variable = currentScope.LookUpVariable(node.Name)
-                ?? throw new IdentifierNotFoundException(node.Name, node.IdentifierToken);
-            return variable.Value;
-        }
-        public Instance VisitDeclaratedIdentifier(DeclaratedIdentifierNode node)
-        {
-            return node.Identifier.ASTScan(this);
+            return node.GetVariable(this).Value;
         }
         public Instance VisitNumberLiteral(IntLiteralNode node)
         {
