@@ -1,3 +1,5 @@
+using System;
+using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
 {
@@ -10,12 +12,22 @@ namespace UnityLike.Entities.Symbol
         public Class Type { get; }
         public Instance Value { get; set; }
 
-        // ëºÇÃèÓïÒÇå„ÅXí«â¡ó\íË
-
         public Variable(string name, Class type)
         {
             Name = name;
             Type = type;
+        }
+
+        public void SetValue(Instance set, ColoredToken equal)
+        {
+            Type expectedType = Type.GetInitalInstance().GetType();
+            bool castable = expectedType.IsAssignableFrom(set.GetType());
+
+            if (!castable)
+            {
+                throw new AssignmentNotIncompatibleException(Type.Name, set.Type.Name, equal);
+            }
+            Value = set;
         }
     }
 }

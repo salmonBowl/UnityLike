@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using UnityLike.Entities.Symbol;
 
 namespace UnityLike.Entities.Compiler
@@ -27,7 +25,7 @@ namespace UnityLike.Entities.Compiler
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
             rebuilder.ImportColoredToken(NewToken);
-            rebuilder.ImportColoredToken(LeftParenToken);
+            rebuilder.ImportColoredToken(ClassNameToken);
             rebuilder.ImportColoredToken(LeftParenToken);
             for (int i = 0; i < Arguments.Length; i++)
             {

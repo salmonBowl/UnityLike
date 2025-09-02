@@ -119,6 +119,15 @@ namespace UnityLike.Entities.Compiler
             token.HasError(Message);
         }
     }
+    public class AssignmentNotIncompatibleException : ExecuteException
+    {
+        public override string Message { get; }
+        public AssignmentNotIncompatibleException(string expectedType, string assignmentType, ColoredToken token)
+        {
+            Message = $"{expectedType}Œ^‚Ì•Ï”‚É{assignmentType}Œ^‚Ì’l‚ğ‘ã“ü‚·‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñ";
+            token.HasError(Message);
+        }
+    }
     public class ParseFailedException : ExecuteException
     {
         public override string Message { get; }

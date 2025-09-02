@@ -10,7 +10,7 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
     {
         private readonly CompileManager compile;
         private readonly CompileData data;
-        private readonly Interpreter interpreter;
+        private readonly Interpreter interpreter = new();
         private readonly CodeErrorPopup errorPopup;
 
         public CodeManager(ISetTextUI setTextUI, IPopupView popup)
@@ -23,6 +23,8 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
         public void OnChangeCode(string sourceCode)
         {
             compile.Execute(sourceCode, data);
+            interpreter.ExecuteCode(data.AST);
+            compile.RenderText(data);
         }
 
         public void ExecuteCode()

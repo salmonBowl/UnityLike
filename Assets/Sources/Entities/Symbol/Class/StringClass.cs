@@ -4,6 +4,7 @@ namespace UnityLike.Entities.Symbol
 {
     public class StringClass : Class
     {
+        public override string Name { get; } = "string";
         public static Vector3Class Single => new();
 
         public override Instance GetInitalInstance()

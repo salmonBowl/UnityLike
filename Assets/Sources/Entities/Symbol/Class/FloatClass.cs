@@ -4,6 +4,7 @@ namespace UnityLike.Entities.Symbol
 {
     public class FloatClass : Class
     {
+        public override string Name { get; } = "float";
         public static FloatClass Single => new();
 
         public override Instance GetInitalInstance()

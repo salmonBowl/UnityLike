@@ -36,7 +36,7 @@ namespace UnityLike.UseCases.Compiler
                 }
                 else
                 {
-                    throw new System.InvalidProgramException("Identifier‚Å‚Í‚È‚¢‚Æ‚±‚ë‚ÅIdentifier‚ğì¬‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚Ü‚·");
+                    throw new SyntaxErrorException("•¶–@‚ª³‚µ‚­‚ ‚è‚Ü‚¹‚ñ");
                 }
                 return retval;
             }

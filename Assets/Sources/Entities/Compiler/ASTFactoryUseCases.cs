@@ -18,10 +18,30 @@ namespace UnityLike.Entities.Compiler
             cMember.IsMember();
             return new MemberAccessNode(parent, cDot, cMember);
         }
-        public static IntLiteralNode NumberLiteralNode(Token number)
+        public static NumberLiteralNode NumberLiteralNode(Token number)
         {
-            int value = int.Parse(number.Value);
-            return new IntLiteralNode(value, TokenToColoredToken(number));
+            // 文字列が.またはfを含むかチェック
+            if (number.Value.Contains('.') || number.Value.Contains('f'))
+            {
+                // float型として処理
+                float floatValue;
+                if (number.Value.EndsWith("f", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    // fを取り除いてパース
+                    floatValue = float.Parse(number.Value[..^1]);
+                }
+                else
+                {
+                    floatValue = float.Parse(number.Value);
+                }
+                return new FloatLiteralNode(floatValue, TokenToColoredToken(number));
+            }
+            else
+            {
+                // 整数として処理
+                int intValue = int.Parse(number.Value);
+                return new IntLiteralNode(intValue, TokenToColoredToken(number));
+            }
         }
 
         /// <summary>
@@ -93,7 +113,7 @@ namespace UnityLike.Entities.Compiler
         {
             if (TokenConstants.syntaxHighlightColors.ContainsKey(token.TokenType) == false)
             {
-                throw new System.Collections.Generic.KeyNotFoundException(
+                throw new KeyNotFoundException(
                     "SourceCodeRebuilder : 指定されたTokenTypeにつける色がConstantsで登録されていません");
             }
 

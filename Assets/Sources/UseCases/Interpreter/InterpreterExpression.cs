@@ -36,7 +36,11 @@ namespace UnityLike.UseCases.Interpreter
         {
             return node.GetVariable(this).Value;
         }
-        public Instance VisitNumberLiteral(IntLiteralNode node)
+        public Instance VisitIntLiteral(IntLiteralNode node)
+        {
+            return new IntInstance(node.Value);
+        }
+        public Instance VisitFloatLiteral(FloatLiteralNode node)
         {
             return new FloatInstance(node.Value);
         }

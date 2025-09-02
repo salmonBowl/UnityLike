@@ -5,12 +5,12 @@ namespace UnityLike.Entities.Compiler
     /// <summary>
     /// 数字リテラルを表現するノードです。Expressionの木構造の末端に位置します。
     /// </summary>
-    public class IntLiteralNode : ExpressionNode
+    public class FloatLiteralNode : NumberLiteralNode
     {
-        public int Value { get; }
+        public float Value { get; }
         public ColoredToken NumberToken { get; }
 
-        public IntLiteralNode(int value, ColoredToken numberToken)
+        public FloatLiteralNode(float value, ColoredToken numberToken)
         {
             Value = value;
             NumberToken = numberToken;
@@ -22,6 +22,6 @@ namespace UnityLike.Entities.Compiler
         }
 
         public override string ToPrettyString() => Value.ToString();
-        public override Instance ASTScan(IVisitor interpreter) => interpreter.VisitNumberLiteral(this);
+        public override Instance ASTScan(IVisitor interpreter) => interpreter.VisitFloatLiteral(this);
     }
 }

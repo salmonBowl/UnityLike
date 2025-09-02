@@ -38,9 +38,9 @@ namespace UnityLike.UseCases.Interpreter
                 {
                     statement.ASTScan(this);
                 }
-                catch (SemanticErrorException error)
+                catch
                 {
-                    UnityEngine.Debug.Log($"ÉGÉâÅ[Ç™î≠ê∂ÇµÇ‹ÇµÇΩ : '{error.Message}'");
+
                 }
             }
             Terminate();
