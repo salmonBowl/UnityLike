@@ -49,8 +49,9 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             codeEditorLayout = GetComponent<CodeEditorLayout>();
             codeEditorUICalculator = GetComponent<UIPosCalculator>();
 
-            InputFieldVoidstart.MemberInitialize();
-            InputFieldVoidupdate.MemberInitialize();
+            GameObject gameObject = GetComponentInParent<GameObjectManagement.GameObjectPrefab>().gameObject;
+            InputFieldVoidstart.MemberInitialize(gameObject);
+            InputFieldVoidupdate.MemberInitialize(gameObject);
 
             inputManager = new CodeEditorInputManager(codeEditorLayout,
                 InputFieldVoidstart.codeManager, InputFieldVoidupdate.codeManager);

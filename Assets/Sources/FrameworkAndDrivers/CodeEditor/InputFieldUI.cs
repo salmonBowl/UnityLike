@@ -20,9 +20,9 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         public ErrorPopupUI errorPopupUI;
         public IUIPosCalculator mousePos;
 
-        public void MemberInitialize()
+        public void MemberInitialize(GameObject gameObject)
         {
-            codeManager = new CodeManager(this, errorPopupUI);
+            codeManager = new CodeManager(this, errorPopupUI, gameObject);
             inputFieldText = inputField.textComponent;
         }
         public void DIMousePos(IUIPosCalculator mousePos)

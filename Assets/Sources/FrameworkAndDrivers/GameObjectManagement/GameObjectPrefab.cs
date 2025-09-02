@@ -4,12 +4,13 @@ using UnityLike.FrameworkAndDrivers.CodeEditor;
 
 namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 {
+    [RequireComponent(typeof(ModelManager))]
     public class GameObjectPrefab : MonoBehaviour
     {
         [SerializeField] private CodeEditorManager codeEditor;
         [SerializeField] private GameObject codeEditorCanvas;
 
-        private GameObject model;
+        private ModelManager model;
 
         public void ExecuteVoidStart() => codeEditor.ExecuteVoidStart();
         public void ExecuteVoidUpdate() => codeEditor.ExecuteVoidUpdate();
@@ -17,6 +18,10 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
         public void EditorSetActive(bool value)
         {
             codeEditorCanvas.SetActive(value);
+        }
+        public void HighlightSetActive(bool value)
+        {
+            model.HighlightSetActive(value);
         }
 
         public static GameObjectPrefab Instantiate(GameObject prefab, GameObject model)
@@ -26,9 +31,10 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 
             newModel.tag = "ObjectModel";
 
-            GameObjectPrefab retval = newGameObject.GetComponent<GameObjectPrefab>();
-            retval.model = newModel;
-            return retval;
+            GameObjectPrefab gameObject = newGameObject.GetComponent<GameObjectPrefab>();
+            gameObject.model = gameObject.GetComponent<ModelManager>();
+            gameObject.model.SetModel(newModel, gameObject.transform);
+            return gameObject;
         }
     }
 }

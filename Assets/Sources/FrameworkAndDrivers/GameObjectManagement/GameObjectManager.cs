@@ -18,16 +18,26 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 
         public void ChangeSelected(GameObjectPrefab target)
         {
-            // 元々選択していたオブジェクトのエディターを閉じます
+            // 元々選択していたオブジェクトの選択を外します
             if (selectedGameObject)
+            {
+                // エディターを閉じる
                 selectedGameObject.EditorSetActive(false);
+                // ハイライトを非表示
+                selectedGameObject.HighlightSetActive(false);
+            }
 
             // selectedGameObjectを変更します
             selectedGameObject = target;
 
-            // 新しく選択するオブジェクトのエディターを開きます
+            // 新しく選択するオブジェクトを選択します
             if (target)
+            {
+                // ハイライトを表示
+                target.HighlightSetActive(true);
+                // エディターを非表示
                 target.EditorSetActive(true);
+            }
         }
 
         public void ExecuteVoidStart()
