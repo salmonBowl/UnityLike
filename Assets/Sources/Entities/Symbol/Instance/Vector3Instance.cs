@@ -10,12 +10,12 @@ namespace UnityLike.Entities.Symbol
         {
             Class Float = FloatClass.Single;
 
-            Variable X = new("x", Float);
-            Variable Y = new("y", Float);
-            Variable Z = new("z", Float);
+            StandardVariable X = new("x", Float);
+            StandardVariable Y = new("y", Float);
+            StandardVariable Z = new("z", Float);
 
-            Variable magnitude = new("magnitude", Float);
-            Variable normalized = new("normalized", Vector3Class.Single);
+            StandardVariable magnitude = new("magnitude", Float);
+            StandardVariable normalized = new("normalized", Vector3Class.Single);
 
 
             Member.AddMember(X, Y, Z, magnitude, normalized);

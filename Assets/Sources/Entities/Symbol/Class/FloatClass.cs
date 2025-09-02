@@ -9,7 +9,7 @@ namespace UnityLike.Entities.Symbol
 
         public override Instance GetInitalInstance()
         {
-            return new IntInstance(0);
+            return new FloatInstance(0.0f);
         }
 
         public override void TryMemberExists(string member, ColoredToken token)

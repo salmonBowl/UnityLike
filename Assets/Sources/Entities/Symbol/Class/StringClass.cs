@@ -5,11 +5,11 @@ namespace UnityLike.Entities.Symbol
     public class StringClass : Class
     {
         public override string Name { get; } = "string";
-        public static Vector3Class Single => new();
+        public static StringClass Single => new();
 
         public override Instance GetInitalInstance()
         {
-            return new Vector3Instance(0, 0, 0);
+            return new StringInstance("");
         }
 
         public override void TryMemberExists(string member, ColoredToken token)
