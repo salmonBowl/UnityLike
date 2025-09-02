@@ -1,4 +1,4 @@
-Shader "Custom/GameObjectShader"
+﻿Shader "Custom/GameObjectShader"
 {
     Properties
     {
@@ -7,6 +7,8 @@ Shader "Custom/GameObjectShader"
 
         [MainTexture] _BaseMap("Albedo", 2D) = "white" {}
         [MainColor] _BaseColor("Color", Color) = (1,1,1,1)
+		_OutlineColor("Outline Color", Color) = (1,0.34,0,1)
+		_OutlineWidth("Outline Width", Range(0, 0.1)) = 0.5
 
         _Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
 
@@ -87,16 +89,6 @@ Shader "Custom/GameObjectShader"
             "IgnoreProjector" = "True"
         }
         LOD 300
-        
-        Pass
-        {
-            Stencil
-            {
-                Ref 1
-                Comp Always
-                Pass Replace
-            }
-        }
         
         // ------------------------------------------------------------------
         //  Forward pass. Shades all light in a single pass. GI + emission + Fog

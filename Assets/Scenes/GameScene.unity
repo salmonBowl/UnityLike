@@ -1883,8 +1883,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   codeEditorSettings: {fileID: 11400000, guid: edfea24ced3ee0c4bac1514a2d51484a, type: 2}
-  gameRoopExecuter: {fileID: 0}
-  whilePlayingEffect: {fileID: 259228232}
 --- !u!1 &2079355924
 GameObject:
   m_ObjectHideFlags: 0

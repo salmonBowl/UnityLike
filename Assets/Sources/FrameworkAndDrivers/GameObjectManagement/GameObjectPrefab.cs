@@ -39,6 +39,9 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             GameObjectPrefab gameObject = newGameObject.GetComponent<GameObjectPrefab>();
             gameObject.model = gameObject.GetComponent<ModelManager>();
             gameObject.model.SetModel(newModel, gameObject.transform);
+
+            gameObject.model.HighlightSetActive(false);
+
             return gameObject;
         }
     }
