@@ -11,7 +11,7 @@ namespace UnityLike.Entities.Symbol
             Value = value;
 
             // ƒƒ“ƒo[•Ï”length‚ğ’è‹`‚µ‚Ü‚·
-            StandardVariable Length = new("length", Type);
+            Variable Length = new("length", Type);
             Member.AddMember(Length);
 
             Length.Value = new IntInstance(value.Length);

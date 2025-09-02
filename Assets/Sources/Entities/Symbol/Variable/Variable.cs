@@ -4,17 +4,30 @@ using UnityLike.Entities.Compiler;
 namespace UnityLike.Entities.Symbol
 {
     /// <summary>
-    /// 変数を表す基底クラスです
+    /// 変数を表します。インスタンスを情報として格納します。
     /// </summary>
-    public abstract class Variable
+    public class Variable
     {
-        public abstract string Name { get; }
-        public abstract Class Type { get; }
-        public abstract Instance Value { get; set; }
+        public string Name { get; }
+        public Class Type { get; }
+        public Instance Value { get; set; }
 
-        public abstract void SetValue(Instance set, ColoredToken equal);
+        public Variable(string name, Class type)
+        {
+            Name = name;
+            Type = type;
+        }
 
-        // UnityVariableがUnityと同期させる際に使います
-        public abstract void UpdateValue();
+        public virtual void AssignmentValue(Instance set, ColoredToken equal)
+        {
+            Type expectedType = Type.GetInitalInstance().GetType();
+            bool castable = expectedType.IsAssignableFrom(set.GetType());
+
+            if (!castable)
+            {
+                throw new AssignmentNotIncompatibleException(Type.Name, set.Type.Name, equal);
+            }
+            Value = set;
+        }
     }
 }

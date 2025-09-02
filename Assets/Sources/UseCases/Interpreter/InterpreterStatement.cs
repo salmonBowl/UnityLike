@@ -36,7 +36,7 @@ namespace UnityLike.UseCases.Interpreter
             Instance value = node.Value.ASTScan(this);
 
             // •Ï”‚Ì’l‚ğXV
-            variable.SetValue(value, node.EqualToken);
+            variable.AssignmentValue(value, node.EqualToken);
         }
     }
 }
