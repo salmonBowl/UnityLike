@@ -14,6 +14,12 @@ public class CanvasAdjustor : MonoBehaviour
         myTransform = GetComponent<RectTransform>();
         if (!canvas)
             Debug.LogError("このファイルはcanvasにアタッチしてください");
+
+        GameObject uiCamera = GameObject.Find("Camera_UI");
+        if (!uiCamera)
+            Debug.LogError("Camera_UIが見つかりませんでした");
+
+        canvas.worldCamera = uiCamera.GetComponent<Camera>();
     }
     void Update()
     {

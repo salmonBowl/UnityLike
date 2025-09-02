@@ -12,6 +12,11 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 
         private ModelManager model;
 
+        void Start()
+        {
+            model = GetComponent<ModelManager>();
+        }
+
         public void ExecuteVoidStart() => codeEditor.ExecuteVoidStart();
         public void ExecuteVoidUpdate() => codeEditor.ExecuteVoidUpdate();
 

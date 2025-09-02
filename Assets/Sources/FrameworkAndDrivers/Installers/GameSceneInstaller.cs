@@ -22,20 +22,6 @@ namespace UnityLike.FrameworkAndDrivers.Installers
         private CodeEditorSettings codeEditorSettings;
         public static CodeEditorSettings CodeEditorSettings;
 
-        [Space(20)]
-
-        [Header("開発に使う全てのMonoBehaviourクラスをアタッチします")]
-
-        [Header("CodeEditor関係")]
-        [SerializeField]
-        private CodeEditorUIEvents codeEditorUIEvents;
-
-        [Header("UI関係")]
-        [SerializeField]
-        private GameRoopExecuter gameRoopExecuter;
-        [SerializeField]
-        private WhilePlayingEffect whilePlayingEffect;
-
         public void Awake()
         {
             CodeEditorSettings = codeEditorSettings;
@@ -46,8 +32,6 @@ namespace UnityLike.FrameworkAndDrivers.Installers
 
             if (!codeEditorSettings)
                 Debug.LogError("GameSceneInstaller : CodeEditorSettingsが指定されていません");
-            if (!codeEditorUIEvents)
-                Debug.LogError("GameSceneInstaller : CodeEditorUIEventsがアタッチされていません");
         }
 
         // DIコンテナに依存関係をバインドします
