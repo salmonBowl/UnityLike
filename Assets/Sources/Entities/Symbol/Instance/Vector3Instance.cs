@@ -1,3 +1,5 @@
+using Vector3 = UnityEngine.Vector3;
+
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
@@ -6,6 +8,23 @@ namespace UnityLike.Entities.Symbol
     {
         public override Class Type => Vector3Class.Single;
 
+        public Vector3Instance(Vector3 vector3)
+        {
+            Class Float = FloatClass.Single;
+
+            Variable X = new("x", Float);
+            Variable Y = new("y", Float);
+            Variable Z = new("z", Float);
+
+            Variable magnitude = new("magnitude", Float);
+            Variable normalized = new("normalized", Vector3Class.Single);
+
+            Member.AddMember(X, Y, Z, magnitude, normalized);
+
+            X.Value = new FloatInstance(vector3.x);
+            Y.Value = new FloatInstance(vector3.y);
+            Z.Value = new FloatInstance(vector3.z);
+        }
         public Vector3Instance(float x, float y, float z)
         {
             Class Float = FloatClass.Single;
@@ -17,15 +36,14 @@ namespace UnityLike.Entities.Symbol
             Variable magnitude = new("magnitude", Float);
             Variable normalized = new("normalized", Vector3Class.Single);
 
-
             Member.AddMember(X, Y, Z, magnitude, normalized);
 
             X.Value = new FloatInstance(x);
             Y.Value = new FloatInstance(y);
             Z.Value = new FloatInstance(z);
 
-            float magnitudeValue = (float)System.Math.Sqrt(x * x + y * y + z * z);
-            magnitude.Value = new FloatInstance(magnitudeValue);
+            //float magnitudeValue = (float)System.Math.Sqrt(x * x + y * y + z * z);
+            //magnitude.Value = new FloatInstance(magnitudeValue);
 
             // normalizedÇÕVector3Çäiî[Ç∑ÇÈïKóvÇ™Ç†ÇËÇ‹Ç∑
             // ÇªÇ§Ç∑ÇÈÇ∆ñ≥å¿ÉãÅ[ÉvÇ∆Ç»Ç¡ÇƒÇµÇ‹Ç§ÇΩÇﬂàÍíUå©ëóÇË
@@ -63,6 +81,14 @@ namespace UnityLike.Entities.Symbol
                 default:
                     throw new MemberNotExistException(name, nameToken);
             }
+        }
+
+        public Vector3 AsVector3()
+        {
+            float x = ((NumberInstance)GetMember("x")).AsFloat();
+            float y = ((NumberInstance)GetMember("y")).AsFloat();
+            float z = ((NumberInstance)GetMember("z")).AsFloat();
+            return new Vector3(x, y, z);
         }
 
         public override Instance Add(Instance other)

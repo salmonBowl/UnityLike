@@ -5,7 +5,7 @@ namespace UnityLike.Entities.Symbol
     /// <summary>
     /// new式でのインスタンス生成に使用します。new式の形をNewという仮想のインスタンスのメンバー関数だと見立てる設計を取りました。
     /// </summary>
-    public class NewInstance : WithoutOperationInstance
+    public class NewInstance : NonOperationInstance
     {
         public override Class Type => Vector3Class.Single;
 

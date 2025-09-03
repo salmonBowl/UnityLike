@@ -5,7 +5,7 @@ namespace UnityLike.Entities.Symbol
     /// <summary>
     /// ‰‰ŽZ‚ÉŠÖ‚í‚ç‚È‚¢Œ^‚ð’è‹`‚µ‚Ü‚·
     /// </summary>
-    public abstract class WithoutOperationInstance : Instance
+    public abstract class NonOperationInstance : Instance
     {
         public override Instance Add(Instance other)
         {

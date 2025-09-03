@@ -15,14 +15,6 @@ namespace UnityLike.Entities.Symbol
         public abstract Instance GetInitalInstance();
 
         /// <summary>
-        /// メンバー変数が存在するのかを取得します。意味解析などで使用します。
-        /// </summary>
-        /// <param name="member">メンバー変数の名前</param>
-        /// <param name="token">メンバー変数を表すトークン</param>
-        /// <exception cref="MemberNotExistException"></exception>
-        public abstract void TryMemberExists(string member, ColoredToken token);
-
-        /// <summary>
         /// 静的メソッドを実行します
         /// </summary>
         /// <param name="name">関数名</param>

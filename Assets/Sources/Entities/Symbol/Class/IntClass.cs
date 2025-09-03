@@ -12,11 +12,6 @@ namespace UnityLike.Entities.Symbol
             return new IntInstance(0);
         }
 
-        public override void TryMemberExists(string member, ColoredToken token)
-        {
-            throw new MemberNotExistException(member, token);
-        }
-
         public override Instance ExecuteStaticFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null)
         {
             void ArgCheck(params string[] expected)

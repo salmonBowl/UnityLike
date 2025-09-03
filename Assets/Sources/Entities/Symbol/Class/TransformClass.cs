@@ -2,14 +2,17 @@ using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
 {
-    public class StringClass : Class
+    public class TransformClass : Class
     {
-        public override string Name { get; } = "string";
-        public static StringClass Single => new();
+        public override string Name { get; } = "Transform";
+        public static TransformClass Single => new();
 
         public override Instance GetInitalInstance()
         {
-            return new StringInstance("");
+            Vector3Instance position = new(0, 0, 0);
+            Vector3Instance eulerAngles = new(0, 0, 0);
+            Vector3Instance localScale = new(0, 0, 0);
+            return new TransformInstance(position, eulerAngles, localScale);
         }
 
         public override Instance ExecuteStaticFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null)
