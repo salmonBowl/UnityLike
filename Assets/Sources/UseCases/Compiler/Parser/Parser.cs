@@ -34,6 +34,10 @@ namespace UnityLike.UseCases.Compiler
         public void Parse()
         {
             statements = new();
+
+            while (CurrentTokenType == TokenType.Return)
+                Consume();
+            
             while (CurrentTokenType != TokenType.EOF)
             {
                 statements.Add(ParseStatement());

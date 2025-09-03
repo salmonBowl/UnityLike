@@ -23,7 +23,8 @@ namespace UnityLike.UseCases.Compiler
             {
                 return CurrentTokenType switch
                 {
-                    TokenType.TypeStandard => ParseVariableDeclarationStatement(),
+                    TokenType.TypePrimitive => ParseVariableDeclarationStatement(),
+                    TokenType.TypeOther => ParseVariableDeclarationStatement(),
                     TokenType.Identifier => ParseAssignmentStatement(),
                     _ => ParseUnknownStatement("•¶–@‚ª³‚µ‚­‚ ‚è‚Ü‚¹‚ñ")
                 };

@@ -8,6 +8,17 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         [SerializeField]
         private Canvas canvas;
 
+        void Start()
+        {
+            GameObject uiCamera = GameObject.Find("Camera_UI");
+            if (!uiCamera)
+                Debug.LogError("Camera_UI‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
+
+            canvas.worldCamera = uiCamera.GetComponent<Camera>();
+            if (!canvas.worldCamera)
+                Debug.LogError("Camera_UI‚ÉCamera‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
+        }
+
         public Vector2Int GetTextPosOnMouse(TMP_Text text)
         {
             int charIndex = GetCharIndexOnMouse(text);

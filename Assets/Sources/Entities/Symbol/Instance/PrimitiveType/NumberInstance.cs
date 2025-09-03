@@ -4,7 +4,7 @@ namespace UnityLike.Entities.Symbol
 {
     public abstract class NumberInstance : PrimitiveInstance
     {
-        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null)
+        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen = null)
         {
             throw new MemberNotExistException(name, nameToken);
         }

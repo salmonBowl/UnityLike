@@ -22,14 +22,14 @@ namespace UnityLike.Entities.Symbol
             return (string)Value;
         }
 
-        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null)
+        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen = null)
         {
             throw new MemberNotExistException(name, nameToken);
         }
 
         public override Instance Add(Instance other)
         {
-            if (!Castable(other, "string"))
+            if (Castable(other, "string"))
             {
                 string value1 = AsString();
                 string value2 = ((StringInstance)other).AsString();

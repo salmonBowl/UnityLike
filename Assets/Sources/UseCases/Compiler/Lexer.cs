@@ -81,10 +81,9 @@ namespace UnityLike.UseCases.Compiler
             else if (char.IsDigit(firstChar))
             {
                 string tokenValue = ReadNumber();
-                if (float.TryParse(tokenValue, out _) || double.TryParse(tokenValue, out _))
-                    return new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn);
-                else
-                    return new Token(TokenType.Unknown, tokenValue, tokenLine, tokenColumn);
+                return float.TryParse(tokenValue[..^1], out _) || double.TryParse(tokenValue, out _)
+                    ? new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn)
+                    : new Token(TokenType.Unknown, tokenValue, tokenLine, tokenColumn);
             }
             // 1•¶Žš‚Ü‚½‚Í2•¶Žš
             // Žå‚É‰‰ŽZŽq‚âŠ‡ŒÊ—Þ
@@ -131,8 +130,33 @@ namespace UnityLike.UseCases.Compiler
         private string ReadNumber()
         {
             StringBuilder builder = new();
+            int decimalCount = 0;
 
             while (!IsEndOfFile() && Array.IndexOf(TokenConstants.number, Peek()) != -1)
+            {
+                builder.Append(Peek());
+                Consume();
+
+                if (Peek() == '.')
+                {
+                    decimalCount++;
+                    if (decimalCount == 2)
+                    {
+                        Consume();
+                        break;
+                    }
+                    if (!IsEndOfFile() && Array.IndexOf(TokenConstants.number, Peek()) != -1)
+                    {
+                        builder.Append(Peek());
+                        Consume();
+                    }
+                    else
+                    {
+                        return builder.ToString();
+                    }
+                }
+            }
+            if (!IsEndOfFile() && Peek() == 'f')
             {
                 builder.Append(Peek());
                 Consume();

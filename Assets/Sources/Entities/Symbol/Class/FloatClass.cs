@@ -4,16 +4,12 @@ namespace UnityLike.Entities.Symbol
 {
     public class FloatClass : Class
     {
+        public override string Name { get; } = "float";
         public static FloatClass Single => new();
 
         public override Instance GetInitalInstance()
         {
-            return new IntInstance(0);
-        }
-
-        public override void TryMemberExists(string member, ColoredToken token)
-        {
-            throw new MemberNotExistException(member, token);
+            return new FloatInstance(0.0f);
         }
 
         public override Instance ExecuteStaticFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null)

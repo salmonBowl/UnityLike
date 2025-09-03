@@ -1,24 +1,18 @@
-
 using System;
+
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
 {
     public abstract class Class
     {
+        public abstract string Name { get; }
+
         /// <summary>
         /// インスタンスの初期値を定義します。変数宣言の際などに使用してください。
         /// </summary>
         /// <returns>生成したインスタンスを返します</returns>
         public abstract Instance GetInitalInstance();
-
-        /// <summary>
-        /// メンバー変数が存在するのかを取得します。意味解析などで使用します。
-        /// </summary>
-        /// <param name="member">メンバー変数の名前</param>
-        /// <param name="token">メンバー変数を表すトークン</param>
-        /// <exception cref="MemberNotExistException"></exception>
-        public abstract void TryMemberExists(string member, ColoredToken token);
 
         /// <summary>
         /// 静的メソッドを実行します

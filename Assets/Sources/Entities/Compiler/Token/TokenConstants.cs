@@ -73,23 +73,43 @@ namespace UnityLike.Entities.Compiler
             { "null", TokenType.Null },
             { "true", TokenType.True },
             { "false", TokenType.False },
-            { "public", TokenType.Public },
-            { "private", TokenType.Private },
 
-            { "int", TokenType.TypeStandard },
-            { "float", TokenType.TypeStandard },
-            { "bool", TokenType.TypeStandard },
-            // これ以下はのちにクラス定義として組み込む仕組みを作るつもりです
-            { "string", TokenType.TypeStandard },
+            { "int", TokenType.TypePrimitive },
+            { "float", TokenType.TypePrimitive },
+            { "bool", TokenType.TypePrimitive },
+            { "string", TokenType.TypePrimitive },
 
+            { "Object", TokenType.TypeOther },
+            { "GameObject", TokenType.TypeOther },
+            { "Component", TokenType.TypeOther },
+            { "Transform", TokenType.TypeOther },
+            { "RectTransform", TokenType.TypeOther },
+            { "Rigidbody", TokenType.TypeOther },
+            { "Rigidbody2D", TokenType.TypeOther },
+            { "Collider", TokenType.TypeOther },
+            { "BoxCollider", TokenType.TypeOther },
+            { "SphereCollider", TokenType.TypeOther },
+            { "CapsuleCollider", TokenType.TypeOther },
             { "Vector2", TokenType.TypeOther },
             { "Vector3", TokenType.TypeOther },
-            { "Color", TokenType.TypeOther },
-            { "Transform", TokenType.TypeOther },
-            { "Debug", TokenType.TypeOther },
+            { "Vector4", TokenType.TypeOther },
+            { "Quaternion", TokenType.TypeOther },
+            { "Mathf", TokenType.TypeOther },
             { "Time", TokenType.TypeOther },
+            { "Random", TokenType.TypeOther },
             { "Input", TokenType.TypeOther },
-            { "Mathf", TokenType.TypeOther }
+            { "Renderer", TokenType.TypeOther },
+            { "MeshRenderer", TokenType.TypeOther },
+            { "SkinnedMeshRenderer", TokenType.TypeOther },
+            { "Material", TokenType.TypeOther },
+            { "Color", TokenType.TypeOther },
+            { "MonoBehaviour", TokenType.TypeOther },
+            { "SceneManager", TokenType.TypeOther },
+            { "Animetor", TokenType.TypeOther },
+            { "Canvas", TokenType.TypeOther },
+            { "Text", TokenType.TypeOther },
+            { "Image", TokenType.TypeOther },
+            { "Debug", TokenType.TypeOther },
         };
 
         #endregion
@@ -101,6 +121,7 @@ namespace UnityLike.Entities.Compiler
         public static readonly Dictionary<TokenType, string> syntaxHighlightColors = new()
         {
             { TokenType.Identifier, "#86DEFE" },
+            { TokenType.Member, "#FFFFFF" },
 
             #region 演算子、かっこなど
             { TokenType.NumberLiteral, operatorColor },
@@ -148,11 +169,9 @@ namespace UnityLike.Entities.Compiler
             { TokenType.Null, constBlue },
             { TokenType.True, constBlue },
             { TokenType.False, constBlue },
-            { TokenType.Public, constBlue },
-            { TokenType.Private, constBlue },
             #endregion
             
-            { TokenType.TypeStandard, constBlue },
+            { TokenType.TypePrimitive, constBlue },
             { TokenType.TypeOther, "#00FFAE" },
 
             { TokenType.Return, "#00FF00" },

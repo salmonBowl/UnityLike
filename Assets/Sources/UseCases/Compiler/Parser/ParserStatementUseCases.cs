@@ -14,14 +14,15 @@ namespace UnityLike.UseCases.Compiler
             public TypeNode Type()
             {
                 TypeNode retval;
-                if (outher.CurrentTokenType == TokenType.TypeStandard)
+                if (outher.CurrentTokenType == TokenType.TypePrimitive
+                    || outher.CurrentTokenType == TokenType.TypeOther)
                 {
                     retval = ASTFactory.TypeNode(outher.CurrentToken);
                     outher.Consume();
                 }
                 else
                 {
-                    throw new SyntaxErrorException();
+                    throw new SyntaxErrorException("ï∂ñ@Ç™ê≥ÇµÇ≠Ç†ÇËÇ‹ÇπÇÒ");
                 }
                 return retval;
             }
@@ -35,7 +36,7 @@ namespace UnityLike.UseCases.Compiler
                 }
                 else
                 {
-                    throw new SyntaxErrorException();
+                    throw new SyntaxErrorException("ï∂ñ@Ç™ê≥ÇµÇ≠Ç†ÇËÇ‹ÇπÇÒ");
                 }
                 return retval;
             }
@@ -49,7 +50,7 @@ namespace UnityLike.UseCases.Compiler
                 }
                 else
                 {
-                    throw new SyntaxErrorException();
+                    throw new SyntaxErrorException("ï∂ñ@Ç™ê≥ÇµÇ≠Ç†ÇËÇ‹ÇπÇÒ");
                 }
             }
             public ColoredToken Semicolon()

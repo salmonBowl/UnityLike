@@ -17,7 +17,7 @@ namespace UnityLike.UseCases.Interpreter
             };
 
             // •Ï”‚Ì’Ç‰Á
-            currentScope.AddMember(variable);
+            currentScope.AddUserVariable(variable, node.DeclaratedIdentifier.IdentifierToken);
 
             // ‰Šú‰»®‚ª‚ ‚ê‚ÎInitalAssignmentStatement‚Ì‘–¸‚ÉˆÚ‚é
             node.InitalAssignment?.ASTScan(this);
@@ -36,7 +36,7 @@ namespace UnityLike.UseCases.Interpreter
             Instance value = node.Value.ASTScan(this);
 
             // •Ï”‚Ì’l‚ğXV
-            variable.Value = value;
+            variable.AssignmentValue(value, node.EqualToken);
         }
     }
 }

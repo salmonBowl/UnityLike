@@ -11,9 +11,11 @@ namespace UnityLike.Entities.Compiler
         // Expression
         Instance VisitBinaryExpression(BinaryExpressionNode node);
         Instance VisitVariable(VariableNode node);
-        Instance VisitNumberLiteral(IntLiteralNode node);
+        Instance VisitIntLiteral(IntLiteralNode node);
+        Instance VisitFloatLiteral(FloatLiteralNode node);
         Instance VisitParenExpression(ParenNode node);
         Instance VisitUnaryExpression(UnaryExpressionNode node);
+        Instance VisitNewExpression(NewExpressionNode node);
 
         // Variable
         Variable GetIdentifier(IdentifierNode node);

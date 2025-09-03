@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using Vector2Int = UnityEngine.Vector2Int;
 
 using UnityLike.Entities.Compiler;
+using UnityLike.Entities.Symbol;
 using UnityLike.UseCases.Interpreter;
 using UnityLike.InterfaceAdapters.CodeEditorMouseOver;
+using UnityLike.UseCases.UnityComponent;
 
 namespace UnityLike.InterfaceAdapters.CodeManagement
 {
@@ -11,23 +14,36 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
         private readonly CompileManager compile;
         private readonly CompileData data;
         private readonly Interpreter interpreter;
+        private readonly SyncUnityComponent unityComponent;
         private readonly CodeErrorPopup errorPopup;
 
-        public CodeManager(ISetTextUI setTextUI, IPopupView popup)
+        public CodeManager(ISetTextUI setTextUI, IPopupView popup, UnityEngine.GameObject gameObject)
         {
             compile = new CompileManager(setTextUI);
             data = new CompileData();
+            interpreter = new Interpreter();
+            unityComponent = new SyncUnityComponent(gameObject);
             errorPopup = new CodeErrorPopup(data, popup);
         }
 
         public void OnChangeCode(string sourceCode)
         {
             compile.Execute(sourceCode, data);
+
+            List<Variable> initalMember = unityComponent.GetVariables();
+            interpreter.ExecuteCode(data.AST, initalMember);
+
+            unityComponent.RenderUnityComponent();
+
+            compile.RenderText(data);
         }
 
         public void ExecuteCode()
         {
-            interpreter.ExecuteCode(data.AST);
+            List<Variable> initalMember = unityComponent.GetVariables();
+            interpreter.ExecuteCode(data.AST, initalMember);
+
+            unityComponent.RenderUnityComponent();
         }
 
         public void PopupRequired(Vector2Int textPos)

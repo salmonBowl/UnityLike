@@ -45,15 +45,22 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
             parser.Parse();
             List<StatementNode> statements = parser.GetParsedStatements();
 
-            // ソースコードを色を付けながら再構成し、テキストエディタへ表示します
-            RebuilderFromAST rebuilder = new(statements);
-            rebuilder.RebuildExecute();
-            string richSourceCode = rebuilder.GetRichSourceCode();
-            view.SetViewText(richSourceCode);
 
             // コンパイルしたデータを保存します
-            saveTarget.ColoredTokens = rebuilder.GenerateTokenList.GetData();
             saveTarget.AST = statements;
+        }
+        public void RenderText(CompileData data)
+        {
+            // ソースコードを色を付けながら再構成します
+            RebuilderFromAST rebuilder = new(data.AST);
+            rebuilder.RebuildExecute();
+
+            // リビルドしたデータを保存します
+            data.ColoredTokens = rebuilder.GenerateTokenList.GetData();
+
+            // ソースコードを描画します
+            string richSourceCode = rebuilder.GetRichSourceCode();
+            view.SetViewText(richSourceCode);
         }
 
         /// <summary>
@@ -77,7 +84,7 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
         }
         private string Normalize(string text)
         {
-            return text.Replace("\r\n", "\n").Replace("\\\\", "\\");
+            return text.Replace("\r\n", "\n").Replace("\r", "").Replace("\\\\", "\\");
         }
 
         private Token[] GenerateTokenArray()
