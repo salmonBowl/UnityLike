@@ -426,8 +426,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\rtransform.position = new Vector3(0, 0, 0);\nVector3 Velocity = new Vector3(0,
-    0, 0);\n\u200B"
+  m_text: "\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
   m_sharedMaterial: {fileID: 7155552369867759418, guid: 2a71914e0e5ee5947b55e203fba38979, type: 2}
@@ -1059,8 +1058,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0, g: 1, b: 0, a: 1}
   m_CustomCaretColor: 1
   m_SelectionColor: {r: 0.40634382, g: 0.58652663, b: 0.81886786, a: 0.7882353}
-  m_Text: "\rtransform.position = new Vector3(0, 0, 0);\nVector3 Velocity = new Vector3(0,
-    0, 0);\n"
+  m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -1716,7 +1714,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5777993201202019012}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -1738,7 +1736,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2150773298
+    rgba: 2117218866
   m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.49411765}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2395,7 +2393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.93333334}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.88235295}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

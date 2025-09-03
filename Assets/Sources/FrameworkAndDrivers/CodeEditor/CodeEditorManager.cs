@@ -63,7 +63,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         private void CodeInitialize()
         {
             string textVoidstart = InputFieldVoidstart.GetInputFieldText();
-            string textVoidupdate = InputFieldVoidstart.GetInputFieldText();
+            string textVoidupdate = InputFieldVoidupdate.GetInputFieldText();
 
             codeEditorUIEvents.OnCodeChangedVoidstart(textVoidstart);
             codeEditorUIEvents.OnCodeChangedVoidupdate(textVoidupdate);

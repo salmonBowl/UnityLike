@@ -31,29 +31,12 @@ namespace UnityLike.UseCases.UnityComponent
             return variables;
         }
 
-        private void GenerateInstances()
-        {
-            Variable transformVariable = new("transform", TransformClass.Single)
-            {
-                Value = new TransformInstance(transform)
-            };
-            variables.Add(transformVariable);
-
-            /*
-            Variable gameObjectVariable = new("gameObject", GameObjectClass.Single)
-            {
-                Value = new GameObjectClass(transformVariable)
-            };
-            variables.Add(gameObjectVariable);
-            */
-        }
         public void RenderUnityComponent()
         {
             TransformInstance vTransform = (TransformInstance)transformVariable.Value;
             transform.position = ((Vector3Instance)vTransform.GetMember("position")).AsVector3();
             transform.eulerAngles = ((Vector3Instance)vTransform.GetMember("eulerAngles")).AsVector3();
             transform.localScale = ((Vector3Instance)vTransform.GetMember("localScale")).AsVector3();
-            Debug.Log(transform.position);
         }
     }
 }

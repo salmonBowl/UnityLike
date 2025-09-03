@@ -27,11 +27,6 @@ namespace UnityLike.Entities.Symbol
             {
                 throw new AssignmentNotIncompatibleException(Type.Name, set.Type.Name, equal);
             }
-
-            if (Value.GetType() == typeof(Vector3Instance))
-                UnityEngine.Debug.Log("value : " + ((Vector3Instance)Value).AsVector3());
-            if (set.GetType() == typeof(Vector3Instance))
-                UnityEngine.Debug.Log("set : " + ((Vector3Instance)set).AsVector3());
             Value = set;
         }
     }
