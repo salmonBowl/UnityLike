@@ -51,8 +51,12 @@ Shader "Custom/OutLineShader"
 			{
 				Output o;
 
+				// カメラからの距離を計算
+                float3 worldPos = mul(unity_ObjectToWorld, i.vertex).xyz;
+				float dist = distance(worldPos, _WorldSpaceCameraPos);
+
 				// 法線方向に頂点を押し出し
-				i.vertex.xyz += normalize(i.normal) * _Outline;
+				i.vertex.xyz += normalize(i.normal) * _Outline * dist;
 				o.pos = UnityObjectToClipPos(i.vertex);
 				o.color = _OutlineColor;
 				return o;
@@ -60,7 +64,7 @@ Shader "Custom/OutLineShader"
 			
 			fixed4 frag(Output o) : SV_Target
 			{
-				return o.color;
+				return o.color * 8;
 			}
             ENDCG
         }

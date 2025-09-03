@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
@@ -35,8 +37,9 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             {
                 // ハイライトを表示
                 target.HighlightSetActive(true);
-                // エディターを非表示
-                target.EditorSetActive(true);
+                // エディターを開く
+                // この処理は時間がかかるため、ハイライトの描画を先に行っています
+                StartCoroutine(OpenCodeEditor(target));
             }
         }
 
@@ -53,6 +56,12 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             {
                 gameObject.ExecuteVoidUpdate();
             }
+        }
+
+        private IEnumerator OpenCodeEditor(GameObjectPrefab gameObject)
+        {
+            yield return null;
+            gameObject.EditorSetActive(true);
         }
     }
 }

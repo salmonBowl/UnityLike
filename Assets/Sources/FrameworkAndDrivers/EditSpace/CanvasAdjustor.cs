@@ -20,6 +20,8 @@ public class CanvasAdjustor : MonoBehaviour
             Debug.LogError("Camera_UI‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
 
         canvas.worldCamera = uiCamera.GetComponent<Camera>();
+        if (!canvas.worldCamera)
+            Debug.LogError("Camera_UI‚ÉCamera‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
     }
     void Update()
     {
