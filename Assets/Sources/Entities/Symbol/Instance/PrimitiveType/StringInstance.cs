@@ -29,7 +29,7 @@ namespace UnityLike.Entities.Symbol
 
         public override Instance Add(Instance other)
         {
-            if (!Castable(other, "string"))
+            if (Castable(other, "string"))
             {
                 string value1 = AsString();
                 string value2 = ((StringInstance)other).AsString();

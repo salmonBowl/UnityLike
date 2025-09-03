@@ -18,7 +18,7 @@ namespace UnityLike.Entities.Symbol
             Type = type;
         }
 
-        public virtual void AssignmentValue(Instance set, ColoredToken equal)
+        public void AssignmentValue(Instance set, ColoredToken equal)
         {
             Type expectedType = Type.GetInitalInstance().GetType();
             bool castable = expectedType.IsAssignableFrom(set.GetType());
@@ -27,6 +27,11 @@ namespace UnityLike.Entities.Symbol
             {
                 throw new AssignmentNotIncompatibleException(Type.Name, set.Type.Name, equal);
             }
+
+            if (Value.GetType() == typeof(Vector3Instance))
+                UnityEngine.Debug.Log("value : " + ((Vector3Instance)Value).AsVector3());
+            if (set.GetType() == typeof(Vector3Instance))
+                UnityEngine.Debug.Log("set : " + ((Vector3Instance)set).AsVector3());
             Value = set;
         }
     }

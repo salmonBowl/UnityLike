@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using UnityLike.Entities.Compiler;
@@ -42,9 +43,11 @@ namespace UnityLike.UseCases.Interpreter
                 {
                     statement.ASTScan(this);
                 }
-                catch
+                catch (SemanticErrorException) { }
+                catch (ExecuteException) { }
+                catch (Exception e)
                 {
-
+                    UnityEngine.Debug.Log("äJî≠è„Ç≈ÉGÉâÅ[Ç™î≠ê∂ÇµÇ‹ÇµÇΩ : " + e);
                 }
             }
             Terminate();
