@@ -26,7 +26,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             InputFieldVoidupdate.ExecuteCode();
         }
 
-        void Start()
+        void Awake()
         {
             InputFieldVoidstart.AttachmentInspection();
             InputFieldVoidupdate.AttachmentInspection();
@@ -42,7 +42,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         }
 
         public void SetCodeVoidStart(string sourceCode) => codeEditorUIEvents.OnCodeChangedVoidstart(sourceCode);
-        public void SetCodeVoidSpdate(string sourceCode) => codeEditorUIEvents.OnCodeChangedVoidupdate(sourceCode);
+        public void SetCodeVoidUpdate(string sourceCode) => codeEditorUIEvents.OnCodeChangedVoidupdate(sourceCode);
         public string GetCodeVoidStart() => InputFieldVoidstart.GetInputFieldText();
         public string GetCodeVoidUpdate() => InputFieldVoidupdate.GetInputFieldText();
 

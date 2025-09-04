@@ -29,6 +29,10 @@ namespace UnityLike.UseCases.Interpreter
             node.Variable.ASTScan(this);
             node.Value.ASTScan(this);
 
+            // ˆÓ–¡‰ğÍ‚É‘ã“ü‚Ís‚¢‚Ü‚¹‚ñ
+            if (executionMode == ExecutionMode.SemanticAnalysisOnly)
+                return;
+
             // ¶•Ó‚Ì’l‚ğæ“¾
             Variable variable = node.Variable.GetVariable(this);
 

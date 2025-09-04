@@ -24,7 +24,7 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
         public void ExecuteVoidStart() => codeEditor.ExecuteVoidStart();
         public void ExecuteVoidUpdate() => codeEditor.ExecuteVoidUpdate();
         public void SetCodeVoidStart(string sourceCode) => codeEditor.SetCodeVoidStart(sourceCode);
-        public void SetCodeVoidUpdate(string sourceCode) => codeEditor.SetCodeVoidStart(sourceCode);
+        public void SetCodeVoidUpdate(string sourceCode) => codeEditor.SetCodeVoidUpdate(sourceCode);
         public string GetCodeVoidStart() => codeEditor.GetCodeVoidStart();
         public string GetCodeVoidUpdate() => codeEditor.GetCodeVoidUpdate();
 

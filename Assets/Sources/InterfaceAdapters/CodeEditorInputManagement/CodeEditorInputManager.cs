@@ -27,8 +27,8 @@ namespace UnityLike.InterfaceAdapters.CodeEditorInputManagement
             // ソースコードの解析を行います
             switch (block)
             {
-                case CodeEditorBlock.VoidStart: codeChangeVoidstart.OnChangeCode(newText); break;
-                case CodeEditorBlock.VoidUpdate: codeChangeVoidupdate.OnChangeCode(newText); break;
+                case CodeEditorBlock.VoidStart: codeChangeVoidstart.OnChangeCode(newText, true); break;
+                case CodeEditorBlock.VoidUpdate: codeChangeVoidupdate.OnChangeCode(newText, false); break;
                 default: throw new NotImplementedException();
             }
         }

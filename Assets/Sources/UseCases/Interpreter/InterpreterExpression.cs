@@ -29,6 +29,12 @@ namespace UnityLike.UseCases.Interpreter
             }
             catch (DivideByZeroException zeroException)
             {
+                // ˆÓ–¡‰ğÍ‚É‚Í0Š„‚è‚ğ–³‹‚µ‚Ü‚·
+                if (executionMode == ExecutionMode.SemanticAnalysisOnly)
+                {
+                    return value1;
+                }
+
                 throw new DivideByZeroExecuteException(zeroException.Message, node.OperatorToken);
             }
         }
