@@ -616,6 +616,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectPrefab: {fileID: 5227682074812591798, guid: 5e93ac0ff45383248857beadaf3de394, type: 3}
+  models:
+    models:
+    - name: Cube
+      gameObject: {fileID: 7255814834389358600, guid: 2fabfa4392e8cd6468f81017054c75e4, type: 3}
+  sceneLoader: {fileID: 466921371}
 --- !u!114 &466921371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,7 +634,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectManager: {fileID: 466921370}
-  cube: {fileID: 7255814834389358600, guid: 2fabfa4392e8cd6468f81017054c75e4, type: 3}
 --- !u!1 &916237802
 GameObject:
   m_ObjectHideFlags: 0

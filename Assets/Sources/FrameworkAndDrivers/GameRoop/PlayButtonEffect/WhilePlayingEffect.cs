@@ -23,16 +23,16 @@ namespace UnityLike.FrameworkAndDrivers.GameRoop
         [SerializeField, Header("lineRenderer‚Ìü‰ñ‹O“¹‚ğw’è‚µ‚Ü‚·")]
         private RoundedRectangle orbit;
 
-        private GameRoopManager statementManager;
+        private GameRoopManager stateManager;
 
         /// <summary>
         /// ü‰ñŒvZ‚Ì‚½‚ß‚Ì”}‰î•Ï”‚Å‚·
         /// </summary>
         private float rotateParameter = 0;
 
-        public void StatementManagerInject(GameRoopManager statementManager)
+        public void StateManagerInject(GameRoopManager stateManager)
         {
-            this.statementManager = statementManager;
+            this.stateManager = stateManager;
         }
 
         void Start()
@@ -48,16 +48,16 @@ namespace UnityLike.FrameworkAndDrivers.GameRoop
 
         private void LineActiveManagement()
         {
-            switch(statementManager.Statement)
+            switch(stateManager.State)
             {
-                case GameRoopStatement.Edit:
+                case GameRoopState.Edit:
                     lineRenderer.enabled = false;
                     break;
-                case GameRoopStatement.Play:
+                case GameRoopState.Play:
                     lineRenderer.enabled = true;
                     LightingUpdate();
                     break;
-                case GameRoopStatement.Pause:
+                case GameRoopState.Pause:
                     lineRenderer.enabled = true;
                     break;
                 default:

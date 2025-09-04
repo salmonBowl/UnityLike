@@ -37,6 +37,13 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             model.HighlightSetActive(value);
         }
 
+        // –¼‘O‚Ì—“‚ª•ÏX‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚éŠÖ”
+        // Unity‚ÌInputField‚Åİ’è‚µ‚Ü‚·
+        public void OnNameInputChanged(string newName)
+        {
+            Name = newName;
+        }
+
         public static GameObjectPrefab Instantiate(string name, string modelName, GameObject prefab, GameObject model)
         {
             GameObject newGameObject = Instantiate(prefab);

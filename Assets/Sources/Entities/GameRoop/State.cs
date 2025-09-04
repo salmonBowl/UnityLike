@@ -1,7 +1,7 @@
 
 namespace UnityLike.Entities.GameRoop
 {
-    public enum GameRoopStatement
+    public enum GameRoopState
     {
         Edit,
         Play,
