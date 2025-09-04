@@ -24,22 +24,7 @@ namespace UnityLike.Entities.Symbol
             EulerAngles.Value = new Vector3Instance(transform.eulerAngles);
             LocalScale.Value = new Vector3Instance(transform.localScale);
         }
-        public TransformInstance(Vector3Instance position, Vector3Instance eulerAngles, Vector3Instance localScale)
-        {
-            Class Vector3 = Vector3Class.Single;
 
-            Variable Position = new("position", Vector3);
-            Variable EulerAngles = new("eulerAngles", Vector3);
-            Variable LocalScale = new("localScale", Vector3);
-
-            Member.AddMember(Position, EulerAngles, LocalScale);
-
-            Position.Value = position;
-            EulerAngles.Value = eulerAngles;
-            LocalScale.Value = localScale;
-        }
-
-        // メソッドの実装例
         public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen)
         {
             void ArgCheck(params string[] expected)
@@ -61,7 +46,6 @@ namespace UnityLike.Entities.Symbol
             // 関数実行のためにメンバー変数を取得しておきます
             Vector3 position = ((Vector3Instance)GetMember("position")).AsVector3();
             Vector3 eulerAngles = ((Vector3Instance)GetMember("eulerAngles")).AsVector3();
-            Vector3 scale = ((Vector3Instance)GetMember("scale")).AsVector3();
 
             switch (name)
             {

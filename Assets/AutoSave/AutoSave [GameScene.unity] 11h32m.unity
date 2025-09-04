@@ -629,7 +629,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectManager: {fileID: 466921370}
-  cube: {fileID: 7255814834389358600, guid: 2fabfa4392e8cd6468f81017054c75e4, type: 3}
 --- !u!1 &916237802
 GameObject:
   m_ObjectHideFlags: 0

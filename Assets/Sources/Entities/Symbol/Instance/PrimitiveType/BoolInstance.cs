@@ -2,24 +2,18 @@ using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
 {
-    public class StringInstance : PrimitiveInstance
+    public class BoolInstance : PrimitiveInstance
     {
-        public override Class Type => StringClass.Single;
+        public override Class Type => BoolClass.Single;
 
-        public StringInstance(string value)
+        public BoolInstance(bool value)
         {
             Value = value;
-
-            // ÉÅÉìÉoÅ[ïœêîlengthÇíËã`ÇµÇ‹Ç∑
-            Variable Length = new("length", Type);
-            Member.AddMember(Length);
-
-            Length.Value = new IntInstance(value.Length);
         }
 
-        public string AsString()
+        public bool AsBool()
         {
-            return (string)Value;
+            return (bool)Value;
         }
 
         public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen = null)
@@ -29,13 +23,6 @@ namespace UnityLike.Entities.Symbol
 
         public override Instance Add(Instance other)
         {
-            if (Castable(other, "string"))
-            {
-                string value1 = AsString();
-                string value2 = ((StringInstance)other).AsString();
-
-                return new StringInstance(value1 + value2);
-            }
             throw new InvalidOperatorException();
         }
         public override Instance Subtract(Instance other)
@@ -60,7 +47,8 @@ namespace UnityLike.Entities.Symbol
         }
         public override Instance Denial()
         {
-            throw new InvalidOperatorException();
+            bool retval = !AsBool();
+            return new BoolInstance(retval);
         }
     }
 }

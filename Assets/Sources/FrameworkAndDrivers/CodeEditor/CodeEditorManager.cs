@@ -32,8 +32,6 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             InputFieldVoidupdate.AttachmentInspection();
 
             MemberInitialize();
-
-            CodeInitialize();
         }
         void Update()
         {
@@ -42,6 +40,11 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             InputFieldVoidstart.Update();
             InputFieldVoidupdate.Update();
         }
+
+        public void SetCodeVoidStart(string sourceCode) => codeEditorUIEvents.OnCodeChangedVoidstart(sourceCode);
+        public void SetCodeVoidSpdate(string sourceCode) => codeEditorUIEvents.OnCodeChangedVoidupdate(sourceCode);
+        public string GetCodeVoidStart() => InputFieldVoidstart.GetInputFieldText();
+        public string GetCodeVoidUpdate() => InputFieldVoidupdate.GetInputFieldText();
 
         private void MemberInitialize()
         {
@@ -59,14 +62,6 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             codeEditorUIEvents.DIInputManager(inputManager);
             InputFieldVoidstart.DIMousePos(codeEditorUICalculator);
             InputFieldVoidupdate.DIMousePos(codeEditorUICalculator);
-        }
-        private void CodeInitialize()
-        {
-            string textVoidstart = InputFieldVoidstart.GetInputFieldText();
-            string textVoidupdate = InputFieldVoidupdate.GetInputFieldText();
-
-            codeEditorUIEvents.OnCodeChangedVoidstart(textVoidstart);
-            codeEditorUIEvents.OnCodeChangedVoidupdate(textVoidupdate);
         }
     }
 }
