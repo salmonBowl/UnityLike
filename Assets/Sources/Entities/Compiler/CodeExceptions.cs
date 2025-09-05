@@ -157,4 +157,13 @@ namespace UnityLike.Entities.Compiler
             token.HasError(Message);
         }
     }
+    public class InfiniteLoopException : ExecuteException
+    {
+        public override string Message { get; }
+        public InfiniteLoopException(ColoredToken token)
+        {
+            Message = "ñ≥å¿ÉãÅ[ÉvÇ™î≠ê∂ÇµÇ‹ÇµÇΩ";
+            token.HasError(Message);
+        }
+    }
 }

@@ -8,6 +8,7 @@ namespace UnityLike.Entities.Compiler
         void ExecuteVariableDeclarationStatement(VariableDeclarationStatementNode node);
         void ExecuteAssignmentStatement(AssignmentStatementNode node);
         void ExecuteIfStatement(IfStatementNode node);
+        void ExecuteWhileStatement(WhileStatementNode node);
         void ExecuteScope(ScopeNode scope);
 
         // Expression

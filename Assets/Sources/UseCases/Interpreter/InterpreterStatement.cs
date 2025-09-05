@@ -64,6 +64,42 @@ namespace UnityLike.UseCases.Interpreter
                 node.Else?.ASTScan(this);
             }
         }
+        public void ExecuteWhileStatement(WhileStatementNode node)
+        {
+            Instance conditionValue = node.Condition.ASTScan(this);
+
+            if (conditionValue is not BoolInstance)
+            {
+                throw new ConditionNotBoolException(node.RightParenToken);
+            }
+
+            bool atOnce = executionMode == ExecutionMode.SemanticAnalysisOnly;
+
+            if (atOnce)
+            {
+                node.Statement.ASTScan(this);
+            }
+            else
+            {
+                int loopCount = 0;
+                const int maxIterations = 10000; // à¿ëSÇÃÇΩÇﬂÇÃÉãÅ[Évè„å¿âÒêî
+                
+                while (true)
+                {
+                    bool condition = ((BoolInstance)node.Condition.ASTScan(this)).AsBool();
+                    if (!condition)
+                        break;
+
+                    node.Statement.ASTScan(this);
+
+                    loopCount++;
+                    if (maxIterations < loopCount)
+                    {
+                        throw new InfiniteLoopException(node.WhileToken);
+                    }
+                }
+            }
+        }
 
         public void ExecuteScope(ScopeNode scope)
         {

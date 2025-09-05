@@ -32,7 +32,7 @@ namespace UnityLike.UseCases.UnityComponent
             {
                 Value = new RigidbodyInstance(rigidbody)
             };
-            variables.Add(transformVariable);
+            variables.Add(rigidbodyVariable);
             gameObjectVariable = new("gameObject", GameObjectClass.Single)
             {
                 Value = new GameObjectInstance(transformVariable, rigidbodyVariable)
