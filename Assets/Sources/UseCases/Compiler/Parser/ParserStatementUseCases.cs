@@ -93,6 +93,16 @@ namespace UnityLike.UseCases.Compiler
                 }
                 throw new SyntaxErrorException("ï∂ñ@Ç™ê≥ÇµÇ≠Ç†ÇËÇ‹ÇπÇÒ");
             }
+            public ColoredToken While()
+            {
+                if (outher.CurrentTokenType == TokenType.If)
+                {
+                    Token @if = outher.CurrentToken;
+                    outher.Consume();
+                    return ASTFactory.TokenToColoredToken(@if);
+                }
+                throw new SyntaxErrorException("ï∂ñ@Ç™ê≥ÇµÇ≠Ç†ÇËÇ‹ÇπÇÒ");
+            }
             public ColoredToken LeftParen()
             {
                 if (outher.CurrentTokenType == TokenType.LeftParen)

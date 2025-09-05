@@ -48,6 +48,7 @@ namespace UnityLike.UseCases.UnityComponent
         public void RenderUnityComponent()
         {
             TransformInstance vTransform = (TransformInstance)transformVariable.Value;
+            Debug.Log(vTransform.GetMember("position").GetType());
             transform.position = ((Vector3Instance)vTransform.GetMember("position")).AsVector3();
             transform.eulerAngles = ((Vector3Instance)vTransform.GetMember("eulerAngles")).AsVector3();
             transform.localScale = ((Vector3Instance)vTransform.GetMember("localScale")).AsVector3();
@@ -55,7 +56,7 @@ namespace UnityLike.UseCases.UnityComponent
             rigidbody.mass = ((FloatInstance)vRigidbody.GetMember("mass")).AsFloat();
             rigidbody.useGravity = ((BoolInstance)vRigidbody.GetMember("useGravity")).AsBool();
             rigidbody.isKinematic = ((BoolInstance)vRigidbody.GetMember("isKinematic")).AsBool();
-            rigidbody.linearVelocity = ((Vector3Instance)vRigidbody.GetMember("velocity")).AsVector3();
+            if (rigidbody.isKinematic) rigidbody.linearVelocity = ((Vector3Instance)vRigidbody.GetMember("velocity")).AsVector3();
             GameObjectInstance vGameObject = (GameObjectInstance)gameObjectVariable.Value;
             gameObject.SetActive(((BoolInstance)vGameObject.GetMember("activeSelf")).AsBool());
         }

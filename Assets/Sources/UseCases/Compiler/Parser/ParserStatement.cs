@@ -27,6 +27,7 @@ namespace UnityLike.UseCases.Compiler
                     TokenType.TypeOther => ParseVariableDeclarationStatement(),
                     TokenType.Identifier => ParseAssignmentStatement(),
                     TokenType.If => ParseIfStatement(),
+                    TokenType.While => ParseWhileStatement(),
                     TokenType.LeftBrace => ParseScope(),
                     _ => ParseUnknownStatement("ï∂ñ@Ç™ê≥ÇµÇ≠Ç†ÇËÇ‹ÇπÇÒ")
                 };
@@ -112,6 +113,25 @@ namespace UnityLike.UseCases.Compiler
             StatementNode elseStatement = ParseStatement();
 
             return new IfStatementNode(@if, leftParen, condition, rightParen, thenStatement, @else, elseStatement);
+        }
+        private IfStatementNode ParseWhileStatement()
+        {
+            Usecase u = new(this);
+
+            // whileéÆ
+
+            ColoredToken @while =
+                u.While();
+            ColoredToken leftParen =
+                u.LeftParen();
+            ExpressionNode condition =
+                u.Expression();
+            ColoredToken rightParen =
+                u.RightParen();
+
+            StatementNode statement = ParseStatement();
+
+            return new IfStatementNode(@while, leftParen, condition, rightParen, statement);
         }
         private ScopeNode ParseScope()
         {
