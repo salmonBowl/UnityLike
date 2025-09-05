@@ -11,24 +11,24 @@ namespace UnityLike.Entities.Compiler
     {
         public List<StatementNode> Statements { get; }
 
-        public ColoredToken LeftBrace { get; }
-        public ColoredToken RightBrace { get; }
+        public ColoredToken LeftBraceToken { get; }
+        public ColoredToken RightBraceToken { get; }
 
         public ScopeNode(ColoredToken leftBrace, List<StatementNode> statements, ColoredToken rightBrace)
         {
             Statements = statements;
-            LeftBrace = leftBrace;
-            RightBrace = rightBrace;
+            LeftBraceToken = leftBrace;
+            RightBraceToken = rightBrace;
         }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
-            rebuilder.ImportColoredToken(LeftBrace);
+            rebuilder.ImportColoredToken(LeftBraceToken);
             foreach (var statement in Statements)
             {
                 statement.ColoredTokenScan(rebuilder);
             }
-            rebuilder.ImportColoredToken(RightBrace);
+            rebuilder.ImportColoredToken(RightBraceToken);
         }
 
         public override string ToPrettyString()

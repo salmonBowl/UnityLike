@@ -109,6 +109,17 @@ namespace UnityLike.Entities.Compiler
             token.HasError(Message);
         }
     }
+    public class ConditionNotBoolException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public ConditionNotBoolException(ColoredToken token)
+        {
+            Message = "ğŒ®‚ÌŒ^‚ÍboolŒ^‚É‚µ‚Ä‚­‚¾‚³‚¢";
+            token.HasError(Message);
+        }
+    }
+
+    // --- ÀsƒGƒ‰[ ---
 
     public class ReDefinitionException : ExecuteException
     {

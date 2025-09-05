@@ -43,6 +43,28 @@ namespace UnityLike.UseCases.Interpreter
             variable.AssignmentValue(value, node.EqualToken);
         }
 
+        public void ExecuteIfStatement(IfStatementNode node)
+        {
+            Instance conditionValue = node.Condition.ASTScan(this);
+
+            if (conditionValue is not BoolInstance boolValue)
+            {
+                throw new ConditionNotBoolException(node.RightParenToken);
+            }
+
+            bool condition = boolValue.AsBool();
+            bool isBoth = executionMode == ExecutionMode.SemanticAnalysisOnly;
+
+            if (condition || isBoth)
+            {
+                node.Then.ASTScan(this);
+            }
+            if (!condition || isBoth)
+            {
+                node.Else?.ASTScan(this);
+            }
+        }
+
         public void ExecuteScope(ScopeNode scope)
         {
             VariableTable parentScope = currentScope;

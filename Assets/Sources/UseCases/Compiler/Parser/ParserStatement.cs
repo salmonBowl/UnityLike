@@ -26,6 +26,8 @@ namespace UnityLike.UseCases.Compiler
                     TokenType.TypePrimitive => ParseVariableDeclarationStatement(),
                     TokenType.TypeOther => ParseVariableDeclarationStatement(),
                     TokenType.Identifier => ParseAssignmentStatement(),
+                    TokenType.If => ParseIfStatement(),
+                    TokenType.LeftBrace => ParseScope(),
                     _ => ParseUnknownStatement("ï∂ñ@Ç™ê≥ÇµÇ≠Ç†ÇËÇ‹ÇπÇÒ")
                 };
             }
@@ -87,6 +89,37 @@ namespace UnityLike.UseCases.Compiler
                 return new AssignmentStatementNode(variableNode, equals, expressionNode, semicolon);
 
             throw new SyntaxErrorException(";Ç™ïKóvÇ≈Ç∑");
+        }
+        private IfStatementNode ParseIfStatement()
+        {
+            Usecase u = new(this);
+
+            // iféÆ
+
+            ColoredToken @if =
+                u.If();
+            ColoredToken leftParen =
+                u.LeftParen();
+            ExpressionNode condition =
+                u.Expression();
+            ColoredToken rightParen =
+                u.RightParen();
+
+            StatementNode thenStatement = ParseStatement();
+
+            if (CurrentTokenType != TokenType.Else)
+                return new IfStatementNode(@if, leftParen, condition, rightParen, thenStatement);
+
+            ColoredToken @else =
+                u.Else();
+
+            @StatementNode elseStatement = ParseStatement();
+
+            return new IfStatementNode(@if, leftParen, condition, rightParen, thenStatement, @else, elseStatement);
+        }
+        private ScopeNode ParseScope()
+        {
+            // ñ¢é¿ëï
         }
         private UnknownStatementNode ParseUnknownStatement(string errorMessage)
         {
