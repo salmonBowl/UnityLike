@@ -50,11 +50,13 @@ namespace UnityLike.UseCases.Compiler
                 u.Type();
             IdentifierNode identifierNode =
                 u.Identifier();
-            ColoredToken semicolon =
-                u.Semicolon();
+            ColoredToken semicolon;
 
-            if (semicolon != null)
+            if (CurrentTokenType == TokenType.SemiColon)
+            {
+                semicolon = u.Semicolon();
                 return new VariableDeclarationStatementNode(typeNode, identifierNode, semicolon);
+            }
 
             // 宣言時初期化
             ColoredToken equals =
@@ -64,11 +66,8 @@ namespace UnityLike.UseCases.Compiler
             semicolon =
                 u.Semicolon();
 
-            if (semicolon != null)
-                return new VariableDeclarationStatementNode
-                    (typeNode, identifierNode, equals, expressionNode, semicolon);
-
-            throw new SyntaxErrorException(";が必要です");
+            return new VariableDeclarationStatementNode
+                (typeNode, identifierNode, equals, expressionNode, semicolon);
         }
         private StatementNode ParseAssignmentStatement()
         {
@@ -85,10 +84,7 @@ namespace UnityLike.UseCases.Compiler
             ColoredToken semicolon =
                 u.Semicolon();
 
-            if (semicolon != null)
-                return new AssignmentStatementNode(variableNode, equals, expressionNode, semicolon);
-
-            throw new SyntaxErrorException(";が必要です");
+            return new AssignmentStatementNode(variableNode, equals, expressionNode, semicolon);
         }
         private IfStatementNode ParseIfStatement()
         {
@@ -113,13 +109,30 @@ namespace UnityLike.UseCases.Compiler
             ColoredToken @else =
                 u.Else();
 
-            @StatementNode elseStatement = ParseStatement();
+            StatementNode elseStatement = ParseStatement();
 
             return new IfStatementNode(@if, leftParen, condition, rightParen, thenStatement, @else, elseStatement);
         }
         private ScopeNode ParseScope()
         {
-            // 未実装
+            Usecase u = new(this);
+
+            // スコープ
+
+            ColoredToken leftBrace =
+                u.LeftBrace();
+
+            List<StatementNode> statements = new();
+
+            while (CurrentTokenType is not TokenType.EOF and not TokenType.RightBrace)
+            {
+                statements.Add(ParseStatement());
+            }
+
+            ColoredToken rightBrace =
+                u.RightBrace();
+
+            return new ScopeNode(leftBrace, statements, rightBrace);
         }
         private UnknownStatementNode ParseUnknownStatement(string errorMessage)
         {

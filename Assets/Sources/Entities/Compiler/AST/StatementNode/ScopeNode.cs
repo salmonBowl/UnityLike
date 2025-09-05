@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 
-using UnityLike.Entities.Symbol;
-
 namespace UnityLike.Entities.Compiler
 {
     /// <summary>
     /// スコープを表現するクラスです。List<Statements>を持ちます。
     /// </summary>
-    public abstract class ScopeNode : StatementNode
+    public class ScopeNode : StatementNode
     {
         public List<StatementNode> Statements { get; }
 
