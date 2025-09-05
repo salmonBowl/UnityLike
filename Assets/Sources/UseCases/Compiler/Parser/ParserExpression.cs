@@ -70,6 +70,8 @@ namespace UnityLike.UseCases.Compiler
                 TokenType.Identifier => ParseVariable(),
                 TokenType.New => ParseNewExpression(),
                 TokenType.NumberLiteral => ConsumeWithGenerate(),
+                TokenType.True => ConsumeWithGenerate(),
+                TokenType.False => ConsumeWithGenerate(),
                 TokenType.LeftParen => ParseParenExpression(),
                 TokenType.Unknown => AsUnknown(),
                 TokenType.SemiColon => throw new SyntaxErrorException("ХґВ™КЃРђВµВƒВҐВ№ВєВс"),

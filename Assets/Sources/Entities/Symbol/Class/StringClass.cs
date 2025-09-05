@@ -5,6 +5,7 @@ namespace UnityLike.Entities.Symbol
     public class StringClass : Class
     {
         public override string Name { get; } = "string";
+        public override System.Type Type => typeof(StringInstance);
         public static StringClass Single => new();
 
         public override Instance GetInitalInstance()

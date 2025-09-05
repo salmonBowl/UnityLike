@@ -8,6 +8,7 @@ namespace UnityLike.Entities.Symbol
     public class DebugClass : Class
     {
         public override string Name { get; } = "Vector3";
+        public override Type Type => throw new NotImplementedException();
         public static DebugClass Single => new();
 
         public override Instance GetInitalInstance()

@@ -5,6 +5,7 @@ namespace UnityLike.Entities.Symbol
     public class BoolClass : Class
     {
         public override string Name { get; } = "bool";
+        public override System.Type Type => typeof(BoolInstance);
         public static BoolClass Single => new();
 
         public override Instance GetInitalInstance()

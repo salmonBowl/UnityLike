@@ -43,6 +43,14 @@ namespace UnityLike.Entities.Compiler
                 return new IntLiteralNode(intValue, TokenToColoredToken(number));
             }
         }
+        public static BoolLiteralNode TrueLiteralNode(Token value)
+        {
+            return new BoolLiteralNode(true, TokenToColoredToken(value));
+        }
+        public static BoolLiteralNode FalseLiteralNode(Token value)
+        {
+            return new BoolLiteralNode(false, TokenToColoredToken(value));
+        }
 
         /// <summary>
         /// TokenÇ©ÇÁUnknownExpressionNodeÇê∂ê¨ÇµÇ‹Ç∑
