@@ -1,5 +1,7 @@
 using System;
+
 using UnityLike.Entities.Compiler;
+using UnityLike.FrameworkAndDrivers.LogUI;
 
 namespace UnityLike.Entities.Symbol
 {
@@ -35,6 +37,8 @@ namespace UnityLike.Entities.Symbol
             {
                 case "Log":
                     ArgCheck("string");
+                    string message = ((StringInstance)args[0]).AsString();
+                    DebugLog.Instance.AddLog(message);
                     return null;
                 default:
                     throw new MemberNotExistException(name, nameToken);

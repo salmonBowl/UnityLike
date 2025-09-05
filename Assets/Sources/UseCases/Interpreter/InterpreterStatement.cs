@@ -42,5 +42,20 @@ namespace UnityLike.UseCases.Interpreter
             // •Ï”‚Ì’l‚ğXV
             variable.AssignmentValue(value, node.EqualToken);
         }
+
+        public void ExecuteScope(ScopeNode scope)
+        {
+            VariableTable parentScope = currentScope;
+            VariableTable newScope = new(currentScope);
+
+            currentScope = newScope;
+
+            foreach (var statement in scope.Statements)
+            {
+                statement.ASTScan(this);
+            }
+
+            currentScope = parentScope;
+        }
     }
 }
