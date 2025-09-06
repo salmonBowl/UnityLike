@@ -102,13 +102,22 @@ namespace UnityLike.UseCases.Compiler
             ColoredToken rightParen =
                 u.RightParen();
 
+            if (CurrentTokenType == TokenType.Return)
+                Consume();
+
             StatementNode thenStatement = ParseStatement();
 
             if (CurrentTokenType != TokenType.Else)
                 return new IfStatementNode(@if, leftParen, condition, rightParen, thenStatement);
 
+            if (CurrentTokenType == TokenType.Return)
+                Consume();
+
             ColoredToken @else =
                 u.Else();
+
+            if (CurrentTokenType == TokenType.Return)
+                Consume();
 
             StatementNode elseStatement = ParseStatement();
 
@@ -124,6 +133,10 @@ namespace UnityLike.UseCases.Compiler
                 u.While();
             ColoredToken leftParen =
                 u.LeftParen();
+
+            if (CurrentTokenType == TokenType.RightParen)
+                throw new SyntaxErrorException("’l‚ª•K—v‚Å‚·");
+
             ExpressionNode condition =
                 u.Expression();
             ColoredToken rightParen =
@@ -144,9 +157,12 @@ namespace UnityLike.UseCases.Compiler
 
             List<StatementNode> statements = new();
 
+            SkipReturn();
             while (CurrentTokenType is not TokenType.EOF and not TokenType.RightBrace)
             {
                 statements.Add(ParseStatement());
+
+                SkipReturn();
             }
 
             ColoredToken rightBrace =

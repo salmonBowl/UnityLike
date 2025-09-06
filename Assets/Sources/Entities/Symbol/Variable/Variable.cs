@@ -20,9 +20,8 @@ namespace UnityLike.Entities.Symbol
 
         public void AssignmentValue(Instance set, ColoredToken equal)
         {
-            Type expectedType = Type.Type;
-            Type setType = TypeCastConstants.TypeOf(set.Type.Name);
-            bool castable = expectedType.IsAssignableFrom(setType);
+            Type expectedType = TypeCastConstants.TypeOf(Type.Name);
+            bool castable = expectedType.IsAssignableFrom(set.GetType());
 
             if (!castable)
             {

@@ -16,5 +16,20 @@ namespace UnityLike.UseCases.Interpreter
             Variable member = parent.GetMember(node.MemberName, node.MemberNameToken);
             return member;
         }
+        public Variable ExecuteMemberFunction(MemberFunctionNode node)
+        {
+            Instance parent = node.ParentVariable.GetVariable(this).Value;
+
+            Instance[] args = new Instance[node.Arguments.Length];
+            for (int i = 0; i < node.Arguments.Length; i++)
+            {
+                args[i] = node.Arguments[i].ASTScan(this);
+            }
+
+            Instance @return = parent.ExecuteMemberFuction(node.MemberName, args, node.MemberNameToken, node.RightParenToken);
+            Variable function = new(@return, Class.Single);
+
+            return function;
+        }
     }
 }

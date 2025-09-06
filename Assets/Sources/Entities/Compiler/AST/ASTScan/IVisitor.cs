@@ -20,6 +20,7 @@ namespace UnityLike.Entities.Compiler
         Instance VisitParenExpression(ParenNode node);
         Instance VisitUnaryExpression(UnaryExpressionNode node);
         Instance VisitNewExpression(NewExpressionNode node);
+        Instance ExecuteMemberFunction(MemberFunctionNode node);
 
         // Variable
         Variable GetIdentifier(IdentifierNode node);

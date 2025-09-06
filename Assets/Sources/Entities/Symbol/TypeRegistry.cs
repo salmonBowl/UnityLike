@@ -10,6 +10,7 @@ namespace UnityLike.Entities.Symbol
         {
             { "int", IntClass.Single },
             { "float", FloatClass.Single },
+            { "bool", BoolClass.Single },
             { "string", StringClass.Single },
 
             { "Vector3", Vector3Class.Single },

@@ -17,6 +17,10 @@ namespace UnityLike.UseCases.Compiler
             Token typeToken = CurrentToken;
             if (CurrentTokenType == TokenType.TypeOther)
                 Consume();
+            else if (CurrentTokenType == TokenType.TypePrimitive)
+                throw new SyntaxErrorException("Ç±ÇÃå^ÇÕnewéÆÇ…égÇ¶Ç‹ÇπÇÒ");
+            else if (CurrentTokenType == TokenType.Identifier)
+                throw new SyntaxErrorException($"'{CurrentToken.Value}'ÇÕå^ñºÇ≈ÇÕÇ†ÇËÇ‹ÇπÇÒ");
             else
                 throw new SyntaxErrorException("newéÆÇ™ê≥ÇµÇ≠Ç†ÇËÇ‹ÇπÇÒ");
 

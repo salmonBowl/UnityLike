@@ -33,6 +33,15 @@ namespace UnityLike.Entities.Compiler
             token.HasError(Message);
         }
     }
+    public class InvalidNewException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public InvalidNewException(string typeName, ColoredToken token)
+        {
+            Message = $"{typeName}型はnew式に使えません";
+            token.HasError(Message);
+        }
+    }
     public class MemberNotExistException : SemanticErrorException
     {
         public override string Message { get; }
@@ -163,6 +172,15 @@ namespace UnityLike.Entities.Compiler
         public InfiniteLoopException(ColoredToken token)
         {
             Message = "無限ループが発生しました";
+            token.HasError(Message);
+        }
+    }
+    public class OverflowException : ExecuteException
+    {
+        public override string Message { get; }
+        public OverflowException(ColoredToken token)
+        {
+            Message = "数値が大きすぎます";
             token.HasError(Message);
         }
     }

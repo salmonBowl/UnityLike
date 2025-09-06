@@ -92,10 +92,9 @@ namespace UnityLike.UseCases.Compiler
                 Consume();
                 return ReadOperatorToken(oneCharTokenType, firstChar, tokenLine, tokenColumn);
             }
-            // ‰üs
             else if (firstChar == '\n')
             {
-                Consume(); // ‰üs‚àConsume‚Åˆ—‚Å‚«‚é
+                Consume();
                 return new Token(TokenType.Return, "\n", tokenLine, tokenColumn);
             }
             else

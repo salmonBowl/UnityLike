@@ -35,15 +35,12 @@ namespace UnityLike.UseCases.Compiler
         {
             statements = new();
 
-            while (CurrentTokenType == TokenType.Return)
-                Consume();
-            
+            SkipReturn();
             while (CurrentTokenType != TokenType.EOF)
             {
                 statements.Add(ParseStatement());
 
-                while (CurrentTokenType == TokenType.Return)
-                    Consume();
+                SkipReturn();
             }
         }
         public List<StatementNode> GetParsedStatements()
@@ -65,14 +62,22 @@ namespace UnityLike.UseCases.Compiler
         }
         ExpressionNode ConsumeWithGenerate()
         {
-            ExpressionNode retval = CurrentTokenType switch
+            ExpressionNode retval;
+            try
             {
-                TokenType.Identifier => ASTFactory.IdentifierNode(CurrentToken),
-                TokenType.NumberLiteral => ASTFactory.NumberLiteralNode(CurrentToken),
-                TokenType.True => ASTFactory.TrueLiteralNode(CurrentToken),
-                TokenType.False => ASTFactory.FalseLiteralNode(CurrentToken),
-                _ => throw new System.NotSupportedException("Parser.ConsumeWithGenerate() : 設定されていないTokenTypeです")
-            };
+                retval = CurrentTokenType switch
+                {
+                    TokenType.Identifier => ASTFactory.IdentifierNode(CurrentToken),
+                    TokenType.NumberLiteral => ASTFactory.NumberLiteralNode(CurrentToken),
+                    TokenType.True => ASTFactory.TrueLiteralNode(CurrentToken),
+                    TokenType.False => ASTFactory.FalseLiteralNode(CurrentToken),
+                    _ => throw new System.NotSupportedException("Parser.ConsumeWithGenerate() : 設定されていないTokenTypeです")
+                };
+            }
+            catch (System.OverflowException)
+            {
+                return AsUnknown("値が大きすぎます");
+            }
 
             Consume();
 
@@ -80,18 +85,12 @@ namespace UnityLike.UseCases.Compiler
         }
 
         /// <summary>
-        /// トークンを先読みします
+        /// 改行トークンをスキップします
         /// </summary>
-        /// <param name="offset">どれだけ先を読むのか指定します。0だとcurrentToken</param>
-        private Token Peek(int offset)
+        private void SkipReturn()
         {
-            int returnTokenIndex = currentTokenIndex + offset;
-            if (tokenArray.Length < returnTokenIndex)
-            {
-                throw new System.IndexOutOfRangeException("配列外のトークンを参照しようとしています");
-            }
-            
-            return tokenArray[returnTokenIndex];
+            while (CurrentTokenType == TokenType.Return)
+                Consume();
         }
         #endregion
     }
