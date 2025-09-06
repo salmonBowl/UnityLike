@@ -29,7 +29,7 @@ namespace UnityLike.UseCases.Compiler
                     TokenType.If => ParseIfStatement(),
                     TokenType.While => ParseWhileStatement(),
                     TokenType.LeftBrace => ParseScope(),
-                    _ => ParseUnknownStatement("文法が正しくありません")
+                    _ => throw new SyntaxErrorException("文法が正しくありません")
                 };
             }
             catch (SyntaxErrorException e)
@@ -72,12 +72,21 @@ namespace UnityLike.UseCases.Compiler
         }
         private StatementNode ParseAssignmentStatement()
         {
+            int startTokenIndex = currentTokenIndex;
             Usecase u = new(this);
 
             // 代入式
 
             VariableNode variableNode =
                 u.Variable();
+
+            if (CurrentTokenType == TokenType.Dot)
+                // 代入式の特殊な場合、一度戻って別の構文解析を実行します
+            {
+                currentTokenIndex = startTokenIndex;
+                return ParseFunctionStatement();
+            }
+
             ColoredToken equals =
                 u.Equals();
             ExpressionNode expressionNode =
@@ -86,6 +95,17 @@ namespace UnityLike.UseCases.Compiler
                 u.Semicolon();
 
             return new AssignmentStatementNode(variableNode, equals, expressionNode, semicolon);
+        }
+        private FunctionStatementNode ParseFunctionStatement()
+        {
+            Usecase u = new(this);
+
+            MemberFunctionNode functionNode =
+                u.Function();
+            ColoredToken semicolon =
+                u.Semicolon();
+
+            return new FunctionStatementNode(functionNode, semicolon);
         }
         private IfStatementNode ParseIfStatement()
         {

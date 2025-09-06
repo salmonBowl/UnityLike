@@ -16,7 +16,7 @@ namespace UnityLike.UseCases.Interpreter
             Variable member = parent.GetMember(node.MemberName, node.MemberNameToken);
             return member;
         }
-        public Variable ExecuteMemberFunction(MemberFunctionNode node)
+        public Instance ExecuteMemberFunction(MemberFunctionNode node)
         {
             Instance parent = node.ParentVariable.GetVariable(this).Value;
 
@@ -27,9 +27,7 @@ namespace UnityLike.UseCases.Interpreter
             }
 
             Instance @return = parent.ExecuteMemberFuction(node.MemberName, args, node.MemberNameToken, node.RightParenToken);
-            Variable function = new(@return, Class.Single);
-
-            return function;
+            return @return;
         }
     }
 }

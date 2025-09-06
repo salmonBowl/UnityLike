@@ -40,6 +40,18 @@ namespace UnityLike.UseCases.Compiler
                 }
                 return retval;
             }
+            public MemberFunctionNode Function()
+            {
+                ExpressionNode member = outher.ParseIdentifier();
+                if (member is MemberFunctionNode functionNode)
+                {
+                    return functionNode;
+                }
+                else
+                {
+                    throw new SyntaxErrorException("ï∂ñ@Ç™ê≥ÇµÇ≠Ç†ÇËÇ‹ÇπÇÒ");
+                }
+            }
             public ExpressionNode Expression()
             {
                 return outher.ParseExpression();

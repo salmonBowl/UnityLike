@@ -42,6 +42,10 @@ namespace UnityLike.UseCases.Interpreter
             // •Ï”‚Ì’l‚ğXV
             variable.AssignmentValue(value, node.EqualToken);
         }
+        public void ExecuteFunctionStatement(FunctionStatementNode node)
+        {
+            node.Function.ASTScan(this);
+        }
 
         public void ExecuteIfStatement(IfStatementNode node)
         {
