@@ -43,6 +43,14 @@ namespace UnityLike.Entities.Compiler
                 return new IntLiteralNode(intValue, TokenToColoredToken(number));
             }
         }
+        public static BoolLiteralNode TrueLiteralNode(Token value)
+        {
+            return new BoolLiteralNode(true, TokenToColoredToken(value));
+        }
+        public static BoolLiteralNode FalseLiteralNode(Token value)
+        {
+            return new BoolLiteralNode(false, TokenToColoredToken(value));
+        }
 
         /// <summary>
         /// TokenÇ©ÇÁUnknownExpressionNodeÇê∂ê¨ÇµÇ‹Ç∑
@@ -53,6 +61,12 @@ namespace UnityLike.Entities.Compiler
         {
             ColoredToken cToken = TokenToColoredToken(token);
             cToken.HasError("ñ≥å¯Ç»íPåÍÇ≈Ç∑");
+            return new UnknownExpressionNode(cToken);
+        }
+        public static UnknownExpressionNode UnknownNode(Token token, string message)
+        {
+            ColoredToken cToken = TokenToColoredToken(token);
+            cToken.HasError(message);
             return new UnknownExpressionNode(cToken);
         }
 
@@ -82,10 +96,10 @@ namespace UnityLike.Entities.Compiler
             return new TypeNode(TokenToColoredToken(type));
         }
 
-        public static NewExpressionNode NewNode(Token newToken, Token typeToken, Token leftParen, List<ExpressionNode> arguments, List<Token> commas, Token rightParen)
+        public static NewExpressionNode NewNode(Token @new, Token type, Token leftParen, List<ExpressionNode> arguments, List<Token> commas, Token rightParen)
         {
-            ColoredToken cNewToken = TokenToColoredToken(newToken);
-            ColoredToken cTypeToken = TokenToColoredToken(typeToken);
+            ColoredToken cNewToken = TokenToColoredToken(@new);
+            ColoredToken cTypeToken = TokenToColoredToken(type);
             ColoredToken cLeftParen = TokenToColoredToken(leftParen);
             ColoredToken cRightParen = TokenToColoredToken(rightParen);
 
@@ -97,6 +111,24 @@ namespace UnityLike.Entities.Compiler
             }
 
             return new NewExpressionNode(cNewToken, cTypeToken, cLeftParen, argumentArray, cCommas, cRightParen);
+        }
+        public static MemberFunctionNode MemberFunctionNode(VariableNode parent, Token dot, Token member, Token leftParen, List<ExpressionNode> arguments, List<Token> commas, Token rightParen)
+        {
+            ColoredToken cDot = TokenToColoredToken(dot);
+            ColoredToken cMember = TokenToColoredToken(member);
+            ColoredToken cLeftParen = TokenToColoredToken(leftParen);
+            ColoredToken cRightParen = TokenToColoredToken(rightParen);
+
+            cMember.IsMemberFunction();
+
+            ExpressionNode[] argumentArray = arguments.ToArray();
+            ColoredToken[] cCommas = new ColoredToken[commas.Count];
+            for (int i = 0; i < commas.Count; i++)
+            {
+                cCommas[i] = TokenToColoredToken(commas[i]);
+            }
+
+            return new MemberFunctionNode(parent, cDot, cMember, cLeftParen, argumentArray, cCommas, cRightParen);
         }
 
         /// <summary>

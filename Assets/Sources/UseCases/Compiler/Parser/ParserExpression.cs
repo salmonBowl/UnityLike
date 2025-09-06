@@ -12,6 +12,10 @@ namespace UnityLike.UseCases.Compiler
         {
             return ASTFactory.UnknownNode(CurrentToken);
         }
+        private UnknownExpressionNode AsUnknown(string message)
+        {
+            return ASTFactory.UnknownNode(CurrentToken, message);
+        }
 
         // 構文木を再帰的な関数呼び出しにより構成していきます
         // エントリポイント : ParseExpression();
@@ -67,9 +71,11 @@ namespace UnityLike.UseCases.Compiler
         {
             return CurrentTokenType switch
             {
-                TokenType.Identifier => ParseVariable(),
+                TokenType.Identifier => ParseIdentifier(),
                 TokenType.New => ParseNewExpression(),
                 TokenType.NumberLiteral => ConsumeWithGenerate(),
+                TokenType.True => ConsumeWithGenerate(),
+                TokenType.False => ConsumeWithGenerate(),
                 TokenType.LeftParen => ParseParenExpression(),
                 TokenType.Unknown => AsUnknown(),
                 TokenType.SemiColon => throw new SyntaxErrorException("文が完成していません"),

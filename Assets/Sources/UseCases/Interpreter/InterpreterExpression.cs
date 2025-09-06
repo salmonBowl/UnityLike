@@ -29,6 +29,12 @@ namespace UnityLike.UseCases.Interpreter
             }
             catch (DivideByZeroException zeroException)
             {
+                // à”ñ°âêÕéûÇ…ÇÕ0äÑÇËÇñ≥éãÇµÇ‹Ç∑
+                if (executionMode == ExecutionMode.SemanticAnalysisOnly)
+                {
+                    return value1;
+                }
+
                 throw new DivideByZeroExecuteException(zeroException.Message, node.OperatorToken);
             }
         }
@@ -43,6 +49,10 @@ namespace UnityLike.UseCases.Interpreter
         public Instance VisitFloatLiteral(FloatLiteralNode node)
         {
             return new FloatInstance(node.Value);
+        }
+        public Instance VisitBoolLiteral(BoolLiteralNode node)
+        {
+            return new BoolInstance(node.Value);
         }
         public Instance VisitParenExpression(ParenNode node)
         {

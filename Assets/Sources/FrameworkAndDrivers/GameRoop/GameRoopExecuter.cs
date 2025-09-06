@@ -15,7 +15,7 @@ namespace UnityLike.FrameworkAndDrivers.GameRoop
         [SerializeField]
         private WhilePlayingEffect effectLineRenderer;
 
-        private readonly GameRoopManager statementManager = new();
+        private readonly GameRoopManager stateManager = new();
 
         void Start()
         {
@@ -26,12 +26,12 @@ namespace UnityLike.FrameworkAndDrivers.GameRoop
             if (!effectLineRenderer)
                 Debug.LogError("effectLineRendeererがアタッチされていません");
 
-            effectLineRenderer.StatementManagerInject(statementManager);
-            statementManager.SetStatement(GameRoopStatement.Edit);
+            effectLineRenderer.StateManagerInject(stateManager);
+            stateManager.SetStatement(GameRoopState.Edit);
         }
         private void Update()
         {
-            if (statementManager.Statement == GameRoopStatement.Play)
+            if (stateManager.State == GameRoopState.Play)
             {
                 gameObjectManager.ExecuteVoidUpdate();
             }
@@ -39,25 +39,25 @@ namespace UnityLike.FrameworkAndDrivers.GameRoop
 
         public void OnPlayOrResume()
         {
-            if (statementManager.Statement == GameRoopStatement.Edit)
+            if (stateManager.State == GameRoopState.Edit)
             {
                 // 編集状態だったならPlay
-                statementManager.SetStatement(GameRoopStatement.Play);
+                stateManager.SetStatement(GameRoopState.Play);
                 gameObjectManager.ExecuteVoidStart();
             }
-            else if (statementManager.Statement == GameRoopStatement.Pause)
+            else if (stateManager.State == GameRoopState.Pause)
             {
                 // 一時停止状態だったならResume
-                statementManager.SetStatement(GameRoopStatement.Play);
+                stateManager.SetStatement(GameRoopState.Play);
             }
         }
         public void OnPausePlaying()
         {
-            statementManager.SetStatement(GameRoopStatement.Pause);
+            stateManager.SetStatement(GameRoopState.Pause);
         }
         public void OnStopPlaying()
         {
-            statementManager.SetStatement(GameRoopStatement.Edit);
+            stateManager.SetStatement(GameRoopState.Edit);
             gameObjectManager.ExecuteVoidStart();
         }
     }

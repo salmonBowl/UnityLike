@@ -7,7 +7,7 @@ namespace UnityLike.Entities.Symbol
     /// </summary>
     public class NewInstance : NonOperationInstance
     {
-        public override Class Type => Vector3Class.Single;
+        public override Class Type => throw new System.NotImplementedException();
 
         public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen)
         {
@@ -36,7 +36,7 @@ namespace UnityLike.Entities.Symbol
                     float z = ((NumberInstance)args[2]).AsFloat();
                     return new Vector3Instance(x, y, z);
                 default:
-                    throw new TypeNotExistException(name, nameToken);
+                    throw new InvalidNewException(name, nameToken);
             }
         }
     }

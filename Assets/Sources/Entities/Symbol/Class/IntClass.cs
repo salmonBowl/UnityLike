@@ -5,6 +5,7 @@ namespace UnityLike.Entities.Symbol
     public class IntClass : Class
     {
         public override string Name { get; } = "int";
+        public override System.Type Type => typeof(IntInstance);
         public static IntClass Single => new();
 
         public override Instance GetInitalInstance()

@@ -40,6 +40,29 @@ namespace UnityLike.UseCases.Compiler
                 }
                 return retval;
             }
+            public MemberFunctionNode Function()
+            {
+                ExpressionNode member = outher.ParseIdentifier();
+                if (member is MemberFunctionNode functionNode)
+                {
+                    return functionNode;
+                }
+                else
+                {
+                    throw new SyntaxErrorException("文法が正しくありません");
+                }
+            }
+            public ExpressionNode Expression()
+            {
+                return outher.ParseExpression();
+            }
+            public VariableNode Variable()
+            {
+                return outher.ParseVariable();
+            }
+
+            // --- ColoredToken ---
+
             public ColoredToken Equals()
             {
                 if (outher.CurrentTokenType == TokenType.Equals)
@@ -48,10 +71,8 @@ namespace UnityLike.UseCases.Compiler
                     outher.Consume();
                     return ASTFactory.TokenToColoredToken(equal);
                 }
-                else
-                {
-                    throw new SyntaxErrorException("文法が正しくありません");
-                }
+
+                throw new SyntaxErrorException("=が必要です");
             }
             public ColoredToken Semicolon()
             {
@@ -61,15 +82,78 @@ namespace UnityLike.UseCases.Compiler
                     outher.Consume();
                     return ASTFactory.TokenToColoredToken(semicolon);
                 }
-                return null;
+
+                throw new SyntaxErrorException(";が必要です");
             }
-            public ExpressionNode Expression()
+            public ColoredToken If()
             {
-                return outher.ParseExpression();
+                if (outher.CurrentTokenType == TokenType.If)
+                {
+                    Token @if = outher.CurrentToken;
+                    outher.Consume();
+                    return ASTFactory.TokenToColoredToken(@if);
+                }
+                throw new SyntaxErrorException("文法が正しくありません");
             }
-            public VariableNode Variable()
+            public ColoredToken Else()
             {
-                return outher.ParseVariable();
+                if (outher.CurrentTokenType == TokenType.Else)
+                {
+                    Token @else = outher.CurrentToken;
+                    outher.Consume();
+                    return ASTFactory.TokenToColoredToken(@else);
+                }
+                throw new SyntaxErrorException("文法が正しくありません");
+            }
+            public ColoredToken While()
+            {
+                if (outher.CurrentTokenType == TokenType.If)
+                {
+                    Token @if = outher.CurrentToken;
+                    outher.Consume();
+                    return ASTFactory.TokenToColoredToken(@if);
+                }
+                throw new SyntaxErrorException("文法が正しくありません");
+            }
+            public ColoredToken LeftParen()
+            {
+                if (outher.CurrentTokenType == TokenType.LeftParen)
+                {
+                    Token leftParen = outher.CurrentToken;
+                    outher.Consume();
+                    return ASTFactory.TokenToColoredToken(leftParen);
+                }
+                throw new SyntaxErrorException("()が必要です");
+            }
+            public ColoredToken RightParen()
+            {
+                if (outher.CurrentTokenType == TokenType.RightParen)
+                {
+                    Token rightParen = outher.CurrentToken;
+                    outher.Consume();
+                    return ASTFactory.TokenToColoredToken(rightParen);
+                }
+                throw new SyntaxErrorException(")が必要です");
+            }
+            public ColoredToken LeftBrace()
+            {
+                if (outher.CurrentTokenType == TokenType.LeftBrace)
+                {
+                    Token leftBrace = outher.CurrentToken;
+                    outher.Consume();
+                    return ASTFactory.TokenToColoredToken(leftBrace);
+                }
+                throw new SyntaxErrorException("文法が正しくありません");
+            }
+            public ColoredToken RightBrace()
+            {
+                if (outher.CurrentTokenType == TokenType.RightBrace)
+                {
+                    Token rightBrace = outher.CurrentToken;
+                    outher.Consume();
+                    return ASTFactory.TokenToColoredToken(rightBrace);
+                }
+                throw new SyntaxErrorException("}が必要です");
             }
         }
     }

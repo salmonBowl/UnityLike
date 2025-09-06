@@ -5,6 +5,7 @@ namespace UnityLike.Entities.Compiler
     {
         Identifier, // 変数や関数などの識別子
         Member, // 識別子がメンバーだった場合
+        MemberFunction,
 
         // リテラル
         NumberLiteral,

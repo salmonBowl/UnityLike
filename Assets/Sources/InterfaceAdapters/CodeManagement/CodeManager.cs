@@ -26,12 +26,13 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
             errorPopup = new CodeErrorPopup(data, popup);
         }
 
-        public void OnChangeCode(string sourceCode)
+        public void OnChangeCode(string sourceCode, bool isVoidStart)
         {
             compile.Execute(sourceCode, data);
 
             List<Variable> initalMember = unityComponent.GetVariables();
-            interpreter.ExecuteCode(data.AST, initalMember);
+            ExecutionMode mode = isVoidStart ? ExecutionMode.InitalExecution : ExecutionMode.SemanticAnalysisOnly;
+            interpreter.ExecuteCode(data.AST, initalMember, mode);
 
             unityComponent.RenderUnityComponent();
 
@@ -41,7 +42,7 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
         public void ExecuteCode()
         {
             List<Variable> initalMember = unityComponent.GetVariables();
-            interpreter.ExecuteCode(data.AST, initalMember);
+            interpreter.ExecuteCode(data.AST, initalMember, ExecutionMode.FullExecution);
 
             unityComponent.RenderUnityComponent();
         }

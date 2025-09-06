@@ -4,7 +4,7 @@ namespace UnityLike.Entities.Symbol
 {
     public class StringInstance : PrimitiveInstance
     {
-        public override Class Type => IntClass.Single;
+        public override Class Type => StringClass.Single;
 
         public StringInstance(string value)
         {

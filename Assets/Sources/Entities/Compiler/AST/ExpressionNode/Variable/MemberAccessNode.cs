@@ -1,5 +1,4 @@
 using UnityLike.Entities.Symbol;
-using UnityLike.UseCases.Interpreter;
 
 namespace UnityLike.Entities.Compiler
 {

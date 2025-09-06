@@ -26,7 +26,10 @@ namespace UnityLike.UseCases.Compiler
                     TokenType.TypePrimitive => ParseVariableDeclarationStatement(),
                     TokenType.TypeOther => ParseVariableDeclarationStatement(),
                     TokenType.Identifier => ParseAssignmentStatement(),
-                    _ => ParseUnknownStatement("文法が正しくありません")
+                    TokenType.If => ParseIfStatement(),
+                    TokenType.While => ParseWhileStatement(),
+                    TokenType.LeftBrace => ParseScope(),
+                    _ => throw new SyntaxErrorException("文法が正しくありません")
                 };
             }
             catch (SyntaxErrorException e)
@@ -48,11 +51,13 @@ namespace UnityLike.UseCases.Compiler
                 u.Type();
             IdentifierNode identifierNode =
                 u.Identifier();
-            ColoredToken semicolon =
-                u.Semicolon();
+            ColoredToken semicolon;
 
-            if (semicolon != null)
+            if (CurrentTokenType == TokenType.SemiColon)
+            {
+                semicolon = u.Semicolon();
                 return new VariableDeclarationStatementNode(typeNode, identifierNode, semicolon);
+            }
 
             // 宣言時初期化
             ColoredToken equals =
@@ -62,20 +67,26 @@ namespace UnityLike.UseCases.Compiler
             semicolon =
                 u.Semicolon();
 
-            if (semicolon != null)
-                return new VariableDeclarationStatementNode
-                    (typeNode, identifierNode, equals, expressionNode, semicolon);
-
-            throw new SyntaxErrorException(";が必要です");
+            return new VariableDeclarationStatementNode
+                (typeNode, identifierNode, equals, expressionNode, semicolon);
         }
         private StatementNode ParseAssignmentStatement()
         {
+            int startTokenIndex = currentTokenIndex;
             Usecase u = new(this);
 
             // 代入式
 
             VariableNode variableNode =
                 u.Variable();
+
+            if (CurrentTokenType == TokenType.Dot)
+                // 代入式の特殊な場合、一度戻って別の構文解析を実行します
+            {
+                currentTokenIndex = startTokenIndex;
+                return ParseFunctionStatement();
+            }
+
             ColoredToken equals =
                 u.Equals();
             ExpressionNode expressionNode =
@@ -83,10 +94,101 @@ namespace UnityLike.UseCases.Compiler
             ColoredToken semicolon =
                 u.Semicolon();
 
-            if (semicolon != null)
-                return new AssignmentStatementNode(variableNode, equals, expressionNode, semicolon);
+            return new AssignmentStatementNode(variableNode, equals, expressionNode, semicolon);
+        }
+        private FunctionStatementNode ParseFunctionStatement()
+        {
+            Usecase u = new(this);
 
-            throw new SyntaxErrorException(";が必要です");
+            MemberFunctionNode functionNode =
+                u.Function();
+            ColoredToken semicolon =
+                u.Semicolon();
+
+            return new FunctionStatementNode(functionNode, semicolon);
+        }
+        private IfStatementNode ParseIfStatement()
+        {
+            Usecase u = new(this);
+
+            // if式
+
+            ColoredToken @if =
+                u.If();
+            ColoredToken leftParen =
+                u.LeftParen();
+            ExpressionNode condition =
+                u.Expression();
+            ColoredToken rightParen =
+                u.RightParen();
+
+            if (CurrentTokenType == TokenType.Return)
+                Consume();
+
+            StatementNode thenStatement = ParseStatement();
+
+            if (CurrentTokenType != TokenType.Else)
+                return new IfStatementNode(@if, leftParen, condition, rightParen, thenStatement);
+
+            if (CurrentTokenType == TokenType.Return)
+                Consume();
+
+            ColoredToken @else =
+                u.Else();
+
+            if (CurrentTokenType == TokenType.Return)
+                Consume();
+
+            StatementNode elseStatement = ParseStatement();
+
+            return new IfStatementNode(@if, leftParen, condition, rightParen, thenStatement, @else, elseStatement);
+        }
+        private IfStatementNode ParseWhileStatement()
+        {
+            Usecase u = new(this);
+
+            // while式
+
+            ColoredToken @while =
+                u.While();
+            ColoredToken leftParen =
+                u.LeftParen();
+
+            if (CurrentTokenType == TokenType.RightParen)
+                throw new SyntaxErrorException("値が必要です");
+
+            ExpressionNode condition =
+                u.Expression();
+            ColoredToken rightParen =
+                u.RightParen();
+
+            StatementNode statement = ParseStatement();
+
+            return new IfStatementNode(@while, leftParen, condition, rightParen, statement);
+        }
+        private ScopeNode ParseScope()
+        {
+            Usecase u = new(this);
+
+            // スコープ
+
+            ColoredToken leftBrace =
+                u.LeftBrace();
+
+            List<StatementNode> statements = new();
+
+            SkipReturn();
+            while (CurrentTokenType is not TokenType.EOF and not TokenType.RightBrace)
+            {
+                statements.Add(ParseStatement());
+
+                SkipReturn();
+            }
+
+            ColoredToken rightBrace =
+                u.RightBrace();
+
+            return new ScopeNode(leftBrace, statements, rightBrace);
         }
         private UnknownStatementNode ParseUnknownStatement(string errorMessage)
         {

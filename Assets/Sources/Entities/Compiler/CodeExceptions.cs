@@ -33,6 +33,15 @@ namespace UnityLike.Entities.Compiler
             token.HasError(Message);
         }
     }
+    public class InvalidNewException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public InvalidNewException(string typeName, ColoredToken token)
+        {
+            Message = $"{typeName}型はnew式に使えません";
+            token.HasError(Message);
+        }
+    }
     public class MemberNotExistException : SemanticErrorException
     {
         public override string Message { get; }
@@ -109,6 +118,17 @@ namespace UnityLike.Entities.Compiler
             token.HasError(Message);
         }
     }
+    public class ConditionNotBoolException : SemanticErrorException
+    {
+        public override string Message { get; }
+        public ConditionNotBoolException(ColoredToken token)
+        {
+            Message = "条件式の型はbool型にしてください";
+            token.HasError(Message);
+        }
+    }
+
+    // --- 実行エラー ---
 
     public class ReDefinitionException : ExecuteException
     {
@@ -143,6 +163,24 @@ namespace UnityLike.Entities.Compiler
         public DivideByZeroExecuteException(string message, ColoredToken token)
         {
             Message = message + $"0で除算することはできません";
+            token.HasError(Message);
+        }
+    }
+    public class InfiniteLoopException : ExecuteException
+    {
+        public override string Message { get; }
+        public InfiniteLoopException(ColoredToken token)
+        {
+            Message = "無限ループが発生しました";
+            token.HasError(Message);
+        }
+    }
+    public class OverflowException : ExecuteException
+    {
+        public override string Message { get; }
+        public OverflowException(ColoredToken token)
+        {
+            Message = "数値が大きすぎます";
             token.HasError(Message);
         }
     }

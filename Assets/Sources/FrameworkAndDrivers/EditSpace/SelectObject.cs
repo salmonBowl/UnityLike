@@ -28,7 +28,7 @@ namespace UnityLike.FrameworkAndDrivers.EditSpace
         }
         private void SelectObjectForRayCast()
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 // UIに触れているならスキップ
                 if (EventSystem.current.IsPointerOverGameObject()) return;

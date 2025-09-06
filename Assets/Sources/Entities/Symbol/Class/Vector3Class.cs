@@ -6,6 +6,7 @@ namespace UnityLike.Entities.Symbol
     public class Vector3Class : Class
     {
         public override string Name { get; } = "Vector3";
+        public override Type Type => typeof(Vector3Instance);
         public static Vector3Class Single => new();
 
         public override Instance GetInitalInstance()

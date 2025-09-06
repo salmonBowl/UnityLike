@@ -3,11 +3,11 @@ namespace UnityLike.Entities.GameRoop
 {
     public class GameRoopManager
     {
-        public GameRoopStatement Statement { get; private set; }
+        public GameRoopState State { get; private set; }
 
-        public void SetStatement(GameRoopStatement value)
+        public void SetStatement(GameRoopState value)
         {
-            Statement = value;
+            State = value;
         }
     }
 }
