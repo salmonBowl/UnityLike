@@ -119,6 +119,8 @@ namespace UnityLike.Entities.Compiler
             ColoredToken cLeftParen = TokenToColoredToken(leftParen);
             ColoredToken cRightParen = TokenToColoredToken(rightParen);
 
+            cMember.IsMemberFunction();
+
             ExpressionNode[] argumentArray = arguments.ToArray();
             ColoredToken[] cCommas = new ColoredToken[commas.Count];
             for (int i = 0; i < commas.Count; i++)

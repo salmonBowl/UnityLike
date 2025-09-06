@@ -50,6 +50,14 @@ namespace UnityLike.Entities.Compiler
         }
 
         /// <summary>
+        /// このトークンがメンバー関数である時、色をメンバー関数のものに変更します
+        /// </summary>
+        public void IsMemberFunction()
+        {
+            ColorCode = TokenConstants.syntaxHighlightColors[TokenType.MemberFunction];
+        }
+
+        /// <summary>
         /// トークンの情報を文字列として取得します
         /// </summary>
         public override string ToString() // Token.ToString

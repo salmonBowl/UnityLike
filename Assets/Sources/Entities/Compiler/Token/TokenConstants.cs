@@ -122,6 +122,7 @@ namespace UnityLike.Entities.Compiler
         {
             { TokenType.Identifier, "#86DEFE" },
             { TokenType.Member, "#FFFFFF" },
+            { TokenType.MemberFunction, "#FFD55C" },
 
             #region ââéZéqÅAÇ©Ç¡Ç±Ç»Ç«
             { TokenType.NumberLiteral, operatorColor },
