@@ -20,7 +20,9 @@ namespace UnityLike.Entities.Symbol
         private static readonly Dictionary<string, Type> typeDictionary = new()
         {
             { "float", typeof(NumberInstance) },
-            { "int", typeof(NumberInstance) },
+            { "int", typeof(IntInstance) },
+            { "bool", typeof(BoolInstance) },
+            { "string", typeof(StringInstance) },
             { "Vector3", typeof(Vector3Instance) },
         };
     }

@@ -24,12 +24,12 @@ namespace UnityLike.Entities.Compiler
     /// </summary>
     public class ExecuteException : CodeException { }
 
-    public class TypeNotExistException : SemanticErrorException
+    public class TypeNotRegistryException : SemanticErrorException
     {
         public override string Message { get; }
-        public TypeNotExistException(string typeName, ColoredToken token)
+        public TypeNotRegistryException(string typeName, ColoredToken token)
         {
-            Message = $"М^ЦЉ'{typeName}'ВЌСґНЁВµВ№ВєВс";
+            Message = $"М^ЦЉ'{typeName}'ВЌОgЧpВ≈ВЂВ№ВєВс";
             token.HasError(Message);
         }
     }

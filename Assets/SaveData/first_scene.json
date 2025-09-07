@@ -3,6 +3,7 @@
         {
             "name": "Player",
             "modelName" : "Cube",
+            "activeSelf" : true,
             "transform":
             {
                 "position": { "x": 0, "y": 1, "z": 0 },
@@ -17,9 +18,9 @@
                 "velocity": { "x": 0, "y": 0, "z": 0 }
             },
             "voidStart":
-            "",
+            "transform.position = new Vector3(0, 0, 0);\\n",
             "voidUpdate":
-            ""
+            "transform.Translate(0.001f, 0, 0);"
         }
      ]
 }

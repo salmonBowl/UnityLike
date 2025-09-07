@@ -9,7 +9,7 @@ namespace UnityLike.UseCases.Interpreter
         {
             // •Ï”‚ğ¶¬
             string variableName = node.DeclaratedIdentifier.Name;
-            Class variableType = TypeRegistry.TypeOf(node.Type.Name, node.Type.NameToken);
+            Class variableType = TypeRegistry.DeclarationTypeOf(node.Type.Name, node.Type.NameToken);
             Variable variable = new(variableName, variableType)
             {
                 // •Ï”‚Ì‰Šú’l
