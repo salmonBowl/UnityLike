@@ -6,6 +6,28 @@ namespace UnityLike.UseCases.Compiler
 {
     public partial class Parser
     {
+        private List<ExpressionNode> ParseArgumentList(out List<Token> commas)
+        {
+            List<ExpressionNode> arguments = new();
+            commas = new();
+
+            if (CurrentTokenType == TokenType.RightParen)
+            {
+                // 引数なしの場合
+                return arguments;
+            }
+
+            arguments.Add(ParseExpression());
+            while (CurrentTokenType == TokenType.Comma)
+            {
+                commas.Add(CurrentToken);
+                Consume();
+                
+                arguments.Add(ParseExpression());
+            }
+
+            return arguments;
+        }
         private ExpressionNode ParseIdentifier()
         {
             VariableNode parent = ParseVariable();
@@ -54,7 +76,7 @@ namespace UnityLike.UseCases.Compiler
             }
             else
             {
-                return ASTFactory.MemberAccessNode(parent, dot, member);
+                return MemberAccess(ASTFactory.MemberAccessNode(parent, dot, member));
             }
         }
         private MemberFunctionNode ParseMemberFunctionNode(VariableNode parent)
@@ -72,7 +94,10 @@ namespace UnityLike.UseCases.Compiler
                 throw new SyntaxErrorException("無効なメンバー名です");
 
             Token leftParen = CurrentToken;
-            Consume();
+            if (CurrentTokenType == TokenType.LeftParen)
+                Consume();
+            else
+                throw new SyntaxErrorException("文法が正しくありません");
 
             List<ExpressionNode> arguments = new();
             List<Token> commas = new();
@@ -106,6 +131,43 @@ namespace UnityLike.UseCases.Compiler
                 ExpressionNode arg = ParseExpression();
                 arguments.Add(arg);
             }
+            return ASTFactory.MemberFunctionNode(parent, dot, member, leftParen, arguments, commas, rightParen);
+        }
+        private MemberFunctionNode ParseStaticFunction()
+        {
+            TypeNode parent;
+            if (CurrentTokenType == TokenType.TypePrimitive || CurrentTokenType == TokenType.TypeOther)
+                parent = ASTFactory.TypeNode(CurrentToken);
+            else
+                throw new SyntaxErrorException("文法が正しくありません");
+            Consume();
+
+            Token dot = CurrentToken;
+            if (CurrentTokenType == TokenType.Dot)
+                Consume();
+            else
+                throw new SyntaxErrorException("文法が正しくありません");
+
+            Token member = CurrentToken;
+            if (CurrentTokenType == TokenType.Identifier)
+                Consume();
+            else
+                throw new SyntaxErrorException("無効なメンバー名です");
+
+            Token leftParen = CurrentToken;
+            if (CurrentTokenType == TokenType.LeftParen)
+                Consume();
+            else
+                throw new SyntaxErrorException("()が必要です");
+
+            var arguments = ParseArgumentList(out var commas);
+
+            Token rightParen = CurrentToken;
+            if (CurrentTokenType == TokenType.RightParen)
+                Consume();
+            else
+                throw new SyntaxErrorException(")が必要です");
+
             return ASTFactory.MemberFunctionNode(parent, dot, member, leftParen, arguments, commas, rightParen);
         }
     }

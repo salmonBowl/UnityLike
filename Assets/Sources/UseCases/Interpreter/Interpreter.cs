@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 using UnityLike.Entities.Compiler;
 using UnityLike.Entities.Symbol;
-using UnityLike.UseCases.Interpreter;
 
 namespace UnityLike.UseCases.Interpreter
 {

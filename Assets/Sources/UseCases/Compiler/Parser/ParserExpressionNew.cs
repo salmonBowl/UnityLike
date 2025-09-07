@@ -30,38 +30,14 @@ namespace UnityLike.UseCases.Compiler
             else
                 throw new SyntaxErrorException("()が必要です");
 
-            List<ExpressionNode> arguments = new();
-            List<Token> commas = new();
+            var arguments = ParseArgumentList(out var commas);
 
             Token rightParen = CurrentToken;
             if (CurrentTokenType == TokenType.RightParen)
-            {
                 Consume();
-                return ASTFactory.NewNode(newToken, typeToken, leftParen, arguments, commas, rightParen);
-            }
+            else
+                throw new SyntaxErrorException(")が必要です");
 
-            ExpressionNode firstArg = ParseExpression();
-            arguments.Add(firstArg);
-
-            while (true)
-            {
-                rightParen = CurrentToken;
-                if (CurrentTokenType == TokenType.RightParen)
-                {
-                    Consume();
-                    break;
-                }
-
-                Token comma = CurrentToken;
-                if (CurrentTokenType == TokenType.Comma)
-                    Consume();
-                else
-                    throw new SyntaxErrorException(",が必要です");
-                commas.Add(comma);
-
-                ExpressionNode arg = ParseExpression();
-                arguments.Add(arg);
-            }
             return ASTFactory.NewNode(newToken, typeToken, leftParen, arguments, commas, rightParen);
         }
     }

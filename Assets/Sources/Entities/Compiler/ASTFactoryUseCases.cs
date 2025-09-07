@@ -130,6 +130,24 @@ namespace UnityLike.Entities.Compiler
 
             return new MemberFunctionNode(parent, cDot, cMember, cLeftParen, argumentArray, cCommas, cRightParen);
         }
+        public static MemberFunctionNode MemberFunctionNode(TypeNode parent, Token dot, Token member, Token leftParen, List<ExpressionNode> arguments, List<Token> commas, Token rightParen)
+        {
+            ColoredToken cDot = TokenToColoredToken(dot);
+            ColoredToken cMember = TokenToColoredToken(member);
+            ColoredToken cLeftParen = TokenToColoredToken(leftParen);
+            ColoredToken cRightParen = TokenToColoredToken(rightParen);
+
+            cMember.IsMemberFunction();
+
+            ExpressionNode[] argumentArray = arguments.ToArray();
+            ColoredToken[] cCommas = new ColoredToken[commas.Count];
+            for (int i = 0; i < commas.Count; i++)
+            {
+                cCommas[i] = TokenToColoredToken(commas[i]);
+            }
+
+            return new MemberFunctionNode(parent, cDot, cMember, cLeftParen, argumentArray, cCommas, cRightParen);
+        }
 
         /// <summary>
         /// TokenÇColoredTokenÇ…ïœä∑ÇµÇ‹Ç∑ÅBÇªÇÃç€TokenConstantsÇÃdictionaryÇéQè∆ÇµÇ‹Ç∑ÅB

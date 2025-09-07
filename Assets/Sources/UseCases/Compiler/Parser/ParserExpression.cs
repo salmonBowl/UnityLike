@@ -71,12 +71,14 @@ namespace UnityLike.UseCases.Compiler
         {
             return CurrentTokenType switch
             {
-                TokenType.Identifier => ParseIdentifier(),
+                TokenType.Identifier => ConsumeWithGenerate(),
                 TokenType.New => ParseNewExpression(),
                 TokenType.NumberLiteral => ConsumeWithGenerate(),
                 TokenType.True => ConsumeWithGenerate(),
                 TokenType.False => ConsumeWithGenerate(),
                 TokenType.LeftParen => ParseParenExpression(),
+                TokenType.TypePrimitive => ParseStaticFunction(),
+                TokenType.TypeOther => ParseStaticFunction(),
                 TokenType.Unknown => AsUnknown(),
                 TokenType.SemiColon => throw new SyntaxErrorException("文が完成していません"),
                 TokenType.RightParen => throw new SyntaxErrorException("値がありません"),
@@ -105,19 +107,68 @@ namespace UnityLike.UseCases.Compiler
         /*
             演算の優先順位に従って優先順位が低い演算→だんだん高い演算という順序で再帰的に潜っていきます
             
-            Addtive → Multitive → Unary → Primary
+            Addtive → Multitive → Unary → MemberAccess → Primary
          */
+        private ExpressionNode ParseMemberAccessExpression()
+        {
+            // 最初の要素を解析
+            ExpressionNode primary = ParsePrimaryExpression();
+
+            // ここで左辺が変数であることを確認
+            if (primary is not VariableNode left)
+            {
+                return primary;
+            }
+
+            while (CurrentTokenType == TokenType.Dot)
+            {
+                // ドットを消費
+                Token dot = CurrentToken;
+                Consume();
+
+                // メンバー名の解析
+                Token member = CurrentToken;
+                if (CurrentTokenType != TokenType.Identifier)
+                    throw new SyntaxErrorException("メンバー名が必要です");
+                Consume();
+
+                if (CurrentTokenType == TokenType.LeftParen)
+                {
+                    // メンバー関数として処理
+                    Token leftParen = CurrentToken;
+                    Consume();
+
+                    var arguments = ParseArgumentList(out var commas);
+
+                    Token rightParen = CurrentToken;
+                    if (CurrentTokenType != TokenType.RightParen)
+                        throw new SyntaxErrorException("文法が正しくありません");
+                    Consume();
+
+                    var memberFunction = ASTFactory.MemberFunctionNode
+                        (left, dot, member, leftParen, arguments, commas, rightParen);
+                    return memberFunction;
+                }
+                else
+                {
+                    // メンバー変数として処理
+                    left = ASTFactory.MemberAccessNode(left, dot, member);
+                }
+            }
+
+            return left;
+        }
         private ExpressionNode ParseUnaryExpression()
         {
-            if (CurrentTokenType == TokenType.Minus)
+            if (CurrentTokenType is TokenType.Minus or TokenType.Not)
             {
                 Token @operator = CurrentToken;
                 Consume();
-                return ASTFactory.UnaryExpressionNode(@operator, ParsePrimaryExpression());
+                return ASTFactory.UnaryExpressionNode(@operator, ParseMemberAccessExpression());
             }
             else
             {
-                return ParsePrimaryExpression();
+                return ParseMemberAccessExpression();
             }
         }
         private ExpressionNode ParseMultitiveExpression()

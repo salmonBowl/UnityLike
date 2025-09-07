@@ -8,6 +8,8 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
     public class CodeEditorManager : MonoBehaviour
     {
         [SerializeField]
+        private NameFieldUI InputFieldObjectName;
+        [SerializeField]
         private InputFieldUI InputFieldVoidstart;
         [SerializeField]
         private InputFieldUI InputFieldVoidupdate;
@@ -41,6 +43,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             InputFieldVoidupdate.Update();
         }
 
+        public void SetNameInputField(string name) => InputFieldObjectName.SetName(name);
         public void SetCodeVoidStart(string sourceCode) => codeEditorUIEvents.OnCodeChangedVoidstart(sourceCode);
         public void SetCodeVoidUpdate(string sourceCode) => codeEditorUIEvents.OnCodeChangedVoidupdate(sourceCode);
         public string GetCodeVoidStart() => InputFieldVoidstart.GetInputFieldText();

@@ -45,6 +45,8 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
             interpreter.ExecuteCode(data.AST, initalMember, ExecutionMode.FullExecution);
 
             unityComponent.RenderUnityComponent();
+
+            compile.RenderText(data);
         }
 
         public void PopupRequired(Vector2Int textPos)

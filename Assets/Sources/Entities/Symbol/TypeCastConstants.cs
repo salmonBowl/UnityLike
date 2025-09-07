@@ -16,6 +16,10 @@ namespace UnityLike.Entities.Symbol
                 throw new KeyNotFoundException($"å^'{type}'Ç™ê›íËÇ≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ");
             }
         }
+        public static bool TypeContains(string type)
+        {
+            return typeDictionary.ContainsKey(type);
+        }
 
         private static readonly Dictionary<string, Type> typeDictionary = new()
         {

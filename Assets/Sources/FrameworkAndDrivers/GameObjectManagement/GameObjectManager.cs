@@ -98,7 +98,8 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             // 状態の読み込み
             componentSetter.Set(gameObject.gameObject, data);
 
-            // コードを読み込み
+            // テキストを読み込み
+            gameObject.SetNameInputField(data.name);
             gameObject.SetCodeVoidStart(data.voidStart);
             gameObject.SetCodeVoidUpdate(data.voidUpdate);
 

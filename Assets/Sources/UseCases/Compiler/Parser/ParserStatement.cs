@@ -40,6 +40,7 @@ namespace UnityLike.UseCases.Compiler
         }
         private StatementNode ParseVariableDeclarationStatement()
         {
+            int startTokenIndex = currentTokenIndex;
             Usecase u = new(this);
 
             // 正しい書式を順番に読み込んでいく処理です
@@ -49,6 +50,14 @@ namespace UnityLike.UseCases.Compiler
 
             TypeNode typeNode =
                 u.Type();
+
+            if (CurrentTokenType == TokenType.Dot)
+            // 代入式の特殊な場合、一度戻って別の構文解析を実行します
+            {
+                currentTokenIndex = startTokenIndex;
+                return ParseFunctionStatement();
+            }
+
             IdentifierNode identifierNode =
                 u.Identifier();
             ColoredToken semicolon;

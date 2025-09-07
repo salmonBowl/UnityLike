@@ -148,6 +148,15 @@ namespace UnityLike.Entities.Compiler
             token.HasError(Message);
         }
     }
+    public class NotAssignableTypeException : ExecuteException
+    {
+        public override string Message { get; }
+        public NotAssignableTypeException(string typeName, ColoredToken token)
+        {
+            Message = $"{typeName}Œ^‚Ì•Ï”‚É‚Í‘ã“ü‚Å‚«‚Ü‚¹‚ñ";
+            token.HasError(Message);
+        }
+    }
     public class ParseFailedException : ExecuteException
     {
         public override string Message { get; }

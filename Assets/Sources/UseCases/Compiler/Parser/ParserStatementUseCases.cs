@@ -42,7 +42,11 @@ namespace UnityLike.UseCases.Compiler
             }
             public MemberFunctionNode Function()
             {
-                ExpressionNode member = outher.ParseIdentifier();
+                bool isStatic = outher.CurrentTokenType is TokenType.TypePrimitive or TokenType.TypeOther;
+                
+                ExpressionNode member = isStatic ?
+                    outher.ParseStaticFunction() : outher.ParseIdentifier();
+                
                 if (member is MemberFunctionNode functionNode)
                 {
                     return functionNode;
