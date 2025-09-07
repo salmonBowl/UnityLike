@@ -1,10 +1,13 @@
+#nullable enable
+
 using UnityLike.Entities.Symbol;
 
 namespace UnityLike.Entities.Compiler
 {
     public class MemberFunctionNode : ExpressionNode
     {
-        public VariableNode ParentVariable { get; }
+        public VariableNode? ParentVariable { get; }
+        public TypeNode? ParentClass { get; }
         public string MemberName { get; }
         public ExpressionNode[] Arguments { get; }
         public ColoredToken Dot { get; }
@@ -25,10 +28,23 @@ namespace UnityLike.Entities.Compiler
             CommaTokens = commas;
             RightParenToken = rightParen;
         }
+        public MemberFunctionNode(TypeNode parent, ColoredToken dot, ColoredToken member,
+            ColoredToken leftParen, ExpressionNode[] arguments, ColoredToken[] commas, ColoredToken rightParen)
+        {
+            ParentClass = parent;
+            MemberName = member.Value;
+            Dot = dot;
+            MemberNameToken = member;
+            Arguments = arguments;
+            LeftParenToken = leftParen;
+            CommaTokens = commas;
+            RightParenToken = rightParen;
+        }
 
         public override void ColoredTokenScan(ISourceCodeRebuildFromColoredToken rebuilder)
         {
-            ParentVariable.ColoredTokenScan(rebuilder);
+            ParentVariable?.ColoredTokenScan(rebuilder);
+            ParentClass?.ColoredTokenScan(rebuilder);
             rebuilder.ImportColoredToken(Dot);
             rebuilder.ImportColoredToken(MemberNameToken);
             rebuilder.ImportColoredToken(LeftParenToken);
@@ -44,7 +60,9 @@ namespace UnityLike.Entities.Compiler
 
         public override string ToPrettyString()
         {
-            string parent = ParentVariable.ToPrettyString();
+            string parent = string.Empty;
+            if (ParentVariable != null) parent = ParentVariable.ToPrettyString();
+            if (ParentClass != null) parent = ParentClass.ToPrettyString();
             string arguments = string.Empty;
             for (int i = 0; i < Arguments.Length; i++)
             {

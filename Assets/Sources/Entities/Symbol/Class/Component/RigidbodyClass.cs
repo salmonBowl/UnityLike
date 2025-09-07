@@ -8,7 +8,7 @@ namespace UnityLike.Entities.Symbol
         public override System.Type Type => typeof(RigidbodyInstance);
         public static RigidbodyClass Single => new();
 
-        public override Instance ExecuteStaticFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null)
+        public override Instance ExecuteStaticFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen = null)
         {
             throw new MemberNotExistException(name, nameToken);
         }

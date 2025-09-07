@@ -13,7 +13,7 @@ namespace UnityLike.Entities.Symbol
             return new IntInstance(0);
         }
 
-        public override Instance ExecuteStaticFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null)
+        public override Instance ExecuteStaticFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen = null)
         {
             void ArgCheck(params string[] expected)
             {
@@ -26,7 +26,7 @@ namespace UnityLike.Entities.Symbol
                 {
                     if (!Castable(args[i], expected[i]))
                     {
-                        throw new ArgumentInvalidTypeException(expected[i], argTokens[i]);
+                        throw new ArgumentInvalidTypeException(expected[i], nameToken);
                     }
                 }
             }

@@ -24,6 +24,7 @@ namespace UnityLike.Entities.Symbol
             { "bool", typeof(BoolInstance) },
             { "string", typeof(StringInstance) },
             { "Vector3", typeof(Vector3Instance) },
+            { "KeyCode", typeof(KeyCodeInstance) },
         };
     }
 }

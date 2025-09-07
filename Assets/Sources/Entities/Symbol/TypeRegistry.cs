@@ -14,6 +14,7 @@ namespace UnityLike.Entities.Symbol
             { "string", StringClass.Single },
 
             { "Vector3", Vector3Class.Single },
+            { "KeyCode", KeyCodeClass.Single },
         };
         private static readonly Dictionary<string, Class> staticMethodTypeDictionary = new()
         {

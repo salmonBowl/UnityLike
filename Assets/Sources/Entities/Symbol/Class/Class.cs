@@ -21,7 +21,7 @@ namespace UnityLike.Entities.Symbol
         /// <param name="name">関数名</param>
         /// <param name="args">引数</param>
         /// <returns>Instance型の返り値</returns>
-        public abstract Instance ExecuteStaticFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken[] argTokens, ColoredToken rightParen = null);
+        public abstract Instance ExecuteStaticFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen = null);
         
         /// <summary>
         /// Instanceがある型にキャストできるかを判定する補助メソッドです

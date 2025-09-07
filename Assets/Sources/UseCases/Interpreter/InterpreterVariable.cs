@@ -18,6 +18,10 @@ namespace UnityLike.UseCases.Interpreter
         }
         public Instance ExecuteMemberFunction(MemberFunctionNode node)
         {
+            // ParentVariable‚Ì—L–³‚Åˆ—‚ğ•ª‚¯‚Ä‚¢‚Ü‚·
+            if (node.ParentVariable == null)
+                return ExecuteStaticFunction(node);
+
             Instance parent = node.ParentVariable.GetVariable(this).Value;
 
             Instance[] args = new Instance[node.Arguments.Length];
@@ -27,6 +31,20 @@ namespace UnityLike.UseCases.Interpreter
             }
 
             Instance @return = parent.ExecuteMemberFuction(node.MemberName, args, node.MemberNameToken, node.RightParenToken);
+            return @return;
+        }
+        private Instance ExecuteStaticFunction(MemberFunctionNode node)
+        {
+            string parentName = node.ParentClass.Name;
+            Class parent = TypeRegistry.StaticMethodTypeOf(parentName, node.ParentClass.NameToken);
+
+            Instance[] args = new Instance[node.Arguments.Length];
+            for (int i = 0; i < node.Arguments.Length; i++)
+            {
+                args[i] = node.Arguments[i].ASTScan(this);
+            }
+
+            Instance @return = parent.ExecuteStaticFuction(node.MemberName, args, node.MemberNameToken, node.RightParenToken);
             return @return;
         }
     }
