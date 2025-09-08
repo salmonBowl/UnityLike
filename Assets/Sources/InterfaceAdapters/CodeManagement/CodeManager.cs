@@ -14,15 +14,17 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
         private readonly CompileManager compile;
         private readonly CompileData data;
         private readonly Interpreter interpreter;
+        private readonly InitalMemberManager initialMemberManager;
         private readonly SyncUnityComponent unityComponent;
         private readonly CodeErrorPopup errorPopup;
 
-        public CodeManager(ISetTextUI setTextUI, IPopupView popup, UnityEngine.GameObject gameObject)
+        public CodeManager(ISetTextUI setTextUI, IPopupView popup, InitalMemberManager initialMemberManager)
         {
             compile = new CompileManager(setTextUI);
             data = new CompileData();
             interpreter = new Interpreter();
-            unityComponent = new SyncUnityComponent(gameObject);
+            this.initialMemberManager = initialMemberManager;
+            unityComponent = initialMemberManager.UnityComponent;
             errorPopup = new CodeErrorPopup(data, popup);
         }
 
@@ -30,19 +32,42 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
         {
             compile.Execute(sourceCode, data);
 
-            List<Variable> initalMember = unityComponent.GetVariables();
-            ExecutionMode mode = isVoidStart ? ExecutionMode.InitalExecution : ExecutionMode.SemanticAnalysisOnly;
-            interpreter.ExecuteCode(data.AST, initalMember, mode);
+            if (isVoidStart)
+            {
+                initialMemberManager.InitializeList();
+                List<Variable> initalMember = initialMemberManager.GetList();
+
+                interpreter.ExecuteCode(data.AST, initalMember, ExecutionMode.InitalExecution);
+
+                initialMemberManager.SetList(interpreter.GetVariables());
+            }
+            else
+            {
+                List<Variable> initalMember = initialMemberManager.GetList();
+                interpreter.ExecuteCode(data.AST, initalMember, ExecutionMode.SemanticAnalysisOnly);
+            }
 
             unityComponent.RenderUnityComponent();
 
             compile.RenderText(data);
         }
 
-        public void ExecuteCode()
+        public void ExecuteCode(bool isVoidStart)
         {
-            List<Variable> initalMember = unityComponent.GetVariables();
-            interpreter.ExecuteCode(data.AST, initalMember, ExecutionMode.FullExecution);
+            if (isVoidStart)
+            {
+                initialMemberManager.InitializeList();
+                List<Variable> initalMember = initialMemberManager.GetList();
+
+                interpreter.ExecuteCode(data.AST, initalMember, ExecutionMode.FullExecution);
+
+                initialMemberManager.SetList(interpreter.GetVariables());
+            }
+            else
+            {
+                List<Variable> initalMember = initialMemberManager.GetList();
+                interpreter.ExecuteCode(data.AST, initalMember, ExecutionMode.FullExecution);
+            }
 
             unityComponent.RenderUnityComponent();
 

@@ -16,10 +16,9 @@ namespace UnityLike.FrameworkAndDrivers.LogUI
 
         private readonly Queue<Log> logs = new();
 
-        void Start()
+        private DebugLog()
         {
-            if (Instance == null)
-                Instance = this;
+            Instance = this;
         }
 
         public void AddLog(string message)
@@ -28,15 +27,17 @@ namespace UnityLike.FrameworkAndDrivers.LogUI
             GameObject newLogObject = Instantiate(logTextPrefab, logParent);
             newLogObject.transform.SetAsFirstSibling();
 
+            TMP_Text textComponent = newLogObject.GetComponent<TMP_Text>();
+            textComponent.text = message;
+            textComponent.alpha = 1f;
+
             // 構造体の設定
             Log newLog = new()
             {
                 GameObject = newLogObject,
-                Text = newLogObject.GetComponent<TMP_Text>(),
+                Text = textComponent,
                 ElapsedTime = Time.time,
             };
-            newLog.Text.text = message;
-            newLog.Text.alpha = 1f;
 
             // 新しいログを追加
             logs.Enqueue(newLog);
@@ -51,9 +52,24 @@ namespace UnityLike.FrameworkAndDrivers.LogUI
 
         void Update()
         {
+            LogsWhiteOutUpdate();
             LogsFadeOutUpdate();
         }
 
+        private void LogsWhiteOutUpdate()
+        {
+            // 各ログを白色へ
+            foreach (var log in logs)
+            {
+                Color color = log.Text.color;
+
+                float whiteOutTime = 1.2f;
+                float newBlue = Mathf.Min(1, color.b + Time.deltaTime / whiteOutTime);
+                color.b = newBlue;
+
+                log.Text.color = color;
+            }
+        }
         private void LogsFadeOutUpdate()
         {
             // 各ログの透明化処理

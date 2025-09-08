@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using UnityLike.InterfaceAdapters.CodeEditorInputManagement;
+using UnityLike.InterfaceAdapters.CodeManagement;
 
 namespace UnityLike.FrameworkAndDrivers.CodeEditor
 {
@@ -18,14 +19,15 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         private CodeEditorLayout codeEditorLayout;
         private UIPosCalculator codeEditorUICalculator;
         private CodeEditorInputManager inputManager;
+        private InitalMemberManager initalMemberManager;
 
         public void ExecuteVoidStart()
         {
-            InputFieldVoidstart.ExecuteCode();
+            InputFieldVoidstart.ExecuteCode(true);
         }
         public void ExecuteVoidUpdate()
         {
-            InputFieldVoidupdate.ExecuteCode();
+            InputFieldVoidupdate.ExecuteCode(false);
         }
 
         void Awake()
@@ -56,8 +58,9 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             codeEditorUICalculator = GetComponent<UIPosCalculator>();
 
             GameObject gameObject = GetComponentInParent<GameObjectManagement.GameObjectPrefab>().gameObject;
-            InputFieldVoidstart.MemberInitialize(gameObject);
-            InputFieldVoidupdate.MemberInitialize(gameObject);
+            initalMemberManager = new(gameObject);
+            InputFieldVoidstart.MemberInitialize(initalMemberManager);
+            InputFieldVoidupdate.MemberInitialize(initalMemberManager);
 
             inputManager = new CodeEditorInputManager(codeEditorLayout,
                 InputFieldVoidstart.codeManager, InputFieldVoidupdate.codeManager);

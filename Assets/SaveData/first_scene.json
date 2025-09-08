@@ -6,8 +6,8 @@
             "activeSelf": true,
             "transform": {
                 "position": {
-                    "x": 0.0,
-                    "y": 0.0,
+                    "x": 2.0,
+                    "y": 1.0,
                     "z": 0.0
                 },
                 "eulerAngles": {
@@ -31,42 +31,8 @@
                     "z": 0.0
                 }
             },
-            "voidStart": "transform.position = new Vector3(0, 0, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 1);\n\nfloat moveSpeed = 0.01f;",
-            "voidUpdate": "float moveSpeed = 0.05f;\nif (Input.GetKey(RightArrow))\n{\n    transform.Translate(moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(LeftArrow))\n{\n    transform.Translate(-moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(UpArrow))\n{\n    transform.Translate(0, 0, moveSpeed);\n}\n\nif (Input.GetKey(DownArrow))\n{\n    transform.Translate(0, 0, -moveSpeed);\n}\n\n"
-        },
-        {
-            "name": "Stage",
-            "modelName": "Cube",
-            "activeSelf": true,
-            "transform": {
-                "position": {
-                    "x": 0.0,
-                    "y": -2.0,
-                    "z": 0.0
-                },
-                "eulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "localScale": {
-                    "x": 15.0,
-                    "y": 1.0,
-                    "z": 15.0
-                }
-            },
-            "rigidbody": {
-                "mass": 1.0,
-                "useGravity": true,
-                "isKinematic": true,
-                "velocity": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                }
-            },
-            "voidStart": "transform.position = new Vector3(0, -2, 0);\ntransform.localScale = new Vector3(15, 1, 15);",
-            "voidUpdate": ""
+            "voidStart": "transform.position = new Vector3(2, 1, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 1);\n\nDebug.Log(\"プレイ開始\");\n",
+            "voidUpdate": "float moveSpeed = 0.05f;\n\nif (Input.GetKey(RightArrow))\n{\n    transform.Translate(moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(LeftArrow))\n{\n    transform.Translate(-moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(UpArrow))\n{\n    transform.Translate(0, 0, moveSpeed);\n}\n\nif (Input.GetKey(DownArrow))\n{\n    transform.Translate(0, 0, -moveSpeed);\n}\n\n"
         }
     ]
 }

@@ -115,12 +115,24 @@ namespace UnityLike.UseCases.Compiler
             return new VariableDeclarationStatementNode
                 (typeNode, identifierNode, equals, expressionNode, semicolon);
         }
-        private FunctionStatementNode ParseStaticFunctionStatement(TypeNode type)
+        private FunctionStatementNode ParseStaticFunctionStatement(TypeNode @class)
         {
             Usecase u = new(this);
 
-            MemberFunctionNode functionNode =
-                u.Function();
+            ColoredToken dot =
+                u.Dot();
+            ColoredToken member =
+                u.Member();
+            ColoredToken leftParen =
+                u.LeftParen();
+
+            var arguments = ParseArgumentList(out var commas);
+
+            ColoredToken rightParen =
+                u.RightParen();
+
+            MemberFunctionNode functionNode = ASTFactory.MemberFunctionNode
+                (@class, dot, member, leftParen, arguments, commas, rightParen);
             ColoredToken semicolon =
                 u.Semicolon();
 

@@ -1,4 +1,5 @@
 using System;
+
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
@@ -20,6 +21,7 @@ namespace UnityLike.Entities.Symbol
 
         public void AssignmentValue(Instance set, ColoredToken equal)
         {
+            UnityEngine.Debug.Log(Name + " Assignment. set:" + set.Type.Name);
             if (!TypeCastConstants.TypeContains(Type.Name))
             {
                 throw new NotAssignableTypeException(Type.Name, equal);

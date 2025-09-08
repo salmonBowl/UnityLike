@@ -174,7 +174,7 @@ namespace UnityLike.UseCases.Compiler
         /// <returns>最終的なトークンを返します</returns>
         private Token ReadString(int tokenLine, int tokenColumn)
         {
-            StringBuilder builder = new('"');
+            StringBuilder builder = new("\"");
 
             while (Peek() != '"' && !IsEndOfFile())
             {

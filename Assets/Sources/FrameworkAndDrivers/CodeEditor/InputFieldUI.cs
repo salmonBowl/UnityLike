@@ -20,9 +20,9 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         public ErrorPopupUI errorPopupUI;
         public IUIPosCalculator mousePos;
 
-        public void MemberInitialize(GameObject gameObject)
+        public void MemberInitialize(InitalMemberManager initalMemberManager)
         {
-            codeManager = new CodeManager(this, errorPopupUI, gameObject);
+            codeManager = new CodeManager(this, errorPopupUI, initalMemberManager);
             inputFieldText = inputField.textComponent;
         }
         public void DIMousePos(IUIPosCalculator mousePos)
@@ -30,7 +30,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             this.mousePos = mousePos;
         }
 
-        public void ExecuteCode() => codeManager.ExecuteCode();
+        public void ExecuteCode(bool isVoidStart) => codeManager.ExecuteCode(isVoidStart);
 
         public void Update()
         {

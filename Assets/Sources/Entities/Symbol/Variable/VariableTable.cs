@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections.Generic;
 
 using UnityLike.Entities.Compiler;
@@ -59,6 +60,19 @@ namespace UnityLike.Entities.Symbol
             {
                 return ParentScope.LookUpVariable(name);
             }
+        }
+
+        /// <summary>
+        /// VariableTableが持つデータをリストとして取得します
+        /// </summary>
+        public List<Variable> GetVariableList()
+        {
+            var list = new List<Variable>();
+            foreach (var m in variables)
+            {
+                list.Add(m.Value);
+            }
+            return list;
         }
     }
 }

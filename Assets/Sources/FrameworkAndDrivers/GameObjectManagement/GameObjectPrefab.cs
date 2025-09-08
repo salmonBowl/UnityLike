@@ -1,6 +1,5 @@
 using UnityEngine;
 
-using UnityLike.Entities.CodeEditor;
 using UnityLike.FrameworkAndDrivers.CodeEditor;
 
 namespace UnityLike.FrameworkAndDrivers.GameObjectManagement

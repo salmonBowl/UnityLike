@@ -43,6 +43,11 @@ namespace UnityLike.UseCases.Interpreter
             }
             Terminate();
         }
+        public List<Variable> GetVariables()
+        {
+            return currentScope.GetVariableList();
+        }
+
         private void Initialize(List<Variable> initalMember, ExecutionMode mode)
         {
             currentScope = new VariableTable(null);
