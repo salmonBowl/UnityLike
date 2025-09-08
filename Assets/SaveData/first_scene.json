@@ -1,26 +1,72 @@
 {
-  "gameObjects":[
+    "gameObjects": [
         {
             "name": "プレイヤー",
-            "modelName" : "Cube",
-            "activeSelf" : true,
-            "transform":
-            {
-                "position": { "x": 0, "y": 1, "z": 0 },
-                "rotation": { "x": 0, "y": 0, "z": 0 },
-                "scale": { "x": 1, "y": 1, "z": 1 }
+            "modelName": "Cube",
+            "activeSelf": true,
+            "transform": {
+                "position": {
+                    "x": 3.9499971866607668,
+                    "y": 0.0,
+                    "z": -0.09999954700469971
+                },
+                "eulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
             },
-            "rigidbody":
-            {
-                "mass": 1,
+            "rigidbody": {
+                "mass": 1.0,
                 "useGravity": true,
-                "isKinematic": false,
-                "velocity": { "x": 0, "y": 0, "z": 0 }
+                "isKinematic": true,
+                "velocity": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
             },
-            "voidStart":
-            "transform.position = new Vector3(0, 0, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 1);\n\nfloat moveSpeed = 0.01f;",
-            "voidUpdate":
-            "transform.Translate(modeSpeed, 0, 0);\n"
+            "voidStart": "transform.position = new Vector3(0, 0, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 1);\n\nfloat moveSpeed = 0.01f;",
+            "voidUpdate": "float moveSpeed = 0.05f;\nif (Input.GetKey(RightArrow))\n{\n    transform.Translate(moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(LeftArrow))\n{\n    transform.Translate(-moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(UpArrow))\n{\n    transform.Translate(0, 0, moveSpeed);\n}\n\nif (Input.GetKey(DownArrow))\n{\n    transform.Translate(0, 0, -moveSpeed);\n}\n\n"
+        },
+        {
+            "name": "新規オブジェクト",
+            "modelName": "Cube",
+            "activeSelf": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "eulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "rigidbody": {
+                "mass": 1.0,
+                "useGravity": true,
+                "isKinematic": true,
+                "velocity": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            },
+            "voidStart": "rigidbody.isKinematic = false;",
+            "voidUpdate": "if (Input.GetKey(RightArrow))\n{\n    transform.position += new Vector3(1, 0, 0);\n}\nif (Input.GetKey(LeftArrow))\n{\n    transform.position -= new Vector3(1, 0, 0);\n}\r\n\r\nif (transform.position.y <= -5) //もし地面に接地しているなら\n{\n    transform.position.y = -5;\n    rigidbody.velocity.y = 0;\n    \n    if (input.GetKeyDown(Space)\n    {\n        velocity.y = 1;\n    }\n};\n\nrigidbody.velocity.y = -0.05f;\n\ntransform.position += Velocity;\n"
         }
-     ]
+    ]
 }

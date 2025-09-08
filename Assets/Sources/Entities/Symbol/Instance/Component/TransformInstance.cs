@@ -1,5 +1,3 @@
-using Transform = UnityEngine.Transform;
-using Vector3 = UnityEngine.Vector3;
 using UnityEngine;
 
 using UnityLike.Entities.Compiler;
@@ -42,19 +40,50 @@ namespace UnityLike.Entities.Symbol
                     }
                 }
             }
+            bool IsMatchArg(params string[] expected)
+            {
+                int argCount = expected.Length;
+                if (args.Length != argCount)
+                {
+                    return false;
+                }
+                for (int i = 0; i < argCount; i++)
+                {
+                    if (!Castable(args[i], expected[i]))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
 
             // 関数実行のためにメンバー変数を取得しておきます
             Vector3 position = ((Vector3Instance)GetMember("position")).AsVector3();
             Vector3 eulerAngles = ((Vector3Instance)GetMember("eulerAngles")).AsVector3();
+            // 重複して使用する変数を宣言しておきます
+            float x;
+            float y;
+            float z;
 
             switch (name)
             {
                 case "Translate":
-                    ArgCheck("float", "float", "float");
-                    float x = ((NumberInstance)args[0]).AsFloat();
-                    float y = ((NumberInstance)args[1]).AsFloat();
-                    float z = ((NumberInstance)args[2]).AsFloat();
-                    Vector3 localVector = new(x, y, z);
+                    Vector3 localVector;
+                    if (IsMatchArg("float", "float", "float"))
+                    {
+                        x = ((NumberInstance)args[0]).AsFloat();
+                        y = ((NumberInstance)args[1]).AsFloat();
+                        z = ((NumberInstance)args[2]).AsFloat();
+                        localVector = new Vector3(x, y, z);
+                    }
+                    else if (IsMatchArg("Vector3"))
+                    {
+                        localVector = ((Vector3Instance)args[0]).AsVector3();
+                    }
+                    else
+                    {
+                        throw new InvalidArgumentException(3, nameToken);
+                    }
 
                     // ローカル座標のベクトルをワールド座標に変換
                     // (簡易的な実装です。後にQuaternionに置き換えます)

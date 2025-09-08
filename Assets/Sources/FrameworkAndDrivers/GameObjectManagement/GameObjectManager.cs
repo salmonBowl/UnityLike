@@ -19,6 +19,11 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
         private readonly ComponentSetter componentSetter = new();
         private readonly ComponentReader componentReader = new();
 
+        void OnApplicationQuit()
+        {
+            SaveScene();
+        }
+
         public void ChangeSelected(GameObjectPrefab target)
         {
             // 元々選択していたオブジェクトの選択を外します
@@ -46,7 +51,7 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 
         public void ExecuteVoidStart()
         {
-            foreach(var gameObject in gameObjects)
+            foreach (var gameObject in gameObjects)
             {
                 gameObject.ExecuteVoidStart();
             }
@@ -59,6 +64,10 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             }
         }
 
+        public void AddNewObject()
+        {
+            AddNewObject("新規オブジェクト", "Cube");
+        }
         /// <summary>
         /// オブジェクトを新規作成します
         /// </summary>
@@ -94,7 +103,7 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             // モデルからInstantiate
             GameObjectPrefab gameObject = GameObjectPrefab.Instantiate
                 (data.name, data.modelName, gameObjectPrefab, modelObject);
-            
+
             // 状態の読み込み
             componentSetter.Set(gameObject.gameObject, data);
 
@@ -114,6 +123,11 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
                 data.gameObjects.Add(componentReader.Read(gameObject));
             }
 
+            if (data.gameObjects.Count == 0)
+            {
+                Debug.Log("実行中のビルドにより、このシーンは保存しません");
+                return;
+            }
             sceneLoader.SaveFile(data);
         }
 

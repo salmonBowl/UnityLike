@@ -98,6 +98,7 @@ namespace UnityLike.Entities.Compiler
             { "Time", TokenType.TypeOther },
             { "Random", TokenType.TypeOther },
             { "Input", TokenType.TypeOther },
+            { "KeyCode", TokenType.TypeOther },
             { "Renderer", TokenType.TypeOther },
             { "MeshRenderer", TokenType.TypeOther },
             { "SkinnedMeshRenderer", TokenType.TypeOther },

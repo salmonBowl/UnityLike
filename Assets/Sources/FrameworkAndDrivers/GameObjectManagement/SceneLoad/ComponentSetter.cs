@@ -18,7 +18,8 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             rigidbody.mass = data.rigidbody.mass;
             rigidbody.useGravity = data.rigidbody.useGravity;
             rigidbody.isKinematic = data.rigidbody.isKinematic;
-            rigidbody.linearVelocity = data.rigidbody.velocity;
+            if (!rigidbody.isKinematic)
+                rigidbody.linearVelocity = data.rigidbody.velocity;
 
             gameObject.SetActive(data.activeSelf);
         }
@@ -29,12 +30,11 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 
             transform.position = Vector3.zero;
             transform.eulerAngles = Vector3.zero;
-            transform.localScale = Vector3.zero;
+            transform.localScale = Vector3.one;
 
             rigidbody.mass = 1;
             rigidbody.useGravity = true;
             rigidbody.isKinematic = true;
-            rigidbody.linearVelocity = Vector3.zero;
 
             gameObject.SetActive(true);
         }
