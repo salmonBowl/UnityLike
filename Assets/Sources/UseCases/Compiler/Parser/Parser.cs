@@ -69,6 +69,7 @@ namespace UnityLike.UseCases.Compiler
                 {
                     TokenType.Identifier => ASTFactory.IdentifierNode(CurrentToken),
                     TokenType.NumberLiteral => ASTFactory.NumberLiteralNode(CurrentToken),
+                    TokenType.StringLiteral => ASTFactory.StringLiteralNode(CurrentToken),
                     TokenType.True => ASTFactory.TrueLiteralNode(CurrentToken),
                     TokenType.False => ASTFactory.FalseLiteralNode(CurrentToken),
                     _ => throw new System.NotSupportedException("Parser.ConsumeWithGenerate() : İ’è‚³‚ê‚Ä‚¢‚È‚¢TokenType‚Å‚·")

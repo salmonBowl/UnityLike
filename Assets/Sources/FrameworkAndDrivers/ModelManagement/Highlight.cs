@@ -4,11 +4,11 @@ using UnityLike.FrameworkAndDrivers.Mesh;
 
 namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 {
-    public class SwitchHighlight
+    public class Highlight
     {
         private readonly GameObject copyModel;
 
-        public SwitchHighlight(GameObject model, Transform parent, Material material)
+        public Highlight(GameObject model, Transform parent, Material material)
         {
             copyModel = Object.Instantiate(model, parent);
             copyModel.AddComponent<OutLine>();
@@ -18,6 +18,11 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
         public void SetActive(bool value)
         {
             copyModel.SetActive(value);
+        }
+
+        public void SetModelSize(Vector3 size)
+        {
+            copyModel.transform.localScale = size;
         }
     }
 }

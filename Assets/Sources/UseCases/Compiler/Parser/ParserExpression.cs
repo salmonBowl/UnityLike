@@ -73,6 +73,7 @@ namespace UnityLike.UseCases.Compiler
             {
                 TokenType.Identifier => ConsumeWithGenerate(),
                 TokenType.NumberLiteral => ConsumeWithGenerate(),
+                TokenType.StringLiteral => ConsumeWithGenerate(),
                 TokenType.True => ConsumeWithGenerate(),
                 TokenType.False => ConsumeWithGenerate(),
                 TokenType.LeftParen => ParseParenExpression(),

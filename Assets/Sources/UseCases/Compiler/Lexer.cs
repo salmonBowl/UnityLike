@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-using System.Collections.Generic;
 using Zenject;
 
 using UnityLike.Entities.Compiler;
@@ -85,6 +84,12 @@ namespace UnityLike.UseCases.Compiler
                     ? new Token(TokenType.NumberLiteral, tokenValue, tokenLine, tokenColumn)
                     : new Token(TokenType.Unknown, tokenValue, tokenLine, tokenColumn);
             }
+            // 文字列
+            else if (firstChar == '"')
+            {
+                Consume();
+                return ReadString(tokenLine, tokenColumn);
+            }
             // 1文字または2文字
             // 主に演算子や括弧類
             else if (TokenConstants.OneCharOperators.TryGetValue(firstChar, out TokenType oneCharTokenType))
@@ -162,6 +167,44 @@ namespace UnityLike.UseCases.Compiler
             }
 
             return builder.ToString();
+        }
+        /// <summary>
+        /// 文字列のトークンを読み取ります
+        /// </summary>
+        /// <returns>最終的なトークンを返します</returns>
+        private Token ReadString(int tokenLine, int tokenColumn)
+        {
+            StringBuilder builder = new('"');
+
+            while (Peek() != '"' && !IsEndOfFile())
+            {
+                // エスケープシーケンスの処理
+                if (Peek() == '\\')
+                {
+                    Consume(); // '\'を1文字だけ消費
+                    char escapedChar = Peek();
+                    builder.Append(escapedChar);
+                    Consume();
+                }
+                else
+                {
+                    builder.Append(Peek());
+                    Consume();
+                }
+            }
+
+            if (Peek() == '"')
+            {
+                builder.Append('"');
+                Consume();
+            }
+            else
+            {
+                // 終端の"が見つからない場合はエラー
+                return new Token(TokenType.Unknown, builder.ToString(), tokenLine, tokenColumn);
+            }
+
+            return new Token(TokenType.StringLiteral, builder.ToString(), tokenLine, tokenColumn);
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
         [SerializeField] private Material highlightMaterial;
 
         private GameObject model;
-        private SwitchHighlight highlight;
+        private Highlight highlight;
 
         /// <summary>
         /// êVÇµÇ≠ÉÇÉfÉãÇäiî[ÇµÇ‹Ç∑
@@ -22,7 +22,7 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             }
 
             model = newModel;
-            highlight = new SwitchHighlight(newModel, parent, highlightMaterial);
+            highlight = new Highlight(newModel, parent, highlightMaterial);
         }
         public void ChangeModel()
         {
@@ -31,6 +31,16 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
         public void HighlightSetActive(bool value)
         {
             highlight.SetActive(value);
+        }
+
+        public Vector3 GetModelSize()
+        {
+            return model.transform.localScale;
+        }
+        public void SetModelSize(Vector3 size)
+        {
+            model.transform.localScale = size;
+            highlight.SetModelSize(size);
         }
     }
 }

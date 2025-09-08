@@ -17,6 +17,7 @@ namespace UnityLike.Entities.Compiler
         Instance VisitVariable(VariableNode node);
         Instance VisitIntLiteral(IntLiteralNode node);
         Instance VisitFloatLiteral(FloatLiteralNode node);
+        Instance VisitStringLiteral(StringLiteralNode node);
         Instance VisitBoolLiteral(BoolLiteralNode node);
         Instance VisitParenExpression(ParenNode node);
         Instance VisitUnaryExpression(UnaryExpressionNode node);

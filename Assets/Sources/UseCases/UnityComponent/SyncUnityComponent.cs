@@ -98,6 +98,7 @@ namespace UnityLike.UseCases.UnityComponent
             TransformInstance vTransform = (TransformInstance)transformVariable.Value;
             transform.position = ((Vector3Instance)vTransform.GetMember("position")).AsVector3();
             transform.eulerAngles = ((Vector3Instance)vTransform.GetMember("eulerAngles")).AsVector3();
+            transform.localScale = ((Vector3Instance)vTransform.GetMember("localScale")).AsVector3();
             RigidbodyInstance vRigidbody = (RigidbodyInstance)rigidbodyVariable.Value;
             rigidbody.mass = ((FloatInstance)vRigidbody.GetMember("mass")).AsFloat();
             rigidbody.useGravity = ((BoolInstance)vRigidbody.GetMember("useGravity")).AsBool();

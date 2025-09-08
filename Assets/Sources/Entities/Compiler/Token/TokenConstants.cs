@@ -156,6 +156,8 @@ namespace UnityLike.Entities.Compiler
             { TokenType.RightBracket, operatorColor },
             #endregion
             
+            { TokenType.StringLiteral, "#FF7050" },
+
             { TokenType.SemiColon, "#FFFFFF" },
 
             // ƒGƒ‰[‚ğÔF‚É

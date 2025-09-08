@@ -9,6 +9,7 @@ namespace UnityLike.Entities.Compiler
 
         // ƒŠƒeƒ‰ƒ‹
         NumberLiteral,
+        StringLiteral,
         Null,
         True,
         False,

@@ -45,6 +45,9 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             Name = newName;
         }
 
+        public Vector3 GetModelSize() => model.GetModelSize();
+        public void SetModelSize(Vector3 size) => model.SetModelSize(size);
+
         public static GameObjectPrefab Instantiate(string name, string modelName, GameObject prefab, GameObject model)
         {
             GameObject newGameObject = Instantiate(prefab);

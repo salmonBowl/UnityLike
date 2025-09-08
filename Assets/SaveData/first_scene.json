@@ -6,9 +6,9 @@
             "activeSelf": true,
             "transform": {
                 "position": {
-                    "x": 3.9499971866607668,
+                    "x": 0.0,
                     "y": 0.0,
-                    "z": -0.09999954700469971
+                    "z": 0.0
                 },
                 "eulerAngles": {
                     "x": 0.0,
@@ -35,13 +35,13 @@
             "voidUpdate": "float moveSpeed = 0.05f;\nif (Input.GetKey(RightArrow))\n{\n    transform.Translate(moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(LeftArrow))\n{\n    transform.Translate(-moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(UpArrow))\n{\n    transform.Translate(0, 0, moveSpeed);\n}\n\nif (Input.GetKey(DownArrow))\n{\n    transform.Translate(0, 0, -moveSpeed);\n}\n\n"
         },
         {
-            "name": "新規オブジェクト",
+            "name": "Stage",
             "modelName": "Cube",
             "activeSelf": true,
             "transform": {
                 "position": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": -2.0,
                     "z": 0.0
                 },
                 "eulerAngles": {
@@ -50,9 +50,9 @@
                     "z": 0.0
                 },
                 "localScale": {
-                    "x": 1.0,
+                    "x": 15.0,
                     "y": 1.0,
-                    "z": 1.0
+                    "z": 15.0
                 }
             },
             "rigidbody": {
@@ -65,8 +65,8 @@
                     "z": 0.0
                 }
             },
-            "voidStart": "rigidbody.isKinematic = false;",
-            "voidUpdate": "if (Input.GetKey(RightArrow))\n{\n    transform.position += new Vector3(1, 0, 0);\n}\nif (Input.GetKey(LeftArrow))\n{\n    transform.position -= new Vector3(1, 0, 0);\n}\r\n\r\nif (transform.position.y <= -5) //もし地面に接地しているなら\n{\n    transform.position.y = -5;\n    rigidbody.velocity.y = 0;\n    \n    if (input.GetKeyDown(Space)\n    {\n        velocity.y = 1;\n    }\n};\n\nrigidbody.velocity.y = -0.05f;\n\ntransform.position += Velocity;\n"
+            "voidStart": "transform.position = new Vector3(0, -2, 0);\ntransform.localScale = new Vector3(15, 1, 15);",
+            "voidUpdate": ""
         }
     ]
 }

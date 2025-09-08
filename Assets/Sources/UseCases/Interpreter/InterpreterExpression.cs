@@ -50,6 +50,10 @@ namespace UnityLike.UseCases.Interpreter
         {
             return new FloatInstance(node.Value);
         }
+        public Instance VisitStringLiteral(StringLiteralNode node)
+        {
+            return new StringInstance(node.Value);
+        }
         public Instance VisitBoolLiteral(BoolLiteralNode node)
         {
             return new BoolInstance(node.Value);

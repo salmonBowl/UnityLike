@@ -1,6 +1,3 @@
-using Vector3 = UnityEngine.Vector3;
-using UnityEngine;
-
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.Entities.Symbol
@@ -9,7 +6,7 @@ namespace UnityLike.Entities.Symbol
     {
         public override Class Type => RigidbodyClass.Single;
 
-        public RigidbodyInstance(Rigidbody rigidbody)
+        public RigidbodyInstance(UnityEngine.Rigidbody rigidbody)
         {
             Variable Mass = new("mass", FloatClass.Single);
             Variable UseGravity = new("useGravity", BoolClass.Single);
