@@ -13,60 +13,49 @@ namespace UnityLike.UseCases.Compiler
             }
             public TypeNode Type()
             {
-                TypeNode retval;
                 if (outher.CurrentTokenType == TokenType.TypePrimitive
                     || outher.CurrentTokenType == TokenType.TypeOther)
                 {
-                    retval = ASTFactory.TypeNode(outher.CurrentToken);
+                    Token type = outher.CurrentToken;
                     outher.Consume();
+                    return ASTFactory.TypeNode(type);
                 }
-                else
-                {
-                    throw new SyntaxErrorException("文法が正しくありません");
-                }
-                return retval;
+
+                throw new SyntaxErrorException("文法が正しくありません");
             }
             public IdentifierNode Identifier()
             {
-                IdentifierNode retval;
                 if (outher.CurrentTokenType == TokenType.Identifier)
                 {
-                    retval = ASTFactory.IdentifierNode(outher.CurrentToken);
+                    Token identifier = outher.CurrentToken;
                     outher.Consume();
+                    return ASTFactory.IdentifierNode(identifier);
                 }
-                else
-                {
-                    throw new SyntaxErrorException("文法が正しくありません");
-                }
-                return retval;
+
+                throw new SyntaxErrorException("文法が正しくありません");
             }
             public MemberFunctionNode Function()
             {
-                bool isStatic = outher.CurrentTokenType is TokenType.TypePrimitive or TokenType.TypeOther;
-                
-                ExpressionNode member = isStatic ?
-                    outher.ParseStaticFunction() : outher.ParseIdentifier();
-                
-                if (member is MemberFunctionNode functionNode)
-                {
-                    return functionNode;
-                }
-                else
-                {
-                    throw new SyntaxErrorException("文法が正しくありません");
-                }
+                return outher.ParseStaticMemberAccess();
             }
             public ExpressionNode Expression()
             {
                 return outher.ParseExpression();
             }
-            public VariableNode Variable()
-            {
-                return outher.ParseVariable();
-            }
 
             // --- ColoredToken ---
 
+            public ColoredToken Member()
+            {
+                if (outher.CurrentTokenType == TokenType.Identifier)
+                {
+                    Token member = outher.CurrentToken;
+                    outher.Consume();
+                    return ASTFactory.TokenToColoredToken(member);
+                }
+
+                throw new SyntaxErrorException("文法が正しくありません");
+            }
             public ColoredToken Equals()
             {
                 if (outher.CurrentTokenType == TokenType.Equals)
@@ -77,6 +66,16 @@ namespace UnityLike.UseCases.Compiler
                 }
 
                 throw new SyntaxErrorException("=が必要です");
+            }
+            public ColoredToken Dot()
+            {
+                if (outher.CurrentTokenType == TokenType.Dot)
+                {
+                    Token dot = outher.CurrentToken;
+                    outher.Consume();
+                    return ASTFactory.TokenToColoredToken(dot);
+                }
+                throw new SyntaxErrorException(".が必要です");
             }
             public ColoredToken Semicolon()
             {

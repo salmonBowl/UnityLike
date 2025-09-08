@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using UnityLike.Entities.Compiler;
 
 namespace UnityLike.UseCases.Compiler

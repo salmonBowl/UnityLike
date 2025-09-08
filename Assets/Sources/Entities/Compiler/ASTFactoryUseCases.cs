@@ -11,12 +11,10 @@ namespace UnityLike.Entities.Compiler
         {
             return new IdentifierNode(TokenToColoredToken(identifier));
         }
-        public static MemberAccessNode MemberAccessNode(VariableNode parent, Token dot, Token member)
+        public static MemberAccessNode MemberAccessNode(VariableNode parent, ColoredToken dot, ColoredToken member)
         {
-            ColoredToken cDot = TokenToColoredToken(dot);
-            ColoredToken cMember = TokenToColoredToken(member);
-            cMember.IsMember();
-            return new MemberAccessNode(parent, cDot, cMember);
+            member.IsMember();
+            return new MemberAccessNode(parent, dot, member);
         }
         public static NumberLiteralNode NumberLiteralNode(Token number)
         {
@@ -112,14 +110,9 @@ namespace UnityLike.Entities.Compiler
 
             return new NewExpressionNode(cNewToken, cTypeToken, cLeftParen, argumentArray, cCommas, cRightParen);
         }
-        public static MemberFunctionNode MemberFunctionNode(VariableNode parent, Token dot, Token member, Token leftParen, List<ExpressionNode> arguments, List<Token> commas, Token rightParen)
+        public static MemberFunctionNode MemberFunctionNode(VariableNode parent, ColoredToken dot, ColoredToken member, ColoredToken leftParen, List<ExpressionNode> arguments, List<Token> commas, ColoredToken rightParen)
         {
-            ColoredToken cDot = TokenToColoredToken(dot);
-            ColoredToken cMember = TokenToColoredToken(member);
-            ColoredToken cLeftParen = TokenToColoredToken(leftParen);
-            ColoredToken cRightParen = TokenToColoredToken(rightParen);
-
-            cMember.IsMemberFunction();
+            member.IsMemberFunction();
 
             ExpressionNode[] argumentArray = arguments.ToArray();
             ColoredToken[] cCommas = new ColoredToken[commas.Count];
@@ -128,16 +121,11 @@ namespace UnityLike.Entities.Compiler
                 cCommas[i] = TokenToColoredToken(commas[i]);
             }
 
-            return new MemberFunctionNode(parent, cDot, cMember, cLeftParen, argumentArray, cCommas, cRightParen);
+            return new MemberFunctionNode(parent, dot, member, leftParen, argumentArray, cCommas, rightParen);
         }
-        public static MemberFunctionNode MemberFunctionNode(TypeNode parent, Token dot, Token member, Token leftParen, List<ExpressionNode> arguments, List<Token> commas, Token rightParen)
+        public static MemberFunctionNode MemberFunctionNode(TypeNode parent, ColoredToken dot, ColoredToken member, ColoredToken leftParen, List<ExpressionNode> arguments, List<Token> commas, ColoredToken rightParen)
         {
-            ColoredToken cDot = TokenToColoredToken(dot);
-            ColoredToken cMember = TokenToColoredToken(member);
-            ColoredToken cLeftParen = TokenToColoredToken(leftParen);
-            ColoredToken cRightParen = TokenToColoredToken(rightParen);
-
-            cMember.IsMemberFunction();
+            member.IsMemberFunction();
 
             ExpressionNode[] argumentArray = arguments.ToArray();
             ColoredToken[] cCommas = new ColoredToken[commas.Count];
@@ -146,7 +134,7 @@ namespace UnityLike.Entities.Compiler
                 cCommas[i] = TokenToColoredToken(commas[i]);
             }
 
-            return new MemberFunctionNode(parent, cDot, cMember, cLeftParen, argumentArray, cCommas, cRightParen);
+            return new MemberFunctionNode(parent, dot, member, leftParen, argumentArray, cCommas, rightParen);
         }
 
         /// <summary>

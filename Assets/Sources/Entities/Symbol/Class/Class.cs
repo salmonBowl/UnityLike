@@ -32,7 +32,7 @@ namespace UnityLike.Entities.Symbol
         protected bool Castable(Instance instance, string typeName)
         {
             Type expectedType = TypeCastConstants.TypeOf(typeName);
-            bool castable = instance.GetType().IsSubclassOf(expectedType);
+            bool castable = expectedType.IsAssignableFrom(instance.GetType());
             return castable;
         }
     }

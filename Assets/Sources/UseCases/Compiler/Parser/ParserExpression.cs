@@ -72,13 +72,13 @@ namespace UnityLike.UseCases.Compiler
             return CurrentTokenType switch
             {
                 TokenType.Identifier => ConsumeWithGenerate(),
-                TokenType.New => ParseNewExpression(),
                 TokenType.NumberLiteral => ConsumeWithGenerate(),
                 TokenType.True => ConsumeWithGenerate(),
                 TokenType.False => ConsumeWithGenerate(),
                 TokenType.LeftParen => ParseParenExpression(),
-                TokenType.TypePrimitive => ParseStaticFunction(),
-                TokenType.TypeOther => ParseStaticFunction(),
+                TokenType.New => ParseNewExpression(),
+                TokenType.TypePrimitive => ParseStaticMemberAccess(),
+                TokenType.TypeOther => ParseStaticMemberAccess(),
                 TokenType.Unknown => AsUnknown(),
                 TokenType.SemiColon => throw new SyntaxErrorException("文が完成していません"),
                 TokenType.RightParen => throw new SyntaxErrorException("値がありません"),
@@ -88,21 +88,16 @@ namespace UnityLike.UseCases.Compiler
 
         private ExpressionNode ParseParenExpression()
         {
-            Token leftParen = CurrentToken;
-            if (CurrentTokenType == TokenType.LeftParen)
-                Consume();
-            else
-                return AsUnknown();
+            Usecase u = new(this);
 
-            ExpressionNode content = ParseExpression();
+            ColoredToken leftParen =
+                u.LeftParen();
+            ExpressionNode content =
+                u.Expression();
+            ColoredToken rightParen =
+                u.RightParen();
 
-            Token rightParen = CurrentToken;
-            if (CurrentTokenType == TokenType.RightParen)
-                Consume();
-            else
-                throw new SyntaxErrorException(")が必要です");
-
-            return ASTFactory.ParenNode(leftParen, content, rightParen);
+            return new ParenNode(leftParen, content, rightParen);
         }
         /*
             演算の優先順位に従って優先順位が低い演算→だんだん高い演算という順序で再帰的に潜っていきます
@@ -111,6 +106,8 @@ namespace UnityLike.UseCases.Compiler
          */
         private ExpressionNode ParseMemberAccessExpression()
         {
+            Usecase u = new(this);
+
             // 最初の要素を解析
             ExpressionNode primary = ParsePrimaryExpression();
 
@@ -122,32 +119,25 @@ namespace UnityLike.UseCases.Compiler
 
             while (CurrentTokenType == TokenType.Dot)
             {
-                // ドットを消費
-                Token dot = CurrentToken;
-                Consume();
-
-                // メンバー名の解析
-                Token member = CurrentToken;
-                if (CurrentTokenType != TokenType.Identifier)
-                    throw new SyntaxErrorException("メンバー名が必要です");
-                Consume();
+                ColoredToken dot =
+                    u.Dot();
+                ColoredToken member =
+                    u.Member();
 
                 if (CurrentTokenType == TokenType.LeftParen)
                 {
                     // メンバー関数として処理
-                    Token leftParen = CurrentToken;
-                    Consume();
+
+                    ColoredToken leftParen =
+                        u.LeftParen();
 
                     var arguments = ParseArgumentList(out var commas);
 
-                    Token rightParen = CurrentToken;
-                    if (CurrentTokenType != TokenType.RightParen)
-                        throw new SyntaxErrorException("文法が正しくありません");
-                    Consume();
+                    ColoredToken rightParen =
+                        u.RightParen();
 
-                    var memberFunction = ASTFactory.MemberFunctionNode
+                    return ASTFactory.MemberFunctionNode
                         (left, dot, member, leftParen, arguments, commas, rightParen);
-                    return memberFunction;
                 }
                 else
                 {
@@ -200,6 +190,27 @@ namespace UnityLike.UseCases.Compiler
             {
                 return leftExpression;
             }
+        }
+        private MemberFunctionNode ParseStaticMemberAccess()
+        {
+            Usecase u = new(this);
+
+            TypeNode @class =
+                u.Type();
+            ColoredToken dot =
+                u.Dot();
+            ColoredToken member =
+                u.Member();
+            ColoredToken leftParen =
+                u.LeftParen();
+
+            var arguments = ParseArgumentList(out var commas);
+
+            ColoredToken rightParen =
+                u.RightParen();
+
+            return ASTFactory.MemberFunctionNode
+                (@class, dot, member, leftParen, arguments, commas, rightParen);
         }
     }
 }

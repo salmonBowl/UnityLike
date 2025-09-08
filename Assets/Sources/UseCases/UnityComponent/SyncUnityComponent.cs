@@ -38,6 +38,54 @@ namespace UnityLike.UseCases.UnityComponent
                 Value = new GameObjectInstance(transformVariable, rigidbodyVariable)
             };
             variables.Add(gameObjectVariable);
+
+            // --- ëºèâä˙ïœêî ---
+
+            Variable space = new("Space", KeyCodeClass.Single)
+            {
+                Value = new KeyCodeInstance(KeyCode.Space)
+            };
+            Variable rightArrow = new("RightArrow", KeyCodeClass.Single)
+            {
+                Value = new KeyCodeInstance(KeyCode.RightArrow)
+            };
+            Variable leftArrow = new("LeftArrow", KeyCodeClass.Single)
+            {
+                Value = new KeyCodeInstance(KeyCode.LeftArrow)
+            };
+            Variable upArrow = new("UpArrow", KeyCodeClass.Single)
+            {
+                Value = new KeyCodeInstance(KeyCode.UpArrow)
+            };
+            Variable downArrow = new("DownArrow", KeyCodeClass.Single)
+            {
+                Value = new KeyCodeInstance(KeyCode.DownArrow)
+            };
+            Variable keyW = new("W", KeyCodeClass.Single)
+            {
+                Value = new KeyCodeInstance(KeyCode.W)
+            };
+            Variable keyA = new("A", KeyCodeClass.Single)
+            {
+                Value = new KeyCodeInstance(KeyCode.A)
+            };
+            Variable keyS = new("S", KeyCodeClass.Single)
+            {
+                Value = new KeyCodeInstance(KeyCode.S)
+            };
+            Variable keyD = new("D", KeyCodeClass.Single)
+            {
+                Value = new KeyCodeInstance(KeyCode.D)
+            };
+            variables.Add(space);
+            variables.Add(rightArrow);
+            variables.Add(leftArrow);
+            variables.Add(upArrow);
+            variables.Add(downArrow);
+            variables.Add(keyW);
+            variables.Add(keyA);
+            variables.Add(keyS);
+            variables.Add(keyD);
         }
 
         public List<Variable> GetVariables()

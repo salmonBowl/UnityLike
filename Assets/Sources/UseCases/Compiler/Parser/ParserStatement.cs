@@ -23,9 +23,9 @@ namespace UnityLike.UseCases.Compiler
             {
                 return CurrentTokenType switch
                 {
-                    TokenType.TypePrimitive => ParseVariableDeclarationStatement(),
-                    TokenType.TypeOther => ParseVariableDeclarationStatement(),
-                    TokenType.Identifier => ParseAssignmentStatement(),
+                    TokenType.Identifier => ParseStatementByExpressionType(),
+                    TokenType.TypePrimitive => ParseDeclarationOrStaticCall(),
+                    TokenType.TypeOther => ParseDeclarationOrStaticCall(),
                     TokenType.If => ParseIfStatement(),
                     TokenType.While => ParseWhileStatement(),
                     TokenType.LeftBrace => ParseScope(),
@@ -38,25 +38,61 @@ namespace UnityLike.UseCases.Compiler
                 return ParseUnknownStatement(e.Message);
             }
         }
-        private StatementNode ParseVariableDeclarationStatement()
+        private StatementNode ParseStatementByExpressionType()
         {
-            int startTokenIndex = currentTokenIndex;
             Usecase u = new(this);
-
             // 正しい書式を順番に読み込んでいく処理です
             // 書式が間違っているとuの関数内でSyntaxErrorExceptionが出されます
 
-            // 変数宣言
+            // 最初のExpressionNodeを解析します
+            ExpressionNode expression = ParseMemberAccessExpression();
 
-            TypeNode typeNode =
-                u.Type();
-
-            if (CurrentTokenType == TokenType.Dot)
-            // 代入式の特殊な場合、一度戻って別の構文解析を実行します
+            // MemberFunction
+            if (expression is MemberFunctionNode functionCallNode)
             {
-                currentTokenIndex = startTokenIndex;
-                return ParseFunctionStatement();
+                ColoredToken semicolon =
+                    u.Semicolon();
+                return new FunctionStatementNode(functionCallNode, semicolon);
             }
+            // Assignment
+            else if (expression is VariableNode variable)
+            {
+                ColoredToken equals =
+                    u.Equals();
+                ExpressionNode valueExpression =
+                    u.Expression();
+                ColoredToken semicolon =
+                    u.Semicolon();
+
+                return new AssignmentStatementNode(variable, equals, valueExpression, semicolon);
+            }
+
+            throw new SyntaxErrorException("文法が正しくありません");
+        }
+        private StatementNode ParseDeclarationOrStaticCall()
+        {
+            // 最初のトークンを記録
+            Token typeToken = CurrentToken;
+            Consume();
+
+            // staticFunction
+            if (CurrentTokenType == TokenType.Dot)
+            {
+                return ParseStaticFunctionStatement(ASTFactory.TypeNode(typeToken));
+            }
+            // declaration
+            else if (CurrentTokenType == TokenType.Identifier)
+            {
+                return ParseVariableDeclarationStatement(ASTFactory.TypeNode(typeToken));
+            }
+
+            throw new SyntaxErrorException("文法が正しくありません");
+        }
+        private StatementNode ParseVariableDeclarationStatement(TypeNode typeNode)
+        {
+            Usecase u = new(this);
+
+            // 変数宣言
 
             IdentifierNode identifierNode =
                 u.Identifier();
@@ -79,33 +115,7 @@ namespace UnityLike.UseCases.Compiler
             return new VariableDeclarationStatementNode
                 (typeNode, identifierNode, equals, expressionNode, semicolon);
         }
-        private StatementNode ParseAssignmentStatement()
-        {
-            int startTokenIndex = currentTokenIndex;
-            Usecase u = new(this);
-
-            // 代入式
-
-            VariableNode variableNode =
-                u.Variable();
-
-            if (CurrentTokenType == TokenType.Dot)
-                // 代入式の特殊な場合、一度戻って別の構文解析を実行します
-            {
-                currentTokenIndex = startTokenIndex;
-                return ParseFunctionStatement();
-            }
-
-            ColoredToken equals =
-                u.Equals();
-            ExpressionNode expressionNode =
-                u.Expression();
-            ColoredToken semicolon =
-                u.Semicolon();
-
-            return new AssignmentStatementNode(variableNode, equals, expressionNode, semicolon);
-        }
-        private FunctionStatementNode ParseFunctionStatement()
+        private FunctionStatementNode ParseStaticFunctionStatement(TypeNode type)
         {
             Usecase u = new(this);
 
