@@ -3,7 +3,7 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 {
     public interface ICodeExecute
     {
-        void ExecuteVoidStart();
+        void ExecuteVoidStart(bool onStopped);
         void ExecuteVoidUpdate();
     }
 }

@@ -30,7 +30,7 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
             this.mousePos = mousePos;
         }
 
-        public void ExecuteCode(bool isVoidStart) => codeManager.ExecuteCode(isVoidStart);
+        public void ExecuteCode(bool isVoidStart, bool onStopped) => codeManager.ExecuteCode(isVoidStart, onStopped);
 
         public void Update()
         {

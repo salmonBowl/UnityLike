@@ -42,7 +42,7 @@ namespace UnityLike.FrameworkAndDrivers.GameRoop
             {
                 // ï“èWèÛë‘ÇæÇ¡ÇΩÇ»ÇÁPlay
                 stateManager.SetStatement(GameRoopState.Play);
-                gameObjectManager.ExecuteVoidStart();
+                gameObjectManager.ExecuteVoidStart(false);
             }
             else if (stateManager.State == GameRoopState.Pause)
             {
@@ -57,7 +57,7 @@ namespace UnityLike.FrameworkAndDrivers.GameRoop
         public void OnStopPlaying()
         {
             stateManager.SetStatement(GameRoopState.Edit);
-            gameObjectManager.ExecuteVoidStart();
+            gameObjectManager.ExecuteVoidStart(true);
         }
     }
 }

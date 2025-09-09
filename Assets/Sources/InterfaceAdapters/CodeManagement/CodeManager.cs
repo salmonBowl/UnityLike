@@ -52,8 +52,16 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
             compile.RenderText(data);
         }
 
-        public void ExecuteCode(bool isVoidStart)
+        public void ExecuteCode(bool isVoidStart, bool onStopped)
         {
+            if (onStopped)
+            {
+                List<Variable> initalMember = initialMemberManager.GetList();
+                interpreter.ExecuteCode(data.AST, initalMember, ExecutionMode.InitalExecution);
+
+                return;
+            }
+
             if (isVoidStart)
             {
                 initialMemberManager.InitializeList();

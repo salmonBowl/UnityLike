@@ -96,7 +96,6 @@ namespace UnityLike.UseCases.UnityComponent
         public void RenderUnityComponent()
         {
             TransformInstance vTransform = (TransformInstance)transformVariable.Value;
-            Debug.Log(((Vector3Instance)vTransform.GetMember("position")).AsVector3());
             transform.position = ((Vector3Instance)vTransform.GetMember("position")).AsVector3();
             transform.eulerAngles = ((Vector3Instance)vTransform.GetMember("eulerAngles")).AsVector3();
             transform.localScale = ((Vector3Instance)vTransform.GetMember("localScale")).AsVector3();

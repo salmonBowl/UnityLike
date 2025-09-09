@@ -21,13 +21,13 @@ namespace UnityLike.FrameworkAndDrivers.CodeEditor
         private CodeEditorInputManager inputManager;
         private InitalMemberManager initalMemberManager;
 
-        public void ExecuteVoidStart()
+        public void ExecuteVoidStart(bool onStopped)
         {
-            InputFieldVoidstart.ExecuteCode(true);
+            InputFieldVoidstart.ExecuteCode(true, onStopped);
         }
         public void ExecuteVoidUpdate()
         {
-            InputFieldVoidupdate.ExecuteCode(false);
+            InputFieldVoidupdate.ExecuteCode(false, false);
         }
 
         void Awake()

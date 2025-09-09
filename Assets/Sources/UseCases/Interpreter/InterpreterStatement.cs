@@ -44,7 +44,11 @@ namespace UnityLike.UseCases.Interpreter
         }
         public void ExecuteFunctionStatement(FunctionStatementNode node)
         {
-            node.Function.ASTScan(this);
+            // ä÷êîé¿çsÇÕé¿çséûÇ…ÇÃÇ›çsÇ¢Ç‹Ç∑
+            if (executionMode == ExecutionMode.FullExecution)
+            {
+                node.Function.ASTScan(this);
+            }
         }
 
         public void ExecuteIfStatement(IfStatementNode node)

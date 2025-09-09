@@ -6,8 +6,8 @@
             "activeSelf": true,
             "transform": {
                 "position": {
-                    "x": 2.0,
-                    "y": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
                     "z": 0.0
                 },
                 "eulerAngles": {
@@ -31,8 +31,8 @@
                     "z": 0.0
                 }
             },
-            "voidStart": "transform.position = new Vector3(2, 1, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 1);\n\nDebug.Log(\"プレイ開始\");\n",
-            "voidUpdate": "float moveSpeed = 0.05f;\n\nif (Input.GetKey(RightArrow))\n{\n    transform.Translate(moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(LeftArrow))\n{\n    transform.Translate(-moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(UpArrow))\n{\n    transform.Translate(0, 0, moveSpeed);\n}\n\nif (Input.GetKey(DownArrow))\n{\n    transform.Translate(0, 0, -moveSpeed);\n}\n\n"
+            "voidStart": "transform.position = new Vector3(0, 0, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 1);\n\nfloat moveSpeed = 0.05f;\n\nDebug.Log(\"プレイ開始\");\n",
+            "voidUpdate": "if (Input.GetKey(RightArrow))\n{\n    transform.Translate(moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(LeftArrow))\n{\n    transform.Translate(-moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(UpArrow))\n{\n    transform.Translate(0, 0, moveSpeed);\n}\n\nif (Input.GetKey(DownArrow))\n{\n    transform.Translate(0, 0, -moveSpeed);\n}\n\n"
         }
     ]
 }

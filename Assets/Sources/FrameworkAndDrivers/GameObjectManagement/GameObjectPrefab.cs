@@ -20,7 +20,7 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             model = GetComponent<ModelManager>();
         }
 
-        public void ExecuteVoidStart() => codeEditor.ExecuteVoidStart();
+        public void ExecuteVoidStart(bool onStopped) => codeEditor.ExecuteVoidStart(onStopped);
         public void ExecuteVoidUpdate() => codeEditor.ExecuteVoidUpdate();
         public void SetNameInputField(string name) => codeEditor.SetNameInputField(name);
         public void SetCodeVoidStart(string sourceCode) => codeEditor.SetCodeVoidStart(sourceCode);

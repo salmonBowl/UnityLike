@@ -49,11 +49,11 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             }
         }
 
-        public void ExecuteVoidStart()
+        public void ExecuteVoidStart(bool onStopped)
         {
             foreach (var gameObject in gameObjects)
             {
-                gameObject.ExecuteVoidStart();
+                gameObject.ExecuteVoidStart(onStopped);
             }
         }
         public void ExecuteVoidUpdate()
