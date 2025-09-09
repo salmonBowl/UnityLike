@@ -1,9 +1,10 @@
 using Debug = UnityEngine.Debug;
 
 using UnityLike.Entities.SceneLoad;
-using UnityLike.FrameworkAndDrivers.FileAdapter;
+using UnityLike.FrameworkAndDrivers.GameObjectManagement;
+using UnityLike.FrameworkAndDrivers.IO;
 
-namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
+namespace UnityLike.FrameworkAndDrivers.SceneLoad
 {
     public class SceneLoader
     {

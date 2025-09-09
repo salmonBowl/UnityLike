@@ -3,7 +3,7 @@ using UnityEngine;
 
 using UnityLike.Entities.SceneLoad;
 
-namespace UnityLike.FrameworkAndDrivers.FileAdapter
+namespace UnityLike.FrameworkAndDrivers.IO
 {
     public class FileLoader
     {

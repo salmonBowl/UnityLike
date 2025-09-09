@@ -1,8 +1,9 @@
 using UnityEngine;
 
 using UnityLike.Entities.SceneLoad;
+using UnityLike.FrameworkAndDrivers.GameObjectManagement;
 
-namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
+namespace UnityLike.FrameworkAndDrivers.SceneLoad
 {
     public class ComponentReader
     {

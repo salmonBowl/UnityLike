@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityLike.Entities.SceneLoad;
+using UnityLike.FrameworkAndDrivers.GameRoop;
 
 namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 {

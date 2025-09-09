@@ -5,7 +5,7 @@ using UnityLike.Entities.GameRoop;
 using UnityLike.Entities.Shape;
 using Radishmouse;
 
-namespace UnityLike.FrameworkAndDrivers.GameRoop
+namespace UnityLike.FrameworkAndDrivers.PlayButton
 {
     /// <summary>
     /// ゲームの実行中にPlayButtonを回るエフェクトを表現します。UILineRendererにアタッチしてください。

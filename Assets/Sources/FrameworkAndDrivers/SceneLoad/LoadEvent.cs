@@ -1,7 +1,8 @@
-
 using UnityEngine;
 
-namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
+using UnityLike.FrameworkAndDrivers.GameObjectManagement;
+
+namespace UnityLike.FrameworkAndDrivers.SceneLoad
 {
     public class LoadEvent : MonoBehaviour
     {

@@ -1,5 +1,5 @@
 
-namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
+namespace UnityLike.FrameworkAndDrivers.GameRoop
 {
     public interface ICodeExecute
     {

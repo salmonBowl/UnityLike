@@ -1,6 +1,8 @@
 using UnityEngine;
 
-namespace UnityLike.FrameworkAndDrivers.GameRoop
+using UnityLike.FrameworkAndDrivers.GameRoop;
+
+namespace UnityLike.FrameworkAndDrivers.PlayButton
 {
     [RequireComponent(typeof(GameRoopExecuter))]
     public class PlayButtonsEventManager : MonoBehaviour
