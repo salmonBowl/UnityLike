@@ -2,7 +2,7 @@ using UnityEngine;
 
 using UnityLike.Entities.SceneLoad;
 
-namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
+namespace UnityLike.FrameworkAndDrivers.SceneLoad
 {
     public class ComponentSetter
     {
