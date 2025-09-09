@@ -54,20 +54,14 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
 
         public void ExecuteCode(bool isVoidStart, bool onStopped)
         {
-            if (onStopped)
-            {
-                List<Variable> initalMember = initialMemberManager.GetList();
-                interpreter.ExecuteCode(data.AST, initalMember, ExecutionMode.InitalExecution);
-
-                return;
-            }
-
             if (isVoidStart)
             {
                 initialMemberManager.InitializeList();
                 List<Variable> initalMember = initialMemberManager.GetList();
 
-                interpreter.ExecuteCode(data.AST, initalMember, ExecutionMode.FullExecution);
+                ExecutionMode mode = onStopped ? ExecutionMode.InitalExecution : ExecutionMode.FullExecution;
+                
+                interpreter.ExecuteCode(data.AST, initalMember, mode);
 
                 initialMemberManager.SetList(interpreter.GetVariables());
             }

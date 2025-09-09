@@ -1,7 +1,7 @@
 
 namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 {
-    public class GameObjectSelectionManager
+    public class GameObjectSelection
     {
         private GameObjectPrefab selectedGameObject;
 

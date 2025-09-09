@@ -1,26 +1,21 @@
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 using UnityLike.Entities.SceneLoad;
-using UnityLike.FrameworkAndDrivers.GameObjectManagement;
 
 namespace UnityLike.FrameworkAndDrivers.FileAdapter
 {
-    public class SceneLoader : MonoBehaviour
+    public class FileLoader
     {
-        [SerializeField] private GameObjectManager gameObjectManager;
-        private readonly string relativePath = "SaveData/first_scene.json";
+        private readonly string filePath;
 
-        void Start()
+        public FileLoader(string relativeFilePath)
         {
-            LoadSceneFromFile();
+            filePath = Path.Combine(Application.dataPath, relativeFilePath);
         }
 
-        public void LoadSceneFromFile()
+        public LoadData LoadData()
         {
-            string filePath = Path.Combine(Application.dataPath, relativePath);
-
             if (!File.Exists(filePath))
             {
                 Debug.LogError($"ファイルが見つかりません: {filePath}");
@@ -42,16 +37,11 @@ namespace UnityLike.FrameworkAndDrivers.FileAdapter
                 Debug.LogError($"JSONファイルの読み込み中にエラーが発生しました: {ex.Message}");
             }
 
-            foreach (var gameObjectData in loadData.gameObjects)
-            {
-                gameObjectManager.LoadGameObject(gameObjectData.modelName, gameObjectData);
-            }
+            return loadData;
         }
 
         public void SaveFile(LoadData data)
         {
-            string filePath = Path.Combine(Application.dataPath, relativePath);
-
             try
             {
                 // JSONファイルに変換
