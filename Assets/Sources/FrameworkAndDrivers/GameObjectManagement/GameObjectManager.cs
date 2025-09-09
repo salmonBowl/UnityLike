@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,11 +10,11 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
     {
         [SerializeField] private GameObject gameObjectPrefab;
         [SerializeField] private ModelList models;
+        [SerializeField] private SceneLoader sceneLoader;
 
         private readonly List<GameObjectPrefab> gameObjects = new();
-        private GameObjectPrefab selectedGameObject;
 
-        [SerializeField] private SceneLoader sceneLoader;
+        private readonly GameObjectSelectionManager selectionManager = new();
         private readonly ComponentSetter componentSetter = new();
         private readonly ComponentReader componentReader = new();
 
@@ -26,27 +25,7 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 
         public void ChangeSelected(GameObjectPrefab target)
         {
-            // 元々選択していたオブジェクトの選択を外します
-            if (selectedGameObject)
-            {
-                // エディターを閉じる
-                selectedGameObject.EditorSetActive(false);
-                // ハイライトを非表示
-                selectedGameObject.HighlightSetActive(false);
-            }
-
-            // selectedGameObjectを変更します
-            selectedGameObject = target;
-
-            // 新しく選択するオブジェクトを選択します
-            if (target)
-            {
-                // ハイライトを表示
-                target.HighlightSetActive(true);
-                // エディターを開く
-                // この処理は時間がかかるため、ハイライトの描画を先に行っています
-                StartCoroutine(OpenCodeEditor(target));
-            }
+            selectionManager.ChangeSelected(target);
         }
 
         public void ExecuteVoidStart(bool onStopped)
@@ -90,7 +69,7 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
             gameObjects.Add(gameObject);
         }
         /// <summary>
-        /// データファイルからオブジェクトを読み込みます
+        /// データファイルからオブジェクトを1つずつ読み込みます
         /// </summary>
         public void LoadGameObject(string modelName, GameObjectData data)
         {
@@ -129,12 +108,6 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
                 return;
             }
             sceneLoader.SaveFile(data);
-        }
-
-        private IEnumerator OpenCodeEditor(GameObjectPrefab gameObject)
-        {
-            yield return null;
-            gameObject.EditorSetActive(true);
         }
     }
 }

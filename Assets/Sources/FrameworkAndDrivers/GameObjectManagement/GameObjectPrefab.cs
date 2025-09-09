@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 using UnityLike.FrameworkAndDrivers.CodeEditor;
@@ -30,6 +31,11 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 
         public void EditorSetActive(bool value)
         {
+            StartCoroutine(OpenCodeEditor(value));
+        }
+        private IEnumerator OpenCodeEditor(bool value)
+        {
+            yield return null;
             codeEditorCanvas.SetActive(value);
         }
         public void HighlightSetActive(bool value)
