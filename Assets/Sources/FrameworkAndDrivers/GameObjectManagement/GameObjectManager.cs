@@ -7,6 +7,7 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
     public class GameObjectManager : ICodeExecute
     {
         private readonly List<GameObjectPrefab> gameObjects = new();
+
         private readonly GameObjectSelection selectionManager = new();
 
         /// <summary>

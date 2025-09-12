@@ -13,9 +13,9 @@ using UnityLike.FrameworkAndDrivers.CodeEditor;
 using UnityLike.FrameworkAndDrivers.Settings;
 using UnityLike.FrameworkAndDrivers.GameRoop;
 
-namespace UnityLike.FrameworkAndDrivers.Installers
+namespace UnityLike.Installers
 {
-    public class GameSceneInstaller : MonoInstaller
+    public class Installer : MonoInstaller
     {
         [Header("ScriptableObjectファイルをアタッチします")]
         [SerializeField]

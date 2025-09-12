@@ -14,7 +14,7 @@ namespace UnityLike.FrameworkAndDrivers.SceneLoad
         [SerializeField, Header("モデルオブジェクトのプレハブを取得します")]
         private ModelList modelList;
 
-        private readonly GameObjectManager gameObjectManager;
+        private readonly GameObjectManager gameObjectManager = new();
         private readonly ComponentSetter componentSetter = new();
 
         /// <summary>

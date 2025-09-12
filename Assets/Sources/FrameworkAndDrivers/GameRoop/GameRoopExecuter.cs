@@ -9,18 +9,15 @@ namespace UnityLike.FrameworkAndDrivers.GameRoop
     public class GameRoopExecuter : MonoBehaviour
     {
         [SerializeField]
-        private GameObjectManager gameObjectManager;
-        [SerializeField]
         private PlayButtonsEventManager buttonManager;
         [SerializeField]
         private WhilePlayingEffect effectLineRenderer;
 
+        private readonly GameObjectManager gameObjectManager;
         private readonly GameRoopManager stateManager = new();
 
         void Start()
         {
-            if (!gameObjectManager)
-                Debug.LogError("gameObjectManagerがアタッチされていません");
             if (!buttonManager)
                 Debug.LogError("buttonManagerがアタッチされていません");
             if (!effectLineRenderer)

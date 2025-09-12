@@ -1,4 +1,4 @@
-using Debug = UnityEngine.Debug;
+using UnityEngine;
 
 using UnityLike.Entities.SceneLoad;
 using UnityLike.FrameworkAndDrivers.GameObjectManagement;
@@ -8,6 +8,7 @@ namespace UnityLike.FrameworkAndDrivers.SceneLoad
 {
     public class SceneLoader
     {
+        private readonly GameObjectFactory gameObjectFactory;
         private readonly GameObjectManager gameObjectManager;
         private readonly FileLoader fileLoader;
 
@@ -26,7 +27,7 @@ namespace UnityLike.FrameworkAndDrivers.SceneLoad
 
             foreach (var gameObjectData in data.gameObjects)
             {
-                gameObjectManager.LoadGameObject(gameObjectData);
+                gameObjectFactory.LoadGameObject(gameObjectData);
             }
         }
         public void SaveScene()

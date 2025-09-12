@@ -16,7 +16,7 @@ namespace UnityLike.InterfaceAdapters.TextAreaLayout
         public LayoutDataBuilder(LineCountManager lineCountManager)
         {
             this.lineCountManager = lineCountManager;
-            settings = FrameworkAndDrivers.Installers.GameSceneInstaller.CodeEditorSettings;
+            settings = Installers.Installer.CodeEditorSettings;
         }
 
         public TextAreaLayoutData BuildData()
