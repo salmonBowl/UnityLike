@@ -782,8 +782,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityLike.FrameworkAndDrivers.GameObjectManagement.GameObjectManager,
+      - m_Target: {fileID: 466921372}
+        m_TargetAssemblyTypeName: UnityLike.FrameworkAndDrivers.SceneLoad.GameObjectFactory,
           Base-Assembly
         m_MethodName: AddNewObject
         m_Mode: 1

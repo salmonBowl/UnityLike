@@ -18,7 +18,7 @@ namespace UnityLike.Entities.Symbol
 
         public override Instance Add(Instance other)
         {
-            if (!Castable(other, "float"))
+            if (Castable(other, "float"))
             {
                 float value1 = AsFloat();
                 float value2 = ((NumberInstance)other).AsFloat();
@@ -29,7 +29,7 @@ namespace UnityLike.Entities.Symbol
         }
         public override Instance Subtract(Instance other)
         {
-            if (!Castable(other, "float"))
+            if (Castable(other, "float"))
             {
                 float value1 = AsFloat();
                 float value2 = ((NumberInstance)other).AsFloat();
@@ -40,14 +40,14 @@ namespace UnityLike.Entities.Symbol
         }
         public override Instance Multiply(Instance other)
         {
-            if (!Castable(other, "float"))
+            if (Castable(other, "float"))
             {
                 float value1 = AsFloat();
                 float value2 = ((NumberInstance)other).AsFloat();
 
                 return new FloatInstance(value1 * value2);
             }
-            else if (!Castable(other, "Vector3"))
+            else if (Castable(other, "Vector3"))
             {
                 float scalar = AsFloat();
                 float x = ((NumberInstance)other.GetMember("x")).AsFloat();
@@ -60,7 +60,7 @@ namespace UnityLike.Entities.Symbol
         }
         public override Instance Divide(Instance other)
         {
-            if (!Castable(other, "float"))
+            if (Castable(other, "float"))
             {
                 float value1 = (float)Value;
                 float value2 = ((NumberInstance)other).AsFloat();
@@ -73,7 +73,7 @@ namespace UnityLike.Entities.Symbol
         }
         public override Instance Modulo(Instance other)
         {
-            if (!Castable(other, "float"))
+            if (Castable(other, "float"))
             {
                 float value1 = (float)Value;
                 float value2 = ((NumberInstance)other).AsFloat();

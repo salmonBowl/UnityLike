@@ -1,14 +1,14 @@
 {
     "gameObjects": [
         {
-            "name": "プレイヤー",
+            "name": "",
             "modelName": "Cube",
             "activeSelf": true,
             "transform": {
                 "position": {
-                    "x": 1.0,
-                    "y": 2.0,
-                    "z": 3.0
+                    "x": 0.0,
+                    "y": -1.0,
+                    "z": 0.0
                 },
                 "eulerAngles": {
                     "x": 0.0,
@@ -16,7 +16,41 @@
                     "z": 0.0
                 },
                 "localScale": {
-                    "x": 1.0,
+                    "x": 20.0,
+                    "y": 1.0,
+                    "z": 20.0
+                }
+            },
+            "rigidbody": {
+                "mass": 1.0,
+                "useGravity": true,
+                "isKinematic": true,
+                "velocity": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            },
+            "voidStart": "transform.position = new Vector3(0, -1, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(20, 1, 20);",
+            "voidUpdate": ""
+        },
+        {
+            "name": "",
+            "modelName": "Cube",
+            "activeSelf": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -7.0
+                },
+                "eulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 5.400000095367432,
                     "y": 1.0,
                     "z": 1.0
                 }
@@ -31,8 +65,110 @@
                     "z": 0.0
                 }
             },
-            "voidStart": "transform.position = new Vector3(1, 2, 3);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 1);\n\nfloat speed = 0.09;",
-            "voidUpdate": "if(Input.GetKey(RightArrow))\n{\ntransform.Rotate(0, 0.4, 0);\n}\nif(Input.GetKey(LeftArrow))\n{\ntransform.Translate(-speed,0,0);\n}\nif(Input.GetKey(UpArrow))\n{\ntransform.Translate(0,0,speed);\n}\nif(Input.GetKey(DownArrow))\n{\ntransform.Translate(0,0,-speed);\n}\n"
+            "voidStart": "transform.position = new Vector3(0, 0, -7);\ntransform.eulerAngles = new Vector3(0, 0, 0);\n\nfloat moveSpeed = 0.12f;\nfloat stageWidth = 20 - 2;\nfloat width = 5.4f;\n\ntransform.localScale = new Vector3(width, 1, 1);",
+            "voidUpdate": "transform.localScale = new Vector3(width, 1, 1);\n\nif (Input.GetKey(RightArrow))\n{\n    transform.Translate(moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(LeftArrow))\n{\n    transform.Translate(-moveSpeed, 0, 0);\n}\n\nVector3 pos = transform.position;\nfloat halfRange = (stageWidth - width) / 2;\npos.x = Mathf.Clamp(pos.x, -halfRange, halfRange);\n\ntransform.position = pos;"
+        },
+        {
+            "name": "",
+            "modelName": "Cube",
+            "activeSelf": true,
+            "transform": {
+                "position": {
+                    "x": 9.5,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "eulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 20.0
+                }
+            },
+            "rigidbody": {
+                "mass": 1.0,
+                "useGravity": true,
+                "isKinematic": true,
+                "velocity": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            },
+            "voidStart": "transform.position = new Vector3(9.5f, 0, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 20);\n",
+            "voidUpdate": "\n"
+        },
+        {
+            "name": "",
+            "modelName": "Cube",
+            "activeSelf": true,
+            "transform": {
+                "position": {
+                    "x": -9.5,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "eulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 20.0
+                }
+            },
+            "rigidbody": {
+                "mass": 1.0,
+                "useGravity": true,
+                "isKinematic": true,
+                "velocity": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            },
+            "voidStart": "transform.position = new Vector3(-9.5f, 0, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 20);\n",
+            "voidUpdate": "\n"
+        },
+        {
+            "name": "",
+            "modelName": "Cube",
+            "activeSelf": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 9.5
+                },
+                "eulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 20.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "rigidbody": {
+                "mass": 1.0,
+                "useGravity": true,
+                "isKinematic": true,
+                "velocity": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            },
+            "voidStart": "transform.position = new Vector3(0, 0, 9.5f);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(20, 1, 1);\n",
+            "voidUpdate": "\n"
         }
     ]
 }

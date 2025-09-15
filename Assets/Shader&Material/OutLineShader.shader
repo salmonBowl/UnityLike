@@ -51,12 +51,18 @@ Shader "Custom/OutLineShader"
 			{
 				Output o;
 
+				// ワールドスケールの倍率を計算
+				float3 localScale = length(float3(
+					length(unity_ObjectToWorld[0].xyz),
+					length(unity_ObjectToWorld[1].xyz),
+					length(unity_ObjectToWorld[2].xyz)));
+
 				// カメラからの距離を計算
                 float3 worldPos = mul(unity_ObjectToWorld, i.vertex).xyz;
 				float dist = distance(worldPos, _WorldSpaceCameraPos);
 
 				// 法線方向に頂点を押し出し
-				i.vertex.xyz += normalize(i.normal) * _Outline * dist;
+				i.vertex.xyz += normalize(i.normal) * _Outline * dist / localScale;
 				o.pos = UnityObjectToClipPos(i.vertex);
 				o.color = _OutlineColor;
 				return o;

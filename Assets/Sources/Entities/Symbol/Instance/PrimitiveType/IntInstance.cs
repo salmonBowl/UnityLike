@@ -58,7 +58,7 @@ namespace UnityLike.Entities.Symbol
         }
         public override Instance Multiply(Instance other)
         {
-            if (    Castable(other, "int"))
+            if (Castable(other, "int"))
             {
                 int value1 = AsInt();
                 int value2 = ((IntInstance)other).AsInt();

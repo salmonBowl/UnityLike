@@ -859,9 +859,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1399111758}
-        m_TargetAssemblyTypeName: TitleSceneAll, Base-Assembly
-        m_MethodName: LoadProject
+      - m_Target: {fileID: 1399111755}
+        m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -926,9 +926,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1399111758}
-          m_TargetAssemblyTypeName: TitleSceneAll, Base-Assembly
-          m_MethodName: ButtonCreateNewProjectPointerEnter
+        - m_Target: {fileID: 1399111755}
+          m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -942,9 +942,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1399111758}
-          m_TargetAssemblyTypeName: TitleSceneAll, Base-Assembly
-          m_MethodName: ButtonPointerExit
+        - m_Target: {fileID: 1399111755}
+          m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1549,9 +1549,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1399111758}
-        m_TargetAssemblyTypeName: TitleSceneAll, Base-Assembly
-        m_MethodName: CreateNewProject
+      - m_Target: {fileID: 1399111755}
+        m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1632,9 +1632,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1399111758}
-          m_TargetAssemblyTypeName: TitleSceneAll, Base-Assembly
-          m_MethodName: ButtonPointerExit
+        - m_Target: {fileID: 1399111755}
+          m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
