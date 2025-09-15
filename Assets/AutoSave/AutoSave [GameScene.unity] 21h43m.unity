@@ -602,6 +602,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979101396e3425446bf8d67f28504e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameObjectPrefab: {fileID: 5227682074812591798, guid: 5e93ac0ff45383248857beadaf3de394, type: 3}
+  models:
+    models:
+    - name: Cube
+      gameObject: {fileID: 7255814834389358600, guid: 2fabfa4392e8cd6468f81017054c75e4, type: 3}
 --- !u!114 &466921371
 MonoBehaviour:
   m_ObjectHideFlags: 0

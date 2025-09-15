@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 using UnityLike.Entities.SceneLoad;
 using UnityLike.FrameworkAndDrivers.GameObjectManagement;
@@ -8,10 +9,13 @@ namespace UnityLike.FrameworkAndDrivers.SceneLoad
 {
     public class SceneLoader
     {
+        [Inject]
         private readonly GameObjectFactory gameObjectFactory;
-        private readonly GameObjectManager gameObjectManager;
-        private readonly FileLoader fileLoader;
 
+        [Inject]
+        private readonly GameObjectManager gameObjectManager;
+
+        private readonly FileLoader fileLoader;
         private readonly ComponentReader componentReader = new();
 
         public SceneLoader(GameObjectManager gameObjectManager)

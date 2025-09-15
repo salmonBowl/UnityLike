@@ -566,7 +566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 466921369}
-  - component: {fileID: 466921372}
+  - component: {fileID: 466921370}
   - component: {fileID: 466921371}
   m_Layer: 0
   m_Name: GameDirector
@@ -590,6 +590,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &466921370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466921367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979101396e3425446bf8d67f28504e31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjectPrefab: {fileID: 5227682074812591798, guid: 5e93ac0ff45383248857beadaf3de394, type: 3}
+  models:
+    models:
+    - name: Cube
+      gameObject: {fileID: 7255814834389358600, guid: 2fabfa4392e8cd6468f81017054c75e4, type: 3}
 --- !u!114 &466921371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,23 +619,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1de972d8a6cad4186f11541299ad56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &466921372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466921367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99bc954246adef24481bd969d80472d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 5227682074812591798, guid: 5e93ac0ff45383248857beadaf3de394, type: 3}
-  modelList:
-    models:
-    - name: Cube
-      gameObject: {fileID: 7255814834389358600, guid: 2fabfa4392e8cd6468f81017054c75e4, type: 3}
 --- !u!1 &683952733
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 466921370}
         m_TargetAssemblyTypeName: UnityLike.FrameworkAndDrivers.GameObjectManagement.GameObjectManager,
           Base-Assembly
         m_MethodName: AddNewObject

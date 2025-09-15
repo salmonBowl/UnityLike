@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 using UnityLike.FrameworkAndDrivers.GameObjectManagement;
 
@@ -8,7 +9,8 @@ namespace UnityLike.FrameworkAndDrivers.EditSpace
     [RequireComponent(typeof(Camera))]
     public class SelectObject : MonoBehaviour
     {
-        [SerializeField] private GameObjectManager gameObjectManager;
+        [Inject]
+        private readonly GameObjectManager gameObjectManager;
 
         private Camera myCamera;
 

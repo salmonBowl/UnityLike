@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 using UnityLike.Entities.SceneLoad;
 using UnityLike.FrameworkAndDrivers.GameObjectManagement;
@@ -14,7 +15,9 @@ namespace UnityLike.FrameworkAndDrivers.SceneLoad
         [SerializeField, Header("モデルオブジェクトのプレハブを取得します")]
         private ModelList modelList;
 
-        private readonly GameObjectManager gameObjectManager = new();
+        [Inject]
+        private readonly GameObjectManager gameObjectManager;
+
         private readonly ComponentSetter componentSetter = new();
 
         /// <summary>

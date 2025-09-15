@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 using UnityLike.Entities.GameRoop;
 using UnityLike.FrameworkAndDrivers.GameObjectManagement;
@@ -13,7 +14,9 @@ namespace UnityLike.FrameworkAndDrivers.GameRoop
         [SerializeField]
         private WhilePlayingEffect effectLineRenderer;
 
+        [Inject]
         private readonly GameObjectManager gameObjectManager;
+
         private readonly GameRoopManager stateManager = new();
 
         void Start()
