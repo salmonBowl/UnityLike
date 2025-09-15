@@ -927,6 +927,7 @@ GameObject:
   - component: {fileID: 1045609373960111230}
   - component: {fileID: 8703019796140798944}
   - component: {fileID: 5093874312953752302}
+  - component: {fileID: 7068409702402083261}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -1062,7 +1063,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnDeselect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7068409702402083261}
+        m_TargetAssemblyTypeName: InputFieldScrollControll, Base-Assembly
+        m_MethodName: OnInputFieldDeselect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -1126,6 +1139,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentScrollView: {fileID: 7446004973309550237}
+--- !u!114 &7068409702402083261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954650914768801742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebff10db45adf264dbb2c68752116cbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textArea: {fileID: 8788299386372228464}
 --- !u!1 &3369438817825175368
 GameObject:
   m_ObjectHideFlags: 0
@@ -2585,6 +2611,7 @@ GameObject:
   - component: {fileID: 755208121330872224}
   - component: {fileID: 8081745225828345780}
   - component: {fileID: 1500336269084584310}
+  - component: {fileID: 5250078075990607026}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -2720,7 +2747,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnDeselect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5250078075990607026}
+        m_TargetAssemblyTypeName: InputFieldScrollControll, Base-Assembly
+        m_MethodName: OnInputFieldDeselect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -2779,6 +2818,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentScrollView: {fileID: 7446004973309550237}
+--- !u!114 &5250078075990607026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7641214443151356278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebff10db45adf264dbb2c68752116cbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textArea: {fileID: 7088034324558689486}
 --- !u!1 &7790049406162726424
 GameObject:
   m_ObjectHideFlags: 0
@@ -3132,7 +3184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1223434680888647827
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3231,6 +3283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editorSize: 0.1
+  followTarget: {fileID: 1883792532977924305}
 --- !u!1 &8806046612525910350
 GameObject:
   m_ObjectHideFlags: 0

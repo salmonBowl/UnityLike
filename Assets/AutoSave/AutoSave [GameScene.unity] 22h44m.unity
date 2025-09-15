@@ -566,10 +566,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 466921369}
-  - component: {fileID: 466921370}
   - component: {fileID: 466921371}
+  - component: {fileID: 466921372}
   m_Layer: 0
-  m_Name: GameDirector
+  m_Name: GameObjectManagement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -590,23 +590,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &466921370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466921367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 979101396e3425446bf8d67f28504e31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 5227682074812591798, guid: 5e93ac0ff45383248857beadaf3de394, type: 3}
-  models:
-    models:
-    - name: Cube
-      gameObject: {fileID: 7255814834389358600, guid: 2fabfa4392e8cd6468f81017054c75e4, type: 3}
 --- !u!114 &466921371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,6 +602,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1de972d8a6cad4186f11541299ad56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &466921372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466921367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99bc954246adef24481bd969d80472d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjectPrefab: {fileID: 5227682074812591798, guid: 5e93ac0ff45383248857beadaf3de394, type: 3}
+  modelList:
+    models:
+    - name: Cube
+      gameObject: {fileID: 7255814834389358600, guid: 2fabfa4392e8cd6468f81017054c75e4, type: 3}
 --- !u!1 &683952733
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   logTextPrefab: {fileID: 2712252635250230533, guid: 917b285b58f897b458a3e94099d4d987, type: 3}
   logParent: {fileID: 683952734}
-  maxLogLines: 10
+  maxLogLines: 15
   fadeoutTime: 1
   fadeoutMarginTime: 4
 --- !u!1 &880865310
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 466921370}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityLike.FrameworkAndDrivers.GameObjectManagement.GameObjectManager,
           Base-Assembly
         m_MethodName: AddNewObject
@@ -2381,10 +2381,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1788240994}
-  - component: {fileID: 1788240997}
   - component: {fileID: 1788240996}
+  - component: {fileID: 1788240997}
+  - component: {fileID: 1788240998}
   m_Layer: 0
-  m_Name: GameSceneInstaller
+  m_Name: GameInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2420,6 +2421,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1788240997}
+  - {fileID: 1788240998}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -2450,6 +2452,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   codeEditorSettings: {fileID: 11400000, guid: edfea24ced3ee0c4bac1514a2d51484a, type: 2}
+--- !u!114 &1788240998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788240993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618f3c6985425184c9fbe91c1ec362a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjectFactoryInstance: {fileID: 466921372}
 --- !u!1 &1948327213
 GameObject:
   m_ObjectHideFlags: 0

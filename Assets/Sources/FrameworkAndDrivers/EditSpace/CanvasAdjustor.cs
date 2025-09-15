@@ -4,12 +4,17 @@ public class CanvasAdjustor : MonoBehaviour
 {
     [SerializeField]
     private float editorSize = 0.1f;
+    [SerializeField]
+    private Transform followTarget;
 
     private Canvas canvas;
     private RectTransform myTransform;
 
     void Start()
     {
+        if (!followTarget)
+            Debug.Log("followTargetがアタッチされていません");
+
         canvas = GetComponent<Canvas>();
         myTransform = GetComponent<RectTransform>();
         if (!canvas)
@@ -22,9 +27,15 @@ public class CanvasAdjustor : MonoBehaviour
         canvas.worldCamera = uiCamera.GetComponent<Camera>();
         if (!canvas.worldCamera)
             Debug.LogError("Camera_UIにCameraが見つかりませんでした");
+
+        // 親子関係を解除し、元々親だったtransformの影響を受けないようにします
+        transform.SetParent(null);
     }
     void Update()
     {
+        // 位置の制御
+        transform.position = followTarget.position;
+
         // 向きの制御
         Quaternion cameraRotation = canvas.worldCamera.transform.rotation;
         transform.rotation = cameraRotation;

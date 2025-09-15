@@ -77,6 +77,10 @@ namespace UnityLike.UseCases.UnityComponent
             {
                 Value = new KeyCodeInstance(KeyCode.D)
             };
+            Variable mouse = new("Mouse", KeyCodeClass.Single)
+            {
+                Value = new KeyCodeInstance(KeyCode.Mouse0)
+            };
             variables.Add(space);
             variables.Add(rightArrow);
             variables.Add(leftArrow);
@@ -86,6 +90,7 @@ namespace UnityLike.UseCases.UnityComponent
             variables.Add(keyA);
             variables.Add(keyS);
             variables.Add(keyD);
+            variables.Add(mouse);
         }
 
         public List<Variable> GetVariables()
