@@ -23,7 +23,6 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
 
         public void ExecuteVoidStart(bool onStopped) => codeEditor.ExecuteVoidStart(onStopped);
         public void ExecuteVoidUpdate() => codeEditor.ExecuteVoidUpdate();
-        public void SetNameInputField(string name) => codeEditor.SetNameInputField(name);
         public void SetCodeVoidStart(string sourceCode) => codeEditor.SetCodeVoidStart(sourceCode);
         public void SetCodeVoidUpdate(string sourceCode) => codeEditor.SetCodeVoidUpdate(sourceCode);
         public string GetCodeVoidStart() => codeEditor.GetCodeVoidStart();
@@ -48,6 +47,11 @@ namespace UnityLike.FrameworkAndDrivers.GameObjectManagement
         public void OnNameInputChanged(string newName)
         {
             Name = newName;
+        }
+        public void SetName(string name)
+        {
+            Name = name;
+            codeEditor.SetNameInputField(name);
         }
 
         public Vector3 GetModelSize() => model.GetModelSize();

@@ -44,7 +44,11 @@ namespace UnityLike.FrameworkAndDrivers.SceneLoad
                 (objectName, modelName, gameObjectPrefab, modelObject);
 
             // 新規オブジェクトの初期値を設定
-            componentSetter.SetAsInitialize(gameObject.gameObject);
+            componentSetter.SetAsInitialize(gameObject.gameObject, out GameObjectData initialData);
+
+            gameObject.SetName(initialData.name);
+            gameObject.SetCodeVoidStart(initialData.voidStart);
+            gameObject.SetCodeVoidUpdate(initialData.voidUpdate);
 
             // GameObjectリストに格納
             gameObjectManager.Add(gameObject);
@@ -71,7 +75,7 @@ namespace UnityLike.FrameworkAndDrivers.SceneLoad
             componentSetter.Set(gameObject.gameObject, data);
 
             // テキストを読み込み
-            gameObject.SetNameInputField(data.name);
+            gameObject.SetName(data.name);
             gameObject.SetCodeVoidStart(data.voidStart);
             gameObject.SetCodeVoidUpdate(data.voidUpdate);
 

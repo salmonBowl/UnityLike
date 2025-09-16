@@ -54,7 +54,7 @@ namespace UnityLike.FrameworkAndDrivers.EditSpace
                 // ‰¡ˆÚ“®
                 transform.Translate(moveX, moveY, 0);
 
-                Cursor.SetCursor(mouseCursor_move, new Vector2(0, 0), CursorMode.ForceSoftware);
+                Cursor.SetCursor(mouseCursor_move, new Vector2(0, 0), CursorMode.Auto);
             }
         }
         private void MouseScroll()

@@ -1,7 +1,7 @@
 {
     "gameObjects": [
         {
-            "name": "",
+            "name": "ステージ",
             "modelName": "Cube",
             "activeSelf": true,
             "transform": {
@@ -35,12 +35,12 @@
             "voidUpdate": ""
         },
         {
-            "name": "",
+            "name": "プレイヤー",
             "modelName": "Cube",
             "activeSelf": true,
             "transform": {
                 "position": {
-                    "x": -0.1400018334388733,
+                    "x": 0.0,
                     "y": 0.0,
                     "z": -7.0
                 },
@@ -176,14 +176,14 @@
             "activeSelf": true,
             "transform": {
                 "position": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
+                    "x": -7.654124800637874e-8,
+                    "y": -7.152557657263969e-9,
+                    "z": -2.5392349556341288e-8
                 },
                 "eulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
+                    "x": -4.1209190726476665e-7,
+                    "y": -9.400202998222085e-7,
+                    "z": 0.000005333367425919278
                 },
                 "localScale": {
                     "x": 1.0,

@@ -23,7 +23,7 @@ namespace UnityLike.FrameworkAndDrivers.SceneLoad
 
             gameObject.SetActive(data.activeSelf);
         }
-        public void SetAsInitialize(GameObject gameObject)
+        public void SetAsInitialize(GameObject gameObject, out GameObjectData initialData)
         {
             Transform transform = gameObject.GetComponent<Transform>();
             Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -37,6 +37,16 @@ namespace UnityLike.FrameworkAndDrivers.SceneLoad
             rigidbody.isKinematic = true;
 
             gameObject.SetActive(true);
+
+            initialData = new()
+            {
+                name = "新規オブジェクト",
+                voidStart =
+                "transform.position = new Vector3(0, 0, 0);\n" +
+                "transform.eulerAngles = new Vector3(0, 0, 0);\n" +
+                "transform.localScale = new Vector3(1, 1, 1);",
+                voidUpdate = "",
+            };
         }
     }
 }

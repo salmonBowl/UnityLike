@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_Text: 'transform.position = new Vector3(0, 0, 0);
 
     transform.eulerAngles
-    = new Vecto3(0, 0, 0);
+    = new Vector3(0, 0, 0);
 
     transform.localScale = new Vector3(1, 1, 1);
 
@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_OnFocusSelectAll: 0
   m_ResetOnDeActivation: 0
   m_KeepTextSelectionVisible: 0
-  m_RestoreOriginalTextOnEscape: 1
+  m_RestoreOriginalTextOnEscape: 0
   m_isRichTextEditingAllowed: 1
   m_LineLimit: 0
   isAlert: 0
@@ -2799,7 +2799,7 @@ MonoBehaviour:
   m_OnFocusSelectAll: 0
   m_ResetOnDeActivation: 0
   m_KeepTextSelectionVisible: 0
-  m_RestoreOriginalTextOnEscape: 1
+  m_RestoreOriginalTextOnEscape: 0
   m_isRichTextEditingAllowed: 1
   m_LineLimit: 0
   isAlert: 0
@@ -3470,7 +3470,7 @@ MonoBehaviour:
   m_OnFocusSelectAll: 0
   m_ResetOnDeActivation: 0
   m_KeepTextSelectionVisible: 0
-  m_RestoreOriginalTextOnEscape: 1
+  m_RestoreOriginalTextOnEscape: 0
   m_isRichTextEditingAllowed: 1
   m_LineLimit: 0
   isAlert: 0
