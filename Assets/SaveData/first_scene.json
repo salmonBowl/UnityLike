@@ -40,7 +40,7 @@
             "activeSelf": true,
             "transform": {
                 "position": {
-                    "x": 0.0,
+                    "x": -0.1400018334388733,
                     "y": 0.0,
                     "z": -7.0
                 },
@@ -65,7 +65,7 @@
                     "z": 0.0
                 }
             },
-            "voidStart": "transform.position = new Vector3(0, 0, -7);\ntransform.eulerAngles = new Vector3(0, 0, 0);\n\nfloat moveSpeed = 0.12f;\nfloat stageWidth = 20 - 2;\nfloat width = 5.4f;\n\ntransform.localScale = new Vector3(width, 1, 1);",
+            "voidStart": "transform.position = new Vector3(0, 0, -7);\ntransform.eulerAngles = new Vector3(0, 0, 0);\n\nfloat moveSpeed = 0.22f;\nfloat stageWidth = 20 - 2;\nfloat width = 5.4f;\n\ntransform.localScale = new Vector3(width, 1, 1);",
             "voidUpdate": "transform.localScale = new Vector3(width, 1, 1);\n\nif (Input.GetKey(RightArrow))\n{\n    transform.Translate(moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(LeftArrow))\n{\n    transform.Translate(-moveSpeed, 0, 0);\n}\n\nVector3 pos = transform.position;\nfloat halfRange = (stageWidth - width) / 2;\npos.x = Mathf.Clamp(pos.x, -halfRange, halfRange);\n\ntransform.position = pos;"
         },
         {
@@ -169,6 +169,40 @@
             },
             "voidStart": "transform.position = new Vector3(0, 0, 9.5f);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(20, 1, 1);\n",
             "voidUpdate": "\n"
+        },
+        {
+            "name": "",
+            "modelName": "Cube",
+            "activeSelf": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "eulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "rigidbody": {
+                "mass": 1.0,
+                "useGravity": true,
+                "isKinematic": false,
+                "velocity": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            },
+            "voidStart": "transform.position = new Vector3(0, 0, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 1);\n\nrigidbody.isKinematic = false;\n\nfloat activeFrame = 0;\n",
+            "voidUpdate": "activeFrame = activeFrame + 1;\nif (activeFrame < 90)\n{\n    rigidbody.velocity = new Vector3(0, 0, 0);\n    transform.position = new Vector3(0, 0, 0);\n}\nelse\n{\n    rigidbody.velocity = rigidbody.velocity.Normalize();\n}\n\nfloat posz = transform.position.z;\nif (posz < -8f)\n{\n    activeframe = 0;\n}\n"
         }
     ]
 }

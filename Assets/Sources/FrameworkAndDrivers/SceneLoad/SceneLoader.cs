@@ -22,7 +22,8 @@ namespace UnityLike.FrameworkAndDrivers.SceneLoad
         {
             this.gameObjectManager = gameObjectManager;
 
-            fileLoader = new FileLoader("SaveData/first_scene.json");
+            string sceneFilePath = FilePath.GetPath();
+            fileLoader = new FileLoader(sceneFilePath);
         }
 
         public void LoadScene()

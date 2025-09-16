@@ -96,7 +96,7 @@ namespace UnityLike.UseCases.Compiler
                     outher.Consume();
                     return ASTFactory.TokenToColoredToken(@if);
                 }
-                throw new SyntaxErrorException("文法が正しくありません");
+                throw new SyntaxErrorException("ifが必要です");
             }
             public ColoredToken Else()
             {
@@ -106,7 +106,7 @@ namespace UnityLike.UseCases.Compiler
                     outher.Consume();
                     return ASTFactory.TokenToColoredToken(@else);
                 }
-                throw new SyntaxErrorException("文法が正しくありません");
+                throw new SyntaxErrorException("elseが必要です");
             }
             public ColoredToken While()
             {
@@ -116,7 +116,7 @@ namespace UnityLike.UseCases.Compiler
                     outher.Consume();
                     return ASTFactory.TokenToColoredToken(@if);
                 }
-                throw new SyntaxErrorException("文法が正しくありません");
+                throw new SyntaxErrorException("whileが必要です");
             }
             public ColoredToken LeftParen()
             {

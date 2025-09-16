@@ -10,6 +10,8 @@ namespace UnityLike.FrameworkAndDrivers.SceneLoad
 
         void Start()
         {
+            Application.targetFrameRate = 60;
+
             sceneLoader.LoadScene();
         }
         private void OnApplicationQuit()

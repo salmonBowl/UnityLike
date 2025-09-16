@@ -859,9 +859,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1399111755}
-        m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1399111758}
+        m_TargetAssemblyTypeName: TitleSceneAll, Base-Assembly
+        m_MethodName: LoadProject
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -926,9 +926,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1399111755}
-          m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
-          m_MethodName: 
+        - m_Target: {fileID: 1399111758}
+          m_TargetAssemblyTypeName: TitleSceneAll, Base-Assembly
+          m_MethodName: ButtonCreateNewProjectPointerEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -942,9 +942,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1399111755}
-          m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
-          m_MethodName: 
+        - m_Target: {fileID: 1399111758}
+          m_TargetAssemblyTypeName: TitleSceneAll, Base-Assembly
+          m_MethodName: ButtonPointerExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1409,7 +1409,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1399111757}
-  - component: {fileID: 1399111756}
   - component: {fileID: 1399111758}
   m_Layer: 0
   m_Name: TitleScene
@@ -1418,22 +1417,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1399111756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399111755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c48abf166fcefe43a13682851a9951f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 902049396}
-  buttonNewStart: {fileID: 1702696032}
-  buttonLoad: {fileID: 758478369}
-  UnityIcon: {fileID: 1180756042}
 --- !u!4 &1399111757
 Transform:
   m_ObjectHideFlags: 0
@@ -1464,7 +1447,7 @@ MonoBehaviour:
   panel: {fileID: 902049396}
   buttonNewStart: {fileID: 1702696032}
   buttonLoad: {fileID: 758478369}
-  UnityIcon: {fileID: 1721424554}
+  UnityIcon: {fileID: 1180756042}
 --- !u!1 &1702696030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,9 +1532,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1399111755}
-        m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1399111758}
+        m_TargetAssemblyTypeName: TitleSceneAll, Base-Assembly
+        m_MethodName: CreateNewProject
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1632,9 +1615,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1399111755}
-          m_TargetAssemblyTypeName: TitleSceneAll, Assembly-CSharp
-          m_MethodName: 
+        - m_Target: {fileID: 1399111758}
+          m_TargetAssemblyTypeName: TitleSceneAll, Base-Assembly
+          m_MethodName: ButtonPointerExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

@@ -164,6 +164,9 @@ namespace UnityLike.UseCases.Compiler
             if (CurrentTokenType == TokenType.Return)
                 Consume();
 
+            if (CurrentTokenType != TokenType.Else)
+                return new IfStatementNode(@if, leftParen, condition, rightParen, thenStatement);
+
             ColoredToken @else =
                 u.Else();
 
