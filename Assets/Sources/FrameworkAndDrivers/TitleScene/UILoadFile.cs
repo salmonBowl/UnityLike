@@ -10,6 +10,8 @@ namespace UnityLike.FrameworkAndDrivers.TitleScene
         private FileContent fileContentPrefab;
         [SerializeField]
         private Transform fileContentParent;
+        [SerializeField]
+        private SceneTransitionManager sceneTransition;
 
         void OnEnable()
         {
@@ -22,7 +24,7 @@ namespace UnityLike.FrameworkAndDrivers.TitleScene
 
             foreach (string fileName in loader.GetAllFileNames())
             {
-                fileContentPrefab.Instantiate(fileContentParent, fileName);
+                fileContentPrefab.Instantiate(fileContentParent, fileName, sceneTransition);
             }
         }
     }

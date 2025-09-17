@@ -16,10 +16,7 @@ namespace UnityLike.Entities.Symbol
             Variable Y = new("y", Float);
             Variable Z = new("z", Float);
 
-            Variable magnitude = new("magnitude", Float);
-            Variable normalized = new("normalized", Vector3Class.Single);
-
-            Member.AddMember(X, Y, Z, magnitude, normalized);
+            Member.AddMember(X, Y, Z);
 
             X.Value = new FloatInstance(vector3.x);
             Y.Value = new FloatInstance(vector3.y);
@@ -78,6 +75,14 @@ namespace UnityLike.Entities.Symbol
                     ArgCheck();
                     string message = $"Vector3({x}, {y}, {z})";
                     return new StringInstance(message);
+                case "Magnitude":
+                    ArgCheck();
+                    float magnitude = new Vector3(x, y, z).magnitude;
+                    return new FloatInstance(magnitude);
+                case "Normalized":
+                    ArgCheck();
+                    Vector3 normalized = new Vector3(x, y, z).normalized;
+                    return new Vector3Instance(normalized);
                 default:
                     throw new MemberNotExistException(name, nameToken);
             }

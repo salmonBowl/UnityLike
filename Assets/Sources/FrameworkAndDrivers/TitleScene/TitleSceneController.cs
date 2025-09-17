@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 namespace UnityLike.FrameworkAndDrivers.TitleScene
 {
     public class TitleSceneController : MonoBehaviour
     {
+        [SerializeField] GameObject newProject;
+        [SerializeField] GameObject loadProject;
+
         [SerializeField] UIAnimator animator;
-        [SerializeField] SceneTransitionManager sceneTransition;
 
         void Start()
         {
@@ -14,27 +15,26 @@ namespace UnityLike.FrameworkAndDrivers.TitleScene
         }
         public void ButtonCreateNewProjectPointerEnter()
         {
-            if (!sceneTransition.WhileFadeOut())
-                animator.SetRotationDestination(-120);
+            animator.SetRotationDestination(-120);
         }
         public void ButtonLoadProjectPointerEnter()
         {
-            if (!sceneTransition.WhileFadeOut())
-                animator.SetRotationDestination(120);
+            animator.SetRotationDestination(120);
         }
         public void ButtonPointerExit()
         {
-            if (!sceneTransition.WhileFadeOut())
-                animator.SetRotationDestination(0);
+            animator.SetRotationDestination(0);
         }
 
         public void CreateNewProject()
         {
-            sceneTransition.StartFadeOut();
+            newProject.SetActive(true);
+            loadProject.SetActive(false);
         }
         public void LoadProject()
         {
-            sceneTransition.StartFadeOut();
+            newProject.SetActive(false);
+            loadProject.SetActive(true);
         }
     }
 }
