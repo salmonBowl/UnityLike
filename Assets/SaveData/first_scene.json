@@ -69,7 +69,7 @@
             "voidUpdate": "transform.localScale = new Vector3(width, 1, 1);\n\nif (Input.GetKey(RightArrow))\n{\n    transform.Translate(moveSpeed, 0, 0);\n}\n\nif (Input.GetKey(LeftArrow))\n{\n    transform.Translate(-moveSpeed, 0, 0);\n}\n\nVector3 pos = transform.position;\nfloat halfRange = (stageWidth - width) / 2;\npos.x = Mathf.Clamp(pos.x, -halfRange, halfRange);\n\ntransform.position = pos;"
         },
         {
-            "name": "",
+            "name": "壁",
             "modelName": "Cube",
             "activeSelf": true,
             "transform": {
@@ -103,7 +103,7 @@
             "voidUpdate": "\n"
         },
         {
-            "name": "",
+            "name": "壁",
             "modelName": "Cube",
             "activeSelf": true,
             "transform": {
@@ -137,7 +137,7 @@
             "voidUpdate": "\n"
         },
         {
-            "name": "",
+            "name": "天井",
             "modelName": "Cube",
             "activeSelf": true,
             "transform": {
@@ -171,19 +171,19 @@
             "voidUpdate": "\n"
         },
         {
-            "name": "",
+            "name": "弾",
             "modelName": "Cube",
             "activeSelf": true,
             "transform": {
                 "position": {
-                    "x": -7.654124800637874e-8,
-                    "y": -7.152557657263969e-9,
-                    "z": -2.5392349556341288e-8
+                    "x": -7.296521431499059e-8,
+                    "y": 2.205370641661375e-8,
+                    "z": -3.6378732914954529e-8
                 },
                 "eulerAngles": {
-                    "x": -4.1209190726476665e-7,
-                    "y": -9.400202998222085e-7,
-                    "z": 0.000005333367425919278
+                    "x": 0.0000016781589238235029,
+                    "y": 0.000005278856860968517,
+                    "z": 0.0000034039601359836526
                 },
                 "localScale": {
                     "x": 1.0,

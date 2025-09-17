@@ -17,6 +17,13 @@ public class InputFieldValidater : TMP_InputValidator
 
             return ch;
         }
+        if (ch == '\n')
+        {
+            text = text.Insert(pos, "\n");
+            pos += 1;
+
+            return ch;
+        }
 
         // テキストを更新
         text = text.Insert(pos, ch.ToString());
