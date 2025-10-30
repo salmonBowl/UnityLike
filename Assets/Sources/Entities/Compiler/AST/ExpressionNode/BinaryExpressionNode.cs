@@ -44,6 +44,12 @@ namespace UnityLike.Entities.Compiler
                 TokenType.Minus => "-",
                 TokenType.Multiply => "*",
                 TokenType.Divide => "/",
+                TokenType.GreaterThan => "<",
+                TokenType.GreaterThanOrEqual => "<=",
+                TokenType.LessThan => ">",
+                TokenType.LessThanOrEqual => ">=",
+                TokenType.EqualEquals => "==",
+                TokenType.NotEquals => "!=",
                 _ => throw new System.NotSupportedException()
             }
             + " " + RightNode.ToPrettyString();

@@ -98,6 +98,14 @@ namespace UnityLike.UseCases.UnityComponent
             return variables;
         }
 
+        public void UpdateVariable()
+        {
+            TransformInstance vTransform = (TransformInstance)transformVariable.Value;
+            vTransform.SetMember("position", new Vector3Instance(transform.position));
+            vTransform.SetMember("eulerAngles", new Vector3Instance(transform.eulerAngles));
+            RigidbodyInstance vRigidbody = (RigidbodyInstance)rigidbodyVariable.Value;
+            vRigidbody.SetMember("velocity", new Vector3Instance(rigidbody.angularVelocity));
+        }
         public void RenderUnityComponent()
         {
             TransformInstance vTransform = (TransformInstance)transformVariable.Value;

@@ -158,9 +158,6 @@ namespace UnityLike.UseCases.Compiler
 
             StatementNode thenStatement = ParseStatement();
 
-            if (CurrentTokenType != TokenType.Else)
-                return new IfStatementNode(@if, leftParen, condition, rightParen, thenStatement);
-
             if (CurrentTokenType == TokenType.Return)
                 Consume();
 

@@ -41,6 +41,7 @@ namespace UnityLike.Entities.Symbol
         public abstract Instance Multiply(Instance other);
         public abstract Instance Divide(Instance other);
         public abstract Instance Modulo(Instance other);
+        public abstract Instance Comparison(Instance other, string @operator);
         public abstract Instance Minus();
         public abstract Instance Denial();
 
@@ -74,7 +75,7 @@ namespace UnityLike.Entities.Symbol
         /// </summary>
         /// <param name="name">メンバー名</param>
         /// <param name="instance">設定する値</param>
-        protected void SetMember(string name, Instance instance)
+        public void SetMember(string name, Instance instance)
         {
             Variable variable = Member.LookUpVariable(name) ??
                 throw new NotSupportedException($"メンバー変数'{name}'は存在しません");

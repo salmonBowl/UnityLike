@@ -171,6 +171,21 @@ namespace UnityLike.Entities.Symbol
             }
             throw new InvalidOperatorException();
         }
+        public override Instance Comparison(Instance other, string @operator)
+        {
+            if (other is not Vector3Instance otherVector3)
+            {
+                throw new InvalidOperatorException();
+            }
+
+            bool result = @operator switch
+            {
+                "==" => AsVector3() == otherVector3.AsVector3(),
+                "!=" => AsVector3() != otherVector3.AsVector3(),
+                _ => throw new InvalidOperatorException()
+            };
+            return new BoolInstance(result);
+        }
         public override Instance Minus()
         {
             float x = ((NumberInstance)GetMember("x")).AsFloat();

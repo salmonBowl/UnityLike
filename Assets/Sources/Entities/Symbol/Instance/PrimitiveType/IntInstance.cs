@@ -20,6 +20,38 @@ namespace UnityLike.Entities.Symbol
             return (int)Value;
         }
 
+        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen)
+        {
+            void ArgCheck(params string[] expected)
+            {
+                int argCount = expected.Length;
+                if (args.Length != argCount)
+                {
+                    throw new InvalidArgumentException(expected.Length, rightParen);
+                }
+                for (int i = 0; i < argCount; i++)
+                {
+                    if (!Castable(args[i], expected[i]))
+                    {
+                        throw new ArgumentInvalidTypeException(expected[i], nameToken);
+                    }
+                }
+            }
+
+            // ŠÖ”ŽÀs‚Ì‚½‚ß‚É’l‚ðŽæ“¾‚µ‚Ä‚¨‚«‚Ü‚·
+            int value = (int)Value;
+
+            switch (name)
+            {
+                case "ToString":
+                    ArgCheck();
+                    string message = value.ToString();
+                    return new StringInstance(message);
+                default:
+                    throw new MemberNotExistException(name, nameToken);
+            }
+        }
+
         public override Instance Add(Instance other)
         {
             if (Castable(other, "int"))

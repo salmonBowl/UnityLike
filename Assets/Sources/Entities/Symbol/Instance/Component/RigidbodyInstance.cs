@@ -48,7 +48,7 @@ namespace UnityLike.Entities.Symbol
                 case "AddForce":
                     ArgCheck("Vector3");
                     Vector3Instance add = (Vector3Instance)args[0];
-                    Vector3Instance velocity = (Vector3Instance)GetMember("position");
+                    Vector3Instance velocity = (Vector3Instance)GetMember("velocity");
                     SetMember("velocity", velocity.Add(add));
                     return null;
                 default:

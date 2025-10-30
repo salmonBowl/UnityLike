@@ -27,6 +27,10 @@ namespace UnityLike.Entities.Symbol
         {
             throw new InvalidOperatorException();
         }
+        public override Instance Comparison(Instance other, string @operator)
+        {
+            throw new InvalidOperatorException();
+        }
         public override Instance Minus()
         {
             throw new InvalidOperatorException();

@@ -20,6 +20,12 @@ namespace UnityLike.UseCases.Interpreter
                     TokenType.Minus => value1.Subtract(value2),
                     TokenType.Multiply => value1.Multiply(value2),
                     TokenType.Divide => value1.Divide(value2),
+                    TokenType.GreaterThan => value1.Comparison(value2, ">"),
+                    TokenType.GreaterThanOrEqual => value1.Comparison(value2, ">="),
+                    TokenType.LessThan => value1.Comparison(value2, "<"),
+                    TokenType.LessThanOrEqual => value1.Comparison(value2, "<="),
+                    TokenType.EqualEquals => value1.Comparison(value2, "=="),
+                    TokenType.NotEquals => value1.Comparison(value2, "!="),
                     _ => throw new InvalidOperatorException(node.OperatorToken)
                 };
             }

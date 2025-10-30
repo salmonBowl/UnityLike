@@ -23,14 +23,14 @@ namespace UnityLike.FrameworkAndDrivers.PlayButton
         [SerializeField, Header("lineRenderer‚Ìü‰ñ‹O“¹‚ğw’è‚µ‚Ü‚·")]
         private RoundedRectangle orbit;
 
-        private GameRoopManager stateManager;
+        private StateManager stateManager;
 
         /// <summary>
         /// ü‰ñŒvZ‚Ì‚½‚ß‚Ì”}‰î•Ï”‚Å‚·
         /// </summary>
         private float rotateParameter = 0;
 
-        public void StateManagerInject(GameRoopManager stateManager)
+        public void StateManagerInject(StateManager stateManager)
         {
             this.stateManager = stateManager;
         }

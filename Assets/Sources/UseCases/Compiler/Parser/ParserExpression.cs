@@ -60,7 +60,7 @@ namespace UnityLike.UseCases.Compiler
         {
             // Å‚à—Dæ‡ˆÊ‚Ì’á‚¢‰‰Zq‚ğŒÄ‚Ño‚µ‚Ü‚·
 
-            return ParseAdditiveExpression();
+            return ParseComparisonExpression();
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace UnityLike.UseCases.Compiler
         /*
             ‰‰Z‚Ì—Dæ‡ˆÊ‚É]‚Á‚Ä—Dæ‡ˆÊ‚ª’á‚¢‰‰Z¨‚¾‚ñ‚¾‚ñ‚‚¢‰‰Z‚Æ‚¢‚¤‡˜‚ÅÄ‹A“I‚Éö‚Á‚Ä‚¢‚«‚Ü‚·
             
-            Addtive ¨ Multitive ¨ Unary ¨ MemberAccess ¨ Primary
+            Comparison ¨ Addtive ¨ Multitive ¨ Unary ¨ MemberAccess ¨ Primary
          */
         private ExpressionNode ParseMemberAccessExpression()
         {
@@ -182,6 +182,27 @@ namespace UnityLike.UseCases.Compiler
             ExpressionNode leftExpression = ParseMultitiveExpression();
 
             if (CurrentTokenType == TokenType.Plus || CurrentTokenType == TokenType.Minus)
+            {
+                Token @operator = CurrentToken;
+                Consume();
+                return ASTFactory.BinaryExpressionNode(leftExpression, @operator, ParseAdditiveExpression());
+            }
+            else
+            {
+                return leftExpression;
+            }
+        }
+        private ExpressionNode ParseComparisonExpression()
+        {
+            ExpressionNode leftExpression = ParseAdditiveExpression();
+
+            if (CurrentTokenType is
+                TokenType.GreaterThan or
+                TokenType.GreaterThanOrEqual or
+                TokenType.LessThan or
+                TokenType.LessThanOrEqual or
+                TokenType.EqualEquals or
+                TokenType.NotEquals)
             {
                 Token @operator = CurrentToken;
                 Consume();

@@ -17,6 +17,7 @@ public class InputFieldValidater : TMP_InputValidator
 
             return ch;
         }
+        UnityLike.FrameworkAndDrivers.LogUI.DebugLog.Instance.AddLog("pressed : " + ch + " :");
         if (ch == '\n')
         {
             text = text.Insert(pos, "\n");

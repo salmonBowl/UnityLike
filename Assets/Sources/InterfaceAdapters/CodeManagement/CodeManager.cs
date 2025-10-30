@@ -32,6 +32,8 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
         {
             compile.Execute(sourceCode, data);
 
+            unityComponent.UpdateVariable();
+
             if (isVoidStart)
             {
                 initialMemberManager.InitializeList();
@@ -54,6 +56,8 @@ namespace UnityLike.InterfaceAdapters.CodeManagement
 
         public void ExecuteCode(bool isVoidStart, bool onStopped)
         {
+            unityComponent.UpdateVariable();
+
             if (isVoidStart)
             {
                 initialMemberManager.InitializeList();

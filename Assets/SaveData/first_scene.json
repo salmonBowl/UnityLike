@@ -176,14 +176,14 @@
             "activeSelf": true,
             "transform": {
                 "position": {
-                    "x": -7.654124800637874e-8,
-                    "y": -7.152557657263969e-9,
-                    "z": -2.5392349556341288e-8
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                 },
                 "eulerAngles": {
-                    "x": -4.1209190726476665e-7,
-                    "y": -9.400202998222085e-7,
-                    "z": 0.000005333367425919278
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                 },
                 "localScale": {
                     "x": 1.0,
@@ -201,8 +201,8 @@
                     "z": 0.0
                 }
             },
-            "voidStart": "transform.position = new Vector3(0, 0, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 1);\n\nrigidbody.isKinematic = false;\n\nfloat activeFrame = 0;\n",
-            "voidUpdate": "activeFrame = activeFrame + 1;\nif (activeFrame < 90)\n{\n    rigidbody.velocity = new Vector3(0, 0, 0);\n    transform.position = new Vector3(0, 0, 0);\n}\nelse\n{\n    rigidbody.velocity = rigidbody.velocity.Normalize();\n}\n\nfloat posz = transform.position.z;\nif (posz < -8f)\n{\n    activeframe = 0;\n}\n"
+            "voidStart": "transform.position = new Vector3(0, 0, 0);\ntransform.eulerAngles = new Vector3(0, 0, 0);\ntransform.localScale = new Vector3(1, 1, 1);\n\nrigidbody.isKinematic = false;\n\nfloat activeFrame = 0;",
+            "voidUpdate": "activeFrame = activeFrame + 1;\nif (activeFrame < 90)\n{\n    rigidbody.velocity = new Vector3(0, 0, 0);\n    transform.position = new Vector3(0, 0, 0);\n}\nelse\n{\n    if (rigidbody.velocity.Magnitude() < 0.01f)\n        rigidbody.AddForce(new Vector3(3, 0, 0));\n}\n\nfloat posz = transform.position.z;\nif (posz < -8f)\n{\n    activeFrame = 0;\n}"
         }
     ]
 }

@@ -4,11 +4,26 @@ namespace UnityLike.Entities.Symbol
 {
     public abstract class NumberInstance : PrimitiveInstance
     {
-        public override Instance ExecuteMemberFuction(string name, Instance[] args, ColoredToken nameToken, ColoredToken rightParen = null)
-        {
-            throw new MemberNotExistException(name, nameToken);
-        }
-
         public abstract float AsFloat(); // êîílÇfloatÇ∆ÇµÇƒï‘ÇµÇ‹Ç∑
+
+        public override Instance Comparison(Instance other, string @operator)
+        {
+            if (other is not NumberInstance otherNumber)
+            {
+                throw new InvalidOperatorException();
+            }
+
+            bool result = @operator switch
+            {
+                "<" => AsFloat() < otherNumber.AsFloat(),
+                "<=" => AsFloat() <= otherNumber.AsFloat(),
+                ">" => AsFloat() > otherNumber.AsFloat(),
+                ">=" => AsFloat() >= otherNumber.AsFloat(),
+                "==" => AsFloat() == otherNumber.AsFloat(),
+                "!=" => AsFloat() != otherNumber.AsFloat(),
+                _ => throw new InvalidOperatorException()
+            };
+            return new BoolInstance(result);
+        }
     }
 }

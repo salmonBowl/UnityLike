@@ -17,7 +17,7 @@ namespace UnityLike.FrameworkAndDrivers.GameRoop
         [Inject]
         private readonly GameObjectManager gameObjectManager;
 
-        private readonly GameRoopManager stateManager = new();
+        private readonly StateManager stateManager = new();
 
         void Start()
         {
