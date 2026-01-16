@@ -1,17 +1,15 @@
 {
-    "name": "Base-Assembly",
-    "rootNamespace": "",
+    "name": "UnityLike.Domain",
+    "rootNamespace": "UnityLike",
     "references": [
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:560b04d1a97f54a4e82edc0cbbb69285"
+        "GUID:ff5ad9ea6706cd646ace5b1141050cd4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

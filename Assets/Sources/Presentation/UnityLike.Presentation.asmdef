@@ -1,0 +1,17 @@
+{
+    "name": "UnityLike.Presentation",
+    "rootNamespace": "UnityLike.Presentation",
+    "references": [
+        "GUID:84a63e3295cb4134bacb6468765353b5",
+        "GUID:ff5ad9ea6706cd646ace5b1141050cd4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
