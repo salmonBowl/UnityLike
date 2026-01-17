@@ -1,5 +1,5 @@
 {
-    "name": "UnityLike.Application",
+    "name": "UnityLike.Framework",
     "rootNamespace": "",
     "references": [
         "Unity.TextMeshPro"

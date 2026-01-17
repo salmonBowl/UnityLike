@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UnityLike.Presentation
+namespace UnityLike.Application
 {
     public abstract class Main : MonoBehaviour
     {
@@ -12,7 +12,7 @@ namespace UnityLike.Presentation
         {
             currentScene.SetUp();
 
-            Application.targetFrameRate = 60;
+            UnityEngine.Application.targetFrameRate = 60;
         }
 
         private void Update()

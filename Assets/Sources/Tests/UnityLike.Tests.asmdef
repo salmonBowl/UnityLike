@@ -4,7 +4,7 @@
     "references": [
         "UnityLike.Library",
         "UnityLike.Domain",
-        "UnityLike.Presentation"
+        "UnityLike.Application"
     ],
     "includePlatforms": [
         "Editor"

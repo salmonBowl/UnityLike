@@ -1,4 +1,4 @@
-namespace UnityLike.Presentation
+namespace UnityLike.Application
 {
     public class CurrentScene
     {

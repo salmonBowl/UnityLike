@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UnityLike.Presentation
+namespace UnityLike.Application
 {
     public class TitleSceneMain : Main
     {

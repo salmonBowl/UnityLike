@@ -1,6 +1,6 @@
 namespace UnityLike
 {
-    public class IUnityIconEntity : ScopedClass
+    public abstract class IUnityIconEntity : ScopedClass
     {
         protected override System.Type GetScopeType() => typeof(UnityIconEntityScope);
     }

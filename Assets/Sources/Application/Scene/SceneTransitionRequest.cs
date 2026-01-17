@@ -1,6 +1,6 @@
 using UnityEngine.SceneManagement;
 
-namespace UnityLike.Presentation
+namespace UnityLike.Application
 {
     public class SceneTransitionRequest
     {
