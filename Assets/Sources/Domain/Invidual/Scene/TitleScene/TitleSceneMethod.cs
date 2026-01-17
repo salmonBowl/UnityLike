@@ -1,13 +1,15 @@
 namespace UnityLike
 {
-    public partial class TitleScene
+    public partial class TitleScene : Scene
     {
         public override void SetUp()
         {
             throw new System.NotImplementedException();
         }
-        public override void Update()
+        public override SceneType Update(TimeSpan deltaTime)
         {
+            clock.Advance(deltaTime);
+
             throw new System.NotImplementedException();
         }
     }

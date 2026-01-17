@@ -5,9 +5,9 @@ namespace UnityLike
         private class GameSceneFactory
         {
             private readonly GameScene outher;
-            private readonly IApplicationFactory application;
+            private readonly IGameSceneApplicationFactory application;
 
-            public GameSceneFactory(IApplicationFactory application, GameScene outher)
+            public GameSceneFactory(IGameSceneApplicationFactory application, GameScene outher)
             {
                 this.outher = outher;
                 this.application = application;

@@ -5,9 +5,9 @@ namespace UnityLike
         private class TitleSceneFactory
         {
             private readonly TitleScene outher;
-            private readonly IApplicationFactory application;
+            private readonly ITitleSceneApplicationFactory application;
 
-            public TitleSceneFactory(IApplicationFactory application, TitleScene outher)
+            public TitleSceneFactory(ITitleSceneApplicationFactory application, TitleScene outher)
             {
                 this.outher = outher;
                 this.application = application;

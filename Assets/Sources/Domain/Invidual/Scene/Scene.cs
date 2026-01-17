@@ -4,6 +4,10 @@ namespace UnityLike
     {
         public abstract SceneType GetSceneType();
         public abstract void SetUp();
-        public abstract void Update();
+        public abstract SceneType Update(TimeSpan deltaTime);
+    }
+    public class SceneScope : ScopeBase
+    {
+
     }
 }
