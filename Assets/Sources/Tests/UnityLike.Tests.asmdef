@@ -6,9 +6,7 @@
         "UnityLike.Domain",
         "UnityLike.Application"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

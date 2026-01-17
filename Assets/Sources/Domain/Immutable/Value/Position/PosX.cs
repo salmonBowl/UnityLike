@@ -1,23 +1,26 @@
-public class PosX : Value
+namespace UnityLike
 {
-    public PosX(float x) : base(x) { }
-
-    public PosX Add(PosX other)
+    public class PosX : Value
     {
-        float result = value + other.value;
+        public PosX(float x) : base(x) { }
 
-        return new PosX(result);
-    }
-    public PosX Subtract(PosX other)
-    {
-        float result = value - other.value;
+        public PosX Add(PosX other)
+        {
+            float result = value + other.value;
 
-        return new PosX(result);
-    }
-    public PosX Multiply(DisplacementScalar magnification)
-    {
-        float result = value * magnification.Get();
+            return new PosX(result);
+        }
+        public PosX Subtract(PosX other)
+        {
+            float result = value - other.value;
 
-        return new PosX(result);
+            return new PosX(result);
+        }
+        public PosX Multiply(PositionScalar magnification)
+        {
+            float result = value * magnification.Get();
+
+            return new PosX(result);
+        }
     }
 }

@@ -30,4 +30,8 @@ public class LargeValue
         double result = value - other.Get();
         return new LargeValue(result);
     }
+    public bool IsZero()
+    {
+        return value == 0;
+    }
 }

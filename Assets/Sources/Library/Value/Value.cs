@@ -32,4 +32,8 @@ public class Value
         float result = value / other.value;
         return new Value(result);
     }
+    public bool IsZero()
+    {
+        return value == 0;
+    }
 }

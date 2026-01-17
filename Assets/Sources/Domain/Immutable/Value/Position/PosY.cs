@@ -1,23 +1,26 @@
-public class PosY : Value
+namespace UnityLike
 {
-    public PosY(float x) : base(x) { }
-
-    public PosY Add(PosY other)
+    public class PosY : Value
     {
-        float result = value + other.Get();
+        public PosY(float x) : base(x) { }
 
-        return new PosY(result);
-    }
-    public PosY Subtract(PosY other)
-    {
-        float result = value - other.Get();
+        public PosY Add(PosY other)
+        {
+            float result = value + other.Get();
 
-        return new PosY(result);
-    }
-    public PosY Multiply(DisplacementScalar magnification)
-    {
-        float result = value * magnification.Get();
+            return new PosY(result);
+        }
+        public PosY Subtract(PosY other)
+        {
+            float result = value - other.Get();
 
-        return new PosY(result);
+            return new PosY(result);
+        }
+        public PosY Multiply(PositionScalar magnification)
+        {
+            float result = value * magnification.Get();
+
+            return new PosY(result);
+        }
     }
 }

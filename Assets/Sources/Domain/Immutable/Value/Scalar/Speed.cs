@@ -1,4 +1,4 @@
-public class Speed : DisplacementScalar
+public class Speed : PositionScalar
 {
     public Speed(float multiplier) : base(multiplier) { }
 }

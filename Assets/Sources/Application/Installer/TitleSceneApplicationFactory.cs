@@ -4,11 +4,11 @@ namespace UnityLike.Application
 {
     public class TitleSceneApplicationFactory : ITitleSceneApplicationFactory
     {
-        [SerializeField] private GameObject prefab01;
+        [SerializeField] private IUnityIconEntity unityIconEntity;
 
-        public void CreateEntity01()
+        public IUnityIconEntity GetUnityIconEntity()
         {
-
+            return unityIconEntity;
         }
     }
 }
