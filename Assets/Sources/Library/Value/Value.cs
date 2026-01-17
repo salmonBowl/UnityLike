@@ -32,8 +32,19 @@ public class Value
         float result = value / other.value;
         return new Value(result);
     }
+
     public bool IsZero()
     {
         return value == 0;
+    }
+
+    public Value SquareRoot()
+    {
+        if (value < 0)
+            throw new ValueComplexedException("•‰‚Ì”‚Ì•½•ûª‚ªŒvŽZ‚³‚ê‚Ü‚µ‚½");
+
+        float result = (float)System.Math.Sqrt(value);
+        
+        return new Value(result);
     }
 }

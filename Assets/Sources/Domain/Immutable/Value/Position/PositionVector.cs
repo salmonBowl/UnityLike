@@ -22,5 +22,19 @@ namespace UnityLike
         public PosX GetX() => x;
         public PosY GetY() => y;
         public PosZ GetZ() => z;
+
+        public PositionScalar Magnitude
+        {
+            get
+            {
+                Value r1 = x.Multiply(x);
+                Value r2 = y.Multiply(y);
+                Value r3 = z.Multiply(z);
+
+                Value result = r1.Add(r2).Add(r3).SquareRoot();
+
+                return new PositionScalar(result.Get());
+            }
+        }
     }
 }
