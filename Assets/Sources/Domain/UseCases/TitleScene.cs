@@ -1,5 +1,3 @@
-using UniRx;
-
 using UnityLike.Domain.IPresenter;
 
 namespace UnityLike.Domain.UseCase
