@@ -4,11 +4,15 @@ namespace UnityLike
     {
         public override void SetUp()
         {
+            clock.Restart();
+
             throw new System.NotImplementedException();
         }
-        public override SceneType Update(TimeSpan deltaTime)
+        public override SceneType Update(DeltaTime deltaTime)
         {
             clock.Advance(deltaTime);
+
+            WorldTime.SyncClock(clock, deltaTime);
 
             throw new System.NotImplementedException();
         }

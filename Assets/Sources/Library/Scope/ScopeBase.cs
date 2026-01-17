@@ -26,7 +26,10 @@ public class ScopeBase
     public void ConnectParent(ScopeBase parent)
     {
         if (parentScope != null)
-            throw new ValueAlreadySetException("親スコープは既に設定されています");
+        {
+            throw new ValueAlreadySetException(
+                "親スコープは既に設定されています。単一のインスタンスを複数の場所からメンバーにしないでください。");
+        }
 
         parentScope = parent;
     }

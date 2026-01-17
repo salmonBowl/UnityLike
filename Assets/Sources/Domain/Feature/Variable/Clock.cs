@@ -17,7 +17,7 @@ namespace UnityLike
             this.time = time;
         }
 
-        public void Advance(TimeSpan addTime)
+        public void Advance(DeltaTime addTime)
         {
             time = time.Add(addTime);
         }

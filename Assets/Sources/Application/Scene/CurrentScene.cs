@@ -21,7 +21,7 @@ namespace UnityLike.Application
         }
         public void Update(out SceneType nextScene)
         {
-            TimeSpan deltaTime = new(UnityEngine.Time.deltaTime, TimeUnit.sec);
+            DeltaTime deltaTime = new(UnityEngine.Time.deltaTime, TimeUnit.sec);
 
             nextScene = currentScene.Update(deltaTime);
         }
