@@ -2,6 +2,6 @@ namespace UnityLike
 {
     public interface ITitleSceneApplicationFactory
     {
-        IUnityIconEntity GetUnityIconEntity();
+        IUnityIconEntity ConnectUnityIconEntity(UnityIcon unityIcon);
     }
 }

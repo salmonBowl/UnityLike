@@ -43,7 +43,8 @@ public class Value
         if (value < 0)
             throw new ValueComplexedException("•‰‚Ì”‚Ì•½•ûª‚ªŒvŽZ‚³‚ê‚Ü‚µ‚½");
 
-        float result = (float)System.Math.Sqrt(value);
+        // Mathf‚ª‘¬‚¢‚½‚ßUnityEngine‚ð—˜—p‚µ‚Ä‚¢‚Ü‚·
+        float result = UnityEngine.Mathf.Sqrt(value);
         
         return new Value(result);
     }

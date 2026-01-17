@@ -2,10 +2,9 @@ using UnityEngine;
 
 namespace UnityLike.Application
 {
-    public class GameSceneApplicationFactory : MonoBehaviour, IGameSceneApplicationFactory
+    public class GameSceneApplicationFactory : ApplicationFactoryBase, IGameSceneApplicationFactory
     {
-        [SerializeField]
-        private GameObject prefab01;
+        [SerializeField] GameObject prefab01;
 
         public void CreateEntity01()
         {
