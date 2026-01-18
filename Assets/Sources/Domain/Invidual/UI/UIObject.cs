@@ -1,4 +1,4 @@
-namespace UnityLike
+namespace UnityLike.UI
 {
     public abstract class UIObject : ScopedClass
     {

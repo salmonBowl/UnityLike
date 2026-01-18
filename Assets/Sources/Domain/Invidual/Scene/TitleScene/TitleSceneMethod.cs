@@ -4,12 +4,9 @@ namespace UnityLike
     {
         public override void SetUp()
         {
-            factory.ConnectUnityIcon();
-
+            ui.SetUp();
 
             clock.Restart();
-
-            throw new System.NotImplementedException();
         }
         public override SceneType Update(DeltaTime deltaTime)
         {
@@ -17,7 +14,7 @@ namespace UnityLike
 
             WorldTime.SyncClock(clock, deltaTime);
 
-            throw new System.NotImplementedException();
+            ui.DrawUpdate();
         }
     }
 }

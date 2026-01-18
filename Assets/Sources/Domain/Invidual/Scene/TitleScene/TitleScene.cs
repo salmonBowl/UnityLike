@@ -1,3 +1,5 @@
+using UnityLike.UI;
+
 namespace UnityLike
 {
     public partial class TitleScene : Scene
@@ -7,8 +9,6 @@ namespace UnityLike
         private readonly TitleSceneUI ui;
 
         // メンバー
-        private readonly ActorList actorList;
-        private readonly EntityList entityList;
         private readonly Clock clock = new();
 
         // コンストラクタ―
