@@ -4,6 +4,9 @@ namespace UnityLike
     {
         public override void SetUp()
         {
+            factory.ConnectUnityIcon();
+
+
             clock.Restart();
 
             throw new System.NotImplementedException();

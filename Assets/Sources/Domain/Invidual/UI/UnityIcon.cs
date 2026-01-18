@@ -1,18 +1,22 @@
 namespace UnityLike
 {
-    public class UnityIcon : ScopedClass
+    public class UnityIcon : UIObject
     {
-        AngleStatus angleStatus = new();
-        AngularVelocityStatus angularVelocityStatus = new();
+        private readonly AngleStatus angleStatus = new(AngleUnit.Radian);
+        private readonly AngularVelocityStatus angularVelocityStatus = new(AngleUnit.Radian);
 
-        public void Update()
+        public override void SetUp()
+        {
+            angleStatus.SetAngle(new Angle(0));
+        }
+        public override void Update()
         {
 
             angleStatus.Rotate();
         }
 
         protected override System.Type GetScopeType() => typeof(UnityIconScope);
-        public void GetAngle() => angleStatus.Current();
+        public Angle GetAngle() => angleStatus.CurrentAngle();
     }
     public class UnityIconScope : ScopeBase
     {

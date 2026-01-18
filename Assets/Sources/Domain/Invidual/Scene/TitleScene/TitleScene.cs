@@ -4,8 +4,11 @@ namespace UnityLike
     {
         // TitleScene本体
         private readonly TitleSceneFactory factory;
+        private readonly TitleSceneUI ui;
 
         // メンバー
+        private readonly ActorList actorList;
+        private readonly EntityList entityList;
         private readonly Clock clock = new();
 
         // コンストラクタ―

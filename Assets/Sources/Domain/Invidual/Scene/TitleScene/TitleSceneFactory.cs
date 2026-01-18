@@ -12,8 +12,6 @@ namespace UnityLike
                 this.outher = outher;
                 this.application = application;
             }
-
-
         }
     }
 }
