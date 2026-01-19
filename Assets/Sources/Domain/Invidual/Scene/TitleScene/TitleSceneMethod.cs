@@ -15,6 +15,9 @@ namespace UnityLike
             WorldTime.SyncClock(clock, deltaTime);
 
             ui.DrawUpdate();
+
+            // ‰½‚à‚È‚©‚Á‚½ê‡‚ÍƒV[ƒ“‘JˆÚ‚ğs‚¢‚Ü‚¹‚ñ
+            return GetSceneType();
         }
     }
 }

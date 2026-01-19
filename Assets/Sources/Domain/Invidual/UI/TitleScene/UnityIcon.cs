@@ -9,10 +9,14 @@ namespace UnityLike.UI
         {
             angleStatus.SetAngle(new Angle(0));
         }
+
+        public void RotateTo(Angle destination)
+        {
+        }
+
         public override void Update()
         {
 
-            angleStatus.Rotate();
         }
 
         protected override System.Type GetScopeType() => typeof(UnityIconScope);

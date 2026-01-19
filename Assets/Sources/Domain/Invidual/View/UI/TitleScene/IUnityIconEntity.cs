@@ -1,6 +1,6 @@
-namespace UnityLike
+namespace UnityLike.UI
 {
-    public abstract class IUnityIconEntity : ScopedClass, IEntity
+    public abstract class IUnityIconEntity : ScopedClass, IUIEntity
     {
         protected override System.Type GetScopeType() => typeof(UnityIconEntityScope);
 

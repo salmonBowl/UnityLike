@@ -9,6 +9,8 @@ namespace UnityLike.UI
         private readonly CreateWindow createWindow;
         private readonly LoadWindow loadWindow;
 
+        private readonly AngleStatus iconAngleDestination = new(AngleUnit.Radian);
+
         public TitleSceneUI(ITitleSceneApplicationFactory application)
         {
             setup = new TitleSceneUISetUps(application, this);
@@ -22,18 +24,6 @@ namespace UnityLike.UI
         }
 
         protected override System.Type GetScopeType() => typeof(TitleSceneUIScope);
-
-        public void SetUp()
-        {
-            setup.CreateWindow();
-            setup.LoadWindow();
-            setup.UnityIcon();
-        }
-
-        public void DrawUpdate()
-        {
-            entityList.DrawAll();
-        }
     }
 
     public class TitleSceneUIScope : ScopeBase

@@ -27,22 +27,27 @@ namespace UnityLike.UI
                 }
             }
 
-            public void LoadWindow()
+            public void CreateWindow(out IButtonInput createWindowButtonInput)
             {
+                createWindowButtonInput = application.GetCreateWindowButtonInput();
+
+                using (outher.MemberInitialization(1))
+                {
+                    var createWindowEntity = application.ConnectCreateWindowEntity(outher.createWindow);
+
+                    entityList.Add(createWindowEntity);
+                }
+            }
+
+            public void LoadWindow(out IButtonInput loadWindowButtonInput)
+            {
+                loadWindowButtonInput = application.GetLoadWindowButtonInput();
+
                 using (outher.MemberInitialization(1))
                 {
                     var loadWindowEntity = application.ConnectLoadWindowEntity(outher.loadWindow);
 
                     entityList.Add(loadWindowEntity);
-                }
-            }
-            public void CreateWindow()
-            {
-                using (outher.MemberInitialization(2))
-                {
-                    var createWindowEntity = application.ConnectLoadWindowEntity(outher.createWindow);
-
-                    entityList.Add(createWindowEntity);
                 }
             }
         }

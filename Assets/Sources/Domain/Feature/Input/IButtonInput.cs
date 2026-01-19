@@ -2,8 +2,8 @@ namespace UnityLike
 {
     public interface IButtonInput
     {
-        event BlankEventHandler OnPressDown;
-        event BlankEventHandler OnMouseOverEnter;
-        event BlankEventHandler OnMouseOverLeave;
+        WeakEvent OnPressDown { get; set; }
+        WeakEvent OnMouseOverEnter { get; }
+        WeakEvent OnMouseOverExit { get; }
     }
 }
